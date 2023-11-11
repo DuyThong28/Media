@@ -10,6 +10,6 @@ namespace Media.ViewModels
 {
     public class PlayMedia: ViewModelBase
     {
-
+        public string PlayId { get; set; }
     }
 }
