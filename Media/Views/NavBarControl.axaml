@@ -1,0 +1,158 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+			 Name="navBar"
+			 xmlns:vm="using:Media.ViewModels"
+			 x:DataType="vm:NavBarControlViewModel"
+             x:Class="Media.Views.NavBarControl">
+		<Border CornerRadius="5" ClipToBounds="True" Margin="10,10,5,10">
+			<Grid>
+				<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
+				</Border>
+				<ListBox Background="Transparent"  SelectionChanged="ListBox_SelectionChanged">
+					<ListBox.Styles>
+						<Style Selector="ListBoxItem:pointerover">
+							<Setter	Property="CornerRadius" Value="5"></Setter>
+						</Style>
+						<Style Selector="ListBoxItem:selected">
+							<Setter	Property="CornerRadius" Value="5"></Setter>
+						</Style>
+					</ListBox.Styles>
+					<ListBoxItem Name="homeBtn">
+						<DockPanel>
+							<Image
+								Classes.checked="{Binding ElementName=homeBtn, Path=IsSelected}"
+								Classes.unChecked="{Binding ElementName=homeBtn, Path=!IsSelected}"
+								>
+								<Image.Styles>
+									<Style Selector="Image.unChecked">
+										<Setter Property="Source" Value="/Assets/Icons/home.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+									<Style Selector="Image.checked">
+										<Setter Property="Source" Value="/Assets/Icons/home-hover.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+								</Image.Styles>
+							</Image>
+							<Label Name="home">Trang chủ</Label>
+						</DockPanel>
+					</ListBoxItem>
+					<ListBoxItem Name="searchBtn">
+						<DockPanel>
+							<Image
+								Classes.checked="{Binding ElementName=searchBtn, Path=IsSelected}"
+								Classes.unChecked="{Binding ElementName=searchBtn, Path=!IsSelected}"
+								>
+								<Image.Styles>
+									<Style Selector="Image.unChecked">
+										<Setter Property="Source" Value="/Assets/Icons/search.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+									<Style Selector="Image.checked">
+										<Setter Property="Source" Value="/Assets/Icons/search-hover.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+								</Image.Styles>
+							</Image>
+							<Label  >Tìm kiếm</Label>
+						</DockPanel>
+					</ListBoxItem>
+					<ListBoxItem Name="musicBtn">
+						<DockPanel>
+							<Image
+								Classes.checked="{Binding ElementName=musicBtn, Path=IsSelected}"
+								Classes.unChecked="{Binding ElementName=musicBtn, Path=!IsSelected}"
+								>
+								<Image.Styles>
+									<Style Selector="Image.unChecked">
+										<Setter Property="Source" Value="/Assets/Icons/music.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+									<Style Selector="Image.checked">
+										<Setter Property="Source" Value="/Assets/Icons/music-hover.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+								</Image.Styles>
+							</Image>
+							<Label  >Âm nhạc</Label>
+						</DockPanel>
+					</ListBoxItem>
+					<ListBoxItem Name="videoBtn" Grid.Row="3">
+						<DockPanel>
+							<Image
+								Classes.checked="{Binding ElementName=videoBtn, Path=IsSelected}"
+								Classes.unChecked="{Binding ElementName=videoBtn, Path=!IsSelected}"
+								>
+								<Image.Styles>
+									<Style Selector="Image.unChecked">
+										<Setter Property="Source" Value="/Assets/Icons/video.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+									<Style Selector="Image.checked">
+										<Setter Property="Source" Value="/Assets/Icons/video-hover.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+								</Image.Styles>
+							</Image>
+							<Label>Video</Label>
+						</DockPanel>
+					</ListBoxItem>
+					<ListBoxItem Name="libraryBtn">
+						<DockPanel>
+							<Image
+						Classes.checked="{Binding ElementName=libraryBtn, Path=IsSelected}"
+						Classes.unChecked="{Binding ElementName=libraryBtn, Path=!IsSelected}"
+								>
+								<Image.Styles>
+									<Style Selector="Image.unChecked">
+										<Setter Property="Source" Value="/Assets/Icons/Library.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+									<Style Selector="Image.checked">
+										<Setter Property="Source" Value="/Assets/Icons/Library-hover.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+								</Image.Styles>
+							</Image>
+							<Label  >Thư viện</Label>
+						</DockPanel>
+					</ListBoxItem>
+					<ListBoxItem Name="settingBtn">
+						<DockPanel>
+							<Image
+								Classes.checked="{Binding ElementName=settingBtn, Path=IsSelected}"
+								Classes.unChecked="{Binding ElementName=settingBtn, Path=!IsSelected}"
+								>
+								<Image.Styles>
+									<Style Selector="Image.unChecked">
+										<Setter Property="Source" Value="/Assets/Icons/setting.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+									<Style Selector="Image.checked">
+										<Setter Property="Source" Value="/Assets/Icons/setting-hover.png"></Setter>
+										<Setter Property="Width" Value="20"></Setter>
+										<Setter Property="Height" Value="20"></Setter>
+									</Style>
+								</Image.Styles>
+							</Image>
+							<Label>Cài đặt</Label>
+						</DockPanel>
+					</ListBoxItem>
+				</ListBox>
+			</Grid>
+		</Border>
+</UserControl>

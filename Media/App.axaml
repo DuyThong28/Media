@@ -1,0 +1,25 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Media.App"
+             xmlns:local="using:Media"
+             RequestedThemeVariant="Dark">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+		<FluentTheme>
+			<FluentTheme.Palettes>
+				<ColorPaletteResources x:Key="Light" Accent="#ff34224f" AltHigh="Black" AltLow="Black" AltMedium="Black" AltMediumHigh="Black" AltMediumLow="Black" BaseHigh="White" BaseLow="#ff34224f" BaseMedium="#ff9c90af" BaseMediumHigh="#ffb6abc7" BaseMediumLow="#ff68597f" ChromeAltLow="#ffb6abc7" ChromeBlackHigh="Black" ChromeBlackLow="#ffb6abc7" ChromeBlackMedium="Black" ChromeBlackMediumLow="Black" ChromeDisabledHigh="#ff34224f" ChromeDisabledLow="#ff9c90af" ChromeGray="#ff827497" ChromeHigh="#ff827497" ChromeLow="#ff160934" ChromeMedium="#ff1d0f3b" ChromeMediumLow="#ff2c1c48" ChromeWhite="White" ListLow="#ff1d0f3b" ListMedium="#ff34224f" RegionColor="#ff170f23" />
+				<!--<ColorPaletteResources x:Key="Light" Accent="#ffb72479" AltHigh="White" AltLow="White" AltMedium="White" AltMediumHigh="White" AltMediumLow="White" BaseHigh="Black" BaseLow="#fffde8e8" BaseMedium="#ffbf999a" BaseMediumHigh="#ff956466" BaseMediumLow="#ffaa7e80" ChromeAltLow="#ff956466" ChromeBlackHigh="Black" ChromeBlackLow="#fffde8e8" ChromeBlackMedium="#ff956466" ChromeBlackMediumLow="#ffbf999a" ChromeDisabledHigh="#fffde8e8" ChromeDisabledLow="#ffbf999a" ChromeGray="#ffaa7e80" ChromeHigh="#fffde8e8" ChromeLow="#fffff2f2" ChromeMedium="#fffff0f0" ChromeMediumLow="#fffff2f2" ChromeWhite="White" ListLow="#fffff0f0" ListMedium="#fffde8e8" RegionColor="#fff9dbdb" />-->
+				<ColorPaletteResources x:Key="Dark" Accent="#ff138673" AltHigh="Black" AltLow="Black" AltMedium="Black" AltMediumHigh="Black" AltMediumLow="Black" BaseHigh="White" BaseLow="#ff204b3d" BaseMedium="#ff86a89e" BaseMediumHigh="#ff9fbfb6" BaseMediumLow="#ff53796d" ChromeAltLow="#ff9fbfb6" ChromeBlackHigh="Black" ChromeBlackLow="#ff9fbfb6" ChromeBlackMedium="Black" ChromeBlackMediumLow="Black" ChromeDisabledHigh="#ff204b3d" ChromeDisabledLow="#ff86a89e" ChromeGray="#ff6c9186" ChromeHigh="#ff6c9186" ChromeLow="#ff062617" ChromeMedium="#ff0d2f20" ChromeMediumLow="#ff1a4233" ChromeWhite="White" ListLow="#ff0d2f20" ListMedium="#ff204b3d" RegionColor="#ff142922" />
+			</FluentTheme.Palettes>
+		</FluentTheme>
+		<StyleInclude Source="/Views/MediaItemTC.axaml"/>
+		<StyleInclude Source="/Views/MusicRowTC.axaml"/>
+		<StyleInclude Source="/Views/PlaylistItemTC.axaml"/>
+		<StyleInclude Source="/Views/SettingItemTC.axaml"/>
+    </Application.Styles>
+</Application>

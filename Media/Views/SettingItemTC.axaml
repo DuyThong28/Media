@@ -1,0 +1,73 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Media.Views">
+  <Design.PreviewWith>
+    <controls:SettingItemTC />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|SettingItemTC">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <ToggleButton Height="70" Background="Gray" Padding="20,10,20,10" CornerRadius="10">
+			  <ToggleButton.Resources>
+				  <ControlTheme x:Key="{x:Type ToggleButton}" TargetType="ToggleButton">
+					  <Setter Property="Template">
+						  <ControlTemplate>
+							  <Panel>
+								  <Border Background="{TemplateBinding Background}"
+										  CornerRadius="{TemplateBinding CornerRadius}"
+								>
+									  <Border.Styles>
+										  <Style Selector="Border">
+											  <Setter Property="Opacity" Value="0.2"/>
+										  </Style>
+										  <Style Selector="Border:pointerover">
+											  <Setter Property="Opacity" Value="0.3"/>
+										  </Style>
+									  </Border.Styles>
+								  </Border>
+								  <ContentPresenter x:Name="PART_ContentPresenter"
+													Content="{TemplateBinding Content}"
+													Margin="{TemplateBinding Padding}"/>
+							  </Panel>
+						  </ControlTemplate>
+					  </Setter>
+				  </ControlTheme>
+			  </ToggleButton.Resources>
+			  <Grid>
+				  <Grid.ColumnDefinitions>
+					  <ColumnDefinition Width="40"></ColumnDefinition>
+					  <ColumnDefinition></ColumnDefinition>
+					  <ColumnDefinition></ColumnDefinition>
+				  </Grid.ColumnDefinitions>
+				  <Image Height="30" Width="30" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="{TemplateBinding ImageSource}"></Image>
+				  <Label Grid.Column="1" VerticalAlignment="Center" FontSize="17" Content="{TemplateBinding SettingContent}"></Label>
+				  <Button Grid.Column="2" VerticalAlignment="Center"
+						  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"
+						  Padding="20,5,20,5"
+						  CornerRadius="5"
+						  HorizontalAlignment="Right"
+						  Command="{TemplateBinding Command}"
+						  CommandParameter="{TemplateBinding CommandParameter}"
+						  >
+					  <Button.Styles>
+						  <Style Selector="Button:pointerover">
+							  <Setter Property="Opacity" Value="0.9"/>
+						  </Style>
+						  <Style Selector="Button:pressed">
+							  <Setter Property="Opacity" Value="0.8"/>
+						  </Style>
+					  </Button.Styles>
+					  <Label VerticalAlignment="Center"
+							 FontSize="17"
+							 Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"
+							 Content="{TemplateBinding ButtonContent}">
+					  </Label>
+				  </Button>
+			  </Grid>
+		  </ToggleButton>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>
