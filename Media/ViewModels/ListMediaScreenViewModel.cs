@@ -23,5 +23,7 @@ namespace Media.ViewModels
             set => this.RaiseAndSetIfChanged(ref selectedSong, value);
         }
 
+        public ReactiveCommand<Unit, Unit> doIt { get; private set; }
+
     }
 }

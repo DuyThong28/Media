@@ -1,4 +1,6 @@
+using Avalonia;
 using Avalonia.Controls;
+using Media.ViewModels;
 using System;
 
 namespace Media.Views
@@ -9,7 +11,6 @@ namespace Media.Views
         {
             InitializeComponent();
         }
-
         private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             if(buttonClicked!=null)
@@ -25,8 +26,10 @@ namespace Media.Views
             remove { buttonClicked -= value; }
         }
 
-        private void Slider_ValueChanged(object? sender, Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        public void Slider_PointerCaptureLost(object? sender, Avalonia.Input.PointerCaptureLostEventArgs e)
         {
+            PlayMedia.setCurrentPosition(mediaTrackBar.Value);
         }
+
     }
 }

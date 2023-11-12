@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
+using Avalonia.Platform.Storage;
 using Media.Models;
 using Media.Views;
 using ReactiveUI;
@@ -15,6 +16,7 @@ namespace Media.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+
         public MainWindowViewModel()
         {
             MediaHelper.FetchListMedia(MediaTypes.Audio);
@@ -23,7 +25,7 @@ namespace Media.ViewModels
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.listVideos;
-            MediaControlViewModel.getPathOfSong(new MediaItem(@"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3"));
+            //MediaControlViewModel.getPathOfSong(new MediaItem(@"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3"));
             //PlayMedia.Path = @"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3";
             //PlayMedia.playSong();
         }

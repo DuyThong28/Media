@@ -103,10 +103,10 @@
 							</Image.Styles>
 						</Image>			
 					</Button>
-					<ToggleButton x:Name="btn_Play" Background="Transparent">
+					<Button x:Name="btn_Play" Background="Transparent">
 							<Image 
-								Classes.checked="{Binding ElementName=btn_Play, Path=IsChecked}" 
-								Classes.unChecked="{Binding ElementName=btn_Play, Path=!IsChecked}" 
+								Classes.checked="{Binding ElementName=btn_Play, Path=IsVisible}" 
+								Classes.unChecked="{Binding ElementName=btn_Play, Path=!IsVisible}" 
 								>
 								<Image.Styles>
 									<Style Selector="Image.unChecked">
@@ -131,7 +131,7 @@
 									</Style>
 								</Image.Styles>
 							</Image>
-					</ToggleButton>
+					</Button>
 					<Button Name="btn_next" Background="Transparent"  >
 						<Image >
 							<Image.Styles>
@@ -172,23 +172,12 @@
 					<ColumnDefinition></ColumnDefinition>
 					<ColumnDefinition Width="40"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
-				<Label x:Name="timeSongPlay" Foreground="Gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TbValue}"></Label>
+				<Label x:Name="timeSongPlay" Foreground="Gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TimeSongPlay}"></Label>
 				<Slider x:Name="mediaTrackBar" Grid.Column="1"
 						 Maximum="{Binding TbMaxValue}"
 						Value="{Binding TbValue}"
-						Background="Gray"
-						ValueChanged="Slider_ValueChanged"
+						PointerCaptureLost="Slider_PointerCaptureLost"
 						Padding="0,0,0,20">
-					<Slider.Styles>
-						<Style Selector="Slider:pointerover">
-							<Setter Property="Foreground" Value="Green" />
-							<Setter Property="Background" Value="Gray" />
-						</Style>
-						<Style Selector="Slider:pressed">
-							<Setter Property="Foreground" Value="Green" />
-							<Setter Property="Background" Value="Gray" />
-						</Style>
-					</Slider.Styles>
 				</Slider>
 				<Label x:Name="timeSongEnd" Grid.Column="2" Foreground="gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TimeSongEnd}"></Label>
 			</Grid>
@@ -214,22 +203,13 @@
 							<Setter Property="Source" Value="avares://Media/Assets/Icons/volume-high-hover.png"></Setter>
 						</Style>
 					</Image.Styles>
-				</Image>			</Button>
+				</Image>			
+			</Button>
 			<Slider Grid.Column="1"
 					HorizontalAlignment="Left"
-						 
-						Background="Gray" Width="100" Margin="0,0,10,0" >
-				<Slider.Styles>
-					<Style Selector="Slider:pointerover">
-						<Setter Property="Foreground" Value="Green" />
-						<Setter Property="Background" Value="Gray" />
-					</Style>
-					<Style Selector="Slider:pressed">
-						<Setter Property="Foreground" Value="Green" />
-						<Setter Property="Background" Value="Gray" />
-					</Style>
-				</Slider.Styles>
+					Width="100" Margin="0,0,10,0" >
 			</Slider>
+			<!--<Label Content="{TemplateBinding MediaName}"></Label>-->
 		</Grid>
 	</Grid>
 	</Grid>

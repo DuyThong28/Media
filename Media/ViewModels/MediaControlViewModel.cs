@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Media.Models;
 using Avalonia.Media;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Avalonia.Threading;
 
 namespace Media.ViewModels
 {
@@ -22,6 +23,14 @@ namespace Media.ViewModels
         private IImage imageSource;
         private string songName;
         private string nameAuthor;
+
+        public MediaControlViewModel()
+        {
+            if (PlayMedia.timer != null)
+            {
+                PlayMedia.timer.Tick += Timer_Tick;
+            }
+        }
         public double TbMaxValue
         {
             get { return tbMaxValue; }
@@ -31,7 +40,8 @@ namespace Media.ViewModels
         public double TbValue
         {
             get { return tbValue; }
-            set { this.RaiseAndSetIfChanged(ref tbValue, value); }
+            set { this.RaiseAndSetIfChanged(ref tbValue, value);
+                TimeSongPlay = TimeSpan.FromSeconds(TbValue).ToString(@"mm\:ss");}
         }
         public string TimeSongEnd
         {
@@ -59,28 +69,20 @@ namespace Media.ViewModels
             get => nameAuthor;
             set=> this.RaiseAndSetIfChanged(ref nameAuthor, value);
         }
-
-
-        public void getPathOfSong(MediaItem media)
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            if (media != null) _media = media;
-            SongName = media.Title;
-            NameAuthor = media.ArtistsString;
-            ImageSource = media.Image;
-            TbMaxValue = (double)media.Duration.TotalSeconds;
-            TbValue = 0;
-            TimeSongPlay = "00:00";
-            TimeSongEnd = media.DurationText;
-
-            if (media.FilePath != null) PlayMedia.URL = media.FilePath;
-            PlayMedia.setCurrentTimePlay();
-            PlayMedia.playSong();
+            //if(_media.FilePath!= PlayMedia.Path)
+            //{
+                _media = PlayMedia.media;
+                SongName = PlayMedia.media.Title;
+                NameAuthor = PlayMedia.media.ArtistsString;
+                ImageSource = PlayMedia.media.Image;
+                TbMaxValue = PlayMedia.DurationSong;
+                TbValue = PlayMedia.CurrentPositionSong;
+                TimeSongPlay = PlayMedia.CurrentPositionstringSong;
+                TimeSongEnd = PlayMedia.DurationstringSong;
+            //}
+            TbValue += 1;
         }
-
-        public void Slider_ValueChanged(object? sender, Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs e)
-        {
-
-        }
-
     }
 }

@@ -8,27 +8,26 @@ using ReactiveUI;
 using System.Reactive;
 using NAudio.Wave;
 using System.Diagnostics;
+using Avalonia.Threading;
+using Instances;
+using Media.Models;
 
 namespace Media.ViewModels
 {
     public static class PlayMedia
     {
-
+        public static MediaItem media;
+        public static DispatcherTimer timer = new DispatcherTimer();
         static string path = null;
         static double currentTimePlay = 0.0;
         static bool checkFirst = false;
         public static bool Suffle = false;
         public static WaveOutEvent waveOutEvent = new WaveOutEvent();
         public static AudioFileReader audioFileReader;
-        //public static string mp3FilePath = @"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3";
-        public static bool IsFirst
-        {
-            get { return checkFirst; }
-        }
-        public static void setCurrentTimePlay()
-        {
-           currentTimePlay = audioFileReader.CurrentTime.TotalSeconds;
-        }
+        //public static bool IsFirst
+        //{
+        //    get { return checkFirst; }
+        //}
         public static double CurrentTimePlay
         {
             get { return currentTimePlay; }
@@ -47,8 +46,8 @@ namespace Media.ViewModels
         {
             get
             {
-                if (waveOutEvent.PlaybackState == PlaybackState.Playing)
-                    return audioFileReader.TotalTime.ToString();
+                if (audioFileReader!=null)
+                    return audioFileReader.TotalTime.ToString(@"mm\:ss");
                 return "00:00";
             }
         }
@@ -56,8 +55,8 @@ namespace Media.ViewModels
         {
             get
             {
-                if (waveOutEvent.PlaybackState == PlaybackState.Playing || waveOutEvent.PlaybackState == PlaybackState.Paused)
-                    return audioFileReader.CurrentTime.ToString();
+                if (audioFileReader != null)
+                    return audioFileReader.CurrentTime.ToString(@"mm\:ss");
                 return "00:00";
             }
         }
@@ -70,7 +69,7 @@ namespace Media.ViewModels
         {
             set
             {
-                checkFirst = true;
+                //checkFirst = true;
 
                 if (value != null)
                 {
@@ -78,10 +77,12 @@ namespace Media.ViewModels
                 }
                 if (path != null)
                 {
+                    waveOutEvent.Dispose();
                     audioFileReader = new AudioFileReader(path);
                     waveOutEvent.Init(audioFileReader);
+                    timer.Interval = new TimeSpan(0, 0, 1);
                     currentTimePlay = 0.0;
-                    waveOutEvent.Stop();
+
                 }
             }
         }
@@ -89,45 +90,47 @@ namespace Media.ViewModels
         {
             set {   waveOutEvent.Volume = value; }
         }
+        public static void setCurrentTimePlay()
+        {
+            currentTimePlay = audioFileReader.CurrentTime.TotalSeconds;
+        }
         public static void continueSong()
         {
             if (waveOutEvent.PlaybackState == PlaybackState.Paused)
             {
-                audioFileReader.CurrentTime = audioFileReader.CurrentTime;
-                //audioFileReader.CurrentTime = TimeSpan.FromSeconds(currentTimePlay);
+                audioFileReader.CurrentTime = TimeSpan.FromSeconds(currentTimePlay);
                 waveOutEvent.Play();
+                timer.Start();
             }
         }
         public static void playSong()
         {
             audioFileReader.CurrentTime = TimeSpan.FromSeconds(currentTimePlay);
             waveOutEvent.Play();
+            timer.Start();
         }
         public static void stopSong()
         {
             currentTimePlay = 0.0;
-            waveOutEvent.Stop();
+            waveOutEvent.Dispose();
+            timer.Stop();
         }
         public static void pauseSong()
         {
+            currentTimePlay = audioFileReader.CurrentTime.TotalSeconds;
             waveOutEvent.Pause();
+            timer.Stop();
         }
         public static void muteVolume()
         {
             waveOutEvent.Volume = 0;
         }
-        public static void setCurrentPosition(int mousePosition, int progressBarWidth)
+        public static void setCurrentPosition(double position)
         {
-            //try
-            //{
-            //    if (waveOutEvent. != null)
-            //        player.Ctlcontrols.currentPosition = player.currentMedia.duration * mousePosition / progressBarWidth;
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.Print(ex.ToString());
-            //}
+            if (waveOutEvent != null)
+            {
+                audioFileReader.CurrentTime = TimeSpan.FromSeconds(position);
+            }
         }
     }
 }
