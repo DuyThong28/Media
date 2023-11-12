@@ -12,6 +12,12 @@ namespace Media.ViewModels
 {
     public class NavBarControlViewModel:ViewModelBase
     {
+        private ListBoxItem selectedNavBarItem;
+        public ListBoxItem SelectedNavBarItem
+        {
+            get { return selectedNavBarItem; }
+            set => this.RaiseAndSetIfChanged(ref selectedNavBarItem, value);
+        }
     }
 
 }

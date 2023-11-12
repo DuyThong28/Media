@@ -11,6 +11,9 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using System.Resources;
 using System.Drawing;
+using ReactiveUI;
+using System.Reactive;
+using NAudio.Wave;
 
 namespace Media.Models
 {
@@ -134,6 +137,7 @@ namespace Media.Models
             }
         }
         public TagLib.File Others => others;
+        public ReactiveCommand<Unit, Unit> PlaySongCommand { get; private set; }
 
         public MediaItem(string path)
         {
@@ -173,6 +177,27 @@ namespace Media.Models
                     }
                 }
                 taglib.Save();
+                if (this.mediaType == MediaTypes.Audio)
+                {
+                    this.PlaySongCommand = ReactiveCommand.Create(() => {
+                        //if (PlayMedia.IsFirst == false) return;
+                        if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Stopped)
+                        {
+                            PlayMedia.stopSong();
+                            PlayMedia.Path = this.FilePath;
+                            PlayMedia.audioFileReader = new AudioFileReader(path);
+                            PlayMedia.waveOutEvent.Init(PlayMedia.audioFileReader);
+                            PlayMedia.playSong();
+                        }
+                        else if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Playing)
+                        {
+                            PlayMedia.pauseSong();
+                        } else if(PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Paused)
+                        {
+                            PlayMedia.continueSong();
+                        }
+                    });
+                }
             }
         }
 

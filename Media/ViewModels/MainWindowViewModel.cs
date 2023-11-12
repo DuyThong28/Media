@@ -1,4 +1,5 @@
-﻿using Avalonia.Interactivity;
+﻿using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using Media.Models;
 using Media.Views;
@@ -14,7 +15,6 @@ namespace Media.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-      
         public MainWindowViewModel()
         {
             MediaHelper.FetchListMedia(MediaTypes.Audio);
@@ -23,7 +23,11 @@ namespace Media.ViewModels
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.listVideos;
+            MediaControlViewModel.getPathOfSong(new MediaItem(@"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3"));
+            //PlayMedia.Path = @"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3";
+            //PlayMedia.playSong();
         }
+
         public MediaControlViewModel MediaControlViewModel { get; set; } = new MediaControlViewModel();
         public HomeScreenViewModel HomeScreenViewModel { get; set; } = new HomeScreenViewModel();
         public ListMediaScreenViewModel ListMediaScreenViewModel { get; set; } = new ListMediaScreenViewModel();
@@ -33,6 +37,6 @@ namespace Media.ViewModels
         public LibraryScreenViewModel LibraryScreenViewModel { get; set; } = new LibraryScreenViewModel();
         public SettingScreenViewModel SettingScreenViewModel { get; set; } = new SettingScreenViewModel();
         public SearchScreenViewModel SearchScreenViewModel { get; set; } = new SearchScreenViewModel();
-        public PlayMedia PlayMedia {  get; set; } = new PlayMedia();
+        public NavBarControlViewModel NavBarControlViewModel { get; set; } = new NavBarControlViewModel();
     }
 }

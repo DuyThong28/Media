@@ -6,7 +6,7 @@
 			 xmlns:vm="using:Media.ViewModels"
              x:Class="Media.Views.MediaControl"
 			 xmlns:views="using:Media.Views"
-			 x:DataType="views:MediaControl">
+			 x:DataType="vm:MediaControlViewModel">
 	<Design.DataContext>
 		<vm:MediaControlViewModel/>
 	</Design.DataContext>
@@ -42,15 +42,24 @@
 						<ColumnDefinition></ColumnDefinition>
 					</Grid.ColumnDefinitions>
 					<Border Grid.Column="0" Height="60" Width="60" CornerRadius="5" ClipToBounds="True">
-						<Image x:Name="songImage" Source="/Assets/dung_yeu_nua_em_met_roi.png"></Image>
+						<Image x:Name="songImage" Source="{Binding ImageSource}"></Image>
 					</Border>
 					<Grid Grid.Column="1">
 						<Grid.RowDefinitions>
 							<RowDefinition></RowDefinition>
 							<RowDefinition></RowDefinition>
 						</Grid.RowDefinitions>
-						<Label x:Name="songName" Grid.Row="0"   HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontSize="14" FontWeight="Medium" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}">Đừng yêu nữa em mệt rồi</Label>
-						<Label x:Name="nameAuthor" Grid.Row="1" Foreground="Gray" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="14">MIN</Label>
+						<Label x:Name="songName" Grid.Row="0"   
+							   HorizontalContentAlignment="Left" 
+							   VerticalContentAlignment="Bottom" 
+							   FontSize="14" FontWeight="Medium" 
+							   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"
+						   Content="{Binding SongName}"></Label>
+						<Label x:Name="nameAuthor" Grid.Row="1" 
+							   Foreground="Gray" 
+							   HorizontalContentAlignment="Left" 
+					VerticalContentAlignment="Top" 
+							   FontSize="14" Content="{Binding NameAuthor}"></Label>
 					</Grid>
 				</Grid>
 		</Button>
@@ -163,10 +172,12 @@
 					<ColumnDefinition></ColumnDefinition>
 					<ColumnDefinition Width="40"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
-				<Label x:Name="timeSongPlay" Foreground="Gray"  VerticalContentAlignment="Center" FontSize="10">02:28</Label>
+				<Label x:Name="timeSongPlay" Foreground="Gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TbValue}"></Label>
 				<Slider x:Name="mediaTrackBar" Grid.Column="1"
-						 
+						 Maximum="{Binding TbMaxValue}"
+						Value="{Binding TbValue}"
 						Background="Gray"
+						ValueChanged="Slider_ValueChanged"
 						Padding="0,0,0,20">
 					<Slider.Styles>
 						<Style Selector="Slider:pointerover">
@@ -179,7 +190,7 @@
 						</Style>
 					</Slider.Styles>
 				</Slider>
-				<Label x:Name="timeSongEnd" Grid.Column="2" Foreground="gray"  VerticalContentAlignment="Center" FontSize="10">04:41</Label>
+				<Label x:Name="timeSongEnd" Grid.Column="2" Foreground="gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TimeSongEnd}"></Label>
 			</Grid>
 			<Grid>
 			</Grid>

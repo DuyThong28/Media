@@ -24,5 +24,9 @@ namespace Media.Views
             add { buttonClicked += value; }
             remove { buttonClicked -= value; }
         }
+
+        private void Slider_ValueChanged(object? sender, Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        {
+        }
     }
 }

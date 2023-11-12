@@ -11,12 +11,13 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using TagLib;
+using System.Diagnostics;
 
 namespace Media.Views
 {
     public partial class MainWindow : Window
     {
-
+        private Process ffmpegProcess;
         public MainWindow()
         {
             InitializeComponent();
@@ -24,7 +25,32 @@ namespace Media.Views
             mediaControl.ButtonClicked += MediaControl_ButtonClicked;
             SettingScreenViewModel.OpenSongFolder = ReactiveCommand.Create(() => ChooseSongPath());
             SettingScreenViewModel.OpenVideoFolder = ReactiveCommand.Create(() => ChooseVideoPath());
+            ffmpegProcess = new Process();
+            PlayAudio(@"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3");
+        }
 
+        private void PlayAudio(string filePath)
+        {
+            // Example FFmpeg command to play audio:
+            // ffmpeg -i input.mp3 -f wav - | ffplay -
+
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = "ffmpeg",
+                Arguments = $"-i {filePath} -f wav - | ffplay -",
+                RedirectStandardInput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            ffmpegProcess.StartInfo = startInfo;
+            ffmpegProcess.Start();
+        }
+
+        private void StopAudio()
+        {
+            // Kill the FFmpeg process
+            ffmpegProcess.Kill();
         }
         private void MediaControl_ButtonClicked(object? sender, EventArgs e)
         {

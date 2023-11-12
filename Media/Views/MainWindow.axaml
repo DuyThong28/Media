@@ -33,7 +33,7 @@
 				<ColumnDefinition></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 			
-			<views:NavBarControl x:Name="navBarControl" Grid.Column="0"/>
+			<views:NavBarControl x:Name="navBarControl" Grid.Column="0" DataContext="{Binding NavBarControlViewModel}"/>
 			<Grid Grid.Column="1">
 				<views:ListVideoSreenControl x:Name="videoScreen" DataContext="{Binding ListVideoScreenViewModel}" IsVisible="False"/>
 				<views:ListMediaScreenControl x:Name="musicScreen" DataContext="{Binding ListMediaScreenViewModel}" IsVisible="False"/>
