@@ -13,17 +13,18 @@ namespace Media.ViewModels
     public class ListMediaScreenViewModel:ViewModelBase
     {
         public ListMediaScreenViewModel() {
-            
-        }
-        private List<MediaItem> listSongs;
-        public List<MediaItem> ListSongs { get => listSongs; set { this.RaiseAndSetIfChanged(ref listSongs, value); } }
-        public static ReactiveCommand<Unit, Unit> newCommand { get; set; }
-        private MediaItem selectedSong;
-        public MediaItem SelectedSong { get => selectedSong;
-            set => this.RaiseAndSetIfChanged(ref selectedSong, value);
+            PlayMediaCommand = ReactiveCommand.Create(() => { MediaHelper.PlayThePlaylist(listSongs); });
+            MediaHelper.UpdateListMediaScreen += MediaHelper_UpdateListMediaScreen;
         }
 
-        public ReactiveCommand<Unit, Unit> doIt { get; private set; }
+        private void MediaHelper_UpdateListMediaScreen(object? sender, EventArgs e)
+        {
+
+        }
+
+        private List<MediaItem> listSongs;
+        public List<MediaItem> ListSongs { get => listSongs; set { this.RaiseAndSetIfChanged(ref listSongs, value); } }
+        public ReactiveCommand<Unit, Unit> PlayMediaCommand { get; private set; }
 
     }
 }

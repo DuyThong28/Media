@@ -60,7 +60,7 @@
 								</ListBox.ItemsPanel>
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
-										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}"/>
+										<views:MediaItemTC Name="hahaha" Tag="tre" AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}"/>
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ListBox>

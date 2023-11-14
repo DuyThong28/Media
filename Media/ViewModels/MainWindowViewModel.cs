@@ -16,18 +16,31 @@ namespace Media.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-
+        public static MainWindowViewModel Instance { get; set; }
         public MainWindowViewModel()
         {
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
+            LibraryScreenViewModel.ListMedia = new List<Playlist> { new Playlist() { ListMedia = MediaHelper.listSongs },
+                new Playlist() { ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs } };
             HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.listVideos;
-            //MediaControlViewModel.getPathOfSong(new MediaItem(@"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3"));
-            //PlayMedia.Path = @"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3";
-            //PlayMedia.playSong();
         }
 
         public MediaControlViewModel MediaControlViewModel { get; set; } = new MediaControlViewModel();

@@ -12,6 +12,8 @@ using System.Reflection;
 using System.Text;
 using TagLib;
 using System.Diagnostics;
+using NAudio.Wave;
+using Media.Models;
 
 namespace Media.Views
 {
@@ -22,11 +24,29 @@ namespace Media.Views
             InitializeComponent();
             navBarControl.NavBarItemSelected += NavBarControl_RadioButtonChecked;
             mediaControl.ButtonClicked += MediaControl_ButtonClicked;
+            libraryScreen.SelectPlaylist += LibraryScreen_SelectPlaylist;
             SettingScreenViewModel.OpenSongFolder = ReactiveCommand.Create(() => ChooseSongPath());
             SettingScreenViewModel.OpenVideoFolder = ReactiveCommand.Create(() => ChooseVideoPath());
         }
 
-       
+        private void LibraryScreen_SelectPlaylist(object? sender, EventArgs e)
+        {
+            ListBox listPlaylist = sender as ListBox;
+            Playlist selectedPlaylist = listPlaylist.SelectedItem as Playlist;
+            if(selectedPlaylist.ListMedia != null)
+            {
+                (playlistScreen.DataContext as PlaylistScreenViewModel).Playlist = selectedPlaylist;
+            }
+            homeScreen.IsVisible = false;
+            musicScreen.IsVisible = false;
+            videoScreen.IsVisible = false;
+            playingScreen.IsVisible = false;
+            libraryScreen.IsVisible = false;
+            playlistScreen.IsVisible = true;
+            settingScreen.IsVisible = false;
+            searchScreen.IsVisible = false;
+        }
+
         private void MediaControl_ButtonClicked(object? sender, EventArgs e)
         {
             playingScreen.IsVisible = !playingScreen.IsVisible;

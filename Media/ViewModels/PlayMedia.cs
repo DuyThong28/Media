@@ -11,27 +11,45 @@ using System.Diagnostics;
 using Avalonia.Threading;
 using Instances;
 using Media.Models;
+using System.Numerics;
 
 namespace Media.ViewModels
 {
+    public enum RepeatMode
+    {
+        Off = 0,
+        One = 1,
+        All = 2,
+    }
     public static class PlayMedia
     {
         public static MediaItem media;
         public static DispatcherTimer timer = new DispatcherTimer();
+        public static RepeatMode Repeat = RepeatMode.Off;
         static string path = null;
         static double currentTimePlay = 0.0;
         static bool checkFirst = false;
         public static bool Suffle = false;
         public static WaveOutEvent waveOutEvent = new WaveOutEvent();
         public static AudioFileReader audioFileReader;
-        //public static bool IsFirst
-        //{
-        //    get { return checkFirst; }
-        //}
+        public static bool IsPlay
+        {
+            get; set;
+        } = false;
+        public static bool IsFirst
+        {
+            get { return checkFirst; }
+        }
         public static double CurrentTimePlay
         {
             get { return currentTimePlay; }
             set { currentTimePlay = value; }
+        }
+
+        public static float Volume
+        {
+            set { waveOutEvent.Volume = value; }
+            get { return waveOutEvent.Volume; }
         }
 
         public static double DurationSong
@@ -69,7 +87,7 @@ namespace Media.ViewModels
         {
             set
             {
-                //checkFirst = true;
+                checkFirst = true;
 
                 if (value != null)
                 {
@@ -77,18 +95,16 @@ namespace Media.ViewModels
                 }
                 if (path != null)
                 {
-                    waveOutEvent.Dispose();
+                    waveOutEvent.Stop();
                     audioFileReader = new AudioFileReader(path);
                     waveOutEvent.Init(audioFileReader);
+                    timer.Tick += MediaHelper.UpdateScreen;
+                    timer.Start();
                     timer.Interval = new TimeSpan(0, 0, 1);
                     currentTimePlay = 0.0;
 
                 }
             }
-        }
-        public static float Volume
-        {
-            set {   waveOutEvent.Volume = value; }
         }
         public static void setCurrentTimePlay()
         {
@@ -100,26 +116,22 @@ namespace Media.ViewModels
             {
                 audioFileReader.CurrentTime = TimeSpan.FromSeconds(currentTimePlay);
                 waveOutEvent.Play();
-                timer.Start();
             }
         }
         public static void playSong()
         {
             audioFileReader.CurrentTime = TimeSpan.FromSeconds(currentTimePlay);
             waveOutEvent.Play();
-            timer.Start();
         }
         public static void stopSong()
         {
             currentTimePlay = 0.0;
             waveOutEvent.Dispose();
-            timer.Stop();
         }
         public static void pauseSong()
         {
             currentTimePlay = audioFileReader.CurrentTime.TotalSeconds;
             waveOutEvent.Pause();
-            timer.Stop();
         }
         public static void muteVolume()
         {
@@ -130,7 +142,12 @@ namespace Media.ViewModels
             if (waveOutEvent != null)
             {
                 audioFileReader.CurrentTime = TimeSpan.FromSeconds(position);
+                CurrentTimePlay = position;
             }
         }
+
+       
+
+        
     }
 }

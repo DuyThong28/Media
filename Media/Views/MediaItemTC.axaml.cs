@@ -23,7 +23,7 @@ namespace Media.Views
             AvaloniaProperty.Register<MediaItemTC, string>(
                 nameof(AuthorName),
                 defaultValue: "");
-        
+
         public string AuthorName
         {
             get { return GetValue(AuthorNameProperty); }

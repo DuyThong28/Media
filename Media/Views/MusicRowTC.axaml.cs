@@ -25,7 +25,7 @@ namespace Media.Views
             get { return GetValue(MediaNameProperty); }
             set { SetValue(MediaNameProperty, value); }
         }
-
+        
         public static readonly StyledProperty<string> AuthorNameProperty =
             AvaloniaProperty.Register<MusicRowTC, string>(
                 nameof(AuthorName),

@@ -27,6 +27,14 @@ namespace Media.ViewModels
 
         public static List<MediaItem> listSongs = new List<MediaItem>();
         public static List<MediaItem> listVideos = new List<MediaItem>();
+        private static List<Playlist> allPlayList;
+        public static List<Playlist> AllPlayList
+        {
+            get
+            {
+                return allPlayList;
+            }
+        }
         public static List<MediaItem> PlayQueue
         {
             set => playQueue = value;
@@ -46,6 +54,63 @@ namespace Media.ViewModels
                 return listIndexDefalt;
             }
         }
+        public static int CurrentIndex
+        {
+            get
+            {
+                for (int i = 0; i < PlayQueue.Count; i++)
+                {
+                    if (PlayQueue[ListIndexPlayQueue[i]].FilePath == PlayMedia.Path)
+                    {
+                        return i;
+                    }
+                }
+                return 0;
+            }
+        }
+
+        public static List<int> ListRandomIndex
+        {
+            get
+            {
+                Random random = new Random();
+                List<int> listRanIndex = new List<int>(ListIndexPlayQueue);
+                listRanIndex.Remove(CurrentIndex);
+                int n = listRanIndex.Count;
+                while (n > 1)
+                {
+                    n--;
+                    int k = random.Next(n + 1);
+                    int value = listRanIndex[k];
+                    listRanIndex[k] = listRanIndex[n];
+                    listRanIndex[n] = value;
+                }
+                listRanIndex.Insert(0, CurrentIndex);
+                return listRanIndex;
+            }
+        }
+
+        public static void PlayThePlaylist(List<MediaItem> pl)
+        {
+            if (pl.Count == 0) return;
+            isPlayingPlaylist = true;
+            playQueue.Clear();
+            playQueue = new List<MediaItem>(pl);
+            PlayMedia.media = MediaHelper.PlayQueue[0];
+            PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
+            PlayMedia.playSong();
+        }
+        public static void PlayThePlaylist(Playlist pl)
+        {
+            if (pl.ListMedia.Count == 0) return;
+            isPlayingPlaylist = true;
+            playListPlayingId = pl.PlayListID;
+            playQueue.Clear();
+            playQueue = new List<MediaItem>(pl.ListMedia);
+            PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
+            PlayMedia.playSong();
+        }
+    
 
         public static string MusicPathFolder
         {
@@ -107,6 +172,45 @@ namespace Media.ViewModels
             }
         }
 
+
+        public static event EventHandler updateMediaScreen;
+        public static event EventHandler UpdateMediaScreen
+        {
+            add { updateMediaScreen += value; }
+            remove { updateMediaScreen -= value; }
+        }
+
+        public static event EventHandler updatePlaylistScreen;
+        public static event EventHandler UpdatePlaylistScreen
+        {
+            add { updatePlaylistScreen += value; }
+            remove { updatePlaylistScreen -= value; }
+        }
+        public static event EventHandler updateListMediaScreen;
+        public static event EventHandler UpdateListMediaScreen
+        {
+            add { updateListMediaScreen += value; }
+            remove { updateListMediaScreen -= value; }
+        }
+        public static void UpdateScreen(object sender, EventArgs e)
+        {
+            if (PlayMedia.media != null)
+            {
+                PlayMedia.IsPlay = PlayMedia.media.IsPlay;
+            }
+            if (updateMediaScreen != null)
+            {
+                updateMediaScreen(sender, new EventArgs());
+            }
+            if (updatePlaylistScreen != null)
+            {
+                updatePlaylistScreen(sender, new EventArgs());
+            }
+            if (updateListMediaScreen != null)
+            {
+                updateListMediaScreen(sender, new EventArgs());
+            }
+        }
 
     }
 }
