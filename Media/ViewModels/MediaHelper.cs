@@ -16,24 +16,62 @@ using TagLib;
 
 namespace Media.ViewModels
 {
-    public static class MediaHelper
+    static class MediaHelper
     {
+        private static PlaylistDatabase database = new PlaylistDatabase();
         private static string musicPathFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
         private static string videoPathFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         private static List<MediaItem> playQueue = new List<MediaItem>();
         private static List<int> listIndexDefalt = new List<int>();
         public static bool isPlayingPlaylist = true;
         public static string playListPlayingId = null;
-
+        private static List<Playlist> allPlayList = database.QueryAllPlaylists();
         public static List<MediaItem> listSongs = new List<MediaItem>();
         public static List<MediaItem> listVideos = new List<MediaItem>();
-        private static List<Playlist> allPlayList;
         public static List<Playlist> AllPlayList
         {
             get
             {
                 return allPlayList;
             }
+        }
+        public static void UpdatePlaylist(Playlist playlist)
+        {
+            int index = MediaHelper.AllPlayList.FindIndex(pl => pl.PlayListID == playlist.PlayListID);
+            if (index > 0)
+            {
+                allPlayList[index] = playlist;
+                Database.UpdatePlaylist(playlist);
+            }
+        }
+        public static void AddPlayList(Playlist playlist)
+        {
+            if (allPlayList.Exists(x => x.PlayListID == playlist.PlayListID))
+            {
+                throw new Exception("Playlist trùng ID");
+            }
+            allPlayList.Add(playlist);
+            database.InsertPlaylist(playlist);
+        }
+
+        public static void DeletePlayList(Playlist playlist)
+        {
+            int index = allPlayList.FindIndex(x => x.PlayListID == playlist.PlayListID);
+            if (index >= 0)
+            {
+                database.DeletePlaylist(allPlayList[index].PlayListID);
+                allPlayList.RemoveAt(index);
+            }
+        }
+        public static void DeleteMediaFromPlaylist(string mediaPath, string playlistID)
+        {
+            int index = allPlayList.FindIndex(x => x.PlayListID == playlistID);
+            if (index >= 0)
+            {
+                int indexOfMedia = allPlayList[index].ListMedia.FindIndex(x => x.FilePath == mediaPath);
+                allPlayList[index].ListMedia.RemoveAt(indexOfMedia);
+            }
+            database.DeleteMediaInAPlaylist(mediaPath, playlistID);
         }
         public static List<MediaItem> PlayQueue
         {
@@ -129,6 +167,8 @@ namespace Media.ViewModels
             }
             get { return videoPathFolder; }
         }
+
+        internal static PlaylistDatabase Database { get => database; set => database = value; }
 
         public static void FetchListMedia(MediaTypes mediaTypes)
         {

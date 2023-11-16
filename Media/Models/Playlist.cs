@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Media.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -51,5 +52,54 @@ namespace Media.Models
             if (listMedia != null)
                 this.ListMedia = listMedia;
         }
+        public static IEnumerable<IGrouping<char, MediaItem>> SortListAToZ(List<MediaItem> list)
+        {
+            IEnumerable<IGrouping<char, MediaItem>> res = from song in list
+                                                      orderby song.Title ascending
+                                                      group song by song.Title[0];
+            return res.Reverse();
+        }
+
+        public static IEnumerable<IGrouping<string, MediaItem>> SortListDateAdded(List<MediaItem> list)
+        {
+            IEnumerable<IGrouping<string, MediaItem>> res = from song in list
+                                                        orderby song.DateAdded ascending
+                                                        group song by song.DateAdded.ToString("dd/MM/yyyy");
+            return res.Reverse();
+        }
+
+        public static IEnumerable<IGrouping<string, MediaItem>> SortListAlbum(List<MediaItem> list)
+        {
+            IEnumerable<IGrouping<string, MediaItem>> res = from song in list
+                                                        orderby song.Album ascending
+                                                        group song by song.Album;
+            return res.Reverse();
+        }
+
+        public static IEnumerable<IGrouping<string, MediaItem>> SortListArtists(List<MediaItem> list)
+        {
+            IEnumerable<IGrouping<string, MediaItem>> res = from song in list
+                                                        orderby song.ArtistsString ascending
+                                                        group song by song.ArtistsString;
+            return res.Reverse();
+        }       
+        public void AddMedia(MediaItem media)
+        {
+            if (listMedia.Exists(x => x.FilePath == media.FilePath))
+            {
+                return;
+            }
+            media.PlaylistID = PlayListID;
+            listMedia.Add(media);
+            MediaHelper.Database.InsertMediaIntoPlaylistMedias(this, media);
+        }
+        public void AddRangeMedia(List<MediaItem> medias)
+        {
+            foreach (MediaItem media in medias)
+            {
+                AddMedia(media);
+            }
+        }
+
     }
 }

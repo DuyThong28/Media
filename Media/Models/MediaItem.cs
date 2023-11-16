@@ -35,6 +35,7 @@ namespace Media.Models
             get { return isPlay; }
             set { isPlay = value; }
         }
+        private string playlistID = null; //Tên playlist
         public MediaTypes MediaTypes { get { return mediaType; } }
         public string Title
         {
@@ -167,6 +168,8 @@ namespace Media.Models
                 PlayMedia.continueSong();
             }
         }
+        public ReactiveCommand<Unit, Unit> PlaySongCommand { get; private set; }
+        public string PlaylistID { get => playlistID; set => playlistID = value; }
 
         public MediaItem(string path)
         {
