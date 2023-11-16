@@ -28,6 +28,7 @@ namespace Media.Models
         private DateTime dateAdded;
         private MediaTypes mediaType;
         private TagLib.File others;
+        private string playlistID = null; //Tên playlist
         public MediaTypes MediaTypes { get { return mediaType; } }
         public string Title
         {
@@ -138,6 +139,7 @@ namespace Media.Models
         }
         public TagLib.File Others => others;
         public ReactiveCommand<Unit, Unit> PlaySongCommand { get; private set; }
+        public string PlaylistID { get => playlistID; set => playlistID = value; }
 
         public MediaItem(string path)
         {

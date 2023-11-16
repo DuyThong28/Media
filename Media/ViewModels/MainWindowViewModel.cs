@@ -23,7 +23,7 @@ namespace Media.ViewModels
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.listVideos;
-            MediaControlViewModel.getPathOfSong(new MediaItem(@"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3"));
+            MediaControlViewModel.getPathOfSong(new MediaItem(@"C:\Users\lenovo\Music\Tuy-Am-Xesi-Masew-Nhat-Nguyen.mp3"));
             //PlayMedia.Path = @"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3";
             //PlayMedia.playSong();
         }
