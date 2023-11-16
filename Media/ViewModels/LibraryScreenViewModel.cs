@@ -20,5 +20,6 @@ namespace Media.ViewModels
         private Playlist selectedPlaylist;
         public List<Playlist> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
         public Playlist SelectedPlaylist { get => selectedPlaylist;}
+
     }
 }

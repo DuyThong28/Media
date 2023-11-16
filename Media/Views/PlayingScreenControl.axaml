@@ -5,6 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="600"
              x:Class="Media.Views.PlayingScreenControl"
 			 xmlns:views="using:Media.Views"
+			xmlns:vlc="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
 			 xmlns:vm="using:Media.ViewModels"
 			 x:DataType="vm:PlayingScreenViewModel">
 	<Design.DataContext>
@@ -42,7 +43,7 @@
 	<Design.DataContext>
 		<vm:PlayingScreenViewModel/>
 	</Design.DataContext>
-	<Border Background="#FF1A1A1A" Margin="10,10,10,10"  CornerRadius="5" ClipToBounds="True">
+		<Border  Background="#FF1A1A1A" Margin="10,10,10,10"  CornerRadius="5" ClipToBounds="True">
 		<Panel>
 			<Image Source="{Binding ElementName=imageSong, Path=Source}" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" Opacity="0.8"></Image>
 			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" CornerRadius="5" ClipToBounds="True" Opacity="0.5">

@@ -22,7 +22,7 @@ namespace Media.ViewModels
         private static string videoPathFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         private static List<MediaItem> playQueue = new List<MediaItem>();
         private static List<int> listIndexDefalt = new List<int>();
-        public static bool isPlayingPlaylist = false;
+        public static bool isPlayingPlaylist = true;
         public static string playListPlayingId = null;
 
         public static List<MediaItem> listSongs = new List<MediaItem>();
@@ -194,10 +194,6 @@ namespace Media.ViewModels
         }
         public static void UpdateScreen(object sender, EventArgs e)
         {
-            if (PlayMedia.media != null)
-            {
-                PlayMedia.IsPlay = PlayMedia.media.IsPlay;
-            }
             if (updateMediaScreen != null)
             {
                 updateMediaScreen(sender, new EventArgs());

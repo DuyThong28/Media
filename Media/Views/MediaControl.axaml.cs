@@ -14,14 +14,14 @@ namespace Media.Views
         }
         private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if(buttonClicked!=null)
+            if (buttonClicked != null)
             {
                 buttonClicked(sender, e);
             }
         }
 
-        private event EventHandler buttonClicked;
-        public event EventHandler ButtonClicked
+        private  event EventHandler buttonClicked;
+        public  event EventHandler ButtonClicked
         {
             add { buttonClicked += value; }
             remove { buttonClicked -= value; }
@@ -29,7 +29,7 @@ namespace Media.Views
 
         public void Slider_PointerCaptureLost(object? sender, Avalonia.Input.PointerCaptureLostEventArgs e)
         {
-            PlayMedia.setCurrentPosition(mediaTrackBar.Value);
+            PlayMedia.setCurrentPosition(Convert.ToInt32(mediaTrackBar.Value));
         }
 
         private void Slider_ValueChanged(object? sender, Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs e)
@@ -81,6 +81,10 @@ namespace Media.Views
                 btn_suff_img.Classes.Remove("notSuff");
                 btn_suff_img.Classes.Add("suff");
             }
+        }
+
+        private void Button_Click_3(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
         }
     }
 }

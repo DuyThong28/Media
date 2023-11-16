@@ -75,7 +75,7 @@
 																  MediaName="{Binding Title}"
 																  ImageSource="{Binding Image}"
 																  DurationText="{Binding DurationText}"
-																	Command="{Binding PlayMediaCommand}"
+																	Command="{Binding PlaySongCommand}"
 																	/>
 											</DataTemplate>
 										</ListBox.ItemTemplate>

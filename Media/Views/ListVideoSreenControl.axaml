@@ -29,6 +29,7 @@
 							 Padding="10,5,10,5"
 							 CornerRadius="5"
 							 HorizontalAlignment="Left"
+									Command="{Binding PlayMediaCommand}"
 								>
 								<Button.Styles>
 									<Style Selector="Button:pointerover">
@@ -77,7 +78,7 @@
 										</ListBox.ItemsPanel>
 										<ListBox.ItemTemplate>
 											<DataTemplate>
-												<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}"/>
+												<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}"/>
 											</DataTemplate>
 										</ListBox.ItemTemplate>
 									</ListBox>

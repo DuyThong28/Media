@@ -14,6 +14,8 @@ using TagLib;
 using System.Diagnostics;
 using NAudio.Wave;
 using Media.Models;
+using Avalonia.Markup.Xaml;
+using LibVLCSharp.Shared;
 
 namespace Media.Views
 {
@@ -33,14 +35,14 @@ namespace Media.Views
         {
             ListBox listPlaylist = sender as ListBox;
             Playlist selectedPlaylist = listPlaylist.SelectedItem as Playlist;
-            if(selectedPlaylist.ListMedia != null)
+            if (selectedPlaylist.ListMedia != null)
             {
                 (playlistScreen.DataContext as PlaylistScreenViewModel).Playlist = selectedPlaylist;
             }
             homeScreen.IsVisible = false;
             musicScreen.IsVisible = false;
             videoScreen.IsVisible = false;
-            playingScreen.IsVisible = false;
+            //playingScreen.IsVisible = false;
             libraryScreen.IsVisible = false;
             playlistScreen.IsVisible = true;
             settingScreen.IsVisible = false;
@@ -49,7 +51,18 @@ namespace Media.Views
 
         private void MediaControl_ButtonClicked(object? sender, EventArgs e)
         {
-            playingScreen.IsVisible = !playingScreen.IsVisible;
+            mainScreen.IsVisible = !mainScreen.IsVisible;
+            mainPlayingScreen.IsVisible = !mainPlayingScreen.IsVisible;
+            if (PlayMedia.IsPlayVideo == true)
+            {
+                videoPlayingScreen.IsVisible = true;
+                playingScreen.IsVisible = false;
+            } 
+            else if (PlayMedia.IsPlayVideo == false)
+            {
+                videoPlayingScreen.IsVisible = false;
+                playingScreen.IsVisible = true;
+            }
         }
 
         private void NavBarControl_RadioButtonChecked(object? sender, EventArgs e)
@@ -64,7 +77,7 @@ namespace Media.Views
                     homeScreen.IsVisible = true;
                     musicScreen.IsVisible = false;
                     videoScreen.IsVisible = false;
-                    playingScreen.IsVisible = false;
+                    //playingScreen.IsVisible = false;
                     libraryScreen.IsVisible = false;
                     playlistScreen.IsVisible = false;
                     settingScreen.IsVisible = false;
@@ -74,7 +87,7 @@ namespace Media.Views
                     homeScreen.IsVisible = false;
                     musicScreen.IsVisible = true;
                     videoScreen.IsVisible = false;
-                    playingScreen.IsVisible = false;
+                    //playingScreen.IsVisible = false;
                     libraryScreen.IsVisible = false;
                     playlistScreen.IsVisible = false;
                     settingScreen.IsVisible = false;
@@ -84,7 +97,7 @@ namespace Media.Views
                     homeScreen.IsVisible = false;
                     musicScreen.IsVisible = false;
                     videoScreen.IsVisible = true;
-                    playingScreen.IsVisible = false;
+                    //playingScreen.IsVisible = false;
                     libraryScreen.IsVisible = false;
                     playlistScreen.IsVisible = false;
                     settingScreen.IsVisible = false;
@@ -94,7 +107,7 @@ namespace Media.Views
                     homeScreen.IsVisible = false;
                     musicScreen.IsVisible = false;
                     videoScreen.IsVisible = false;
-                    playingScreen.IsVisible = false;
+                    //playingScreen.IsVisible = false;
                     libraryScreen.IsVisible = false;
                     playlistScreen.IsVisible = false;
                     settingScreen.IsVisible = false;
@@ -104,7 +117,7 @@ namespace Media.Views
                     homeScreen.IsVisible = false;
                     musicScreen.IsVisible = false;
                     videoScreen.IsVisible = false;
-                    playingScreen.IsVisible = false;
+                    //playingScreen.IsVisible = false;
                     libraryScreen.IsVisible = true;
                     playlistScreen.IsVisible = false;
                     settingScreen.IsVisible = false;
@@ -114,7 +127,7 @@ namespace Media.Views
                     homeScreen.IsVisible = false;
                     musicScreen.IsVisible = false;
                     videoScreen.IsVisible = false;
-                    playingScreen.IsVisible = false;
+                    //playingScreen.IsVisible = false;
                     libraryScreen.IsVisible = false;
                     playlistScreen.IsVisible = false;
                     settingScreen.IsVisible = true;
@@ -124,16 +137,15 @@ namespace Media.Views
                     homeScreen.IsVisible = true;
                     musicScreen.IsVisible = false;
                     videoScreen.IsVisible = false;
-                    playingScreen.IsVisible = false;
+                    //playingScreen.IsVisible = false;
                     libraryScreen.IsVisible = false;
                     playlistScreen.IsVisible = false;
                     settingScreen.IsVisible = false;
                     searchScreen.IsVisible = false;
                     break;
             }
-
-
         }
+
         public async void ChooseSongPath()
         {
             var topLevel = TopLevel.GetTopLevel(this);
@@ -168,7 +180,7 @@ namespace Media.Views
             {
                 string folderPath = files[0].Path.ToString();
                 string folderPathFormat = folderPath.Remove(0, 8);
-                MediaHelper.MusicPathFolder = folderPathFormat;
+                MediaHelper.VideoPathFolder = folderPathFormat;
                 MediaHelper.FetchListMedia(MediaTypes.Video);
                 UpdateMedia();
             }
@@ -182,5 +194,6 @@ namespace Media.Views
             (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.listVideos;
             (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.listVideos;
         }
+
     }
 }

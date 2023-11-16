@@ -1,4 +1,5 @@
 ﻿using Avalonia.Media;
+using LibVLCSharp.Shared;
 using Media.Models;
 using ReactiveUI;
 using System;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using MyMedia = LibVLCSharp.Shared.Media;
+
 
 namespace Media.ViewModels
 {
@@ -19,12 +22,14 @@ namespace Media.ViewModels
         private string nameAuthor;
         private bool isPlay;
         private List<MediaItem> listMedia;
+        private bool isPlayingVideo;
         public PlayingScreenViewModel()
         {
             if (PlayMedia.timer != null)
             {
                 MediaHelper.updateMediaScreen += UpdateScreen;
             }
+            PlayMediaCommand = ReactiveCommand.Create(() => { });
         }
         public IImage ImageSource
         {
@@ -42,11 +47,25 @@ namespace Media.ViewModels
             set => this.RaiseAndSetIfChanged(ref nameAuthor, value);
         }
         public List<MediaItem> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
-        public ReactiveCommand<Unit, Unit> PlayMediaCommand { get; set; } = ReactiveCommand.Create(() => { PlayMedia.media.PlayMediaCommand(); });
+        public ReactiveCommand<Unit, Unit> PlayMediaCommand { get; set; }
         public bool IsPlay
         {
             get => isPlay;
             set => this.RaiseAndSetIfChanged(ref isPlay, value);
+        }
+
+        public bool IsPlayingVideo
+        {
+            get => isPlayingVideo;
+            set => this.RaiseAndSetIfChanged(ref isPlayingVideo, value);
+        }
+
+        private void Play()
+        {
+            if (PlayMedia.media != null)
+            {
+                PlayMedia.media.PlayMediaCommand();
+            }
         }
 
         private void UpdateScreen(object sender, EventArgs e)
@@ -57,6 +76,7 @@ namespace Media.ViewModels
             ImageSource = PlayMedia.media.Image;
             IsPlay = PlayMedia.IsPlay;
             ListMedia = MediaHelper.PlayQueue;
+            IsPlayingVideo = PlayMedia.IsPlayVideo;
         }
 
     }

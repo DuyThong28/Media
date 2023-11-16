@@ -62,7 +62,10 @@ namespace Media.ViewModels
         {
             if(MediaHelper.playListPlayingId == playlist.PlayListID)
             {
-                PlayMedia.media.PlayMediaCommand();
+                if (PlayMedia.media != null)
+                {
+                    PlayMedia.media.PlayMediaCommand();
+                }
             } else
             {
                 MediaHelper.PlayThePlaylist(Playlist);

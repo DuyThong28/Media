@@ -14,6 +14,7 @@ using System.Drawing;
 using ReactiveUI;
 using System.Reactive;
 using NAudio.Wave;
+using LibVLCSharp.Shared;
 
 namespace Media.Models
 {
@@ -149,24 +150,20 @@ namespace Media.Models
         {
             if (PlayMedia.Path != this.filePath)
             {
-                IsPlay = true;
                 PlayMedia.URL = this.filePath;
-                PlayMedia.media = this;
+                //PlayMedia.media = this;
             }
-            if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Stopped)
+            if (PlayMedia.MediaPlayer.State == VLCState.Stopped)
             {
-                IsPlay = true;
                 PlayMedia.playSong();
                 
             }
-            else if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Playing)
+            else if (PlayMedia.MediaPlayer.State == VLCState.Playing)
             {
-                IsPlay = false;
                 PlayMedia.pauseSong();
             }
-            else if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Paused)
+            else if (PlayMedia.MediaPlayer.State == VLCState.Paused)
             {
-                IsPlay = true;
                 PlayMedia.continueSong();
             }
         }
@@ -209,11 +206,9 @@ namespace Media.Models
                         this.image = ImageHelper.LoadFromResource(new Uri("avares://Media/Assets/Icons/defaultImage.jpg"));
                     }
                 }
-                taglib.Save();
-                //if (this.mediaType == MediaTypes.Audio)
-                //{
+
                     this.PlaySongCommand = ReactiveCommand.Create(() => { PlayMediaCommand();});
-                //}
+
             }
         }
 
