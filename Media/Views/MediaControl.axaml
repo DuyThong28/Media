@@ -40,7 +40,7 @@
 						<ColumnDefinition></ColumnDefinition>
 					</Grid.ColumnDefinitions>
 					<Border Grid.Column="0" Height="60" Width="60" CornerRadius="5" ClipToBounds="True">
-						<Image x:Name="songImage" Source="{Binding ImageSource}"></Image>
+						<Image x:Name="songImage" Stretch="UniformToFill" Source="{Binding ImageSource}"></Image>
 					</Border>
 					<Grid Grid.Column="1">
 						<Grid.RowDefinitions>

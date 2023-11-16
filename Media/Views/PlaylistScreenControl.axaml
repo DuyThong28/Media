@@ -39,7 +39,7 @@
 							<RowDefinition></RowDefinition>
 						</Grid.RowDefinitions>
 						<Panel Grid.Row="0" ClipToBounds="True">
-							<Image Source="/Assets/dung_yeu_nua_em_met_roi.png" Width="30000" Height="30000" VerticalAlignment="Top" HorizontalAlignment="Left"></Image>
+							<Image Source="/Assets/dung_yeu_nua_em_met_roi.png" Stretch="UniformToFill" Width="30000" Height="30000" VerticalAlignment="Top" HorizontalAlignment="Left"></Image>
 							<Border Opacity="0.3" Background="Black">
 							</Border>
 						</Panel>
@@ -55,7 +55,7 @@
 										<Border.Effect>
 											<DropShadowEffect BlurRadius="100" Color="#9C131313" OffsetX="0" OffsetY="0"/>
 										</Border.Effect>
-										<Image Source="/Assets/dung_yeu_nua_em_met_roi.png">
+										<Image Source="/Assets/dung_yeu_nua_em_met_roi.png" Stretch="UniformToFill">
 											<Image.Transitions>
 												<Transitions>
 													<DoubleTransition Property="Width" Duration="0:0:0.1"></DoubleTransition>

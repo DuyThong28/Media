@@ -44,7 +44,7 @@
 	</Design.DataContext>
 	<Border Background="#FF1A1A1A" Margin="10,10,10,10"  CornerRadius="5" ClipToBounds="True">
 		<Panel>
-			<Image Source="{Binding ElementName=imageSong, Path=Source}"  HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" Opacity="0.8"></Image>
+			<Image Source="{Binding ElementName=imageSong, Path=Source}" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" Opacity="0.8"></Image>
 			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" CornerRadius="5" ClipToBounds="True" Opacity="0.5">
 			</Border>
 		<Grid>
@@ -64,7 +64,7 @@
 							<Border.Effect>
 								<DropShadowEffect BlurRadius="100" Color="#9C131313" OffsetX="0" OffsetY="0"/>
 							</Border.Effect>
-							<Image  Name="imageSong" Source="{Binding ImageSource}">
+							<Image  Name="imageSong" Source="{Binding ImageSource}" Stretch="UniformToFill">
 								<Image.Transitions>
 									<Transitions>
 										<DoubleTransition Property="Width" Duration="0:0:0.1"></DoubleTransition>

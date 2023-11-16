@@ -23,7 +23,7 @@ namespace Media.ViewModels
             MediaHelper.FetchListMedia(MediaTypes.Video);
             LibraryScreenViewModel.ListMedia = new List<Playlist> { new Playlist() { ListMedia = MediaHelper.listSongs },
                 new Playlist() { ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = new List<MediaItem>()},
                 new Playlist(){ ListMedia = MediaHelper.listSongs },
                 new Playlist(){ ListMedia = MediaHelper.listSongs },
                 new Playlist(){ ListMedia = MediaHelper.listSongs },

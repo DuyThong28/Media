@@ -210,10 +210,10 @@ namespace Media.Models
                     }
                 }
                 taglib.Save();
-                if (this.mediaType == MediaTypes.Audio)
-                {
+                //if (this.mediaType == MediaTypes.Audio)
+                //{
                     this.PlaySongCommand = ReactiveCommand.Create(() => { PlayMediaCommand();});
-                }
+                //}
             }
         }
 
