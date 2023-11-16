@@ -46,7 +46,7 @@
 				  </Grid.ColumnDefinitions>
 				  <Grid Grid.Column="0">
 					  <Border CornerRadius="5" ClipToBounds="True" Height="50" Width="50">
-						  <Image Source="{TemplateBinding ImageSource}" Width="50" Height="50"></Image>
+						  <Image Source="{TemplateBinding ImageSource}" Stretch="UniformToFill" Width="50" Height="50"></Image>
 					  </Border>
 					  <Border CornerRadius="5" ClipToBounds="True" Height="50" Width="50" IsVisible="{Binding ElementName=item, Path=Tag}" Opacity="0.4" Background="black"></Border>
 					  <ToggleButton x:Name="btn_Play" 

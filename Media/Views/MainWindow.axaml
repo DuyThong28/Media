@@ -13,18 +13,14 @@
 		Tag="#138673"
 		WindowStartupLocation="CenterScreen"
 		>
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-	<Window.Resources>
-		
-	</Window.Resources>
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition></RowDefinition>
 			<RowDefinition Height="90"></RowDefinition>
 		</Grid.RowDefinitions>
-
 		<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" Opacity="0.3"></Border>
 		<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" Opacity="0.8"></Border>
 		<Grid>
@@ -46,7 +42,7 @@
 			</Grid>
 		</Grid>
 		<Grid Grid.Row="1">
-			<views:MediaControl x:Name="mediaControl" DataContext="{Binding MediaControlViewModel}"/>
+			<views:MediaControl x:Name="mediaControl"  DataContext="{Binding MediaControlViewModel}"/>
 		</Grid>
 	</Grid>
 	

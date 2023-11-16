@@ -10,22 +10,20 @@
 	<Design.DataContext>
 		<vm:MediaControlViewModel/>
 	</Design.DataContext>
-	<UserControl.Resources>
-		<ControlTheme x:Key="{x:Type ToggleButton}" TargetType="ToggleButton">
+	<UserControl.Styles>
+		<Style Selector="Button.function">
 			<Setter Property="Template">
 				<ControlTemplate>
 					<Panel>
-						<Border Background="{TemplateBinding Background}"
-								CornerRadius="{TemplateBinding CornerRadius}"
-								Opacity="0.2"></Border>
-						<ContentPresenter x:Name="PART_ContentPresenter"
+						<Label x:Name="PART_ContentPresenter"
 										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{Binding }"
 										  Margin="{TemplateBinding Padding}"/>
 					</Panel>
 				</ControlTemplate>
 			</Setter>
-		</ControlTheme>
-	</UserControl.Resources>
+		</Style>
+	</UserControl.Styles>
 	<Grid>
 		<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" Opacity="0.25"></Border>
 		<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" Opacity="0.45"></Border>
@@ -35,14 +33,14 @@
 			<ColumnDefinition Width="2*"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-		<Button x:Name="miniMediaBtn" Click="Button_Click" HorizontalAlignment="Left" Padding="0,10,10,10" CornerRadius="10"  ClipToBounds="true" Background="Transparent">
+			<Button x:Name="miniMediaBtn" Click="Button_Click" Padding="0,10,10,10" CornerRadius="10"  ClipToBounds="true" Background="Transparent" HorizontalAlignment="Stretch">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="90"></ColumnDefinition>
 						<ColumnDefinition></ColumnDefinition>
 					</Grid.ColumnDefinitions>
 					<Border Grid.Column="0" Height="60" Width="60" CornerRadius="5" ClipToBounds="True">
-						<Image x:Name="songImage" Source="{Binding ImageSource}"></Image>
+						<Image x:Name="songImage" Stretch="UniformToFill" Source="{Binding ImageSource}"></Image>
 					</Border>
 					<Grid Grid.Column="1">
 						<Grid.RowDefinitions>
@@ -71,95 +69,77 @@
 			</Grid.RowDefinitions>
 			<Grid Grid.Row="0" >
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-					<Button Name="btn_Suffle" Background="Transparent" >
-						<Image >
+					<Button Name="btn_Suffle" Classes.function="true" Click="Button_Click_2" Background="Transparent" Command="{Binding SuffCommand}">
+						<Image Name="btn_suff_img" Classes.notSuff="true" Height="20" Width="20">
 							<Image.Styles>
-								<Style Selector="Image">
+								<Style Selector="Image.notSuff">
 									<Setter Property="Source" Value="/Assets/Icons/suffle.png"></Setter>
-									<Setter Property="Width" Value="20"/>
-									<Setter Property="Height" Value="20"/>
 								</Style>
-								<Style Selector="Image:pointerover">
-									<Setter Property="Width" Value="21"/>
-									<Setter Property="Height" Value="21"/>
+								<Style Selector="Image.suff">
 									<Setter Property="Source" Value="avares://Media/Assets/Icons/suffle_hover.png"></Setter>
 								</Style>
 							</Image.Styles>
 						</Image>
 					</Button>
-					<Button Name="btn_prev" Background="Transparent"  >
-						<Image>
+					<Button Name="btn_prev" Classes.function="true" Background="Transparent"  Command="{Binding PlayPrevCommand}">
+						<Image Height="20" Width="20">
 							<Image.Styles>
 								<Style Selector="Image">
 									<Setter Property="Source" Value="/Assets/Icons/back.png"></Setter>
-									<Setter Property="Width" Value="20"/>
-									<Setter Property="Height" Value="20"/>
 								</Style>
 								<Style Selector="Image:pointerover">
-									<Setter Property="Width" Value="21"/>
-									<Setter Property="Height" Value="21"/>
 									<Setter Property="Source" Value="avares://Media/Assets/Icons/back-hover.png"></Setter>
 								</Style>
 							</Image.Styles>
 						</Image>			
 					</Button>
-					<ToggleButton x:Name="btn_Play" Background="Transparent">
-							<Image 
-								Classes.checked="{Binding ElementName=btn_Play, Path=IsChecked}" 
-								Classes.unChecked="{Binding ElementName=btn_Play, Path=!IsChecked}" 
+					<Button x:Name="btn_Play" Classes.function="true" Background="Transparent" Command="{Binding PlayMediaCommand}">
+							<Image Height="30" Width="30"
+								Classes.checked="{Binding IsPlay}" 
+								Classes.unChecked="{Binding !IsPlay}" 
 								>
 								<Image.Styles>
 									<Style Selector="Image.unChecked">
 										<Setter Property="Source" Value="/Assets/Icons/play.png"></Setter>
-										<Setter Property="Width" Value="30"></Setter>
-										<Setter Property="Height" Value="30"></Setter>
 									</Style>
 									<Style Selector="Image.unChecked:pointerover">
-										<Setter Property="Width" Value="31"></Setter>
-										<Setter Property="Height" Value="31"></Setter>
 										<Setter Property="Source" Value="/Assets/Icons/play-hover.png"></Setter>
 									</Style>
 									<Style Selector="Image.checked">
 										<Setter Property="Source" Value="/Assets/Icons/pause.png"></Setter>
-										<Setter Property="Width" Value="30"></Setter>
-										<Setter Property="Height" Value="30"></Setter>
 									</Style>
 									<Style Selector="Image.checked:pointerover">
 										<Setter Property="Source" Value="/Assets/Icons/pause-hover.png"></Setter>
-										<Setter Property="Width" Value="31"></Setter>
-										<Setter Property="Height" Value="31"></Setter>
 									</Style>
 								</Image.Styles>
 							</Image>
-					</ToggleButton>
-					<Button Name="btn_next" Background="Transparent"  >
-						<Image >
+					</Button>
+					<Button Name="btn_next" Classes.function="true" Background="Transparent"  Command="{Binding PlayNextCommand}">
+						<Image Height="20" Width="20">
 							<Image.Styles>
 								<Style Selector="Image">
-									<Setter Property="Width" Value="20"/>
-									<Setter Property="Height" Value="20"/>
 									<Setter Property="Source" Value="/Assets/Icons/next.png"></Setter>
 								</Style>
 								<Style Selector="Image:pointerover">
-									<Setter Property="Width" Value="21"/>
-									<Setter Property="Height" Value="21"/>
 									<Setter Property="Source" Value="avares://Media/Assets/Icons/next-hover.png"></Setter>
 								</Style>
 							</Image.Styles>
 						</Image>					
 					</Button>
-					<Button Name="btn_Repeat" Background="Transparent"  >
-						<Image >
+					<Button Name="btn_Repeat" Classes.function="true" Click="Button_Click_1" Background="Transparent" Command="{Binding RepeatCommand}" >
+						<Image Name="btn_repeat_img" Classes.repeat="true" Height="20" Width="20">
 							<Image.Styles>
-								<Style Selector="Image">
-									<Setter Property="Width" Value="20"/>
-									<Setter Property="Height" Value="20"/>
+								<Style Selector="Image.repeat">
 									<Setter Property="Source" Value="/Assets/Icons/repeat.png"></Setter>
 								</Style>
-								<Style Selector="Image:pointerover">
-									<Setter Property="Width" Value="21"/>
-									<Setter Property="Height" Value="21"/>
+								<Style Selector="Image.repeat:pointerover">
 									<Setter Property="Source" Value="avares://Media/Assets/Icons/repeat-hover.png"></Setter>
+								</Style>
+								<Style Selector="Image.repeatOne">
+									<Setter Property="Source" Value="/Assets/Icons/repeat_one.png"></Setter>
+								</Style>
+								<Style Selector="Image.repeatOn">
+									<Setter Property="Source" Value="/Assets/Icons/repeat_on.png"></Setter>
 								</Style>
 							</Image.Styles>
 						</Image>					
@@ -172,23 +152,12 @@
 					<ColumnDefinition></ColumnDefinition>
 					<ColumnDefinition Width="40"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
-				<Label x:Name="timeSongPlay" Foreground="Gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TbValue}"></Label>
+				<Label x:Name="timeSongPlay" Foreground="Gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TimeSongPlay}"></Label>
 				<Slider x:Name="mediaTrackBar" Grid.Column="1"
 						 Maximum="{Binding TbMaxValue}"
 						Value="{Binding TbValue}"
-						Background="Gray"
-						ValueChanged="Slider_ValueChanged"
+						PointerCaptureLost="Slider_PointerCaptureLost"
 						Padding="0,0,0,20">
-					<Slider.Styles>
-						<Style Selector="Slider:pointerover">
-							<Setter Property="Foreground" Value="Green" />
-							<Setter Property="Background" Value="Gray" />
-						</Style>
-						<Style Selector="Slider:pressed">
-							<Setter Property="Foreground" Value="Green" />
-							<Setter Property="Background" Value="Gray" />
-						</Style>
-					</Slider.Styles>
 				</Slider>
 				<Label x:Name="timeSongEnd" Grid.Column="2" Foreground="gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TimeSongEnd}"></Label>
 			</Grid>
@@ -200,36 +169,34 @@
 				<ColumnDefinition></ColumnDefinition>
 				<ColumnDefinition Width="100"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
-			<Button x:Name="btn_Volume" Background="Transparent" Grid.Column="0" HorizontalAlignment="Right">
-				<Image >
+			<Button x:Name="btn_Volume" Background="Transparent"
+					Classes.function="true"	
+					Grid.Column="0" HorizontalAlignment="Right">
+				<Image Name="btn_Volume_img" Height="20" Width="20" Classes.unMute="true">
 					<Image.Styles>
-						<Style Selector="Image">
-							<Setter Property="Width" Value="20"/>
-							<Setter Property="Height" Value="20"/>
+						<Style Selector="Image.unMute">
 							<Setter Property="Source" Value="/Assets/Icons/volume-high.png"></Setter>
 						</Style>
-						<Style Selector="Image:pointerover">
-							<Setter Property="Width" Value="21"/>
-							<Setter Property="Height" Value="21"/>
+						<Style Selector="Image.unMute:pointerover">
 							<Setter Property="Source" Value="avares://Media/Assets/Icons/volume-high-hover.png"></Setter>
 						</Style>
+						<Style Selector="Image.mute">
+							<Setter Property="Source" Value="/Assets/Icons/volume-mute.png"></Setter>
+						</Style>
+						<Style Selector="Image.mute:pointerover">
+							<Setter Property="Source" Value="avares://Media/Assets/Icons/volume-mute-hover.png"></Setter>
+						</Style>
 					</Image.Styles>
-				</Image>			</Button>
-			<Slider Grid.Column="1"
+				</Image>			
+			</Button>
+			<Slider Name="slVolume" Grid.Column="1"
 					HorizontalAlignment="Left"
-						 
-						Background="Gray" Width="100" Margin="0,0,10,0" >
-				<Slider.Styles>
-					<Style Selector="Slider:pointerover">
-						<Setter Property="Foreground" Value="Green" />
-						<Setter Property="Background" Value="Gray" />
-					</Style>
-					<Style Selector="Slider:pressed">
-						<Setter Property="Foreground" Value="Green" />
-						<Setter Property="Background" Value="Gray" />
-					</Style>
-				</Slider.Styles>
+					Width="100" Margin="0,0,10,0"
+					Value="{Binding TbVolume}"
+					ValueChanged="Slider_ValueChanged"
+					Maximum="1">
 			</Slider>
+			<!--<Label Content="{TemplateBinding MediaName}"></Label>-->
 		</Grid>
 	</Grid>
 	</Grid>

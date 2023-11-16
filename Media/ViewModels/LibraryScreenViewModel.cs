@@ -14,9 +14,11 @@ namespace Media.ViewModels
     {
         public LibraryScreenViewModel()
         {
-
+            
         }
-        private List<MediaItem> listMedia;
-        public List<MediaItem> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
+        private List<Playlist> listMedia;
+        private Playlist selectedPlaylist;
+        public List<Playlist> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
+        public Playlist SelectedPlaylist { get => selectedPlaylist;}
     }
 }

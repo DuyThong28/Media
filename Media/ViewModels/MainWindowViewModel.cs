@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
+using Avalonia.Platform.Storage;
 using Media.Models;
 using Media.Views;
 using ReactiveUI;
@@ -15,10 +16,27 @@ namespace Media.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        public static MainWindowViewModel Instance { get; set; }
         public MainWindowViewModel()
         {
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
+            LibraryScreenViewModel.ListMedia = new List<Playlist> { new Playlist() { ListMedia = MediaHelper.listSongs },
+                new Playlist() { ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = new List<MediaItem>()},
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs },
+                new Playlist(){ ListMedia = MediaHelper.listSongs } };
             HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;

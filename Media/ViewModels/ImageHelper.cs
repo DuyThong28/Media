@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Drawing.Imaging;
 using Bitmap = Avalonia.Media.Imaging.Bitmap;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Media.ViewModels
 {
@@ -34,5 +35,7 @@ namespace Media.ViewModels
             bitmapTmp.Dispose();
             return bitmap1;
         }
+
+  
     }
 }

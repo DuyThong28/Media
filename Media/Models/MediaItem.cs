@@ -28,6 +28,12 @@ namespace Media.Models
         private DateTime dateAdded;
         private MediaTypes mediaType;
         private TagLib.File others;
+        private bool isPlay;
+        public bool IsPlay
+        {
+            get { return isPlay; }
+            set { isPlay = value; }
+        }
         private string playlistID = null; //Tên playlist
         public MediaTypes MediaTypes { get { return mediaType; } }
         public string Title
@@ -138,6 +144,33 @@ namespace Media.Models
             }
         }
         public TagLib.File Others => others;
+        public ReactiveCommand<Unit, Unit> PlaySongCommand { get; set; }
+
+        public void PlayMediaCommand()
+        {
+            if (PlayMedia.Path != this.filePath)
+            {
+                IsPlay = true;
+                PlayMedia.URL = this.filePath;
+                PlayMedia.media = this;
+            }
+            if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Stopped)
+            {
+                IsPlay = true;
+                PlayMedia.playSong();
+                
+            }
+            else if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Playing)
+            {
+                IsPlay = false;
+                PlayMedia.pauseSong();
+            }
+            else if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Paused)
+            {
+                IsPlay = true;
+                PlayMedia.continueSong();
+            }
+        }
         public ReactiveCommand<Unit, Unit> PlaySongCommand { get; private set; }
         public string PlaylistID { get => playlistID; set => playlistID = value; }
 
@@ -153,6 +186,7 @@ namespace Media.Models
                 this.mediaType = taglib.Properties.MediaTypes;
                 this.album = taglib.Tag.Album;
                 this.others = taglib;
+                this.isPlay = false;
 
                 if (taglib.Tag.Pictures.Length > 0)
                 {
@@ -179,27 +213,10 @@ namespace Media.Models
                     }
                 }
                 taglib.Save();
-                if (this.mediaType == MediaTypes.Audio)
-                {
-                    this.PlaySongCommand = ReactiveCommand.Create(() => {
-                        //if (PlayMedia.IsFirst == false) return;
-                        if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Stopped)
-                        {
-                            PlayMedia.stopSong();
-                            PlayMedia.Path = this.FilePath;
-                            PlayMedia.audioFileReader = new AudioFileReader(path);
-                            PlayMedia.waveOutEvent.Init(PlayMedia.audioFileReader);
-                            PlayMedia.playSong();
-                        }
-                        else if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Playing)
-                        {
-                            PlayMedia.pauseSong();
-                        } else if(PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Paused)
-                        {
-                            PlayMedia.continueSong();
-                        }
-                    });
-                }
+                //if (this.mediaType == MediaTypes.Audio)
+                //{
+                    this.PlaySongCommand = ReactiveCommand.Create(() => { PlayMediaCommand();});
+                //}
             }
         }
 

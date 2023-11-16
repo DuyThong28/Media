@@ -28,8 +28,5 @@ namespace Media.Views
             }
         }
 
-        private void Binding_1(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
-        {
-        }
     }
 }

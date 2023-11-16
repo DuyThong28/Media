@@ -12,5 +12,20 @@ namespace Media.Views
         {
             InitializeComponent();
         }
+
+        private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            if (selectPlaylist!=null)
+            {
+                selectPlaylist(sender, new EventArgs());
+            }
+        }
+
+        private event EventHandler selectPlaylist;
+        public event EventHandler SelectPlaylist
+        {
+            add { selectPlaylist += value; }
+            remove { selectPlaylist -= value; }
+        }
     }
 }

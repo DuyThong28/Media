@@ -12,46 +12,41 @@ using System.Reflection;
 using System.Text;
 using TagLib;
 using System.Diagnostics;
+using NAudio.Wave;
+using Media.Models;
 
 namespace Media.Views
 {
     public partial class MainWindow : Window
     {
-        private Process ffmpegProcess;
         public MainWindow()
         {
             InitializeComponent();
             navBarControl.NavBarItemSelected += NavBarControl_RadioButtonChecked;
             mediaControl.ButtonClicked += MediaControl_ButtonClicked;
+            libraryScreen.SelectPlaylist += LibraryScreen_SelectPlaylist;
             SettingScreenViewModel.OpenSongFolder = ReactiveCommand.Create(() => ChooseSongPath());
             SettingScreenViewModel.OpenVideoFolder = ReactiveCommand.Create(() => ChooseVideoPath());
-            ffmpegProcess = new Process();
-            PlayAudio(@"C:\Users\duyth\OneDrive\Máy tính\Media\ChanAi-OrangeKhoi-6225088.mp3");
         }
 
-        private void PlayAudio(string filePath)
+        private void LibraryScreen_SelectPlaylist(object? sender, EventArgs e)
         {
-            // Example FFmpeg command to play audio:
-            // ffmpeg -i input.mp3 -f wav - | ffplay -
-
-            var startInfo = new ProcessStartInfo
+            ListBox listPlaylist = sender as ListBox;
+            Playlist selectedPlaylist = listPlaylist.SelectedItem as Playlist;
+            if(selectedPlaylist.ListMedia != null)
             {
-                FileName = "ffmpeg",
-                Arguments = $"-i {filePath} -f wav - | ffplay -",
-                RedirectStandardInput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            ffmpegProcess.StartInfo = startInfo;
-            ffmpegProcess.Start();
+                (playlistScreen.DataContext as PlaylistScreenViewModel).Playlist = selectedPlaylist;
+            }
+            homeScreen.IsVisible = false;
+            musicScreen.IsVisible = false;
+            videoScreen.IsVisible = false;
+            playingScreen.IsVisible = false;
+            libraryScreen.IsVisible = false;
+            playlistScreen.IsVisible = true;
+            settingScreen.IsVisible = false;
+            searchScreen.IsVisible = false;
         }
 
-        private void StopAudio()
-        {
-            // Kill the FFmpeg process
-            ffmpegProcess.Kill();
-        }
         private void MediaControl_ButtonClicked(object? sender, EventArgs e)
         {
             playingScreen.IsVisible = !playingScreen.IsVisible;
@@ -155,10 +150,7 @@ namespace Media.Views
                 string folderPathFormat = folderPath.Remove(0, 8);
                 MediaHelper.MusicPathFolder = folderPathFormat;
                 MediaHelper.FetchListMedia(MediaTypes.Audio);
-                (musicScreen.DataContext as ListMediaScreenViewModel).ListSongs = MediaHelper.listSongs;
-                (homeScreen.DataContext as HomeScreenViewModel).ListSongs = MediaHelper.listSongs;
-                (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.listVideos;
-                (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.listVideos;
+                UpdateMedia();
             }
 
         }
@@ -178,12 +170,17 @@ namespace Media.Views
                 string folderPathFormat = folderPath.Remove(0, 8);
                 MediaHelper.MusicPathFolder = folderPathFormat;
                 MediaHelper.FetchListMedia(MediaTypes.Video);
-                (musicScreen.DataContext as ListMediaScreenViewModel).ListSongs = MediaHelper.listSongs;
-                (homeScreen.DataContext as HomeScreenViewModel).ListSongs = MediaHelper.listSongs;
-                (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.listVideos;
-                (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.listVideos;
+                UpdateMedia();
             }
 
+        }
+
+        public void UpdateMedia()
+        {
+            (musicScreen.DataContext as ListMediaScreenViewModel).ListSongs = MediaHelper.listSongs;
+            (homeScreen.DataContext as HomeScreenViewModel).ListSongs = MediaHelper.listSongs;
+            (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.listVideos;
+            (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.listVideos;
         }
     }
 }

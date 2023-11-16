@@ -41,7 +41,7 @@
 			  <StackPanel Width="225" Background="Transparent">
 				  <Grid>
 					  <Border  CornerRadius="10" ClipToBounds="True" Height="225" Width="225" Background="Transparent">
-						  <Image Source="{TemplateBinding ImageSource}" Classes.hover="{Binding ElementName=border, Path=Tag}">
+						  <Image Source="{TemplateBinding ImageSource}" Stretch="UniformToFill" Classes.hover="{Binding ElementName=border, Path=Tag}">
 							  <Image.Styles>
 								  <Style Selector="Image">
 									  <Setter Property="Height" Value="225"></Setter>
