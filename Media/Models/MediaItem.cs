@@ -168,7 +168,6 @@ namespace Media.Models
                 PlayMedia.continueSong();
             }
         }
-        public ReactiveCommand<Unit, Unit> PlaySongCommand { get; private set; }
         public string PlaylistID { get => playlistID; set => playlistID = value; }
 
         public MediaItem(string path)
@@ -209,10 +208,9 @@ namespace Media.Models
                         this.image = ImageHelper.LoadFromResource(new Uri("avares://Media/Assets/Icons/defaultImage.jpg"));
                     }
                 }
-
-                    this.PlaySongCommand = ReactiveCommand.Create(() => { PlayMediaCommand();});
-
             }
+           this.PlaySongCommand = ReactiveCommand.Create(() => { PlayMediaCommand();});
+
         }
 
         public MediaItem()

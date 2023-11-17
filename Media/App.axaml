@@ -21,5 +21,6 @@
 		<StyleInclude Source="/Views/MusicRowTC.axaml"/>
 		<StyleInclude Source="/Views/PlaylistItemTC.axaml"/>
 		<StyleInclude Source="/Views/SettingItemTC.axaml"/>
+		<StyleInclude Source="/Icons.axaml"/>
     </Application.Styles>
 </Application>

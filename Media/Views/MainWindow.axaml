@@ -12,6 +12,7 @@
 		xmlns:vlc="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
         Title="Media"
 		Tag="#138673"
+		WindowState="Maximized"
 		WindowStartupLocation="CenterScreen"
 		>
 	<Design.DataContext>

@@ -38,6 +38,7 @@
 							<Label Grid.Row="0"   FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Bài hát</Label>
 							<ListBox Grid.Row="1"
 									 Name="listMusic"
+									 DoubleTapped="ListBox_DoubleTapped"
 										Background="Transparent"
 										ItemsSource="{Binding ListSongs}"
 									>
@@ -60,7 +61,30 @@
 								</ListBox.ItemsPanel>
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
-										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}"/>
+										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}">
+											<views:MediaItemTC.ContextMenu>
+												<ContextMenu>
+													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
+														<MenuItem.Icon>
+															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
+														</MenuItem.Icon>
+													</MenuItem>
+													<MenuItem Header="Phát tiếp theo">
+														<MenuItem.Icon>
+															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
+														</MenuItem.Icon>
+													</MenuItem>
+													<MenuItem Header="Thêm vào">
+														<MenuItem.Icon>
+															<PathIcon Width="20" Height="20" Data="{StaticResource add_regular}" />
+														</MenuItem.Icon>
+														<MenuItem Header="Phát hàng đợi"/>
+														<MenuItem Header="The Album"/>
+													</MenuItem>
+													
+												</ContextMenu>
+											</views:MediaItemTC.ContextMenu>
+										</views:MediaItemTC>
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ListBox>
@@ -74,6 +98,7 @@
 							<ListBox Grid.Row="1"
 										Background="Transparent"
 									  ItemsSource="{Binding ListVideos}"
+									 DoubleTapped="ListBox_DoubleTapped_1"
 								   >
 								<ListBox.Styles>
 									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
@@ -94,7 +119,29 @@
 								</ListBox.ItemsPanel>
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
-										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}"/>
+										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}">
+											<views:MediaItemTC.ContextMenu>
+												<ContextMenu>
+													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
+														<MenuItem.Icon>
+															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
+														</MenuItem.Icon>
+													</MenuItem>
+													<MenuItem Header="Phát tiếp theo">
+														<MenuItem.Icon>
+															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
+														</MenuItem.Icon>
+													</MenuItem>
+													<MenuItem Header="Thêm vào">
+														<MenuItem.Icon>
+															<PathIcon Width="20" Height="20" Data="{StaticResource add_regular}" />
+														</MenuItem.Icon>
+														<MenuItem Header="Phát hàng đợi"/>
+														<MenuItem Header="The Album"/>
+													</MenuItem>
+												</ContextMenu>
+											</views:MediaItemTC.ContextMenu>
+										</views:MediaItemTC>
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ListBox>
