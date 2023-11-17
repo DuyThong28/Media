@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Media.Models;
+using Media.ViewModels;
 
 namespace Media.Views
 {
@@ -8,12 +9,7 @@ namespace Media.Views
         public SearchScreenControl()
         {
             InitializeComponent();
-        }
-
-        private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
-        {
-            MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
-            media.PlayMediaCommand(); 
+            listBoxMedia.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
         }
     }
 }

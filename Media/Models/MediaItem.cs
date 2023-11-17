@@ -151,21 +151,27 @@ namespace Media.Models
         {
             if (PlayMedia.Path != this.filePath)
             {
+                IsPlay=true;
                 PlayMedia.URL = this.filePath;
                 //PlayMedia.media = this;
-            }
-            if (PlayMedia.MediaPlayer.State == VLCState.Stopped)
+            } else
             {
-                PlayMedia.playSong();
-                
-            }
-            else if (PlayMedia.MediaPlayer.State == VLCState.Playing)
-            {
-                PlayMedia.pauseSong();
-            }
-            else if (PlayMedia.MediaPlayer.State == VLCState.Paused)
-            {
-                PlayMedia.continueSong();
+                if (PlayMedia.MediaPlayer.State == VLCState.Stopped)
+                {
+                    IsPlay = true;
+                    PlayMedia.playSong();
+
+                }
+                else if (PlayMedia.MediaPlayer.State == VLCState.Playing)
+                {
+                    IsPlay = false;
+                    PlayMedia.pauseSong();
+                }
+                else if (PlayMedia.MediaPlayer.State == VLCState.Paused)
+                {
+                    IsPlay = true;
+                    PlayMedia.continueSong();
+                }
             }
         }
         public string PlaylistID { get => playlistID; set => playlistID = value; }

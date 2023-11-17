@@ -26,9 +26,10 @@
 				</Grid>
 				<ScrollViewer Background="Transparent" Grid.Row="2"  Padding="20,0,20,0" Margin="0,0,0,10">
 					<ListBox Grid.Row="1" Background="Transparent"
+							 Name="listBoxMedia"
 								  ItemsSource="{Binding SearchResults}"
 								SelectedItem="{Binding SelectedMedia}"
-							 DoubleTapped="ListBox_DoubleTapped">
+							 >
 						<ListBox.Styles>
 							<Style Selector="ListBoxItem">
 								<Setter Property="Padding" Value="6,5,5,5"></Setter>

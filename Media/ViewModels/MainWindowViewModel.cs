@@ -29,22 +29,9 @@ namespace Media.ViewModels
         {
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
-            LibraryScreenViewModel.ListMedia = new List<Playlist> { new Playlist() { ListMedia = MediaHelper.listSongs },
-                new Playlist() { ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = new List<MediaItem>()},
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs },
-                new Playlist(){ ListMedia = MediaHelper.listSongs } };
+            Playlist playlist = new Playlist() { ListMedia = (MediaHelper.listVideos).Concat(MediaHelper.listSongs).ToList(), PlayListName="NewJeans 1st EP'New Jeans" };
+            MediaHelper.AddPlayList(playlist);
+            LibraryScreenViewModel.ListMedia = MediaHelper.AllPlayList;
             HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;

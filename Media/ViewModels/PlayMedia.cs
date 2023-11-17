@@ -62,8 +62,19 @@ namespace Media.ViewModels
         {
             get
             {
-                if (MediaPlayer!=null)
-                    return TimeSpan.FromMilliseconds(MediaPlayer.Length).ToString(@"mm\:ss");
+                if (MediaPlayer != null)
+                {
+                    double seconds = MediaPlayer.Length / 1000.0;
+                    int minutes = (int)Math.Floor(seconds / 60);
+                    if (minutes < 60)
+                    {
+                        return TimeSpan.FromMilliseconds(MediaPlayer.Length).ToString(@"mm\:ss");
+                    }
+                    else
+                    {
+                        return TimeSpan.FromMilliseconds(MediaPlayer.Length).ToString(@"hh\:mm\:ss");
+                    }
+                }
                 return "00:00";
             }
         }
@@ -72,7 +83,18 @@ namespace Media.ViewModels
             get
             {
                 if (MediaPlayer != null)
-                    return TimeSpan.FromMilliseconds(MediaPlayer.Time).ToString(@"mm\:ss");
+                {
+                    double seconds = MediaPlayer.Length / 1000.0;
+                    int minutes = (int)Math.Floor(seconds / 60);
+                    if (minutes < 60)
+                    {
+                        return TimeSpan.FromMilliseconds(MediaPlayer.Time).ToString(@"mm\:ss");
+                    }
+                    else
+                    {
+                        return TimeSpan.FromMilliseconds(MediaPlayer.Time).ToString(@"hh\:mm\:ss");
+                    }
+                }
                 return "00:00";
             }
         }

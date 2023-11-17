@@ -13,7 +13,10 @@ namespace Media.Views
         private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
         {
             MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
-            media.PlayMediaCommand();
+            if (media != null)
+            {
+                media.PlayMediaCommand();
+            }
         }
     }
 }

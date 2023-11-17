@@ -1,6 +1,8 @@
-﻿using Avalonia.Media;
+﻿using Avalonia.Controls;
+using Avalonia.Media;
 using LibVLCSharp.Shared;
 using Media.Models;
+using NAudio.CoreAudioApi;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -22,7 +24,6 @@ namespace Media.ViewModels
         private string nameAuthor;
         private bool isPlay;
         private List<MediaItem> listMedia;
-        private bool isPlayingVideo;
         public PlayingScreenViewModel()
         {
             if (PlayMedia.timer != null)
@@ -53,13 +54,6 @@ namespace Media.ViewModels
             get => isPlay;
             set => this.RaiseAndSetIfChanged(ref isPlay, value);
         }
-
-        public bool IsPlayingVideo
-        {
-            get => isPlayingVideo;
-            set => this.RaiseAndSetIfChanged(ref isPlayingVideo, value);
-        }
-
         private void Play()
         {
             if (PlayMedia.media != null)
@@ -76,8 +70,18 @@ namespace Media.ViewModels
             ImageSource = PlayMedia.media.Image;
             IsPlay = PlayMedia.IsPlay;
             ListMedia = MediaHelper.PlayQueue;
-            IsPlayingVideo = PlayMedia.IsPlayVideo;
+            SelectedItem = MediaHelper.selectPlayingItem(ListMedia);
         }
+
+
+        private MediaItem selectedItem;
+        public MediaItem SelectedItem
+        {
+            get { return selectedItem; }
+            set => this.RaiseAndSetIfChanged(ref selectedItem, value);
+        }
+
+       
 
     }
 }

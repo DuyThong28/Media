@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using DynamicData;
 using Media.Models;
@@ -231,6 +232,20 @@ namespace Media.ViewModels
         {
             add { updateListMediaScreen += value; }
             remove { updateListMediaScreen -= value; }
+        }  
+        
+        public static event EventHandler updatePlayingScreen;
+        public static event EventHandler UpdatePlayingScreen
+        {
+            add { updatePlayingScreen += value; }
+            remove { updatePlayingScreen -= value; }
+        }
+
+        public static event EventHandler openVideoScreen;
+        public static event EventHandler OpenVideoScreen
+        {
+            add { openVideoScreen += value; }
+            remove { openVideoScreen -= value; }
         }
         public static void UpdateScreen(object sender, EventArgs e)
         {
@@ -246,6 +261,39 @@ namespace Media.ViewModels
             {
                 updateListMediaScreen(sender, new EventArgs());
             }
+            if(updatePlayingScreen != null)
+            {
+                updatePlayingScreen(sender, new EventArgs());
+            }
+        }
+
+
+        public static void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
+            if (media != null)
+            {
+                media.PlayMediaCommand();
+                if (media.MediaTypes != TagLib.MediaTypes.Audio)
+                {
+                    if (openVideoScreen != null)
+                    {
+                        openVideoScreen(sender, new EventArgs());
+                    }
+                }
+
+            }
+        }
+
+        public static MediaItem selectPlayingItem(List<MediaItem> listMedia)
+        {
+            MediaItem selectedItem = null;
+            if (listMedia != null)
+            {
+                selectedItem = listMedia.Cast<MediaItem>().FirstOrDefault(item => item.FilePath == PlayMedia.Path);
+
+            }
+            return selectedItem;
         }
 
     }

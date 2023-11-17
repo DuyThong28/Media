@@ -17,7 +17,6 @@
 					<Panel>
 						<Label x:Name="PART_ContentPresenter"
 										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{Binding }"
 										  Margin="{TemplateBinding Padding}"/>
 					</Panel>
 				</ControlTemplate>
@@ -47,17 +46,19 @@
 							<RowDefinition></RowDefinition>
 							<RowDefinition></RowDefinition>
 						</Grid.RowDefinitions>
-						<Label x:Name="songName" Grid.Row="0"   
-							   HorizontalContentAlignment="Left" 
-							   VerticalContentAlignment="Bottom" 
+						<TextBlock x:Name="songName" Grid.Row="0"   
+							   HorizontalAlignment="Stretch" 
+							   VerticalAlignment="Bottom" 
 							   FontSize="14" FontWeight="Medium" 
 							   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"
-						   Content="{Binding SongName}"></Label>
-						<Label x:Name="nameAuthor" Grid.Row="1" 
+								   TextTrimming="CharacterEllipsis"
+						   Text="{Binding SongName}"></TextBlock>
+						<TextBlock x:Name="nameAuthor" Grid.Row="1" 
 							   Foreground="Gray" 
-							   HorizontalContentAlignment="Left" 
-					VerticalContentAlignment="Top" 
-							   FontSize="14" Content="{Binding NameAuthor}"></Label>
+							   HorizontalAlignment="Stretch" 
+								VerticalAlignment="Top"
+							TextTrimming="CharacterEllipsis"
+							   FontSize="14" Text="{Binding NameAuthor}"></TextBlock>
 					</Grid>
 				</Grid>
 		</Button>

@@ -57,7 +57,6 @@
 							<ListBox Name="lb" Grid.Row="1"
 									Background="Transparent"
 									ItemsSource="{Binding ListMedia}"
-									SelectedItems="{Binding SelectedPlaylist}"
 									 DoubleTapped="ListBox_DoubleTapped"
 								>
 								<ListBox.Styles>
@@ -77,7 +76,7 @@
 								</ListBox.ItemsPanel>
 								<ListBox.ItemTemplate>
 									<DataTemplate>
-										<views:PlaylistItemTC PlaylistName="The Album" CountMedias="4 songs" ImageSource="/Assets/dung_yeu_nua_em_met_roi.png" >
+										<views:PlaylistItemTC PlaylistName="{Binding PlayListName}" CountMedias="{Binding ListMedia.Count}" ImageSource="/Assets/dung_yeu_nua_em_met_roi.png" >
 											<views:PlaylistItemTC.ContextMenu>
 												<ContextMenu>
 													<MenuItem Header="Phát">
