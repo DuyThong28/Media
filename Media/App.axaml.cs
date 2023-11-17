@@ -19,11 +19,18 @@ namespace Media
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainWindowViewModel()
                 };
+
+                desktop.Exit += OnExit;
             }
 
             base.OnFrameworkInitializationCompleted();
+        }
+
+        void OnExit(object sender, ControlledApplicationLifetimeExitEventArgs e)
+        {
+                PlayMedia.dispose();
         }
     }
 }

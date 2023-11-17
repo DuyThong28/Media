@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using ReactiveUI;
-using System.Reactive;
-using NAudio.Wave;
-using System.Diagnostics;
 using Avalonia.Threading;
-using Instances;
 using Media.Models;
-using System.Numerics;
+using LibVLCSharp.Shared;
+using MyMedia = LibVLCSharp.Shared.Media;
+using TagLib;
 
 namespace Media.ViewModels
 {
@@ -27,12 +19,18 @@ namespace Media.ViewModels
         public static DispatcherTimer timer = new DispatcherTimer();
         public static RepeatMode Repeat = RepeatMode.Off;
         static string path = null;
-        static double currentTimePlay = 0.0;
+        static long currentTimePlay = 0;
         static bool checkFirst = false;
         public static bool Suffle = false;
-        public static WaveOutEvent waveOutEvent = new WaveOutEvent();
-        public static AudioFileReader audioFileReader;
+        public static LibVLC _libVlc;
+        public static MediaPlayer MediaPlayer;
+        public static MyMedia _media;
         public static bool IsPlay
+        {
+            get; set;
+        } = false;
+
+        public static bool IsPlayVideo
         {
             get; set;
         } = false;
@@ -40,7 +38,7 @@ namespace Media.ViewModels
         {
             get { return checkFirst; }
         }
-        public static double CurrentTimePlay
+        public static long CurrentTimePlay
         {
             get { return currentTimePlay; }
             set { currentTimePlay = value; }
@@ -48,24 +46,24 @@ namespace Media.ViewModels
 
         public static float Volume
         {
-            set { waveOutEvent.Volume = value; }
-            get { return waveOutEvent.Volume; }
+            set { MediaPlayer.Volume = Convert.ToInt32(value*100); }
+            get { return MediaPlayer.Volume/100; }
         }
 
-        public static double DurationSong
+        public static long DurationSong
         {
-            get { return audioFileReader.TotalTime.TotalSeconds; }
+            get { return MediaPlayer.Length; }
         }
-        public static double CurrentPositionSong
+        public static long CurrentPositionSong
         {
-            get { return audioFileReader.CurrentTime.TotalSeconds; }
+            get { return MediaPlayer.Time; }
         }
         public static string DurationstringSong
         {
             get
             {
-                if (audioFileReader!=null)
-                    return audioFileReader.TotalTime.ToString(@"mm\:ss");
+                if (MediaPlayer!=null)
+                    return TimeSpan.FromMilliseconds(MediaPlayer.Length).ToString(@"mm\:ss");
                 return "00:00";
             }
         }
@@ -73,8 +71,8 @@ namespace Media.ViewModels
         {
             get
             {
-                if (audioFileReader != null)
-                    return audioFileReader.CurrentTime.ToString(@"mm\:ss");
+                if (MediaPlayer != null)
+                    return TimeSpan.FromMilliseconds(MediaPlayer.Time).ToString(@"mm\:ss");
                 return "00:00";
             }
         }
@@ -95,53 +93,73 @@ namespace Media.ViewModels
                 }
                 if (path != null)
                 {
-                    waveOutEvent.Stop();
-                    audioFileReader = new AudioFileReader(path);
-                    waveOutEvent.Init(audioFileReader);
+                    MediaPlayer.Pause();
+                    media = new MediaItem(path);
+                    _media = new MyMedia(_libVlc, new Uri(path));
+                    IsPlay = true;
+                    if (media.MediaTypes == MediaTypes.Audio)
+                    {
+                        IsPlayVideo = false;
+                    }
+                    else
+                    {
+                       IsPlayVideo = true;
+                    }
+                    MediaPlayer.Play(_media);
                     timer.Tick += MediaHelper.UpdateScreen;
                     timer.Start();
                     timer.Interval = new TimeSpan(0, 0, 1);
-                    currentTimePlay = 0.0;
-
+                    currentTimePlay =0;
                 }
             }
         }
         public static void setCurrentTimePlay()
         {
-            currentTimePlay = audioFileReader.CurrentTime.TotalSeconds;
+            currentTimePlay = MediaPlayer.Time;
         }
         public static void continueSong()
         {
-            if (waveOutEvent.PlaybackState == PlaybackState.Paused)
+            if (MediaPlayer.State == VLCState.Paused)
             {
-                audioFileReader.CurrentTime = TimeSpan.FromSeconds(currentTimePlay);
-                waveOutEvent.Play();
+                MediaPlayer.Time = currentTimePlay;
+                IsPlay = true;
+                MediaPlayer.Play();
             }
         }
         public static void playSong()
         {
-            audioFileReader.CurrentTime = TimeSpan.FromSeconds(currentTimePlay);
-            waveOutEvent.Play();
+            IsPlay = true;
+            MediaPlayer.Time = currentTimePlay;
+            MediaPlayer.Play(_media);
         }
-        public static void stopSong()
+        public static void dispose()
         {
-            currentTimePlay = 0.0;
-            waveOutEvent.Dispose();
+            IsPlay = false;
+            currentTimePlay = 0;
+            MediaPlayer?.Dispose();
+            _libVlc?.Dispose();
         }
         public static void pauseSong()
         {
-            currentTimePlay = audioFileReader.CurrentTime.TotalSeconds;
-            waveOutEvent.Pause();
+            IsPlay = false;
+            currentTimePlay = MediaPlayer.Time;
+            MediaPlayer.Pause();
         }
+
+        public static void stopSong()
+        {
+            IsPlay = false;
+            MediaPlayer.Stop();
+        } 
         public static void muteVolume()
         {
-            waveOutEvent.Volume = 0;
+            MediaPlayer.Volume = 0;
         }
-        public static void setCurrentPosition(double position)
+        public static void setCurrentPosition(int position)
         {
-            if (waveOutEvent != null)
+            if (MediaPlayer != null)
             {
-                audioFileReader.CurrentTime = TimeSpan.FromSeconds(position);
+                MediaPlayer.Time = position;
                 CurrentTimePlay = position;
             }
         }

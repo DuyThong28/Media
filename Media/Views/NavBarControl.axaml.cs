@@ -28,5 +28,12 @@ namespace Media.Views
             }
         }
 
+        private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            if (navBarItemSelected != null)
+            {
+                navBarItemSelected(sender, new EventArgs());
+            }
+        }
     }
 }

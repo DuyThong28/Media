@@ -13,26 +13,27 @@ using Avalonia.Threading;
 using System.Reactive;
 using NAudio.Wave;
 using System.Runtime.InteropServices;
+using LibVLCSharp.Shared;
 
 namespace Media.ViewModels
 {
     public class MediaControlViewModel:ViewModelBase
     {
         public MediaItem _media = null;
-        private double tbMaxValue;
-        private double tbValue = 0.0;
+        private long tbMaxValue = 0;
+        private long tbValue = 0;
         private float tbVolume = 1;
-        private string timeSongEnd;
-        private string timeSongPlay;
-        private IImage imageSource;
-        private string songName;
-        private string nameAuthor;
+        private string timeSongEnd = "00:00";
+        private string timeSongPlay = "00:00";
+        private IImage imageSource = ImageHelper.LoadFromResource(new Uri("avares://Media/Assets/Icons/defaultImage.jpg"));
+        private string songName = "Tên bài hát";
+        private string nameAuthor = "Tên ca sĩ";
         private List<int> listIndexPlay;
 
         public MediaControlViewModel()
         {
-            PlayNextCommand = ReactiveCommand.Create(() => { PlayNext();});
-            PlayMediaCommand = ReactiveCommand.Create(()=> {  PlayMedia.media.PlayMediaCommand(); });
+            PlayNextCommand = ReactiveCommand.Create(() => { PlayNext(); });
+            PlayMediaCommand = ReactiveCommand.Create(() => { Play(); });
             PlayPrevCommand = ReactiveCommand.Create(() => { PlayPrev(); });
             RepeatCommand = ReactiveCommand.Create(()=> { Repeat(); });
             SuffCommand = ReactiveCommand.Create(() => { Suff(); });
@@ -41,17 +42,17 @@ namespace Media.ViewModels
                 MediaHelper.updateMediaScreen += UpdateMediaControl;
             }
         }
-        public double TbMaxValue
+        public long TbMaxValue
         {
             get { return tbMaxValue; }
             set { this.RaiseAndSetIfChanged(ref tbMaxValue, value); }
         }
 
-        public double TbValue
+        public long TbValue
         {
             get { return tbValue; }
             set { this.RaiseAndSetIfChanged(ref tbValue, value);
-                TimeSongPlay = TimeSpan.FromSeconds(TbValue).ToString(@"mm\:ss");
+                TimeSongPlay = TimeSpan.FromMilliseconds(TbValue).ToString(@"mm\:ss");
             }
         }
         public string TimeSongEnd
@@ -81,7 +82,7 @@ namespace Media.ViewModels
             set=> this.RaiseAndSetIfChanged(ref nameAuthor, value);
         }
 
-        private bool isPlay;
+        private bool isPlay = false;
         public bool IsPlay
         {
             get => isPlay;
@@ -99,12 +100,12 @@ namespace Media.ViewModels
         public ReactiveCommand<Unit, Unit> PlayPrevCommand { get; set; }
         public ReactiveCommand<Unit,Unit> RepeatCommand { get; set; } 
         public ReactiveCommand<Unit,Unit> SuffCommand { get; set; } 
-        
+
         private void UpdateMediaControl(object sender, EventArgs e)
         {
             listIndexPlay = new List<int>(MediaHelper.ListIndexPlayQueue);
             IsPlay = PlayMedia.IsPlay;
-            if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Playing)
+            if (PlayMedia.MediaPlayer.State == VLCState.Playing)
             {
                 _media = PlayMedia.media;
                 SongName = PlayMedia.media.Title;
@@ -116,7 +117,7 @@ namespace Media.ViewModels
                 TimeSongEnd = PlayMedia.DurationstringSong;
                 PlayMedia.Volume = tbVolume;
             }
-            else if (PlayMedia.waveOutEvent.PlaybackState == PlaybackState.Stopped)
+            else if (PlayMedia.MediaPlayer.State == VLCState.Ended)
             {
                 if (PlayMedia.Repeat == RepeatMode.One)
                 {
@@ -125,8 +126,20 @@ namespace Media.ViewModels
                 } else if(PlayMedia.Repeat == RepeatMode.All)
                 {
                     PlayNext();
+                } else
+                {
+                    PlayMedia.stopSong();
                 }
             }
+        }
+
+        private void Play()
+        {
+            if (PlayMedia.media!=null)
+            {
+                PlayMedia.media.PlayMediaCommand();
+            }
+
         }
 
         private void PlayNext()

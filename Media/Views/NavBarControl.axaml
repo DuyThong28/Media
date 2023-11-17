@@ -11,7 +11,7 @@
 			<Grid>
 				<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
 				</Border>
-				<ListBox Background="Transparent"  SelectionChanged="ListBox_SelectionChanged">
+				<ListBox DoubleTapped="ListBox_DoubleTapped" Background="Transparent"  SelectionChanged="ListBox_SelectionChanged">
 					<ListBox.Styles>
 						<Style Selector="ListBoxItem:pointerover">
 							<Setter	Property="CornerRadius" Value="5"></Setter>
@@ -127,7 +127,7 @@
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label  >Thư viện</Label>
+							<Label  >Danh sách phát</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="settingBtn">
