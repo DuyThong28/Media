@@ -251,6 +251,46 @@ namespace Media.ViewModels
                 updateListMediaScreen(sender, new EventArgs());
             }
         }
+        public static List<MediaItem> ReturnMediaListsSearchedByText(string searchText,List<MediaItem> allMedias)
+        {
+            var result = new List<MediaItem>();
+            searchText = searchText.Trim();
+            bool isNotHaveDiacritics = Diacritics.CheckNoDiacriticsInText(searchText);
 
+            foreach (var media in allMedias)
+            {
+                // If there's no diacritics in searchText -> Proceed to search diacritics insensitively
+                // Else search diacritics sensitively
+                string title =
+                    isNotHaveDiacritics == true ?
+                    Diacritics.RemoveDiacritics(media.Title) :
+                    media.Title;
+                string album = isNotHaveDiacritics == true ?
+                    Diacritics.RemoveDiacritics(media.Album) :
+                    media.Album;
+                List<string> artists = isNotHaveDiacritics == true ?
+                    Diacritics.RemoveDiacriticsForAList(media.Artists) :
+                    media.Artists;
+
+                bool isFoundTitle = title.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0;
+                bool isFoundAlbum = album.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0;
+                bool isFoundArtists = CheckArtistExistsInList(artists, searchText);
+
+                if (isFoundTitle == true || isFoundArtists == true || isFoundAlbum == true)
+                {
+                    result.Add(media);
+                }
+            }
+            return result;
+        }
+        private static bool CheckArtistExistsInList(List<string> listArtists, string searchText)
+        {
+            foreach (var artist in listArtists)
+            {
+                bool isFoundArtists = artist.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0;
+                if (isFoundArtists == true) return true;
+            }
+            return false;
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Media.ViewModels
     internal class PlaylistDatabase
     {
         static string playlistDatabaseFilePath = "Data Source=" + Environment.CurrentDirectory + "\\Playlist.db";
-        static SqliteConnection playlistDatabaseConnection = new SqliteConnection(playlistDatabaseFilePath);      
+        static SqliteConnection playlistDatabaseConnection = new SqliteConnection(playlistDatabaseFilePath);  
         public PlaylistDatabase()
         {
             InitializeTables();
