@@ -17,13 +17,18 @@ namespace Media.ViewModels
         private string countMedia = "0";
         private Playlist playlist;
         private bool isPlay;
+        private MediaItem selectedItem;
+
         public ReactiveCommand<Unit, Unit> PlayMediaCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> BackCommand { get; private set; }
         public PlaylistScreenViewModel()
         {
-         PlayMediaCommand = ReactiveCommand.Create(() => { PlayPlaylist(); });
+            PlayMediaCommand = ReactiveCommand.Create(() => { PlayPlaylist(); });
+            BackCommand = ReactiveCommand.Create(() => { if (backEvent != null)
+                    backEvent(this, new EventArgs());
+            });
             MediaHelper.UpdatePlaylistScreen += UpdateMediaControl;
         }
-
         public List<MediaItem> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value);} }
         public string PlayListName
         {
@@ -42,9 +47,23 @@ namespace Media.ViewModels
             }
             set=> this.RaiseAndSetIfChanged(ref countMedia, value); 
         }
+
+        public MediaItem SelectedItem { get => selectedItem; set => this.RaiseAndSetIfChanged(ref selectedItem,value); }
+
         private void UpdateMediaControl(object sender, EventArgs e)
         {
-            IsPlay = PlayMedia.IsPlay;
+            if(playlist != null)
+            {
+                if (MediaHelper.isPlayingPlaylist == true && MediaHelper.playListPlayingId == playlist.PlayListID)
+                {
+                    IsPlay = PlayMedia.IsPlay;
+                }
+                else
+                {
+                    IsPlay = false;
+                }
+                SelectedItem = MediaHelper.selectPlaylistItem(playlist);
+            }
         }
         private void UpdateScreen()
         {
@@ -65,6 +84,13 @@ namespace Media.ViewModels
             {
                 MediaHelper.PlayThePlaylist(Playlist);
             }
+        }
+
+        private static event EventHandler backEvent;
+        public static event EventHandler BackEvent
+        {
+            add { backEvent += value; }
+            remove { backEvent -= value; }
         }
     }
 }

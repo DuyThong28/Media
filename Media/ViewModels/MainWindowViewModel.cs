@@ -27,17 +27,22 @@ namespace Media.ViewModels
 
         public MainWindowViewModel()
         {
+            PlayMedia._libVlc = _libVlc;
+            PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
             Playlist playlist = new Playlist() { ListMedia = (MediaHelper.listVideos).Concat(MediaHelper.listSongs).ToList(), PlayListName="NewJeans 1st EP'New Jeans" };
+            Playlist playlist2 = new Playlist() { ListMedia = (MediaHelper.listVideos), PlayListName="Itzy The Album" };
+            Playlist playlist3 = new Playlist() { ListMedia = (MediaHelper.listSongs), PlayListName="Get Into The New World" };
             MediaHelper.AddPlayList(playlist);
+            MediaHelper.AddPlayList(playlist2);
+            MediaHelper.AddPlayList(playlist3);
+            SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
             LibraryScreenViewModel.ListMedia = MediaHelper.AllPlayList;
             HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.listVideos;
-            PlayMedia._libVlc = _libVlc;
-            PlayMedia.MediaPlayer = MediaPlayer;
         }
         public MediaControlViewModel MediaControlViewModel { get; set; } = new MediaControlViewModel();
         public HomeScreenViewModel HomeScreenViewModel { get; set; } = new HomeScreenViewModel();

@@ -21,6 +21,7 @@
 					<RowDefinition Height="auto"></RowDefinition>
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
+				<Button Name="playBtn" Command="{Binding PlayPlayListCommand}" IsVisible="False">PlayPlaylist</Button>
 				<Grid Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
 					<Label   FontSize="20" FontWeight="Bold">THƯ VIỆN</Label>
 				</Grid>
@@ -57,16 +58,16 @@
 							<ListBox Name="lb" Grid.Row="1"
 									Background="Transparent"
 									ItemsSource="{Binding ListMedia}"
+									 SelectedItem="{Binding SelectedPlaylist}"
 									 DoubleTapped="ListBox_DoubleTapped"
 								>
 								<ListBox.Styles>
 									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
 										<Setter Property="Background" Value="Transparent"></Setter>
-										<Setter	Property="CornerRadius" Value="15"></Setter>
 									</Style>
 									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
 										<Setter Property="Background" Value="Transparent"></Setter>
-										<Setter	Property="CornerRadius" Value="15"></Setter>
+										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"></Setter>
 									</Style>
 								</ListBox.Styles>
 								<ListBox.ItemsPanel>
@@ -76,7 +77,11 @@
 								</ListBox.ItemsPanel>
 								<ListBox.ItemTemplate>
 									<DataTemplate>
-										<views:PlaylistItemTC PlaylistName="{Binding PlayListName}" CountMedias="{Binding ListMedia.Count}" ImageSource="/Assets/dung_yeu_nua_em_met_roi.png" >
+										<views:PlaylistItemTC PlaylistName="{Binding PlayListName}" 
+															  CountMedias="{Binding ListMedia.Count}" 
+											ImageSource="/Assets/dung_yeu_nua_em_met_roi.png" 
+											Command="{Binding ElementName=playBtn, Path=Command}" 
+											CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 											<views:PlaylistItemTC.ContextMenu>
 												<ContextMenu>
 													<MenuItem Header="Phát">

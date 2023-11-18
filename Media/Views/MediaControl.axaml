@@ -2,11 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="900"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="90"
 			 xmlns:vm="using:Media.ViewModels"
              x:Class="Media.Views.MediaControl"
 			 xmlns:views="using:Media.Views"
-			 x:DataType="vm:MediaControlViewModel">
+			 x:DataType="vm:MediaControlViewModel"
+			 >
 	<Design.DataContext>
 		<vm:MediaControlViewModel/>
 	</Design.DataContext>
@@ -65,13 +66,13 @@
 		
 		<Grid Grid.Column="1" MaxWidth="600">
 			<Grid.RowDefinitions>
-				<RowDefinition></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
 			</Grid.RowDefinitions>
 			<Grid Grid.Row="0" >
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,-10">
 					<Button Name="btn_Suffle" Classes.function="true" Click="Button_Click_2" Background="Transparent" Command="{Binding SuffCommand}">
-						<Image Name="btn_suff_img" Classes.notSuff="true" Height="20" Width="20">
+						<Image Name="btn_suff_img" Classes.notSuff="true" Height="22" Width="22">
 							<Image.Styles>
 								<Style Selector="Image.notSuff">
 									<Setter Property="Source" Value="/Assets/Icons/suffle.png"></Setter>
@@ -83,7 +84,7 @@
 						</Image>
 					</Button>
 					<Button Name="btn_prev" Classes.function="true" Background="Transparent"  Command="{Binding PlayPrevCommand}">
-						<Image Height="20" Width="20">
+						<Image Height="22" Width="22">
 							<Image.Styles>
 								<Style Selector="Image">
 									<Setter Property="Source" Value="/Assets/Icons/back.png"></Setter>
@@ -95,7 +96,7 @@
 						</Image>			
 					</Button>
 					<Button x:Name="btn_Play" Classes.function="true" Background="Transparent" Command="{Binding PlayMediaCommand}">
-							<Image Height="30" Width="30"
+							<Image Height="32" Width="32"
 								Classes.checked="{Binding IsPlay}" 
 								Classes.unChecked="{Binding !IsPlay}" 
 								>
@@ -116,7 +117,7 @@
 							</Image>
 					</Button>
 					<Button Name="btn_next" Classes.function="true" Background="Transparent"  Command="{Binding PlayNextCommand}">
-						<Image Height="20" Width="20">
+						<Image Height="22" Width="22">
 							<Image.Styles>
 								<Style Selector="Image">
 									<Setter Property="Source" Value="/Assets/Icons/next.png"></Setter>
@@ -128,7 +129,7 @@
 						</Image>					
 					</Button>
 					<Button Name="btn_Repeat" Classes.function="true" Click="Button_Click_1" Background="Transparent" Command="{Binding RepeatCommand}" >
-						<Image Name="btn_repeat_img" Classes.repeat="true" Height="20" Width="20">
+						<Image Name="btn_repeat_img" Classes.repeat="true" Height="22" Width="22">
 							<Image.Styles>
 								<Style Selector="Image.repeat">
 									<Setter Property="Source" Value="/Assets/Icons/repeat.png"></Setter>
@@ -147,20 +148,34 @@
 					</Button>
 				</StackPanel>
 			</Grid>
-			<Grid Grid.Row="1">
+			<Grid Grid.Row="1" Margin="0,0,0,10">
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="40"></ColumnDefinition>
+					<ColumnDefinition Width="50"></ColumnDefinition>
 					<ColumnDefinition></ColumnDefinition>
-					<ColumnDefinition Width="40"></ColumnDefinition>
+					<ColumnDefinition Width="50"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
-				<Label x:Name="timeSongPlay" Foreground="Gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TimeSongPlay}"></Label>
+				<Label x:Name="timeSongPlay" Foreground="Gray"  VerticalContentAlignment="Center" HorizontalAlignment="Right" FontSize="13" Content="{Binding TimeSongPlay}"></Label>
 				<Slider x:Name="mediaTrackBar" Grid.Column="1"
 						 Maximum="{Binding TbMaxValue}"
 						Value="{Binding TbValue}"
-						PointerCaptureLost="Slider_PointerCaptureLost"
-						Padding="0,0,0,20">
+						Margin="0,-6,0,0"
+						PointerCaptureLost="Slider_PointerCaptureLost">
+					<Slider.Styles>
+						<Style Selector="Slider Thumb">
+							<Setter Property="Template">
+								<ControlTemplate>
+									<Border
+										Background="Transparent"
+										BorderBrush="{TemplateBinding Background}"
+										BorderThickness="2"
+										CornerRadius="{DynamicResource SliderThumbCornerRadius}"
+										Height="15" Width="15"/>
+								</ControlTemplate>
+							</Setter>
+						</Style>
+					</Slider.Styles>
 				</Slider>
-				<Label x:Name="timeSongEnd" Grid.Column="2" Foreground="gray"  VerticalContentAlignment="Center" FontSize="10" Content="{Binding TimeSongEnd}"></Label>
+				<Label x:Name="timeSongEnd" Grid.Column="2" Foreground="gray" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" Content="{Binding TimeSongEnd}"></Label>
 			</Grid>
 			<Grid>
 			</Grid>
@@ -196,6 +211,20 @@
 					Value="{Binding TbVolume}"
 					ValueChanged="Slider_ValueChanged"
 					Maximum="1">
+				<Slider.Styles>
+					<Style Selector="Slider Thumb">
+						<Setter Property="Template">
+							<ControlTemplate>
+								<Border
+									Background="Transparent"
+									BorderBrush="{TemplateBinding Background}"
+									BorderThickness="2"
+									CornerRadius="{DynamicResource SliderThumbCornerRadius}"
+									Height="15" Width="15"/>
+							</ControlTemplate>
+						</Setter>
+					</Style>
+				</Slider.Styles>
 			</Slider>
 			<!--<Label Content="{TemplateBinding MediaName}"></Label>-->
 		</Grid>

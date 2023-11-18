@@ -46,13 +46,13 @@
 		<Grid Grid.Row="0" Name="mainPlayingScreen" IsVisible="False">
 			<views:PlayingScreenControl x:Name="playingScreen" DataContext="{Binding PlayingScreenViewModel}"/>
 			<Grid Name="videoPlayingScreen" IsVisible="False">
-				<vlc:VideoView MediaPlayer="{Binding MediaPlayer}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+				<vlc:VideoView MediaPlayer="{Binding MediaPlayer}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 				</vlc:VideoView>
 			</Grid>
 		</Grid>
 		
 		<Grid Grid.Row="1">
-			<views:MediaControl x:Name="mediaControl"  DataContext="{Binding MediaControlViewModel}"/>
+			<views:MediaControl x:Name="mediaControl"  DataContext="{Binding MediaControlViewModel}" IsEnabled="False"/>
 		</Grid>
 	</Grid>
 	

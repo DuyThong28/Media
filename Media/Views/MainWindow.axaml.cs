@@ -31,6 +31,45 @@ namespace Media.Views
             MediaHelper.OpenVideoScreen += ListVideoSreenControl_OpenVideoScreen;
             SettingScreenViewModel.OpenSongFolder = ReactiveCommand.Create(() => ChooseSongPath());
             SettingScreenViewModel.OpenVideoFolder = ReactiveCommand.Create(() => ChooseVideoPath());
+            HomeScreenControl.SeeAllSongs += HomeScreenControl_SeeAllSongs;
+            HomeScreenControl.SeeAllVideos += HomeScreenControl_SeeAllVideos;
+            PlaylistScreenViewModel.BackEvent += PlaylistScreenViewModel_BackEvent;
+        }
+
+        private void PlaylistScreenViewModel_BackEvent(object? sender, EventArgs e)
+        {
+            homeScreen.IsVisible = false;
+            musicScreen.IsVisible = false;
+            videoScreen.IsVisible = false;
+            //playingScreen.IsVisible = false;
+            libraryScreen.IsVisible = true;
+            playlistScreen.IsVisible = false;
+            settingScreen.IsVisible = false;
+            searchScreen.IsVisible = false;
+        }
+
+        private void HomeScreenControl_SeeAllVideos(object? sender, EventArgs e)
+        {
+            homeScreen.IsVisible = false;
+            musicScreen.IsVisible = false;
+            videoScreen.IsVisible = true;
+            //playingScreen.IsVisible = false;
+            libraryScreen.IsVisible = false;
+            playlistScreen.IsVisible = false;
+            settingScreen.IsVisible = false;
+            searchScreen.IsVisible = false;
+        }
+
+        private void HomeScreenControl_SeeAllSongs(object? sender, EventArgs e)
+        {
+            homeScreen.IsVisible = false;
+            musicScreen.IsVisible = true;
+            videoScreen.IsVisible = false;
+            //playingScreen.IsVisible = false;
+            libraryScreen.IsVisible = false;
+            playlistScreen.IsVisible = false;
+            settingScreen.IsVisible = false;
+            searchScreen.IsVisible = false;
         }
 
         private void ListVideoSreenControl_OpenVideoScreen(object? sender, EventArgs e)
@@ -50,6 +89,10 @@ namespace Media.Views
             {
                 videoPlayingScreen.IsVisible = false;
                 playingScreen.IsVisible = true;
+            }
+            if (PlayMedia.IsFirst == true)
+            {
+                mediaControl.IsEnabled = true;
             }
         }
 
@@ -205,7 +248,8 @@ namespace Media.Views
             (homeScreen.DataContext as HomeScreenViewModel).ListSongs = MediaHelper.listSongs;
             (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.listVideos;
             (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.listVideos;
-        }
+            (searchScreen.DataContext as SearchScreenViewModel).AllMedias = MediaHelper.AllMedias;
 
+        }
     }
 }

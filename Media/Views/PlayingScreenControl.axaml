@@ -16,7 +16,6 @@
 				<Setter Property="Template">
 					<ControlTemplate>
 						<Panel>
-							
 							<Border Background="{TemplateBinding Background}"
 									CornerRadius="{TemplateBinding CornerRadius}"
 									Opacity="0.9">
@@ -91,6 +90,7 @@
 									   TextWrapping="Wrap"
 									   FontSize="24" 
 									   FontWeight="Bold"
+									   TextTrimming="CharacterEllipsis"
 									   TextAlignment="Center"
 									   Text="{Binding SongName}"></TextBlock>
 							<TextBlock x:Name="nameAuthor" 
@@ -100,6 +100,7 @@
 									   FontSize="20" 
 									   TextAlignment="Center"
 									   TextWrapping="Wrap"
+									   TextTrimming="CharacterEllipsis"
 									   FontWeight="Bold" 
 									   Text="{Binding NameAuthor}"
 									   Margin="10"></TextBlock>
@@ -160,6 +161,13 @@
 											SelectedItem="{Binding SelectedItem}"
 											>
 							<ListBox.Styles>
+									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
+										<Setter Property="Background" Value="Transparent"></Setter>
+									</Style>
+									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
+										<Setter Property="Background" Value="Transparent"></Setter>
+										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"></Setter>
+									</Style>
 								<Style Selector="ListBoxItem">
 									<Setter Property="Padding" Value="6,5,5,5"></Setter>
 								</Style>

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TagLib.Riff;
 
 namespace Media.ViewModels
 {
@@ -17,6 +18,7 @@ namespace Media.ViewModels
         private ObservableCollection<MediaItem> searchResults;
         private MediaItem selectedMedia;
         private string searchText;
+        private List<MediaItem> allMedias;
         public SearchScreenViewModel()
         {
             searchResults = new ObservableCollection<MediaItem>();
@@ -29,10 +31,12 @@ namespace Media.ViewModels
         {
             get
             {
-                List<MediaItem> list = new List<MediaItem>(MediaHelper.listSongs);
-                list.AddRange(MediaHelper.listVideos);
-                return list;
+                return allMedias;
             }
+            set { this.RaiseAndSetIfChanged(ref allMedias, value);
+                DoSearch("");
+            }
+
         }
 
 
