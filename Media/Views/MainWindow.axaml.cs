@@ -27,8 +27,30 @@ namespace Media.Views
             navBarControl.NavBarItemSelected += NavBarControl_RadioButtonChecked;
             mediaControl.ButtonClicked += MediaControl_ButtonClicked;
             libraryScreen.SelectPlaylist += LibraryScreen_SelectPlaylist;
+            MediaHelper.UpdatePlayingScreen += MediaHelper_UpdatePlayingScreen;
+            MediaHelper.OpenVideoScreen += ListVideoSreenControl_OpenVideoScreen;
             SettingScreenViewModel.OpenSongFolder = ReactiveCommand.Create(() => ChooseSongPath());
             SettingScreenViewModel.OpenVideoFolder = ReactiveCommand.Create(() => ChooseVideoPath());
+        }
+
+        private void ListVideoSreenControl_OpenVideoScreen(object? sender, EventArgs e)
+        {
+            mainScreen.IsVisible = false;
+            mainPlayingScreen.IsVisible = true;
+        }
+
+        private void MediaHelper_UpdatePlayingScreen(object? sender, EventArgs e)
+        {
+            if (PlayMedia.IsPlayVideo == true)
+            {
+                videoPlayingScreen.IsVisible = true;
+                playingScreen.IsVisible = false;
+            }
+            else if (PlayMedia.IsPlayVideo == false)
+            {
+                videoPlayingScreen.IsVisible = false;
+                playingScreen.IsVisible = true;
+            }
         }
 
         private void LibraryScreen_SelectPlaylist(object? sender, EventArgs e)
@@ -53,16 +75,6 @@ namespace Media.Views
         {
             mainScreen.IsVisible = !mainScreen.IsVisible;
             mainPlayingScreen.IsVisible = !mainPlayingScreen.IsVisible;
-            if (PlayMedia.IsPlayVideo == true)
-            {
-                videoPlayingScreen.IsVisible = true;
-                playingScreen.IsVisible = false;
-            } 
-            else if (PlayMedia.IsPlayVideo == false)
-            {
-                videoPlayingScreen.IsVisible = false;
-                playingScreen.IsVisible = true;
-            }
         }
 
         private void NavBarControl_RadioButtonChecked(object? sender, EventArgs e)

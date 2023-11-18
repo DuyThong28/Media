@@ -10,23 +10,7 @@
     <Setter Property="Template">
       <ControlTemplate>
 		  <Border Name="border" CornerRadius="10" ClipToBounds="True"
-				  Classes.checked="{Binding ElementName=btn_Play, Path=IsChecked}">
-			  <Border.Resources>
-				  <ControlTheme x:Key="{x:Type ToggleButton}" TargetType="ToggleButton">
-					  <Setter Property="Template">
-						  <ControlTemplate>
-							  <Panel>
-								  <Border Background="{TemplateBinding Background}"
-										  CornerRadius="{TemplateBinding CornerRadius}"
-								></Border>
-								  <ContentPresenter x:Name="PART_ContentPresenter"
-													Content="{TemplateBinding Content}"
-													Margin="{TemplateBinding Padding}"/>
-							  </Panel>
-						  </ControlTemplate>
-					  </Setter>
-				  </ControlTheme>
-			  </Border.Resources>
+				  >
 			  <Border.Styles>
 				  <Style Selector="Border">
 					  <Setter Property="Tag" Value="False"/>
@@ -61,7 +45,7 @@
 						  </Image>
 					  </Border>
 					  <Border CornerRadius="10" Width="225" Height="225" ClipToBounds="True" IsVisible="{Binding ElementName=border, Path=Tag}" Opacity="0.3" Background="black"></Border>
-					  <ToggleButton x:Name="btn_Play" 
+					  <Button x:Name="btn_Play" 
 									Background="Transparent" 
 									IsVisible="{Binding ElementName=border, Path=Tag}" 
 									HorizontalAlignment="Center" 
@@ -69,53 +53,44 @@
 									Command="{TemplateBinding Command}"
 									CommandParameter="{TemplateBinding CommandParameter}"
 									>
-						  <ToggleButton.Effect>
-							  <DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="5"/>
-						  </ToggleButton.Effect>
-						  <Image Stretch="UniformToFill"
-							  Classes.checked="{Binding ElementName=btn_Play, Path=!IsChecked}"
-							  Classes.unChecked="{Binding ElementName=btn_Play, Path=IsChecked}">
-							  <Image.Styles>
-								  <Style Selector="Image.checked">
-									  <Setter Property="Height" Value="50"></Setter>
-									  <Setter Property="Width" Value="50"></Setter>
-									  <Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
-								  </Style>
-								  <Style Selector="Image.checked:pointerover">
-									  <Setter Property="Height" Value="53"></Setter>
-									  <Setter Property="Width" Value="53"></Setter>
-									  <Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
-								  </Style>
-								  <Style Selector="Image.unChecked">
-									  <Setter Property="Height" Value="50"></Setter>
-									  <Setter Property="Width" Value="50"></Setter>
-									  <Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-								  </Style>
-								  <Style Selector="Image.unChecked:pointerover">
-									  <Setter Property="Height" Value="53"></Setter>
-									  <Setter Property="Width" Value="53"></Setter>
-									  <Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-								  </Style>
-							  </Image.Styles>
-						  </Image>
-					  </ToggleButton>
+						  <Button.Effect>
+							  <DropShadowEffect BlurRadius="8" Color="Black" OffsetX="0" OffsetY="3"/>
+						  </Button.Effect>
+						  <Button.Styles>
+							  <Style Selector="Button">
+								  <Setter Property="Template">
+									  <ControlTemplate>
+										  <Panel>
+											  <Label x:Name="PART_ContentPresenter"
+																Content="{TemplateBinding Content}"
+																Margin="{TemplateBinding Padding}"/>
+										  </Panel>
+									  </ControlTemplate>
+								  </Setter>
+							  </Style>
+						  </Button.Styles>
+						  <PathIcon Height="50" Width="50" Data="{StaticResource play_circle_regular}">
+						  </PathIcon>
+					  </Button>
 				  </Grid>
-				  <Label x:Name="playlistName" Grid.Row="0"
-						 Classes.checked="{Binding ElementName=btn_Play, Path=IsChecked}"
-						 Classes.unChecked="{Binding ElementName=btn_Play, Path=!IsChecked}"
-						 HorizontalAlignment="Left"
-						 VerticalContentAlignment="Bottom" FontSize="14" FontWeight="Medium"
-						 Content="{TemplateBinding PlaylistName}">
-					  <Label.Styles>
-						  <Style Selector="Label.checked">
+				  <TextBlock x:Name="playlistName" Grid.Row="0"
+						 HorizontalAlignment="Stretch"
+						TextTrimming="CharacterEllipsis"
+						 VerticalAlignment="Bottom" FontSize="14" FontWeight="Medium"
+						 Text="{TemplateBinding PlaylistName}">
+					  <TextBlock.Styles>
+						  <Style Selector="TextBlock.checked">
 							  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
 						  </Style>
-						  <Style Selector="Label.unChecked">
+						  <Style Selector="TextBlock.unChecked">
 							  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"></Setter>
 						  </Style>
-					  </Label.Styles>
-				  </Label>
-				  <Label x:Name="countMedias" Grid.Row="1" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.5" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="14" Content="{TemplateBinding CountMedias}"></Label>
+					  </TextBlock.Styles>
+				  </TextBlock>
+				  <TextBlock x:Name="countMedias" Grid.Row="1" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="14" TextTrimming="CharacterEllipsis">
+					  <Run Text="{TemplateBinding CountMedias}"></Run>
+					  <Run Text="mục"></Run>
+				  </TextBlock>
 			  </StackPanel>
 		  </Border>
       </ControlTemplate>

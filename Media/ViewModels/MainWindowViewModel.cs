@@ -29,16 +29,9 @@ namespace Media.ViewModels
         {
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
-            Playlist playlist = new Playlist();
-            MediaItem item = new MediaItem(@"C:\Users\lenovo\Downloads\TungQuen-WrenEvansitsnk-12038297.mp3");
-            MediaItem item1 = new MediaItem(@"C:\Users\lenovo\Downloads\ThangDien-PhuongLyJustaTee-5774043.mp3");
-            MediaItem item2 = new MediaItem(@"C:\Users\lenovo\Downloads\Id072019-WN-10597501.mp3");
-            playlist.AddMedia(item);
-            playlist.AddMedia(item1);
-            playlist.AddMedia(item2);
+            Playlist playlist = new Playlist() { ListMedia = (MediaHelper.listVideos).Concat(MediaHelper.listSongs).ToList(), PlayListName="NewJeans 1st EP'New Jeans" };
             MediaHelper.AddPlayList(playlist);
-            MediaHelper.DeleteMediaFromPlaylist(item.FilePath, playlist.PlayListID);
-            LibraryScreenViewModel.ListMedia = new List<Playlist> { playlist, new Playlist() { ListMedia = MediaHelper.listSongs } };
+            LibraryScreenViewModel.ListMedia = MediaHelper.AllPlayList;
             HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;

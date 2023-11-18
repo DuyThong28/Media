@@ -11,18 +11,7 @@ namespace Media.Views
         {
 
             InitializeComponent();
-        }
-
-        private void ListBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
-        {
-            ListBox newListBoxItem = (sender as ListBox);
-            ListBoxItem media = newListBoxItem.SelectedItem as ListBoxItem;
-        }
-
-        private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
-        {
-            MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
-            media.PlayMediaCommand();
+            listMusic.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
         }
     }
 }

@@ -52,7 +52,16 @@ namespace Media.ViewModels
         {
             get { return tbValue; }
             set { this.RaiseAndSetIfChanged(ref tbValue, value);
-                TimeSongPlay = TimeSpan.FromMilliseconds(TbValue).ToString(@"mm\:ss");
+                    double seconds = value / 1000.0;
+                    int minutes = (int)Math.Floor(seconds / 60);
+                    if (minutes < 60)
+                    {
+                        TimeSongPlay = TimeSpan.FromMilliseconds(value).ToString(@"mm\:ss");
+                    }
+                    else
+                    {
+                        TimeSongPlay = TimeSpan.FromMilliseconds(value).ToString(@"hh\:mm\:ss");
+                    }
             }
         }
         public string TimeSongEnd

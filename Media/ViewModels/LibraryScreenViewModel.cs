@@ -17,9 +17,11 @@ namespace Media.ViewModels
             
         }
         private List<Playlist> listMedia;
-        private Playlist selectedPlaylist;
+        //private Playlist selectedPlaylist;
         public List<Playlist> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
-        public Playlist SelectedPlaylist { get => selectedPlaylist;}
+    
+        //public Playlist SelectedPlaylist { get => selectedPlaylist;}
+        public ReactiveCommand<Unit, Unit> newPlayListCommand = ReactiveCommand.Create(() => { });
 
     }
 }

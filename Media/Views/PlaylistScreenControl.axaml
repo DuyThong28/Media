@@ -76,9 +76,9 @@
 									</Border>
 								</Grid>
 								<StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="20,0,0,0">
-									<Label    HorizontalContentAlignment="Left" FontSize="18" FontWeight="Medium" Padding="0,0,0,0" >Playlist</Label>
+									<Label    HorizontalContentAlignment="Left" FontSize="18" FontWeight="Medium" Padding="0,0,0,0" >Danh sách phát</Label>
 									<Label x:Name="playListName"   HorizontalContentAlignment="Left" FontSize="80" FontWeight="Bold" Padding="0,0,0,0" Margin="-10,10,0,20" Content="{Binding PlayListName}"></Label>
-									<Label x:Name="countMedias"   HorizontalContentAlignment="Left" FontSize="18" FontWeight="Bold" Padding="0,0,0,0">4 songs</Label>
+									<Label x:Name="countMedias"   HorizontalContentAlignment="Left" FontSize="18" FontWeight="Bold" Padding="0,0,0,0" Content="{Binding CountMedia}"></Label>
 								</StackPanel>
 							</Grid>
 						</Border>

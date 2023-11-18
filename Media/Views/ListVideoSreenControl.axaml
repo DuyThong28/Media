@@ -56,7 +56,7 @@
 						</Grid>
 						<ScrollViewer Grid.Row="2" Background="Transparent" Padding="10,0,20,0" Margin="0,10,0,10">
 									<ListBox Grid.Row="1"
-											 DoubleTapped="ListBox_DoubleTapped"
+											 Name="listBoxVideo"
 													Background="Transparent"
 												  ItemsSource="{Binding ListVideos}"
 											   >
@@ -79,7 +79,7 @@
 										</ListBox.ItemsPanel>
 										<ListBox.ItemTemplate>
 											<DataTemplate>
-												<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}">
+												<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" DurationText="{Binding DurationText}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}">
 													<views:MediaItemTC.ContextMenu>
 														<ContextMenu>
 															<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">

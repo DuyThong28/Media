@@ -1,5 +1,10 @@
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Layout;
 using Media.Models;
+using Media.ViewModels;
+using System;
 
 namespace Media.Views
 {
@@ -8,12 +13,7 @@ namespace Media.Views
         public ListVideoSreenControl()
         {
             InitializeComponent();
-        }
-
-        private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
-        {
-            MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
-            media.PlayMediaCommand();
+            listBoxVideo.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
         }
     }
 }

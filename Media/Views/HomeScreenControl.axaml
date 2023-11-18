@@ -36,9 +36,8 @@
 								<RowDefinition></RowDefinition>
 							</Grid.RowDefinitions>
 							<Label Grid.Row="0"   FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Bài hát</Label>
-							<ListBox Grid.Row="1"
+							<ListBox  Grid.Row="1"
 									 Name="listMusic"
-									 DoubleTapped="ListBox_DoubleTapped"
 										Background="Transparent"
 										ItemsSource="{Binding ListSongs}"
 									>
@@ -61,7 +60,7 @@
 								</ListBox.ItemsPanel>
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
-										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}">
+										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}" DurationText="{Binding DurationText}">
 											<views:MediaItemTC.ContextMenu>
 												<ContextMenu>
 													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
@@ -79,9 +78,7 @@
 															<PathIcon Width="20" Height="20" Data="{StaticResource add_regular}" />
 														</MenuItem.Icon>
 														<MenuItem Header="Phát hàng đợi"/>
-														<MenuItem Header="The Album"/>
 													</MenuItem>
-													
 												</ContextMenu>
 											</views:MediaItemTC.ContextMenu>
 										</views:MediaItemTC>
@@ -96,9 +93,9 @@
 							</Grid.RowDefinitions>
 							<Label Grid.Row="0"   Margin="5,0,5,0" Padding="10,0,0,0" FontSize="17" VerticalAlignment="Center" FontWeight="Bold">Video</Label>
 							<ListBox Grid.Row="1"
+									 Name="listBoxVideo"
 										Background="Transparent"
 									  ItemsSource="{Binding ListVideos}"
-									 DoubleTapped="ListBox_DoubleTapped_1"
 								   >
 								<ListBox.Styles>
 									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
@@ -119,7 +116,7 @@
 								</ListBox.ItemsPanel>
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
-										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}">
+										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}" DurationText="{Binding DurationText}">
 											<views:MediaItemTC.ContextMenu>
 												<ContextMenu>
 													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">

@@ -86,9 +86,9 @@
 						</Border>
 					</Grid>
 					<StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" >
-							<TextBlock x:Name="songName" 
+							<TextBlock x:Name="songName"
 									   HorizontalAlignment="Center" 
-									   TextWrapping="Wrap"  
+									   TextWrapping="Wrap"
 									   FontSize="24" 
 									   FontWeight="Bold"
 									   TextAlignment="Center"
@@ -155,7 +155,10 @@
 							<Label    FontSize="20" FontWeight="Bold">DANH SÁCH PHÁT</Label>
 						</Grid>
 						<ListBox Grid.Row="1" Background="Transparent"
-										  ItemsSource="{Binding ListMedia}">
+								 Name="listBoxMedia"
+										  ItemsSource="{Binding ListMedia}"
+											SelectedItem="{Binding SelectedItem}"
+											>
 							<ListBox.Styles>
 								<Style Selector="ListBoxItem">
 									<Setter Property="Padding" Value="6,5,5,5"></Setter>
@@ -171,7 +174,7 @@
 							</ListBox.Styles>
 							<ListBox.ItemTemplate>
 								<DataTemplate>
-									<views:MusicRowTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlayMediaCommand}">
+									<views:MusicRowTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlayMediaCommand}" DurationText="{Binding DurationText}"> 
 										<views:MusicRowTC.ContextMenu>
 											<ContextMenu>
 												<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">

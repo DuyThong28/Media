@@ -13,8 +13,8 @@ namespace Media.ViewModels
     public class PlaylistScreenViewModel : ViewModelBase
     {
         private List<MediaItem> listMedia;
-        private string playListName;
-        private string countMedia;
+        private string playListName = "Danh sách phát không có tiêu đề";
+        private string countMedia = "0";
         private Playlist playlist;
         private bool isPlay;
         public ReactiveCommand<Unit, Unit> PlayMediaCommand { get; private set; }
@@ -37,13 +37,8 @@ namespace Media.ViewModels
         }
         public Playlist Playlist { get => playlist; set { this.RaiseAndSetIfChanged(ref playlist, value); UpdateScreen(); } }
         public string CountMedia { 
-            get { if (countMedia == "0" || countMedia=="1"|| countMedia==null) 
-                {
-                    return countMedia+ "song";
-                } else
-                {
-                    return countMedia + "songs";
-                }
+            get {
+                return countMedia+ " mục";
             }
             set=> this.RaiseAndSetIfChanged(ref countMedia, value); 
         }

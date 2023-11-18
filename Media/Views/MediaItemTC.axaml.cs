@@ -58,5 +58,16 @@ namespace Media.Views
             get { return GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
+
+        public static readonly StyledProperty<string> DurationTextProperty =
+    AvaloniaProperty.Register<MusicRowTC, string>(
+        nameof(DurationText),
+        defaultValue: "00:00");
+
+        public string DurationText
+        {
+            get { return GetValue(DurationTextProperty); }
+            set => SetValue(DurationTextProperty, value);
+        }
     }
 }
