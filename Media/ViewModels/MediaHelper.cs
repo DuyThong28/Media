@@ -318,7 +318,7 @@ namespace Media.ViewModels
                     }
                 }
                 media.PlayMediaCommand();
-
+            }
         }
 
         public static MediaItem selectPlayingItem(List<MediaItem> listMedia)
