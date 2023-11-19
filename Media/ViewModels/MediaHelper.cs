@@ -53,6 +53,7 @@ namespace Media.ViewModels
             }
             allPlayList.Add(playlist);
             database.InsertPlaylist(playlist);
+            OnAllPlayListChanged();
         }
 
         public static void DeletePlayList(Playlist playlist)
@@ -63,6 +64,7 @@ namespace Media.ViewModels
                 database.DeletePlaylist(allPlayList[index].PlayListID);
                 allPlayList.RemoveAt(index);
             }
+            OnAllPlayListChanged();
         }
         public static void DeleteMediaFromPlaylist(string mediaPath, string playlistID)
         {
@@ -79,7 +81,7 @@ namespace Media.ViewModels
             set => playQueue = value;
             get => playQueue;
         }
-        public static ReactiveCommand<Unit,Unit> newCommand { get; set; }
+        public static ReactiveCommand<Unit, Unit> newCommand { get; set; }
 
         public static List<int> ListIndexPlayQueue
         {
@@ -149,7 +151,7 @@ namespace Media.ViewModels
             PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
             PlayMedia.playSong();
         }
-    
+
 
         public static string MusicPathFolder
         {
@@ -204,7 +206,7 @@ namespace Media.ViewModels
             }
             catch
             {
-                
+
             }
 
             foreach (string filePath in filePaths)
@@ -232,8 +234,8 @@ namespace Media.ViewModels
         {
             add { updateListMediaScreen += value; }
             remove { updateListMediaScreen -= value; }
-        }  
-        
+        }
+
         public static event EventHandler updatePlayingScreen;
         public static event EventHandler UpdatePlayingScreen
         {
@@ -261,7 +263,7 @@ namespace Media.ViewModels
             {
                 updateListMediaScreen(sender, new EventArgs());
             }
-            if(updatePlayingScreen != null)
+            if (updatePlayingScreen != null)
             {
                 updatePlayingScreen(sender, new EventArgs());
             }
@@ -281,8 +283,8 @@ namespace Media.ViewModels
                         openVideoScreen(sender, new EventArgs());
                     }
                 }
-
             }
+
         }
 
         public static MediaItem selectPlayingItem(List<MediaItem> listMedia)
@@ -295,46 +297,14 @@ namespace Media.ViewModels
             }
             return selectedItem;
         }
-        public static List<MediaItem> ReturnMediaListsSearchedByText(string searchText,List<MediaItem> allMedias)
+        //
+        public static event EventHandler AllPlayListChanged;
+
+        private static void OnAllPlayListChanged()
         {
-            var result = new List<MediaItem>();
-            searchText = searchText.Trim();
-            bool isNotHaveDiacritics = Diacritics.CheckNoDiacriticsInText(searchText);
-
-            foreach (var media in allMedias)
-            {
-                // If there's no diacritics in searchText -> Proceed to search diacritics insensitively
-                // Else search diacritics sensitively
-                string title =
-                    isNotHaveDiacritics == true ?
-                    Diacritics.RemoveDiacritics(media.Title) :
-                    media.Title;
-                string album = isNotHaveDiacritics == true ?
-                    Diacritics.RemoveDiacritics(media.Album) :
-                    media.Album;
-                List<string> artists = isNotHaveDiacritics == true ?
-                    Diacritics.RemoveDiacriticsForAList(media.Artists) :
-                    media.Artists;
-
-                bool isFoundTitle = title.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0;
-                bool isFoundAlbum = album.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0;
-                bool isFoundArtists = CheckArtistExistsInList(artists, searchText);
-
-                if (isFoundTitle == true || isFoundArtists == true || isFoundAlbum == true)
-                {
-                    result.Add(media);
-                }
-            }
-            return result;
+            AllPlayListChanged?.Invoke(null, EventArgs.Empty);
         }
-        private static bool CheckArtistExistsInList(List<string> listArtists, string searchText)
-        {
-            foreach (var artist in listArtists)
-            {
-                bool isFoundArtists = artist.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0;
-                if (isFoundArtists == true) return true;
-            }
-            return false;
-        }
+
+        //
     }
 }

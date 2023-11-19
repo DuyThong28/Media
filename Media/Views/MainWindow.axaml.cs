@@ -30,7 +30,7 @@ namespace Media.Views
             MediaHelper.UpdatePlayingScreen += MediaHelper_UpdatePlayingScreen;
             MediaHelper.OpenVideoScreen += ListVideoSreenControl_OpenVideoScreen;
             SettingScreenViewModel.OpenSongFolder = ReactiveCommand.Create(() => ChooseSongPath());
-            SettingScreenViewModel.OpenVideoFolder = ReactiveCommand.Create(() => ChooseVideoPath());
+            SettingScreenViewModel.OpenVideoFolder = ReactiveCommand.Create(() => ChooseVideoPath());    
         }
 
         private void ListVideoSreenControl_OpenVideoScreen(object? sender, EventArgs e)
@@ -206,6 +206,5 @@ namespace Media.Views
             (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.listVideos;
             (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.listVideos;
         }
-
     }
 }

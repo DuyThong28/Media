@@ -10,17 +10,29 @@ using System.Threading.Tasks;
 
 namespace Media.ViewModels
 {
-    public class LibraryScreenViewModel:ViewModelBase
+    public class LibraryScreenViewModel : ViewModelBase
     {
         public LibraryScreenViewModel()
         {
-            
+            //
+            ListMedia = new ObservableCollection<Playlist>();
+            //
         }
+        //
+        private ObservableCollection<Playlist> listMedia;
+
+        public ObservableCollection<Playlist> ListMedia
+        {
+            get => listMedia;
+            set => this.RaiseAndSetIfChanged(ref listMedia, value);
+        }
+        //
+        /*
         private List<Playlist> listMedia;
         //private Playlist selectedPlaylist;
         public List<Playlist> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
     
-        //public Playlist SelectedPlaylist { get => selectedPlaylist;}
+        //public Playlist SelectedPlaylist { get => selectedPlaylist;}*/
         public ReactiveCommand<Unit, Unit> newPlayListCommand = ReactiveCommand.Create(() => { });
 
     }
