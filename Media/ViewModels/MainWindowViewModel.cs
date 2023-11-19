@@ -31,19 +31,26 @@ namespace Media.ViewModels
             PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
-            Playlist playlist = new Playlist() { ListMedia = (MediaHelper.listVideos).Concat(MediaHelper.listSongs).ToList(), PlayListName = "NewJeans 1st EP'New Jeans", BackroundImageFileName = @"C:\Users\duyth\Downloads\New_Jeans_(EP).jpg" };
-            Playlist playlist2 = new Playlist() { ListMedia = (MediaHelper.listVideos), PlayListName = "Blackpink", BackroundImageFileName = @"C:\Users\duyth\Downloads\maxresdefault.jpg" };
-            Playlist playlist3 = new Playlist() { ListMedia = (MediaHelper.listSongs), PlayListName = "Itzy Dalla Dalla", BackroundImageFileName = @"C:\Users\duyth\Downloads\Itzy.jpg" };
-            MediaHelper.AddPlayList(playlist);
-            MediaHelper.AddPlayList(playlist2);
-            MediaHelper.AddPlayList(playlist3);
             SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
-            LibraryScreenViewModel.ListMedia = MediaHelper.AllPlayList;
+            var ListMedia = new ObservableCollection<Playlist>(MediaHelper.AllPlayList);
+            LibraryScreenViewModel.ListMedia = ListMedia;
             HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.listVideos;
+            PlayMedia._libVlc = _libVlc;
+            PlayMedia.MediaPlayer = MediaPlayer;
+            //
+            MediaHelper.AllPlayListChanged += MediaHelper_AllPlayListChanged;
+            //
         }
+        //
+        private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)
+        {
+            var ListMedia = new ObservableCollection<Playlist>(MediaHelper.AllPlayList);
+            LibraryScreenViewModel.ListMedia = ListMedia;
+        }
+        //
         public MediaControlViewModel MediaControlViewModel { get; set; } = new MediaControlViewModel();
         public HomeScreenViewModel HomeScreenViewModel { get; set; } = new HomeScreenViewModel();
         public ListMediaScreenViewModel ListMediaScreenViewModel { get; set; } = new ListMediaScreenViewModel();

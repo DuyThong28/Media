@@ -30,6 +30,7 @@
 					 Padding="10,5,10,5"
 					 CornerRadius="5"
 					 HorizontalAlignment="Left"
+					 Click="AddAlbum_Click"
 								>
 						<Button.Styles>
 							<Style Selector="Button:pointerover">

@@ -10,40 +10,30 @@ using System.Threading.Tasks;
 
 namespace Media.ViewModels
 {
-    public class LibraryScreenViewModel:ViewModelBase
+    public class LibraryScreenViewModel : ViewModelBase
     {
         public LibraryScreenViewModel()
         {
-            PlayPlayListCommand = ReactiveCommand.Create<Playlist>(PlayPlaylist);
-            MediaHelper.UpdateLibraryScreen += MediaHelper_UpdateLibraryScreen;
+            //
+            ListMedia = new ObservableCollection<Playlist>();
+            //
         }
+        //
+        private ObservableCollection<Playlist> listMedia;
 
-        private void LibraryScreenViewModel_PlayPlayListEvent(object? sender, EventArgs e)
+        public ObservableCollection<Playlist> ListMedia
         {
-            SelectedPlaylist = sender as Playlist;
+            get => listMedia;
+            set => this.RaiseAndSetIfChanged(ref listMedia, value);
         }
-
+        //
+        /*
         private List<Playlist> listMedia;
         private Playlist selectedPlaylist;
         public List<Playlist> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
     
-        public Playlist SelectedPlaylist { get => selectedPlaylist; set => this.RaiseAndSetIfChanged(ref selectedPlaylist, value); }
-        public ReactiveCommand<Playlist, Unit> PlayPlayListCommand { get; set; } 
-        private void PlayPlaylist(Playlist playlist)
-        {
-            SelectedPlaylist = playlist;
-            if (MediaHelper.playListPlayingId == SelectedPlaylist.PlayListID)
-            {
-                if (PlayMedia.media != null)
-                {
-                    PlayMedia.media.PlayMediaCommand();
-                }
-            }
-            else
-            {
-                MediaHelper.PlayThePlaylist(SelectedPlaylist);
-            }
-        }
+        //public Playlist SelectedPlaylist { get => selectedPlaylist;}*/
+        public ReactiveCommand<Unit, Unit> newPlayListCommand = ReactiveCommand.Create(() => { });
 
         private void MediaHelper_UpdateLibraryScreen(object? sender, EventArgs e)
         {

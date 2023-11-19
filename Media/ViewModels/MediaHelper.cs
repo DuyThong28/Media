@@ -61,6 +61,7 @@ namespace Media.ViewModels
             }
             allPlayList.Add(playlist);
             database.InsertPlaylist(playlist);
+            OnAllPlayListChanged();
         }
 
         public static void DeletePlayList(Playlist playlist)
@@ -71,6 +72,7 @@ namespace Media.ViewModels
                 database.DeletePlaylist(allPlayList[index].PlayListID);
                 allPlayList.RemoveAt(index);
             }
+            OnAllPlayListChanged();
         }
         public static void DeleteMediaFromPlaylist(string mediaPath, string playlistID)
         {
@@ -87,7 +89,7 @@ namespace Media.ViewModels
             set => playQueue = value;
             get => playQueue;
         }
-        public static ReactiveCommand<Unit,Unit> newCommand { get; set; }
+        public static ReactiveCommand<Unit, Unit> newCommand { get; set; }
 
         public static List<int> ListIndexPlayQueue
         {
@@ -225,7 +227,7 @@ namespace Media.ViewModels
             }
             catch
             {
-                
+
             }
 
             foreach (string filePath in filePaths)
@@ -256,8 +258,8 @@ namespace Media.ViewModels
         {
             add { updateListMediaScreen += value; }
             remove { updateListMediaScreen -= value; }
-        }  
-        
+        }
+
         public static event EventHandler updatePlayingScreen;
         public static event EventHandler UpdatePlayingScreen
         {
@@ -292,7 +294,7 @@ namespace Media.ViewModels
             {
                 updateListMediaScreen(sender, new EventArgs());
             }
-            if(updatePlayingScreen != null)
+            if (updatePlayingScreen != null)
             {
                 updatePlayingScreen(sender, new EventArgs());
             }
@@ -317,7 +319,6 @@ namespace Media.ViewModels
                 }
                 media.PlayMediaCommand();
 
-            }
         }
 
         public static MediaItem selectPlayingItem(List<MediaItem> listMedia)
@@ -354,5 +355,14 @@ namespace Media.ViewModels
             }
             return selectedItem;
         }
+        //
+        public static event EventHandler AllPlayListChanged;
+
+        private static void OnAllPlayListChanged()
+        {
+            AllPlayListChanged?.Invoke(null, EventArgs.Empty);
+        }
+
+        //
     }
 }
