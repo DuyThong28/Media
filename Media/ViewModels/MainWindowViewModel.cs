@@ -27,6 +27,8 @@ namespace Media.ViewModels
 
         public MainWindowViewModel()
         {
+            PlayMedia._libVlc = _libVlc;
+            PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
             var ListMedia = new ObservableCollection<Playlist>(MediaHelper.AllPlayList);

@@ -1,5 +1,7 @@
 using Avalonia.Controls;
 using Media.Models;
+using Media.ViewModels;
+using System.Numerics;
 
 namespace Media.Views
 {
@@ -8,14 +10,18 @@ namespace Media.Views
         public PlaylistScreenControl()
         {
             InitializeComponent();
+            listMedia.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
         }
 
-        private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        private void ScrollViewer_ScrollChanged(object? sender, Avalonia.Controls.ScrollChangedEventArgs e)
         {
-            MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
-            if (media != null)
+            double Y = (sender as ScrollViewer).Offset.Y;
+            if (Y > 320)
             {
-                media.PlayMediaCommand();
+                playBtn.IsVisible = true;
+            } else
+            {
+                playBtn.IsVisible = false;
             }
         }
     }

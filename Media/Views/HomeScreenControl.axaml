@@ -35,7 +35,26 @@
 								<RowDefinition Height="40"></RowDefinition>
 								<RowDefinition></RowDefinition>
 							</Grid.RowDefinitions>
-							<Label Grid.Row="0"   FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Bài hát</Label>
+							<Grid Grid.Row="0">
+								<Label HorizontalAlignment="Left" FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Bài hát</Label>
+								<Button HorizontalAlignment="Right" Click="Button_Click_1">
+									<Button.Styles>
+										<Style Selector="Button">
+											<Setter Property="Template">
+												<ControlTemplate>
+													<Panel>
+														<Label x:Name="PART_ContentPresenter"
+																		  Content="{TemplateBinding Content}"
+																		  ContentTemplate="{Binding }"
+																		  Margin="{TemplateBinding Padding}"/>
+													</Panel>
+												</ControlTemplate>
+											</Setter>
+										</Style>
+									</Button.Styles>
+									<Label FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Xem tất cả</Label>
+								</Button>
+							</Grid>
 							<ListBox  Grid.Row="1"
 									 Name="listMusic"
 										Background="Transparent"
@@ -91,8 +110,26 @@
 								<RowDefinition Height="40"></RowDefinition>
 								<RowDefinition></RowDefinition>
 							</Grid.RowDefinitions>
-							<Label Grid.Row="0"   Margin="5,0,5,0" Padding="10,0,0,0" FontSize="17" VerticalAlignment="Center" FontWeight="Bold">Video</Label>
-							<ListBox Grid.Row="1"
+							<Grid Grid.Row="0">
+								<Label HorizontalAlignment="Left" FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Video</Label>
+								<Button HorizontalAlignment="Right" Click="Button_Click">
+									<Button.Styles>
+										<Style Selector="Button">
+											<Setter Property="Template">
+												<ControlTemplate>
+													<Panel>
+														<Label x:Name="PART_ContentPresenter"
+																		  Content="{TemplateBinding Content}"
+																		  ContentTemplate="{Binding }"
+																		  Margin="{TemplateBinding Padding}"/>
+													</Panel>
+												</ControlTemplate>
+											</Setter>
+										</Style>
+									</Button.Styles>
+									<Label FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Xem tất cả</Label>
+								</Button>
+							</Grid>							<ListBox Grid.Row="1"
 									 Name="listBoxVideo"
 										Background="Transparent"
 									  ItemsSource="{Binding ListVideos}"

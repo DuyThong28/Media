@@ -10,6 +10,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using DynamicData;
+using LibVLCSharp.Shared;
 using Media.Models;
 using Media.Views;
 using ReactiveUI;
@@ -24,11 +25,18 @@ namespace Media.ViewModels
         private static string videoPathFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         private static List<MediaItem> playQueue = new List<MediaItem>();
         private static List<int> listIndexDefalt = new List<int>();
-        public static bool isPlayingPlaylist = true;
+        public static bool isPlayingPlaylist = false;
         public static string playListPlayingId = null;
         private static List<Playlist> allPlayList = database.QueryAllPlaylists();
         public static List<MediaItem> listSongs = new List<MediaItem>();
         public static List<MediaItem> listVideos = new List<MediaItem>();
+        public static List<MediaItem> allMedias = new List<MediaItem>();
+
+        public static List<MediaItem> AllMedias
+        {
+            get => allMedias;
+            set => allMedias = value;
+        }
         public static List<Playlist> AllPlayList
         {
             get
@@ -134,11 +142,19 @@ namespace Media.ViewModels
         public static void PlayThePlaylist(List<MediaItem> pl)
         {
             if (pl.Count == 0) return;
-            isPlayingPlaylist = true;
+            isPlayingPlaylist = false;
+            playListPlayingId = null;
             playQueue.Clear();
             playQueue = new List<MediaItem>(pl);
             PlayMedia.media = MediaHelper.PlayQueue[0];
             PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
+            if (PlayMedia.media.MediaTypes != TagLib.MediaTypes.Audio)
+            {
+                if (openVideoScreen != null)
+                {
+                    openVideoScreen(PlayMedia.media, new EventArgs());
+                }
+            }
             PlayMedia.playSong();
         }
         public static void PlayThePlaylist(Playlist pl)
@@ -149,6 +165,13 @@ namespace Media.ViewModels
             playQueue.Clear();
             playQueue = new List<MediaItem>(pl.ListMedia);
             PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
+            if (PlayMedia.media.MediaTypes != TagLib.MediaTypes.Audio)
+            {
+                if (openVideoScreen != null)
+                {
+                    openVideoScreen(PlayMedia.media, new EventArgs());
+                }
+            }
             PlayMedia.playSong();
         }
 
@@ -213,6 +236,9 @@ namespace Media.ViewModels
             {
                 listMedia.Add(item: new MediaItem(filePath));
             }
+            AllMedias.Clear();
+            AllMedias = new List<MediaItem>(MediaHelper.listSongs);
+            AllMedias.AddRange(MediaHelper.listVideos);
         }
 
 
@@ -241,6 +267,13 @@ namespace Media.ViewModels
         {
             add { updatePlayingScreen += value; }
             remove { updatePlayingScreen -= value; }
+        }  
+        
+        public static event EventHandler updateLibraryScreen;
+        public static event EventHandler UpdateLibraryScreen
+        {
+            add { updateLibraryScreen += value; }
+            remove { updateLibraryScreen -= value; }
         }
 
         public static event EventHandler openVideoScreen;
@@ -267,6 +300,10 @@ namespace Media.ViewModels
             {
                 updatePlayingScreen(sender, new EventArgs());
             }
+            if (updateLibraryScreen != null)
+            {
+                updateLibraryScreen(sender, new EventArgs());
+            }
         }
 
 
@@ -275,7 +312,6 @@ namespace Media.ViewModels
             MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
             if (media != null)
             {
-                media.PlayMediaCommand();
                 if (media.MediaTypes != TagLib.MediaTypes.Audio)
                 {
                     if (openVideoScreen != null)
@@ -283,7 +319,7 @@ namespace Media.ViewModels
                         openVideoScreen(sender, new EventArgs());
                     }
                 }
-            }
+                media.PlayMediaCommand();
 
         }
 
@@ -294,6 +330,30 @@ namespace Media.ViewModels
             {
                 selectedItem = listMedia.Cast<MediaItem>().FirstOrDefault(item => item.FilePath == PlayMedia.Path);
 
+            }
+            return selectedItem;
+        }
+        
+        public static MediaItem selectPlaylistItem(Playlist playlist)
+        {
+            MediaItem selectedItem = null;
+            if (MediaHelper.isPlayingPlaylist==true&&MediaHelper.playListPlayingId==playlist.PlayListID)
+            {
+                if (playlist.ListMedia != null)
+                {
+                    selectedItem = playlist.ListMedia.Cast<MediaItem>().FirstOrDefault(item => item.FilePath == PlayMedia.Path);
+
+                }
+            }
+            return selectedItem;
+        }
+
+        public static Playlist selectPlaylist(List<Playlist> list)
+        {
+            Playlist selectedItem = null;
+            if (list != null)
+            {
+               selectedItem = list.Cast<Playlist>().FirstOrDefault(item => item.PlayListID == MediaHelper.playListPlayingId);
             }
             return selectedItem;
         }

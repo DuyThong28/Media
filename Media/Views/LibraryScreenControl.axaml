@@ -21,6 +21,7 @@
 					<RowDefinition Height="auto"></RowDefinition>
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
+				<Button Name="playBtn" Command="{Binding PlayPlayListCommand}" IsVisible="False">PlayPlaylist</Button>
 				<Grid Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
 					<Label   FontSize="20" FontWeight="Bold">THƯ VIỆN</Label>
 				</Grid>
@@ -55,59 +56,63 @@
 					</Button>
 				</Grid>
 				<ScrollViewer Grid.Row="2" Background="Transparent" Padding="10,0,20,0" Margin="0,10,0,10">
-					<ListBox Name="lb" Grid.Row="1"
-							Background="Transparent"
-							ItemsSource="{Binding ListMedia}"
-							 DoubleTapped="ListBox_DoubleTapped"
+							<ListBox Name="lb" Grid.Row="1"
+									Background="Transparent"
+									ItemsSource="{Binding ListMedia}"
+									 SelectedItem="{Binding SelectedPlaylist}"
+									 DoubleTapped="ListBox_DoubleTapped"
 								>
-						<ListBox.Styles>
-							<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
-								<Setter Property="Background" Value="Transparent"></Setter>
-								<Setter	Property="CornerRadius" Value="15"></Setter>
-							</Style>
-							<Style Selector="ListBoxItem:selected/template/ContentPresenter">
-								<Setter Property="Background" Value="Transparent"></Setter>
-								<Setter	Property="CornerRadius" Value="15"></Setter>
-							</Style>
-						</ListBox.Styles>
-						<ListBox.ItemsPanel>
-							<ItemsPanelTemplate>
-								<WrapPanel/>
-							</ItemsPanelTemplate>
-						</ListBox.ItemsPanel>
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<views:PlaylistItemTC PlaylistName="{Binding PlayListName}" CountMedias="{Binding ListMedia.Count}" ImageSource="{Binding BackGroundImage}" >
-									<views:PlaylistItemTC.ContextMenu>
-										<ContextMenu>
-											<MenuItem Header="Phát">
-												<MenuItem.Icon>
-													<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
-												</MenuItem.Icon>
-											</MenuItem>
-											<MenuItem Header="Phát tiếp theo">
-												<MenuItem.Icon>
-													<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
-												</MenuItem.Icon>
-											</MenuItem>
-											<MenuItem Header="Thêm vào">
-												<MenuItem.Icon>
-													<PathIcon Width="20" Height="20" Data="{StaticResource add_regular}" />
-												</MenuItem.Icon>
-												<MenuItem Header="Phát hàng đợi"/>
-
-											</MenuItem>
-											<MenuItem Header="Loại bỏ" Click="DeleteAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
-												<MenuItem.Icon>
-													<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
-												</MenuItem.Icon>
-											</MenuItem>
-										</ContextMenu>
-									</views:PlaylistItemTC.ContextMenu>
-								</views:PlaylistItemTC>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
+								<ListBox.Styles>
+									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
+										<Setter Property="Background" Value="Transparent"></Setter>
+									</Style>
+									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
+										<Setter Property="Background" Value="Transparent"></Setter>
+										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"></Setter>
+									</Style>
+								</ListBox.Styles>
+								<ListBox.ItemsPanel>
+									<ItemsPanelTemplate>
+										<WrapPanel/>
+									</ItemsPanelTemplate>
+								</ListBox.ItemsPanel>
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<views:PlaylistItemTC PlaylistName="{Binding PlayListName}" 
+															  CountMedias="{Binding ListMedia.Count}" 
+											ImageSource="/Assets/dung_yeu_nua_em_met_roi.png" 
+											Command="{Binding ElementName=playBtn, Path=Command}" 
+											CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+											<views:PlaylistItemTC.ContextMenu>
+												<ContextMenu>
+													<MenuItem Header="Phát">
+														<MenuItem.Icon>
+															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
+														</MenuItem.Icon>
+													</MenuItem>
+													<MenuItem Header="Phát tiếp theo">
+														<MenuItem.Icon>
+															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
+														</MenuItem.Icon>
+													</MenuItem>
+													<MenuItem Header="Thêm vào">
+														<MenuItem.Icon>
+															<PathIcon Width="20" Height="20" Data="{StaticResource add_regular}" />
+														</MenuItem.Icon>
+														<MenuItem Header="Phát hàng đợi"/>
+														<MenuItem Header="The Album"/>
+													</MenuItem>
+													<MenuItem Header="Loại bỏ">
+														<MenuItem.Icon>
+															<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
+														</MenuItem.Icon>
+													</MenuItem>
+												</ContextMenu>
+											</views:PlaylistItemTC.ContextMenu>
+										</views:PlaylistItemTC>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
 				</ScrollViewer>
 			</Grid>
 		</Grid>

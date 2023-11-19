@@ -75,7 +75,7 @@
 				  </Grid>
 				  <TextBlock x:Name="playlistName" Grid.Row="0"
 						 HorizontalAlignment="Stretch"
-						TextTrimming="CharacterEllipsis"
+						TextWrapping="WrapWithOverflow"
 						 VerticalAlignment="Bottom" FontSize="14" FontWeight="Medium"
 						 Text="{TemplateBinding PlaylistName}">
 					  <TextBlock.Styles>
@@ -87,7 +87,12 @@
 						  </Style>
 					  </TextBlock.Styles>
 				  </TextBlock>
-				  <TextBlock x:Name="countMedias" Grid.Row="1" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="14" TextTrimming="CharacterEllipsis">
+				  <TextBlock x:Name="countMedias"
+							 Grid.Row="1" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"
+							 Opacity="0.5" 
+							 HorizontalAlignment="Stretch"
+							 VerticalAlignment="Top" FontSize="14"
+								TextWrapping="WrapWithOverflow">
 					  <Run Text="{TemplateBinding CountMedias}"></Run>
 					  <Run Text="mục"></Run>
 				  </TextBlock>

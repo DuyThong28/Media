@@ -71,7 +71,7 @@
 										</ListBox.Styles>
 										<ListBox.ItemTemplate>
 											<DataTemplate>
-												<views:MusicRowTC AuthorName="{Binding IsPlay}"
+												<views:MusicRowTC AuthorName="{Binding ArtistsString}"
 															  MediaName="{Binding Title}"
 															  ImageSource="{Binding Image}"
 															  DurationText="{Binding DurationText}"
