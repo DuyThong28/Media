@@ -80,7 +80,7 @@
 									<DataTemplate>
 										<views:PlaylistItemTC PlaylistName="{Binding PlayListName}" 
 															  CountMedias="{Binding ListMedia.Count}" 
-											ImageSource="/Assets/dung_yeu_nua_em_met_roi.png" 
+											ImageSource="{Binding BackGroundImage}" 
 											Command="{Binding ElementName=playBtn, Path=Command}" 
 											CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 											<views:PlaylistItemTC.ContextMenu>

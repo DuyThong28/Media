@@ -97,7 +97,7 @@
 												<Border.Effect>
 													<DropShadowEffect BlurRadius="20" Color="#9C131313" OffsetX="0" OffsetY="0"/>
 												</Border.Effect>
-												<Image Source="/Assets/dung_yeu_nua_em_met_roi.png" Stretch="UniformToFill">
+												<Image Source="{Binding BackGroundImage}" Stretch="UniformToFill">
 													<Image.Transitions>
 														<Transitions>
 															<DoubleTransition Property="Width" Duration="0:0:0.1"></DoubleTransition>

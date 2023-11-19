@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Media;
 using Media.Models;
 using ReactiveUI;
 
@@ -19,6 +20,13 @@ namespace Media.ViewModels
         private bool isPlay;
         private MediaItem selectedItem;
         private string mainColor = "#4E97D1";
+        private IImage backGroundImage;
+
+        public IImage BackGroundImage
+        {
+            get => backGroundImage;
+            set => this.RaiseAndSetIfChanged(ref backGroundImage, value);
+        }
         public string MainColor
         {
             get => mainColor;
@@ -76,6 +84,7 @@ namespace Media.ViewModels
             ListMedia = Playlist.ListMedia;
             PlayListName = Playlist.PlayListName;
             CountMedia = Playlist.ListMedia.Count.ToString();
+            BackGroundImage = Playlist.BackGroundImage;
             if (playlist.BackroundImageFileName != null)
             {
                 MainColor = ImageHelper.GetDominantColor(Playlist.BackroundImageFileName).ToString();

@@ -32,7 +32,7 @@ namespace Media.ViewModels
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
             SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
-            var ListMedia = new ObservableCollection<Playlist>(MediaHelper.AllPlayList);
+            var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);
             LibraryScreenViewModel.ListMedia = ListMedia;
             HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
@@ -47,7 +47,7 @@ namespace Media.ViewModels
         //
         private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)
         {
-            var ListMedia = new ObservableCollection<Playlist>(MediaHelper.AllPlayList);
+            var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);
             LibraryScreenViewModel.ListMedia = ListMedia;
         }
         //
