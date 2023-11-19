@@ -18,6 +18,12 @@ namespace Media.ViewModels
         private Playlist playlist;
         private bool isPlay;
         private MediaItem selectedItem;
+        private string mainColor = "#4E97D1";
+        public string MainColor
+        {
+            get => mainColor;
+            set=> this.RaiseAndSetIfChanged(ref mainColor, value);  
+        }
 
         public ReactiveCommand<Unit, Unit> PlayMediaCommand { get; private set; }
         public ReactiveCommand<Unit, Unit> BackCommand { get; private set; }
@@ -52,7 +58,7 @@ namespace Media.ViewModels
 
         private void UpdateMediaControl(object sender, EventArgs e)
         {
-            if(playlist != null)
+            if (playlist != null)
             {
                 if (MediaHelper.isPlayingPlaylist == true && MediaHelper.playListPlayingId == playlist.PlayListID)
                 {
@@ -70,6 +76,10 @@ namespace Media.ViewModels
             ListMedia = Playlist.ListMedia;
             PlayListName = Playlist.PlayListName;
             CountMedia = Playlist.ListMedia.Count.ToString();
+            if (playlist.BackroundImageFileName != null)
+            {
+                MainColor = ImageHelper.GetDominantColor(Playlist.BackroundImageFileName).ToString();
+            }
         }
 
         private void PlayPlaylist()

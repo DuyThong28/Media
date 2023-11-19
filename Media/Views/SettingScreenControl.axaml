@@ -33,22 +33,15 @@
 							<Label Grid.Row="0" Name="lib"  FontSize="17" VerticalAlignment="Center" FontWeight="Bold">Thư viện</Label>
 							<StackPanel Grid.Row="1" Spacing="10">
 								<views:SettingItemTC ImageSource="/Assets/Icons/folder-128.png"
-													 SettingContent="Music library location"
-													 ButtonContent="Add folder"
+													 SettingContent="Vị trí thư viện nhạc"
+													 ButtonContent="Thêm thư mục"
 													 Command="{Binding OpenSongFolder}"
 												 />
 								<views:SettingItemTC ImageSource="/Assets/Icons/folder-128.png"
-													 SettingContent="Video library location"
-													 ButtonContent="Add folder"
+													 SettingContent="Vị trí thư viện video"
+													 ButtonContent="Thêm thư mục"
 													 Command="{Binding OpenVideoFolder}"/>
 							</StackPanel>
-						</Grid>
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="40"></RowDefinition>
-								<RowDefinition></RowDefinition>
-							</Grid.RowDefinitions>
-							<Label Grid.Row="0" Margin="5,0,5,0" FontSize="17" VerticalAlignment="Center" FontWeight="Bold">Cá nhân hóa</Label>
 						</Grid>
 					</StackPanel>
 				</ScrollViewer>

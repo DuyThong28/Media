@@ -7,53 +7,71 @@
         mc:Ignorable="d" d:DesignWidth="1250" d:DesignHeight="850"
         x:Class="Media.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="avares://Media/Assets/Media.ico"
 		FontFamily="Open Sans"
 		xmlns:vlc="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
         Title="Media"
-		Tag="#138673"
+		Tag="#1ED760"
+		Name="mainWindow"
+		MinHeight="470"
+		MinWidth="840"
 		WindowState="Maximized"
+		Background="Black"
 		WindowStartupLocation="CenterScreen"
 		>
 	<Design.DataContext>
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
 	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition></RowDefinition>
-			<RowDefinition Height="90"></RowDefinition>
-		</Grid.RowDefinitions>
-		<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" Opacity="0.3"></Border>
-		<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" Opacity="0.8"></Border>
-		<Grid Name="mainScreen" Grid.Row="0" IsVisible="True">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="250"></ColumnDefinition>
-				<ColumnDefinition></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			
-			<views:NavBarControl x:Name="navBarControl" Grid.Column="0" DataContext="{Binding NavBarControlViewModel}"/>
-			<Grid Grid.Column="1">
-				<views:ListVideoSreenControl x:Name="videoScreen" DataContext="{Binding ListVideoScreenViewModel}" IsVisible="False"/>
-				<views:ListMediaScreenControl x:Name="musicScreen" DataContext="{Binding ListMediaScreenViewModel}" IsVisible="False"/>
-				<views:LibraryScreenControl x:Name="libraryScreen" DataContext="{Binding LibraryScreenViewModel}" IsVisible="False"/>
-				<views:HomeScreenControl x:Name="homeScreen" DataContext="{Binding HomeScreenViewModel}" IsVisible="True"/>
-				<views:PlaylistScreenControl x:Name="playlistScreen" DataContext="{Binding PlaylistScreenViewModel}" IsVisible="False"/>
-				<views:SettingScreenControl x:Name="settingScreen" DataContext="{Binding SettingScreenViewModel}" IsVisible="False"/>
-				<views:SearchScreenControl x:Name="searchScreen" DataContext="{Binding SearchScreenViewModel}" IsVisible="False"/>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition></RowDefinition>
+				<RowDefinition Height="90"></RowDefinition>
+			</Grid.RowDefinitions>
+			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" Opacity="0.8"></Border>
+			<Grid Name="mainScreen" Grid.Row="0" IsVisible="True">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="250"></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+
+				<views:NavBarControl x:Name="navBarControl" Grid.Column="0" DataContext="{Binding NavBarControlViewModel}"/>
+				<Grid Grid.Column="1">
+					<views:ListVideoSreenControl x:Name="videoScreen" DataContext="{Binding ListVideoScreenViewModel}" IsVisible="False"/>
+					<views:ListMediaScreenControl x:Name="musicScreen" DataContext="{Binding ListMediaScreenViewModel}" IsVisible="False"/>
+					<views:LibraryScreenControl x:Name="libraryScreen" DataContext="{Binding LibraryScreenViewModel}" IsVisible="False"/>
+					<views:HomeScreenControl x:Name="homeScreen" DataContext="{Binding HomeScreenViewModel}" IsVisible="True"/>
+					<views:PlaylistScreenControl x:Name="playlistScreen" DataContext="{Binding PlaylistScreenViewModel}" IsVisible="False"/>
+					<views:SettingScreenControl x:Name="settingScreen" DataContext="{Binding SettingScreenViewModel}" IsVisible="False"/>
+					<views:SearchScreenControl x:Name="searchScreen" DataContext="{Binding SearchScreenViewModel}" IsVisible="False"/>
+				</Grid>
+			</Grid>
+
+			<Grid Grid.Row="0" Name="mainPlayingScreen" IsVisible="False">
+				<views:PlayingScreenControl x:Name="playingScreen" DataContext="{Binding PlayingScreenViewModel}"/>
+			</Grid>
+
+			<Grid Grid.Row="1">
+				<views:MediaControl x:Name="mediaControl"  DataContext="{Binding MediaControlViewModel}" IsEnabled="False"/>
+
 			</Grid>
 		</Grid>
 
-		<Grid Grid.Row="0" Name="mainPlayingScreen" IsVisible="False">
-			<views:PlayingScreenControl x:Name="playingScreen" DataContext="{Binding PlayingScreenViewModel}"/>
-			<Grid Name="videoPlayingScreen" IsVisible="False">
-				<vlc:VideoView MediaPlayer="{Binding MediaPlayer}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-				</vlc:VideoView>
+		<Grid Name="videoPlayingScreen" IsVisible="True">
+			<Grid Name="videoDisplay" IsVisible="True">
+				<vm:VideoView x:Name="VideoViewer"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+					<Panel
+					VerticalAlignment="Bottom"
+					Name="controlPanel"
+					IsVisible="True"
+					Height="90">
+						<views:MediaControl x:Name="videoControl"  DataContext="{Binding ElementName=mediaControl, Path=DataContext}"/>
+					</Panel>
+				</vm:VideoView>
 			</Grid>
-		</Grid>
-		
-		<Grid Grid.Row="1">
-			<views:MediaControl x:Name="mediaControl"  DataContext="{Binding MediaControlViewModel}" IsEnabled="False"/>
+
 		</Grid>
 	</Grid>
+	
 	
 </Window>

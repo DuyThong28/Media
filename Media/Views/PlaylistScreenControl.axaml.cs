@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Media;
 using Media.Models;
 using Media.ViewModels;
 using System.Numerics;
@@ -11,6 +12,7 @@ namespace Media.Views
         {
             InitializeComponent();
             listMedia.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
+            //reg.Fill = new SolidColorBrush(ImageHelper.GetDominantColor(@"C:\Users\duyth\Downloads\i'm back.png"));
         }
 
         private void ScrollViewer_ScrollChanged(object? sender, Avalonia.Controls.ScrollChangedEventArgs e)

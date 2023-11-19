@@ -21,7 +21,7 @@ namespace Media.ViewModels
     {
         public static MainWindowViewModel Instance { get; set; }
 
-        public readonly LibVLC _libVlc = new LibVLC();
+        public readonly LibVLC _libVlc = new LibVLC(enableDebugLogs: true);
         public MediaPlayer MediaPlayer { get; set; } = new MediaPlayer(new LibVLC());
         public LibVLCSharp.Shared.Media media;
 
@@ -31,9 +31,9 @@ namespace Media.ViewModels
             PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
-            Playlist playlist = new Playlist() { ListMedia = (MediaHelper.listVideos).Concat(MediaHelper.listSongs).ToList(), PlayListName="NewJeans 1st EP'New Jeans" };
-            Playlist playlist2 = new Playlist() { ListMedia = (MediaHelper.listVideos), PlayListName="Itzy The Album" };
-            Playlist playlist3 = new Playlist() { ListMedia = (MediaHelper.listSongs), PlayListName="Get Into The New World" };
+            Playlist playlist = new Playlist() { ListMedia = (MediaHelper.listVideos).Concat(MediaHelper.listSongs).ToList(), PlayListName = "NewJeans 1st EP'New Jeans", BackroundImageFileName = @"C:\Users\duyth\Downloads\New_Jeans_(EP).jpg" };
+            Playlist playlist2 = new Playlist() { ListMedia = (MediaHelper.listVideos), PlayListName = "Blackpink", BackroundImageFileName = @"C:\Users\duyth\Downloads\maxresdefault.jpg" };
+            Playlist playlist3 = new Playlist() { ListMedia = (MediaHelper.listSongs), PlayListName = "Itzy Dalla Dalla", BackroundImageFileName = @"C:\Users\duyth\Downloads\Itzy.jpg" };
             MediaHelper.AddPlayList(playlist);
             MediaHelper.AddPlayList(playlist2);
             MediaHelper.AddPlayList(playlist3);

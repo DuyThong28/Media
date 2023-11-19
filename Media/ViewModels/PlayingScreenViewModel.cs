@@ -12,6 +12,7 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using MyMedia = LibVLCSharp.Shared.Media;
+using Color = Avalonia.Media.Color;
 
 
 namespace Media.ViewModels
@@ -24,13 +25,19 @@ namespace Media.ViewModels
         private string nameAuthor;
         private bool isPlay;
         private List<MediaItem> listMedia;
+        private string backgroundColor;
         public PlayingScreenViewModel()
         {
             if (PlayMedia.timer != null)
             {
                 MediaHelper.updateMediaScreen += UpdateScreen;
             }
-            PlayMediaCommand = ReactiveCommand.Create(() => { });
+            PlayMediaCommand = ReactiveCommand.Create(() => { Play(); });
+        }
+
+        public string BackgroundColor
+        {
+            get { return backgroundColor; } set { this.RaiseAndSetIfChanged(ref backgroundColor, value);}
         }
         public IImage ImageSource
         {
@@ -71,6 +78,7 @@ namespace Media.ViewModels
             IsPlay = PlayMedia.IsPlay;
             ListMedia = MediaHelper.PlayQueue;
             SelectedItem = MediaHelper.selectPlayingItem(ListMedia);
+            //BackgroundColor = ImageHelper.GetDominantColor(ImageSource).ToString();
         }
 
 

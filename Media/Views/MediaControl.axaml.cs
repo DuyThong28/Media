@@ -8,6 +8,7 @@ namespace Media.Views
 {
     public partial class MediaControl : UserControl
     {
+        WindowState prevWindowState { get; set; }
         public MediaControl()
         {
             InitializeComponent();
@@ -86,5 +87,27 @@ namespace Media.Views
         private void Button_Click_3(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
         }
+
+        HotKeyManager k;
+        private void Button_Click_4(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            Window topLevel = MainWindow.GetInstance();
+
+            if (topLevel != null)
+            {
+                if (topLevel.WindowState != WindowState.FullScreen)
+                {
+                    prevWindowState = topLevel.WindowState;
+                    topLevel.WindowState = WindowState.FullScreen;
+                }
+                else
+                {
+                    topLevel.WindowState = prevWindowState;
+                }
+            }
+
+        }
+
+       
     }
 }

@@ -31,14 +31,6 @@
 							 HorizontalAlignment="Left"
 									Command="{Binding PlayMediaCommand}"
 								>
-								<Button.Styles>
-									<Style Selector="Button:pointerover">
-										<Setter Property="Opacity" Value="0.9"/>
-									</Style>
-									<Style Selector="Button:pressed">
-										<Setter Property="Opacity" Value="0.8"/>
-									</Style>
-								</Button.Styles>
 								<StackPanel Orientation="Horizontal">
 									<Image
 										Width="25"

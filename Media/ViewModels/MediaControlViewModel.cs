@@ -140,6 +140,7 @@ namespace Media.ViewModels
                     PlayMedia.stopSong();
                 }
             }
+
         }
 
         private void Play()
@@ -162,13 +163,11 @@ namespace Media.ViewModels
                     {
                         PlayMedia.URL = MediaHelper.PlayQueue[i+1].FilePath;
                         PlayMedia.media = MediaHelper.PlayQueue[i + 1];
-                        PlayMedia.playSong();
                     }
                     else if (i == MediaHelper.PlayQueue.Count - 1 && PlayMedia.Repeat == RepeatMode.All)
                     {
                         PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
                         PlayMedia.media = MediaHelper.PlayQueue[0];
-                        PlayMedia.playSong();
                     }
                     return;
                 }
@@ -185,7 +184,6 @@ namespace Media.ViewModels
                     {
                         PlayMedia.URL = MediaHelper.PlayQueue[i - 1].FilePath;
                         PlayMedia.media = MediaHelper.PlayQueue[i - 1];
-                        PlayMedia.playSong();
                     }
                     return;
                 }

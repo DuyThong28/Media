@@ -115,7 +115,7 @@ namespace Media.ViewModels
                 }
                 if (path != null)
                 {
-                    MediaPlayer.Pause();
+                    //MediaPlayer.Pause();
                     media = new MediaItem(path);
                     _media = new MyMedia(_libVlc, new Uri(path));
                     IsPlay = true;
@@ -132,6 +132,7 @@ namespace Media.ViewModels
                     timer.Start();
                     timer.Interval = new TimeSpan(0, 0, 1);
                     currentTimePlay =0;
+                    _media.Dispose();
                 }
             }
         }
@@ -159,7 +160,6 @@ namespace Media.ViewModels
             IsPlay = false;
             currentTimePlay = 0;
             MediaPlayer?.Dispose();
-            _libVlc?.Dispose();
         }
         public static void pauseSong()
         {
