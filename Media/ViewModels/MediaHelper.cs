@@ -266,7 +266,29 @@ namespace Media.ViewModels
         {
             add { updateLibraryScreen += value; }
             remove { updateLibraryScreen -= value; }
+        }  
+        
+        public static event EventHandler updateHomeScreen;
+        public static event EventHandler UpdateHomeScreen
+        {
+            add { updateHomeScreen += value; }
+            remove { updateHomeScreen -= value; }
+        } 
+        
+        public static event EventHandler updateListMediaScreen;
+        public static event EventHandler UpdateListMediaScreen
+        {
+            add { updateListMediaScreen += value; }
+            remove { updateListMediaScreen -= value; }
         }
+
+        public static event EventHandler updateListVideoScreen;
+        public static event EventHandler UpdateListVideoScreen
+        {
+            add { updateListVideoScreen += value; }
+            remove { updateListVideoScreen -= value; }
+        }
+
 
         public static event EventHandler openVideoScreen;
         public static event EventHandler OpenVideoScreen
@@ -276,10 +298,7 @@ namespace Media.ViewModels
         }
         public static void UpdateScreen(object sender, EventArgs e)
         {
-            if (updateMediaScreen != null)
-            {
-                updateMediaScreen(sender, new EventArgs());
-            }
+   
             if (updatePlaylistScreen != null)
             {
                 updatePlaylistScreen(sender, new EventArgs());
@@ -291,6 +310,31 @@ namespace Media.ViewModels
             if (updateLibraryScreen != null)
             {
                 updateLibraryScreen(sender, new EventArgs());
+            }
+        }
+
+        public static void UpdateMainScreen(object sender, EventArgs e)
+        {
+            if (updateListVideoScreen != null)
+            {
+                updateListVideoScreen(sender, new EventArgs());
+            }
+            if(updateHomeScreen!= null)
+            {
+                updateHomeScreen(sender, new EventArgs());
+            }
+            if(updateListMediaScreen!= null)
+            {
+                updateListMediaScreen(sender, new EventArgs());
+            }
+        }
+
+        
+        public static void UpdateMediaControl(object sender, EventArgs e)
+        {
+            if (updateMediaScreen != null)
+            {
+                updateMediaScreen(sender, new EventArgs());
             }
         }
 
@@ -351,6 +395,7 @@ namespace Media.ViewModels
         private static void OnAllPlayListChanged()
         {
             AllPlayListChanged?.Invoke(null, EventArgs.Empty);
+            UpdateMainScreen(null, new EventArgs());
         }
 
         //

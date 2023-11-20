@@ -26,7 +26,6 @@ namespace Media.ViewModels
 
         private Playlist selectedPlaylist;
         public List<Playlist> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
-    
         private void MediaHelper_UpdateLibraryScreen(object? sender, EventArgs e)
         {
             SelectedPlaylist = MediaHelper.selectPlaylist(ListMedia);
@@ -49,12 +48,6 @@ namespace Media.ViewModels
                 MediaHelper.PlayThePlaylist(SelectedPlaylist);
             }
         }
-
-        private void DeletePlaylist(Playlist playlist)
-        {
-            MediaHelper.DeletePlayList(playlist);
-        }
-
 
     }
 }

@@ -4,6 +4,7 @@ using Media.Models;
 using LibVLCSharp.Shared;
 using MyMedia = LibVLCSharp.Shared.Media;
 using TagLib;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace Media.ViewModels
 {
@@ -128,7 +129,11 @@ namespace Media.ViewModels
                        IsPlayVideo = true;
                     }
                     MediaPlayer.Play(_media);
-                    timer.Tick += MediaHelper.UpdateScreen;
+
+                    if (updateScreen != null)
+                    {
+                        updateScreen(null, new EventArgs());
+                    }
                     timer.Start();
                     timer.Interval = new TimeSpan(0, 0, 1);
                     currentTimePlay =0;
@@ -185,6 +190,13 @@ namespace Media.ViewModels
                 MediaPlayer.Time = position;
                 CurrentTimePlay = position;
             }
+        }
+
+        private static event EventHandler updateScreen;
+        public static event EventHandler UpdateScreen
+        {
+           add { updateScreen += value; }
+            remove { updateScreen -= value; }
         }
 
        
