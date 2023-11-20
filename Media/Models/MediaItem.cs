@@ -15,6 +15,7 @@ using ReactiveUI;
 using System.Reactive;
 using NAudio.Wave;
 using LibVLCSharp.Shared;
+using Media.Views;
 
 namespace Media.Models
 {
@@ -30,6 +31,7 @@ namespace Media.Models
         private MediaTypes mediaType;
         private TagLib.File others;
         private bool isPlay;
+        private bool mediaAdded = false;
         public bool IsPlay
         {
             get { return isPlay; }
@@ -145,10 +147,17 @@ namespace Media.Models
             }
         }
         public TagLib.File Others => others;
-        public ReactiveCommand<Unit, Unit> PlaySongCommand { get; set; }
-
-        public void PlayMediaCommand()
+        public ReactiveCommand<Unit, Unit> PlaySongCommand
         {
+            get; set;
+        }
+        public void PlayMediaCommand()
+        {          
+            if (!MediaAdded)
+            {
+                MediaAdded = true;
+                MediaHelper.PlayQueue.Add(this);
+            }
             if (PlayMedia.Path != this.filePath)
             {
                 IsPlay=true;
@@ -175,6 +184,7 @@ namespace Media.Models
             }
         }
         public string PlaylistID { get => playlistID; set => playlistID = value; }
+        public bool MediaAdded { get => mediaAdded; set => mediaAdded = value; }
 
         public MediaItem(string path)
         {
@@ -216,7 +226,6 @@ namespace Media.Models
                 }
             }
            this.PlaySongCommand = ReactiveCommand.Create(() => { PlayMediaCommand();});
-
         }
 
         public MediaItem()

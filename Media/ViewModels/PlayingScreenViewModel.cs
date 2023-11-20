@@ -24,7 +24,7 @@ namespace Media.ViewModels
         private string songName;
         private string nameAuthor;
         private bool isPlay;
-        private List<MediaItem> listMedia;
+        private List<MediaItem> listMedia;      
         private string backgroundColor;
         public PlayingScreenViewModel()
         {
@@ -84,8 +84,8 @@ namespace Media.ViewModels
             ListMedia = MediaHelper.PlayQueue;
             
         }
-
-
+        
+      
         private MediaItem selectedItem;
         public MediaItem SelectedItem
         {
@@ -95,8 +95,6 @@ namespace Media.ViewModels
                 this.RaiseAndSetIfChanged(ref selectedItem, value);
             }
         }
-
        
-
     }
 }
