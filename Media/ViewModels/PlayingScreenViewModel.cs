@@ -71,14 +71,18 @@ namespace Media.ViewModels
 
         private void UpdateScreen(object sender, EventArgs e)
         {
-            _media = PlayMedia.media;
-            SongName = PlayMedia.media.Title;
-            NameAuthor = PlayMedia.media.ArtistsString;
-            ImageSource = PlayMedia.media.Image;
-            IsPlay = PlayMedia.IsPlay;
-            ListMedia = MediaHelper.PlayQueue;
             SelectedItem = MediaHelper.selectPlayingItem(ListMedia);
-            //BackgroundColor = ImageHelper.GetDominantColor(ImageSource).ToString();
+            if(_media!= PlayMedia.media)
+            {
+                _media = PlayMedia.media;
+                SongName = PlayMedia.media.Title;
+                NameAuthor = PlayMedia.media.ArtistsString;
+                ImageSource = PlayMedia.media.Image;
+            }
+            IsPlay = PlayMedia.IsPlay;
+            if(ListMedia!=MediaHelper.PlayQueue)
+            ListMedia = MediaHelper.PlayQueue;
+            
         }
 
 
@@ -86,7 +90,10 @@ namespace Media.ViewModels
         public MediaItem SelectedItem
         {
             get { return selectedItem; }
-            set => this.RaiseAndSetIfChanged(ref selectedItem, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref selectedItem, value);
+            }
         }
 
        

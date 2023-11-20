@@ -101,6 +101,7 @@ namespace Media.ViewModels
         {
             get { return tbVolume; }
             set { this.RaiseAndSetIfChanged(ref tbVolume, value);
+                PlayMedia.Volume = tbVolume;
             }
         }
 
@@ -116,15 +117,17 @@ namespace Media.ViewModels
             IsPlay = PlayMedia.IsPlay;
             if (PlayMedia.MediaPlayer.State == VLCState.Playing)
             {
-                _media = PlayMedia.media;
-                SongName = PlayMedia.media.Title;
-                NameAuthor = PlayMedia.media.ArtistsString;
-                ImageSource = PlayMedia.media.Image;
-                TbMaxValue = PlayMedia.DurationSong;
+                if (_media != PlayMedia.media)
+                {
+                    _media = PlayMedia.media;
+                    SongName = PlayMedia.media.Title;
+                    NameAuthor = PlayMedia.media.ArtistsString;
+                    ImageSource = PlayMedia.media.Image;
+                    TbMaxValue = PlayMedia.DurationSong;
+                    TimeSongEnd = PlayMedia.DurationstringSong;
+                }
                 TbValue = PlayMedia.CurrentPositionSong;
                 TimeSongPlay = PlayMedia.CurrentPositionstringSong;
-                TimeSongEnd = PlayMedia.DurationstringSong;
-                PlayMedia.Volume = tbVolume;
             }
             else if (PlayMedia.MediaPlayer.State == VLCState.Ended)
             {

@@ -17,7 +17,7 @@ namespace Media.ViewModels
             //
             ListMedia = new List<Playlist>();
             PlayPlayListCommand = ReactiveCommand.Create<Playlist>(PlayPlaylist);
-            MediaHelper.UpdateLibraryScreen += MediaHelper_UpdateLibraryScreen;
+            MediaHelper.UpdateLibraryScreen += MediaHelper_UpdateLibraryScreen; 
             //
         }
         //
@@ -48,6 +48,11 @@ namespace Media.ViewModels
             {
                 MediaHelper.PlayThePlaylist(SelectedPlaylist);
             }
+        }
+
+        private void DeletePlaylist(Playlist playlist)
+        {
+            MediaHelper.DeletePlayList(playlist);
         }
 
 

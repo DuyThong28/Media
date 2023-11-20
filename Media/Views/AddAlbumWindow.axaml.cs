@@ -6,6 +6,7 @@ using System.IO;
 using System.Drawing;
 using Media.Models;
 using Media.ViewModels;
+using System.Diagnostics;
 
 namespace Media;
 
@@ -36,7 +37,7 @@ public partial class AddAlbumWindow : Window
                     ms.Position = 0;
                     bmp = new Avalonia.Media.Imaging.Bitmap(ms);
                 }
-                ImageButton.Content = new Avalonia.Controls.Image { Source = bmp };
+                image.Source =  bmp;
                 imagePath = result[0];
             }
         }

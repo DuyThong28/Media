@@ -15,13 +15,8 @@ namespace Media.ViewModels
         public ListVideoScreenViewModel()
         {
             PlayMediaCommand = ReactiveCommand.Create(() => { MediaHelper.PlayThePlaylist(ListVideos); });
-            MediaHelper.UpdateListMediaScreen += MediaHelper_UpdateListMediaScreen;
         }
         private List<MediaItem> listVideos;
-        private void MediaHelper_UpdateListMediaScreen(object? sender, EventArgs e)
-        {
-
-        }
         public List<MediaItem> ListVideos { get => listVideos; set { this.RaiseAndSetIfChanged(ref listVideos, value); } }
         public ReactiveCommand<Unit, Unit> PlayMediaCommand { get; private set; }
     }

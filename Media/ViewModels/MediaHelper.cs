@@ -253,12 +253,6 @@ namespace Media.ViewModels
             add { updatePlaylistScreen += value; }
             remove { updatePlaylistScreen -= value; }
         }
-        public static event EventHandler updateListMediaScreen;
-        public static event EventHandler UpdateListMediaScreen
-        {
-            add { updateListMediaScreen += value; }
-            remove { updateListMediaScreen -= value; }
-        }
 
         public static event EventHandler updatePlayingScreen;
         public static event EventHandler UpdatePlayingScreen
@@ -289,10 +283,6 @@ namespace Media.ViewModels
             if (updatePlaylistScreen != null)
             {
                 updatePlaylistScreen(sender, new EventArgs());
-            }
-            if (updateListMediaScreen != null)
-            {
-                updateListMediaScreen(sender, new EventArgs());
             }
             if (updatePlayingScreen != null)
             {
