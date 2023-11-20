@@ -24,8 +24,7 @@ namespace Media.ViewModels
         private string songName;
         private string nameAuthor;
         private bool isPlay;
-        private List<MediaItem> listMedia;
-        private bool mediaAdded = false;
+        private List<MediaItem> listMedia;      
         private string backgroundColor;
         public PlayingScreenViewModel()
         {
@@ -77,11 +76,6 @@ namespace Media.ViewModels
             NameAuthor = PlayMedia.media.ArtistsString;
             ImageSource = PlayMedia.media.Image;
             IsPlay = PlayMedia.IsPlay;
-            if (!mediaAdded)
-            {
-                MediaHelper.PlayQueue.Add(_media);
-                mediaAdded = true;
-            }
             ListMedia = MediaHelper.PlayQueue;
             SelectedItem = MediaHelper.selectPlayingItem(ListMedia);
             //BackgroundColor = ImageHelper.GetDominantColor(ImageSource).ToString();
@@ -94,7 +88,6 @@ namespace Media.ViewModels
             get { return selectedItem; }
             set => this.RaiseAndSetIfChanged(ref selectedItem, value);
         }
-
-        public bool MediaAdded { get => mediaAdded; set => mediaAdded = value; }
+       
     }
 }

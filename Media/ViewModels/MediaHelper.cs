@@ -32,12 +32,14 @@ namespace Media.ViewModels
         public static List<MediaItem> listSongs = new List<MediaItem>();
         public static List<MediaItem> listVideos = new List<MediaItem>();
         public static List<MediaItem> allMedias = new List<MediaItem>();
+        private static bool mediaAdded = false;
 
         public static List<MediaItem> AllMedias
         {
             get => allMedias;
             set => allMedias = value;
         }
+        public static bool MediaAdded { get => mediaAdded; set => mediaAdded = value; }
         public static List<Playlist> AllPlayList
         {
             get
@@ -349,7 +351,7 @@ namespace Media.ViewModels
             return selectedItem;
         }
 
-        public static Playlist selectPlaylist(ObservableCollection<Playlist> list)
+        public static Playlist selectPlaylist(List<Playlist> list)
             {
                 Playlist selectedItem = null;
                 if (list != null)

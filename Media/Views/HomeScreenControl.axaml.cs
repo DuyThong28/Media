@@ -43,14 +43,49 @@ namespace Media.Views
         }
         private void AddMediaQueue_Click(object sender, RoutedEventArgs e)
         {
+            bool isplay = false;
             if (sender is MenuItem menuItem)
             {             
                 if (menuItem.DataContext is MediaItem mediaItem)
                 {
-                    MediaHelper.PlayQueue.Add(mediaItem);                  
+                    if (!mediaItem.MediaAdded)
+                    {
+                        mediaItem.MediaAdded = true;                                             
+                        for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
+                        {
+                            if (MediaHelper.PlayQueue[i].IsPlay)
+                            {
+                                MediaHelper.PlayQueue.Insert(i + 1, mediaItem);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
+                        {
+                            if (mediaItem.FilePath == MediaHelper.PlayQueue[i].FilePath)
+                            {
+                                isplay = MediaHelper.PlayQueue[i].IsPlay;
+                                if (!isplay)
+                                    MediaHelper.PlayQueue.Remove(MediaHelper.PlayQueue[i]);
+                                break;
+                            }
+                        }
+                        if (!isplay)
+                        {
+                            for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
+                            {
+                                if (MediaHelper.PlayQueue[i].IsPlay)
+                                {
+                                    MediaHelper.PlayQueue.Insert(i + 1, mediaItem);
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }
             }
-
         }
     }
 }
