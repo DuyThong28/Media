@@ -10,6 +10,32 @@
 	<Design.DataContext>
 		<vm:ListMediaScreenViewModel/>
 	</Design.DataContext>
+	<UserControl.Resources>
+		<ControlTheme x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Panel>
+						<Border Background="{TemplateBinding Background}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0.9">
+						</Border>
+						<Border
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0.5">
+						</Border>
+						<ContentPresenter Name="PART_ContentPresenter"
+						  ContentTemplate="{TemplateBinding ContentTemplate}"
+							Content="{TemplateBinding Content}"
+						  FontWeight="{TemplateBinding FontWeight}"
+						  FontSize="{TemplateBinding FontSize}"
+						  Padding="{TemplateBinding Padding}"
+						  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+						  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+					</Panel>
+				</ControlTemplate>
+			</Setter>
+		</ControlTheme>
+	</UserControl.Resources>
 			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
 			 Margin="10" CornerRadius="5" ClipToBounds="True">
 				<Grid>
@@ -31,14 +57,6 @@
 							 HorizontalAlignment="Left"
 									Command="{Binding PlayMediaCommand}"
 								>
-								<Button.Styles>
-									<Style Selector="Button:pointerover">
-										<Setter Property="Opacity" Value="0.9"/>
-									</Style>
-									<Style Selector="Button:pressed">
-										<Setter Property="Opacity" Value="0.8"/>
-									</Style>
-								</Button.Styles>
 								<StackPanel Orientation="Horizontal">
 									<Image
 										Width="25"

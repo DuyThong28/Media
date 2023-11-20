@@ -16,16 +16,28 @@ using NAudio.Wave;
 using Media.Models;
 using Avalonia.Markup.Xaml;
 using LibVLCSharp.Shared;
+using LibVLCSharp.Avalonia;
 
 namespace Media.Views
 {
     public partial class MainWindow : Window
     {
+        private Media.ViewModels.VideoView _videoViewer;
+
+        public MainWindowViewModel viewModel;
+        public static MainWindow _this { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+
+            viewModel = new MainWindowViewModel();
+            DataContext = viewModel;
+            _videoViewer = this.Get<Media.ViewModels.VideoView> ("VideoViewer");
+            _this = this;
+            Opened += MainWindow_Opened;
             navBarControl.NavBarItemSelected += NavBarControl_RadioButtonChecked;
             mediaControl.ButtonClicked += MediaControl_ButtonClicked;
+            videoControl.ButtonClicked += MediaControl_ButtonClicked;
             libraryScreen.SelectPlaylist += LibraryScreen_SelectPlaylist;
             MediaHelper.UpdatePlayingScreen += MediaHelper_UpdatePlayingScreen;
             MediaHelper.OpenVideoScreen += ListVideoSreenControl_OpenVideoScreen;
@@ -34,6 +46,20 @@ namespace Media.Views
             HomeScreenControl.SeeAllSongs += HomeScreenControl_SeeAllSongs;
             HomeScreenControl.SeeAllVideos += HomeScreenControl_SeeAllVideos;
             PlaylistScreenViewModel.BackEvent += PlaylistScreenViewModel_BackEvent;
+        }
+
+        private void MainWindow_Opened(object? sender, System.EventArgs e)
+        {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            if (_videoViewer != null && viewModel.MediaPlayer != null)
+            {
+                _videoViewer.MediaPlayer = PlayMedia.MediaPlayer;
+                _videoViewer.MediaPlayer.SetHandle(_videoViewer.hndl);
+            }
+            videoDisplay.IsVisible = false;
+            controlPanel.IsVisible = false;
+            videoPlayingScreen.IsVisible = false;
         }
 
         private void PlaylistScreenViewModel_BackEvent(object? sender, EventArgs e)
@@ -76,18 +102,21 @@ namespace Media.Views
         {
             mainScreen.IsVisible = false;
             mainPlayingScreen.IsVisible = true;
+            videoPlayingScreen.IsVisible = true;
+            controlPanel.IsVisible = true;
         }
 
         private void MediaHelper_UpdatePlayingScreen(object? sender, EventArgs e)
         {
             if (PlayMedia.IsPlayVideo == true)
             {
-                videoPlayingScreen.IsVisible = true;
+                videoDisplay.IsVisible = true;
                 playingScreen.IsVisible = false;
             }
             else if (PlayMedia.IsPlayVideo == false)
             {
-                videoPlayingScreen.IsVisible = false;
+                videoDisplay.IsVisible = false;
+                controlPanel.IsVisible = false;
                 playingScreen.IsVisible = true;
             }
             if (PlayMedia.IsFirst == true)
@@ -99,10 +128,15 @@ namespace Media.Views
         private void LibraryScreen_SelectPlaylist(object? sender, EventArgs e)
         {
             ListBox listPlaylist = sender as ListBox;
-            Playlist selectedPlaylist = listPlaylist.SelectedItem as Playlist;
-            if (selectedPlaylist.ListMedia != null)
+            Playlist selectedPlaylist;
+            if (listPlaylist != null)
+            {
+                selectedPlaylist = listPlaylist.SelectedItem as Playlist;
+
+            if (selectedPlaylist!=null && selectedPlaylist.ListMedia != null)
             {
                 (playlistScreen.DataContext as PlaylistScreenViewModel).Playlist = selectedPlaylist;
+            }
             }
             homeScreen.IsVisible = false;
             musicScreen.IsVisible = false;
@@ -118,8 +152,11 @@ namespace Media.Views
         {
             mainScreen.IsVisible = !mainScreen.IsVisible;
             mainPlayingScreen.IsVisible = !mainPlayingScreen.IsVisible;
+            videoPlayingScreen.IsVisible = !videoPlayingScreen.IsVisible;
+            if(PlayMedia.IsPlayVideo==true) {
+            controlPanel.IsVisible = !controlPanel.IsVisible;
+            }
         }
-
         private void NavBarControl_RadioButtonChecked(object? sender, EventArgs e)
         {
 
@@ -240,6 +277,11 @@ namespace Media.Views
                 UpdateMedia();
             }
 
+        }
+
+        public static MainWindow GetInstance()
+        {
+                return _this;
         }
 
         public void UpdateMedia()

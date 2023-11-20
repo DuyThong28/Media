@@ -48,5 +48,6 @@ namespace Media.Views
                 MediaHelper.DeletePlayList(playlistToDelete);
             }
         }
+
     }
 }

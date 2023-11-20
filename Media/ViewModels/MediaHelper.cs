@@ -156,7 +156,6 @@ namespace Media.ViewModels
                     openVideoScreen(PlayMedia.media, new EventArgs());
                 }
             }
-            PlayMedia.playSong();
         }
         public static void PlayThePlaylist(Playlist pl)
         {
@@ -173,7 +172,6 @@ namespace Media.ViewModels
                     openVideoScreen(PlayMedia.media, new EventArgs());
                 }
             }
-            PlayMedia.playSong();
         }
 
 

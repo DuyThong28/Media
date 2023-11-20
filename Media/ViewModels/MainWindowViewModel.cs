@@ -21,7 +21,7 @@ namespace Media.ViewModels
     {
         public static MainWindowViewModel Instance { get; set; }
 
-        public readonly LibVLC _libVlc = new LibVLC();
+        public readonly LibVLC _libVlc = new LibVLC(enableDebugLogs: true);
         public MediaPlayer MediaPlayer { get; set; } = new MediaPlayer(new LibVLC());
         public LibVLCSharp.Shared.Media media;
 
@@ -31,7 +31,8 @@ namespace Media.ViewModels
             PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
-            var ListMedia = new ObservableCollection<Playlist>(MediaHelper.AllPlayList);
+            SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
+            var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);
             LibraryScreenViewModel.ListMedia = ListMedia;
             HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
@@ -46,7 +47,7 @@ namespace Media.ViewModels
         //
         private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)
         {
-            var ListMedia = new ObservableCollection<Playlist>(MediaHelper.AllPlayList);
+            var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);
             LibraryScreenViewModel.ListMedia = ListMedia;
         }
         //

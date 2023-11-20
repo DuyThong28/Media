@@ -28,6 +28,32 @@
 			</Setter>
 		</ControlTheme>
 	</UserControl.Resources>
+	<UserControl.Resources>
+		<ControlTheme x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Panel>
+						<Border Background="{TemplateBinding Background}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0.9">
+						</Border>
+						<Border
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0.5">
+						</Border>
+						<ContentPresenter Name="PART_ContentPresenter"
+						  ContentTemplate="{TemplateBinding ContentTemplate}"
+							Content="{TemplateBinding Content}"
+						  FontWeight="{TemplateBinding FontWeight}"
+						  FontSize="{TemplateBinding FontSize}"
+						  Padding="{TemplateBinding Padding}"
+						  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+						  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+					</Panel>
+				</ControlTemplate>
+			</Setter>
+		</ControlTheme>
+	</UserControl.Resources>
 	<Border  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
 			 Margin="10" CornerRadius="5" ClipToBounds="True">
 		<Grid>
@@ -38,99 +64,128 @@
 					<ScrollViewer Background="Transparent" ScrollChanged="ScrollViewer_ScrollChanged">
 						<Grid>
 							<Grid.RowDefinitions>
-								<RowDefinition Height="330"></RowDefinition>
-								<RowDefinition Height="100"></RowDefinition>
+								<RowDefinition Height="430"></RowDefinition>
 								<RowDefinition></RowDefinition>
 							</Grid.RowDefinitions>
 							<Panel Grid.Row="0" ClipToBounds="True">
-								<Image Name="image" Source="/Assets/dung_yeu_nua_em_met_roi.png" Stretch="UniformToFill" Width="30000" Height="30000" VerticalAlignment="Top" HorizontalAlignment="Left"></Image>
-								<Border Opacity="0.3" Background="Black">
-								</Border>
+								<Rectangle Name="reg" Fill="{Binding MainColor}" Stretch="UniformToFill" >
+									<Rectangle.OpacityMask>
+										<LinearGradientBrush StartPoint="50%,100%" EndPoint="50%,50%">
+											<LinearGradientBrush.GradientStops>
+												<GradientStop Offset="0" Color="Transparent"/>
+												<GradientStop Offset="1" Color="Black"/>
+											</LinearGradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Rectangle.OpacityMask>
+								</Rectangle>
 							</Panel>
-							<Border Grid.Row="0" Margin="15,20,20,20">
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="270"></ColumnDefinition>
-										<ColumnDefinition></ColumnDefinition>
-									</Grid.ColumnDefinitions>
+							<Border Grid.Row="0" Background="Black" Opacity="0.3"></Border>
+							<Grid Grid.Row="0">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="330"></RowDefinition>
+									<RowDefinition Height="100"></RowDefinition>
+								</Grid.RowDefinitions>
+								<Border Grid.Row="0" Margin="15,20,20,20">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="270"></ColumnDefinition>
+											<ColumnDefinition></ColumnDefinition>
+										</Grid.ColumnDefinitions>
 
-									<Grid Grid.Column="0"  VerticalAlignment="Bottom" HorizontalAlignment="Center">
-										<Border  CornerRadius="10" ClipToBounds="True" Background="Transparent">
-											<Border.Effect>
-												<DropShadowEffect BlurRadius="100" Color="#9C131313" OffsetX="0" OffsetY="0"/>
-											</Border.Effect>
-											<Image Source="/Assets/dung_yeu_nua_em_met_roi.png" Stretch="UniformToFill">
-												<Image.Transitions>
-													<Transitions>
-														<DoubleTransition Property="Width" Duration="0:0:0.1"></DoubleTransition>
-														<DoubleTransition Property="Height" Duration="0:0:0.1"></DoubleTransition>
-													</Transitions>
-												</Image.Transitions>
+										<Grid Grid.Column="0"  VerticalAlignment="Bottom" HorizontalAlignment="Center">
+											<Border  CornerRadius="10" ClipToBounds="True" Background="Transparent">
+												<Border.Effect>
+													<DropShadowEffect BlurRadius="20" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+												</Border.Effect>
+												<Image Source="{Binding BackGroundImage}" Stretch="UniformToFill">
+													<Image.Transitions>
+														<Transitions>
+															<DoubleTransition Property="Width" Duration="0:0:0.1"></DoubleTransition>
+															<DoubleTransition Property="Height" Duration="0:0:0.1"></DoubleTransition>
+														</Transitions>
+													</Image.Transitions>
+													<Image.Styles>
+														<Style Selector="Image">
+															<Setter Property="Width" Value="250"/>
+															<Setter Property="Height" Value="250"/>
+														</Style>
+														<Style Selector="Image:pointerover">
+															<Setter Property="Width" Value="260"/>
+															<Setter Property="Height" Value="260"/>
+														</Style>
+													</Image.Styles>
+												</Image>
+											</Border>
+										</Grid>
+										<StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="20,0,0,0">
+											<Label    HorizontalContentAlignment="Left" FontSize="18" FontWeight="Medium" Padding="0,0,0,0" >
+												<Label.Effect>
+													<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+												</Label.Effect>
+												Danh sách phát</Label>
+											<TextBlock x:Name="playListName"   HorizontalAlignment="Stretch" FontSize="80" FontWeight="Bold" Padding="0,0,0,0" Margin="-10,10,0,20" Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis">
+												<TextBlock.Effect>
+													<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+												</TextBlock.Effect>
+											</TextBlock>
+											<Label x:Name="countMedias"   HorizontalContentAlignment="Left" FontSize="18" FontWeight="Bold" Padding="0,0,0,0" Content="{Binding CountMedia}">
+												<Label.Effect>
+													<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+												</Label.Effect>
+											</Label>
+										</StackPanel>
+									</Grid>
+								</Border>
+
+								<Grid Grid.Row="1">
+									<Border Background="Black" Opacity="0.2"></Border>
+									<Border BorderBrush="#747474" BorderThickness="0,0,0,1" Margin="20,0,20,0">
+										<Button Background="Transparent" HorizontalAlignment="Left"
+												VerticalAlignment="Center"
+												Command="{Binding PlayMediaCommand}">
+											<Button.Effect>
+												<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="5"/>
+											</Button.Effect>
+											<Image
+													Classes.checked="{Binding !IsPlay}"
+													Classes.unChecked="{Binding IsPlay}">
 												<Image.Styles>
-													<Style Selector="Image">
-														<Setter Property="Width" Value="250"/>
-														<Setter Property="Height" Value="250"/>
+													<Style Selector="Image.checked">
+														<Setter Property="Height" Value="60"></Setter>
+														<Setter Property="Width" Value="60"></Setter>
+														<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
 													</Style>
-													<Style Selector="Image:pointerover">
-														<Setter Property="Width" Value="270"/>
-														<Setter Property="Height" Value="270"/>
+													<Style Selector="Image.checked:pointerover">
+														<Setter Property="Height" Value="63"></Setter>
+														<Setter Property="Width" Value="63"></Setter>
+														<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
+													</Style>
+													<Style Selector="Image.unChecked">
+														<Setter Property="Height" Value="60"></Setter>
+														<Setter Property="Width" Value="60"></Setter>
+														<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
+													</Style>
+													<Style Selector="Image.unChecked:pointerover">
+														<Setter Property="Height" Value="63"></Setter>
+														<Setter Property="Width" Value="63"></Setter>
+														<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
 													</Style>
 												</Image.Styles>
 											</Image>
-										</Border>
-									</Grid>
-									<StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="20,0,0,0">
-										<Label    HorizontalContentAlignment="Left" FontSize="18" FontWeight="Medium" Padding="0,0,0,0" >Danh sách phát</Label>
-
-										<TextBlock x:Name="playListName"   HorizontalAlignment="Stretch" FontSize="80" FontWeight="Bold" Padding="0,0,0,0" Margin="-10,10,0,20" Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis"></TextBlock>
-										<Label x:Name="countMedias"   HorizontalContentAlignment="Left" FontSize="18" FontWeight="Bold" Padding="0,0,0,0" Content="{Binding CountMedia}"></Label>
-									</StackPanel>
+										</Button>
+									</Border>
 								</Grid>
-							</Border>
-							<Grid Grid.Row="1">
-								<Border BorderBrush="#747474" BorderThickness="0,0,0,1" Margin="20,0,20,0">
-									<Button Background="Transparent" HorizontalAlignment="Left"
-											VerticalAlignment="Center"
-											Command="{Binding PlayMediaCommand}">
-										<Button.Effect>
-											<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="5"/>
-										</Button.Effect>
-										<Image
-												Classes.checked="{Binding !IsPlay}"
-												Classes.unChecked="{Binding IsPlay}">
-											<Image.Styles>
-												<Style Selector="Image.checked">
-													<Setter Property="Height" Value="60"></Setter>
-													<Setter Property="Width" Value="60"></Setter>
-													<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
-												</Style>
-												<Style Selector="Image.checked:pointerover">
-													<Setter Property="Height" Value="63"></Setter>
-													<Setter Property="Width" Value="63"></Setter>
-													<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
-												</Style>
-												<Style Selector="Image.unChecked">
-													<Setter Property="Height" Value="60"></Setter>
-													<Setter Property="Width" Value="60"></Setter>
-													<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-												</Style>
-												<Style Selector="Image.unChecked:pointerover">
-													<Setter Property="Height" Value="63"></Setter>
-													<Setter Property="Width" Value="63"></Setter>
-													<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-												</Style>
-											</Image.Styles>
-										</Image>
-									</Button>
-								</Border>
 							</Grid>
-							<ListBox Name="listMedia" Grid.Row="2" Background="Transparent"
+
+							<Border Grid.Row="1" Background="Black" Opacity="0.2"></Border>
+							
+							<ListBox Name="listMedia" Grid.Row="1" Background="Transparent"
 												  ItemsSource="{Binding ListMedia}"
 													SelectedItem="{Binding SelectedItem}"
-												Padding="20,0,20,0">
+												Padding="20,30,20,0">
 								<ListBox.Styles>
 									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
-										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"></Setter>
+										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
 									</Style>
 									<Style Selector="ListBoxItem">
 										<Setter Property="Padding" Value="6,5,5,5"></Setter>
@@ -183,84 +238,87 @@
 								</ListBox.ItemTemplate>
 							</ListBox>
 						</Grid>
+					
 					</ScrollViewer>
 					<Grid Name="header" Height="60"  VerticalAlignment="Top"
 						  Classes.appear="{Binding ElementName=playBtn, Path=IsVisible}"
-						Classes.disappear="{Binding ElementName=playBtn, Path=!IsVisible}"
-						  >
+						Classes.disappear="{Binding ElementName=playBtn, Path=!IsVisible}">
 						<Grid.Styles>
 							<Style Selector="Grid.appear">
-								<Setter Property="Background" Value="#20405A"></Setter>
+								<Setter Property="Background" Value="{Binding ElementName=reg, Path=Fill}"></Setter>
 							</Style>
 							<Style Selector="Grid.disappear">
 								<Setter Property="Background" Value="Transparent"></Setter>
 							</Style>
 						</Grid.Styles>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="55"></ColumnDefinition>
-							<ColumnDefinition Width="65"></ColumnDefinition>
-							<ColumnDefinition></ColumnDefinition>
-						</Grid.ColumnDefinitions>
-						<Button Grid.Column="0" Background="Black" Height="30" Width="30" HorizontalAlignment="Left" Margin="20,0,0,0" 
-								CornerRadius="50" Padding="0" VerticalAlignment="Center" Command="{Binding BackCommand}">
-							<Button.Styles>
-								<Style Selector="Button">
-									<Setter Property="Template">
-										<ControlTemplate>
-											<Panel>
-												<Border 
-														CornerRadius="{TemplateBinding CornerRadius}"
-														Background="Black"
-														Height="{TemplateBinding Height}"
-														Width="{TemplateBinding Width}">
-													<Border.Styles>
-														<Style Selector="Border:pointerover">
-															<Setter Property="Opacity" Value="0.5"></Setter>
-														</Style>
-													</Border.Styles>
-												</Border>
-												<Label x:Name="PART_ContentPresenter"
-																  Content="{TemplateBinding Content}"
+						<Border  Background="Black" Opacity="0.3" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}"></Border>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="55"></ColumnDefinition>
+								<ColumnDefinition Width="65"></ColumnDefinition>
+								<ColumnDefinition></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Button Grid.Column="0" Background="Black" Height="30" Width="30" HorizontalAlignment="Left" Margin="20,0,0,0"
+									CornerRadius="50" Padding="0" VerticalAlignment="Center" Command="{Binding BackCommand}">
+								<Button.Styles>
+									<Style Selector="Button">
+										<Setter Property="Template">
+											<ControlTemplate>
+												<Panel>
+													<Border
+															CornerRadius="{TemplateBinding CornerRadius}"
+															Background="Black"
+															Height="{TemplateBinding Height}"
+															Width="{TemplateBinding Width}">
+														<Border.Styles>
+															<Style Selector="Border:pointerover">
+																<Setter Property="Opacity" Value="0.5"></Setter>
+															</Style>
+														</Border.Styles>
+													</Border>
+													<Label x:Name="PART_ContentPresenter"
+																	  Content="{TemplateBinding Content}"
 										  />
-											</Panel>
-										</ControlTemplate>
-									</Setter>
-								</Style>
-							</Button.Styles>	
-							<PathIcon Height="15" Width="15" FontWeight="Bold" Margin="0,1,0,0" Data="{StaticResource arrow_left_regular}"></PathIcon>
-						</Button>
-						<Button Name="playBtn" IsVisible="False" Background="Transparent" HorizontalAlignment="Left"
-									VerticalAlignment="Center"
-								Grid.Column="1"
-									Command="{Binding PlayMediaCommand}">
-							<Image
-									Classes.checked="{Binding !IsPlay}"
-									Classes.unChecked="{Binding IsPlay}">
-								<Image.Styles>
-									<Style Selector="Image.checked">
-										<Setter Property="Height" Value="50"></Setter>
-										<Setter Property="Width" Value="50"></Setter>
-										<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
+												</Panel>
+											</ControlTemplate>
+										</Setter>
 									</Style>
-									<Style Selector="Image.checked:pointerover">
-										<Setter Property="Height" Value="51"></Setter>
-										<Setter Property="Width" Value="51"></Setter>
-										<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
-									</Style>
-									<Style Selector="Image.unChecked">
-										<Setter Property="Height" Value="50"></Setter>
-										<Setter Property="Width" Value="50"></Setter>
-										<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-									</Style>
-									<Style Selector="Image.unChecked:pointerover">
-										<Setter Property="Height" Value="51"></Setter>
-										<Setter Property="Width" Value="51"></Setter>
-										<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-									</Style>
-								</Image.Styles>
-							</Image>
-						</Button>
-						<TextBlock Grid.Column="2" HorizontalAlignment="Stretch" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Padding="0,0,0,0"  Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis"></TextBlock>
+								</Button.Styles>
+								<PathIcon Height="15" Width="15" FontWeight="Bold" Margin="0,1,0,0" Data="{StaticResource arrow_left_regular}"></PathIcon>
+							</Button>
+							<Button Name="playBtn" IsVisible="False" Background="Transparent" HorizontalAlignment="Left"
+										VerticalAlignment="Center"
+									Grid.Column="1"
+										Command="{Binding PlayMediaCommand}">
+								<Image
+										Classes.checked="{Binding !IsPlay}"
+										Classes.unChecked="{Binding IsPlay}">
+									<Image.Styles>
+										<Style Selector="Image.checked">
+											<Setter Property="Height" Value="50"></Setter>
+											<Setter Property="Width" Value="50"></Setter>
+											<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
+										</Style>
+										<Style Selector="Image.checked:pointerover">
+											<Setter Property="Height" Value="51"></Setter>
+											<Setter Property="Width" Value="51"></Setter>
+											<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
+										</Style>
+										<Style Selector="Image.unChecked">
+											<Setter Property="Height" Value="50"></Setter>
+											<Setter Property="Width" Value="50"></Setter>
+											<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
+										</Style>
+										<Style Selector="Image.unChecked:pointerover">
+											<Setter Property="Height" Value="51"></Setter>
+											<Setter Property="Width" Value="51"></Setter>
+											<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
+										</Style>
+									</Image.Styles>
+								</Image>
+							</Button>
+							<TextBlock Grid.Column="2" HorizontalAlignment="Stretch" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Padding="0,0,0,0"  Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis"></TextBlock>
+						</Grid>
 					</Grid>
 				</Panel>
 			</Border>

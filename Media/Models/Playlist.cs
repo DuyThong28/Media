@@ -22,7 +22,7 @@ namespace Media.Models
         private static readonly string ImageBackgroundFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Media Player\\Play List Image";
         public List<MediaItem> ListMedia { get => listMedia; set => listMedia = value; }
 
-        public string PlayListID => playListID;
+        public string PlayListID => playListID; 
         public string PlayListName
         {
             get => playListName;

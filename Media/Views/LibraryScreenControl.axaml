@@ -68,7 +68,7 @@
 									</Style>
 									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
 										<Setter Property="Background" Value="Transparent"></Setter>
-										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"></Setter>
+										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
 									</Style>
 								</ListBox.Styles>
 								<ListBox.ItemsPanel>
