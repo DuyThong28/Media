@@ -30,7 +30,7 @@ namespace Media.ViewModels
         {
             if (PlayMedia.timer != null)
             {
-                MediaHelper.updateMediaScreen += UpdateScreen;
+                MediaHelper.updatePlayingScreen += UpdateScreen;
             }
             PlayMediaCommand = ReactiveCommand.Create(() => { Play(); });
         }
@@ -82,7 +82,6 @@ namespace Media.ViewModels
             IsPlay = PlayMedia.IsPlay;
             if(ListMedia!=MediaHelper.PlayQueue)
             ListMedia = MediaHelper.PlayQueue;
-            
         }
         
       
