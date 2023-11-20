@@ -1,4 +1,5 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Media.Models;
 using Media.ViewModels;
 using System;
@@ -16,11 +17,12 @@ namespace Media.Views
 
         private static event EventHandler seeAllSongs;
         public static event EventHandler SeeAllSongs
+
         {
             add { seeAllSongs += value; }
             remove { seeAllSongs -= value;}
         }
-        
+
         private static event EventHandler seeAllVideos;
         public static event EventHandler SeeAllVideos
         {
@@ -38,6 +40,17 @@ namespace Media.Views
         {
            if (seeAllSongs != null)
                 seeAllSongs(sender, new EventArgs());
+        }
+        private void AddMediaQueue_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem menuItem)
+            {             
+                if (menuItem.DataContext is MediaItem mediaItem)
+                {
+                    MediaHelper.PlayQueue.Add(mediaItem);                  
+                }
+            }
+
         }
     }
 }

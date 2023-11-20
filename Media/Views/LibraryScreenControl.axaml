@@ -80,7 +80,7 @@
 									<DataTemplate>
 										<views:PlaylistItemTC PlaylistName="{Binding PlayListName}" 
 															  CountMedias="{Binding ListMedia.Count}" 
-											ImageSource="/Assets/dung_yeu_nua_em_met_roi.png" 
+											ImageSource="{Binding BackGroundImage}" 
 											Command="{Binding ElementName=playBtn, Path=Command}" 
 											CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 											<views:PlaylistItemTC.ContextMenu>
@@ -102,7 +102,7 @@
 														<MenuItem Header="Phát hàng đợi"/>
 														<MenuItem Header="The Album"/>
 													</MenuItem>
-													<MenuItem Header="Loại bỏ">
+													<MenuItem Header="Loại bỏ" Click="DeleteAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
 														<MenuItem.Icon>
 															<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
 														</MenuItem.Icon>

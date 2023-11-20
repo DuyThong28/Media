@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reactive;
@@ -321,10 +322,12 @@ namespace Media.ViewModels
                 }
                 media.PlayMediaCommand();
 
+            }
         }
 
         public static MediaItem selectPlayingItem(List<MediaItem> listMedia)
         {
+
             MediaItem selectedItem = null;
             if (listMedia != null)
             {
@@ -333,11 +336,11 @@ namespace Media.ViewModels
             }
             return selectedItem;
         }
-        
+
         public static MediaItem selectPlaylistItem(Playlist playlist)
         {
             MediaItem selectedItem = null;
-            if (MediaHelper.isPlayingPlaylist==true&&MediaHelper.playListPlayingId==playlist.PlayListID)
+            if (MediaHelper.isPlayingPlaylist == true && MediaHelper.playListPlayingId == playlist.PlayListID)
             {
                 if (playlist.ListMedia != null)
                 {
@@ -348,15 +351,15 @@ namespace Media.ViewModels
             return selectedItem;
         }
 
-        public static Playlist selectPlaylist(List<Playlist> list)
-        {
-            Playlist selectedItem = null;
-            if (list != null)
+        public static Playlist selectPlaylist(ObservableCollection<Playlist> list)
             {
-               selectedItem = list.Cast<Playlist>().FirstOrDefault(item => item.PlayListID == MediaHelper.playListPlayingId);
-            }
-            return selectedItem;
-        }
+                Playlist selectedItem = null;
+                if (list != null)
+                {
+                    selectedItem = list.Cast<Playlist>().FirstOrDefault(item => item.PlayListID == MediaHelper.playListPlayingId);
+                }
+                return selectedItem;
+        } 
         //
         public static event EventHandler AllPlayListChanged;
 
