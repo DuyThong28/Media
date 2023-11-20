@@ -136,7 +136,6 @@
 										</StackPanel>
 									</Grid>
 								</Border>
-
 								<Grid Grid.Row="1">
 									<Border Background="Black" Opacity="0.2"></Border>
 									<Border BorderBrush="#747474" BorderThickness="0,0,0,1" Margin="20,0,20,0">
@@ -177,7 +176,7 @@
 								</Grid>
 							</Grid>
 
-							<Border Grid.Row="1" Background="Black" Opacity="0.2"></Border>
+							<Border Grid.Row="1" Background="Black" Opacity="0.5"></Border>
 							
 							<ListBox Name="listMedia" Grid.Row="1" Background="Transparent"
 												  ItemsSource="{Binding ListMedia}"

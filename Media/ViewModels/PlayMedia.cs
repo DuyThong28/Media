@@ -160,6 +160,7 @@ namespace Media.ViewModels
             IsPlay = false;
             currentTimePlay = 0;
             MediaPlayer?.Dispose();
+            _libVlc?.Dispose();
         }
         public static void pauseSong()
         {

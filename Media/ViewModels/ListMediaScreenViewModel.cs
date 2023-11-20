@@ -14,12 +14,6 @@ namespace Media.ViewModels
     {
         public ListMediaScreenViewModel() {
             PlayMediaCommand = ReactiveCommand.Create(() => { MediaHelper.PlayThePlaylist(listSongs); });
-            MediaHelper.UpdateListMediaScreen += MediaHelper_UpdateListMediaScreen;
-        }
-
-        private void MediaHelper_UpdateListMediaScreen(object? sender, EventArgs e)
-        {
-
         }
 
         private List<MediaItem> listSongs;

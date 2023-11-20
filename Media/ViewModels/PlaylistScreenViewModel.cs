@@ -14,7 +14,7 @@ namespace Media.ViewModels
     public class PlaylistScreenViewModel : ViewModelBase
     {
         private List<MediaItem> listMedia;
-        private string playListName = "Danh sách phát không có tiêu đề";
+        private string playListName = "Không có tiêu đề";
         private string countMedia = "0";
         private Playlist playlist;
         private bool isPlay;
@@ -76,7 +76,9 @@ namespace Media.ViewModels
                 {
                     IsPlay = false;
                 }
-                SelectedItem = MediaHelper.selectPlaylistItem(playlist);
+                if(selectedItem != MediaHelper.selectPlaylistItem(playlist)) { 
+                    SelectedItem = MediaHelper.selectPlaylistItem(playlist);
+                }
             }
         }
         private void UpdateScreen()
