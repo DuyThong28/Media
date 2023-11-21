@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Media.Models;
 using Media.ViewModels;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace Media.Views
@@ -23,6 +24,22 @@ namespace Media.Views
             } else
             {
                 playBtn.IsVisible = false;
+            }
+        }
+
+        private void MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+            IList<object> list = menuItem.CommandParameter as IList<object>;
+            if (list != null)
+            {
+                MediaItem mediaItem = list[1] as MediaItem;
+                if (!mediaItem.IsPlay)
+                {
+                    PlaylistScreenViewModel playlistscreen = list[0] as PlaylistScreenViewModel;
+                    playlistscreen.Playlist.DeleteMedia(mediaItem);
+                    playlistscreen.ListMedia.Remove(mediaItem);
+                }
             }
         }
     }

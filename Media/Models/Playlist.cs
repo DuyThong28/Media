@@ -103,6 +103,12 @@ namespace Media.Models
                 AddMedia(media);
             }
         }
-       
+        public void DeleteMedia(MediaItem media)
+        {          
+            media.PlaylistID = PlayListID;
+            ListMedia.Remove(media);
+            MediaHelper.Database.DeleteMediaInAPlaylist(media.FilePath, this.PlayListID);
+            MediaHelper.OnAllPlayListChanged();
+        }
     }
 }
