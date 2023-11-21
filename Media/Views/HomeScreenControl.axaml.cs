@@ -1,8 +1,10 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Interactivity;
 using Media.Models;
 using Media.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace Media.Views
 {
@@ -85,6 +87,17 @@ namespace Media.Views
                         }
                     }
                 }
+            }
+        }
+        private void MenuItem_Click_2(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+            IList<object> list = menuItem.CommandParameter as IList<object>;
+            if (list!=null)
+            {
+                MediaItem mediaItem = list[0] as MediaItem;
+                Playlist playlist = list[1] as Playlist;
+                playlist.AddMedia(mediaItem);              
             }
         }
     }

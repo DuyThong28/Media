@@ -19,8 +19,7 @@ namespace Media.Models
         private List<MediaItem> listMedia = new List<MediaItem>();
         private string backroundImageFileName = null;
         private DateTime dateCreated;
-        private static readonly string ImageBackgroundFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Media Player\\Play List Image";
-        public List<MediaItem> ListMedia { get => listMedia; set => listMedia = value; }
+        private static readonly string ImageBackgroundFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Media Player\\Play List Image";       
 
         public string PlayListID => playListID; 
         public string PlayListName
@@ -42,6 +41,7 @@ namespace Media.Models
             get { return dateCreated; }
         }
 
+        public List<MediaItem> ListMedia { get => listMedia; set => listMedia = value; }
 
         public Playlist(string id = null, string name = "Unnamed", string backroundImageFileName = null, List<MediaItem> listMedia = null)
         {
@@ -87,13 +87,14 @@ namespace Media.Models
         }
         public void AddMedia(MediaItem media)
         {
-            if (listMedia.Exists(x => x.FilePath == media.FilePath))
+            if (ListMedia.Exists(x => x.FilePath == media.FilePath))
             {
                 return;
             }
             media.PlaylistID = PlayListID;
-            listMedia.Add(media);
+            ListMedia.Add(media);
             MediaHelper.Database.InsertMediaIntoPlaylistMedias(this, media);
+            MediaHelper.OnAllPlayListChanged();
         }
         public void AddRangeMedia(List<MediaItem> medias)
         {
@@ -102,6 +103,6 @@ namespace Media.Models
                 AddMedia(media);
             }
         }
-
+       
     }
 }

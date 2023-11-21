@@ -4,17 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Media.ViewModels
 {
-    public class HomeScreenViewModel:ViewModelBase
+    public class HomeScreenViewModel : ViewModelBase
     {
         public HomeScreenViewModel()
         {
             MediaHelper.updateHomeScreen += MediaHelper_updateHomeScreen;
             AllPlayLists = MediaHelper.AllPlayList;
+            AddMediaToPlaylistCommand = ReactiveCommand.Create<MediaItem>(AddMediaToPlaylist);
         }
 
         private void MediaHelper_updateHomeScreen(object? sender, EventArgs e)
@@ -31,19 +34,33 @@ namespace Media.ViewModels
             get => allPlayLists;
             set => this.RaiseAndSetIfChanged(ref allPlayLists, value);
         }
-        public List<MediaItem> ListSongs { get => listSongs; set {
+        public List<MediaItem> ListSongs
+        {
+            get => listSongs; set
+            {
                 if (value.Count > 5)
-                { 
-                    value = value.GetRange(0, 5);
-                }
-                this.RaiseAndSetIfChanged(ref listSongs, value); } } 
-        public List<MediaItem> ListVideos { get => listVideos; set { 
-                if(value.Count > 5)
                 {
                     value = value.GetRange(0, 5);
                 }
-                this.RaiseAndSetIfChanged(ref listVideos, value); } }
+                this.RaiseAndSetIfChanged(ref listSongs, value);
+            }
+        }
+        public List<MediaItem> ListVideos
+        {
+            get => listVideos; set
+            {
+                if (value.Count > 5)
+                {
+                    value = value.GetRange(0, 5);
+                }
+                this.RaiseAndSetIfChanged(ref listVideos, value);
+            }
+        }
+        public ReactiveCommand<MediaItem, Unit> AddMediaToPlaylistCommand { get; set; }
+        private void AddMediaToPlaylist(MediaItem mediaItem)
+        {
+            MediaItem d = mediaItem;
+        }
+
     }
-
-
 }
