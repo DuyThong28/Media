@@ -153,11 +153,27 @@ namespace Media.Models
         }
         public void PlayMediaCommand()
         {          
-            if (!MediaAdded)
+            //if (!MediaAdded)
+            //{
+            //    MediaAdded = true;
+            //    MediaHelper.PlayQueue.Add(this);
+            //}
+
+
+            for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
             {
-                MediaAdded = true;
-                MediaHelper.PlayQueue.Add(this);
+                if (MediaHelper.PlayQueue[i].FilePath == this.FilePath)
+                {
+                    MediaHelper.PlayQueue.Remove(MediaHelper.PlayQueue[i]);
+                    break;
+                }
             }
+            MediaHelper.PlayQueue.Add(this);
+            List<MediaItem> tempQueue = new List<MediaItem>(MediaHelper.PlayQueue);
+            MediaHelper.PlayQueue.Clear();
+            MediaHelper.PlayQueue = new List<MediaItem>();
+            MediaHelper.PlayQueue.AddRange(tempQueue);
+
             if (PlayMedia.Path != this.filePath)
             {
                 IsPlay=true;
