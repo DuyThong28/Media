@@ -152,6 +152,10 @@ namespace Media.ViewModels
                 MediaPlayer.Time = currentTimePlay;
                 IsPlay = true;
                 MediaPlayer.Play();
+                if(updateScreen != null)
+                    {
+                    updateScreen(null, new EventArgs());
+                }
             }
         }
         public static void playSong()
@@ -159,6 +163,10 @@ namespace Media.ViewModels
             IsPlay = true;
             MediaPlayer.Time = currentTimePlay;
             MediaPlayer.Play(_media);
+            if (updateScreen != null)
+            {
+                updateScreen(null, new EventArgs());
+            }
         }
         public static void dispose()
         {
@@ -172,12 +180,20 @@ namespace Media.ViewModels
             IsPlay = false;
             currentTimePlay = MediaPlayer.Time;
             MediaPlayer.Pause();
+            if (updateScreen != null)
+            {
+                updateScreen(null, new EventArgs());
+            }
         }
 
         public static void stopSong()
         {
             IsPlay = false;
             MediaPlayer.Stop();
+            if (updateScreen != null)
+            {
+                updateScreen(null, new EventArgs());
+            }
         } 
         public static void muteVolume()
         {

@@ -83,7 +83,8 @@ namespace Media.ViewModels
         }
         private void UpdateScreen()
         {
-            ListMedia = Playlist.ListMedia;
+            //ListMedia = Playlist.ListMedia;
+            ListMedia = MediaHelper.listSongs;
             PlayListName = Playlist.PlayListName;
             CountMedia = Playlist.ListMedia.Count.ToString();
             BackGroundImage = Playlist.BackGroundImage;

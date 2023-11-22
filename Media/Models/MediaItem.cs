@@ -31,7 +31,7 @@ namespace Media.Models
         private MediaTypes mediaType;
         private TagLib.File others;
         private bool isPlay;
-        private bool mediaAdded = false;
+        //private bool mediaAdded = false;
         public bool IsPlay
         {
             get { return isPlay; }
@@ -160,26 +160,28 @@ namespace Media.Models
             //}
 
 
-            for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
-            {
-                if (MediaHelper.PlayQueue[i].FilePath == this.FilePath)
-                {
-                    MediaHelper.PlayQueue.Remove(MediaHelper.PlayQueue[i]);
-                    break;
-                }
-            }
-            MediaHelper.PlayQueue.Add(this);
-            List<MediaItem> tempQueue = new List<MediaItem>(MediaHelper.PlayQueue);
-            MediaHelper.PlayQueue.Clear();
-            MediaHelper.PlayQueue = new List<MediaItem>();
-            MediaHelper.PlayQueue.AddRange(tempQueue);
+            
 
             if (PlayMedia.Path != this.filePath)
             {
                 IsPlay=true;
-                PlayMedia.URL = this.filePath;
                 //PlayMedia.media = this;
-            } else
+                for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
+                {
+                    if (MediaHelper.PlayQueue[i].FilePath == this.FilePath)
+                    {
+                        MediaHelper.PlayQueue.Remove(MediaHelper.PlayQueue[i]);
+                        break;
+                    }
+                }
+                MediaHelper.PlayQueue.Add(this);
+                List<MediaItem> tempQueue = new List<MediaItem>(MediaHelper.PlayQueue);
+                MediaHelper.PlayQueue.Clear();
+                MediaHelper.PlayQueue = new List<MediaItem>();
+                MediaHelper.PlayQueue.AddRange(tempQueue);
+                PlayMedia.URL = this.filePath;
+            }
+            else
             {
                 if (PlayMedia.MediaPlayer.State == VLCState.Stopped)
                 {
@@ -200,7 +202,7 @@ namespace Media.Models
             }
         }
         public string PlaylistID { get => playlistID; set => playlistID = value; }
-        public bool MediaAdded { get => mediaAdded; set => mediaAdded = value; }
+        //public bool MediaAdded { get => mediaAdded; set => mediaAdded = value; }
 
         public MediaItem(string path)
         {

@@ -264,8 +264,8 @@ namespace Media.ViewModels
         {
             add { updatePlayingScreen += value; }
             remove { updatePlayingScreen -= value; }
-        }  
-        
+        }
+
         public static event EventHandler updateLibraryScreen;
         public static event EventHandler UpdateLibraryScreen
         {
@@ -332,19 +332,23 @@ namespace Media.ViewModels
             {
                 updateListMediaScreen(sender, new EventArgs());
             }
+            if (updatePlayingScreen != null)
+            {
+                updatePlayingScreen(sender, new EventArgs());
+            }
         }
 
-        
+
         public static void UpdateMediaControl(object sender, EventArgs e)
         {
             if (updateMediaScreen != null)
             {
                 updateMediaScreen(sender, new EventArgs());
             }
-            if (updatePlayingScreen != null)
-            {
-                updatePlayingScreen(sender, new EventArgs());
-            }
+            //if (updatePlayingScreen != null)
+            //{
+            //    updatePlayingScreen(sender, new EventArgs());
+            //}
         }
 
 
@@ -471,10 +475,10 @@ namespace Media.ViewModels
                 }
             }
 
-            //if (updatePlayingScreen != null)
-            //{
-            //    updatePlayingScreen(sender, new EventArgs());
-            //}
+            if (updatePlayingScreen != null)
+            {
+                updatePlayingScreen(sender, new EventArgs());
+            }
         }
 
     }

@@ -11,11 +11,14 @@
  <Design.DataContext>
 	<vm:ListVideoScreenViewModel/>
 </Design.DataContext>
-			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
-			 Margin="10" CornerRadius="5" ClipToBounds="True" >
-				<Grid>
-					<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
-					</Border>
+	<Border  Background="White"
+	 Margin="10" CornerRadius="10" ClipToBounds="True">
+		<!--<Border.Effect>
+			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" OffsetX="0" OffsetY="0"></DropShadowEffect>
+		</Border.Effect>-->
+		<Grid>
+			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" CornerRadius="8" Opacity="0.7">
+			</Border>
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="60"></RowDefinition>
@@ -23,15 +26,27 @@
 							<RowDefinition></RowDefinition>
 						</Grid.RowDefinitions>
 						<Grid Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
-							<Label   FontSize="20" FontWeight="Bold">VIDEO</Label>
+							<Label   FontSize="20" FontWeight="Bold" Foreground="#5DA5B9">
+								VIDEO
+								<Label.Effect>
+									<DropShadowEffect BlurRadius="2" Color="White" OffsetX="0" OffsetY="1"></DropShadowEffect>
+								</Label.Effect>
+							</Label>
 						</Grid>
 						<Grid Background="Transparent" Grid.Row="1" Margin="20,10,20,10">
 							<Button Grid.Column="2" VerticalAlignment="Top"
 							 Padding="10,5,10,5"
 							 CornerRadius="5"
 							 HorizontalAlignment="Left"
+									Background="#5DA5B9"
+									BorderBrush="#60A8BB"
+							BorderThickness="3"
+									Foreground="White"
 									Command="{Binding PlayMediaCommand}"
 								>
+								<Button.Effect>
+									<DropShadowEffect BlurRadius="5" Color="#5DA5B9" OffsetX="0" OffsetY="1"/>
+								</Button.Effect>
 								<StackPanel Orientation="Horizontal">
 									<Image
 										Width="25"
@@ -41,7 +56,6 @@
 									</Image>
 									<Label VerticalAlignment="Center"
 									   FontSize="17"
-									   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"
 									   Content="Phát tất cả">
 									</Label>
 								</StackPanel>
@@ -55,6 +69,9 @@
 												ItemsSource="{Binding ListVideos}"
 											   >
 										<ListBox.Styles>
+											<Style Selector="ListBoxItem">
+												<Setter Property="Padding" Value="0"></Setter>
+											</Style>
 											<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
 												<Setter Property="Background" Value="Transparent"></Setter>
 												<Setter	Property="CornerRadius" Value="15"></Setter>
@@ -81,7 +98,7 @@
 																	<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
 																</MenuItem.Icon>
 															</MenuItem>
-															<MenuItem Header="Phát tiếp theo">
+															<MenuItem Header="Phát tiếp theo" Click="MenuItem_Click">
 																<MenuItem.Icon>
 																	<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
 																</MenuItem.Icon>

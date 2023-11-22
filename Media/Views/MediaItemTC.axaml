@@ -9,7 +9,7 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-		  <Border Name="border" CornerRadius="10" ClipToBounds="True">
+		  <Border Name="border" CornerRadius="10" ClipToBounds="True" Padding="12">
 			  <Border.Styles>
 				  <Style Selector="Border">
 					  <Setter Property="Tag" Value="False"/>
@@ -22,7 +22,11 @@
 				  </Style>
 			  </Border.Styles>
 			  <StackPanel Width="225" Background="Transparent">
-				  <Grid>
+				 
+				  <Grid Margin="0,0,0,10">
+					  <Grid.Effect>
+						  <DropShadowEffect BlurRadius="20" Color="#ABD2DD" OffsetX="0" OffsetY="0,10"></DropShadowEffect>
+					  </Grid.Effect>
 					  <Border  CornerRadius="10" ClipToBounds="True" Height="225" Width="225" Background="Transparent">
 						  <Grid>
 							  <Image  Source="{TemplateBinding ImageSource}" Stretch="UniformToFill" Classes.hover="{Binding ElementName=border, Path=Tag}">
@@ -44,7 +48,7 @@
 								  </Image.Transitions>
 							  </Image>
 							  <Border VerticalAlignment="Bottom" HorizontalAlignment="Right" CornerRadius="3" Margin="4" Padding="2,0,2,0" Background="Black">
-								  <Label Padding="0" Opacity="2" FontSize="12" FontWeight="Medium" Margin="0" Content="{TemplateBinding DurationText}"></Label>
+								  <Label Padding="0" Opacity="2" Foreground="White" FontSize="12" FontWeight="Medium" Margin="0" Content="{TemplateBinding DurationText}"></Label>
 							  </Border>
 						  </Grid>
 					  </Border>
@@ -73,7 +77,7 @@
 								  </Setter>
 							  </Style>
 						  </Button.Styles>
-						  <PathIcon Height="50" Width="50" Data="{StaticResource play_circle_regular}">
+						  <PathIcon Height="50"  Foreground="White" Width="50" Data="{StaticResource play_circle_regular}">
 						  </PathIcon>
 					  </Button>
 				  </Grid>

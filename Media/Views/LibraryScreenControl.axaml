@@ -11,10 +11,13 @@
 	<Design.DataContext>
 		<vm:LibraryScreenViewModel/>
 	</Design.DataContext>
-	<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
-			 Margin="10" CornerRadius="5" ClipToBounds="True">
+	<Border  Background="White"
+			 Margin="10" CornerRadius="10" ClipToBounds="True">
+		<!--<Border.Effect>
+			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" OffsetX="0" OffsetY="0"></DropShadowEffect>
+		</Border.Effect>-->
 		<Grid>
-			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
+			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" CornerRadius="8" Opacity="0.7" >
 			</Border>
 			<Grid>
 				<Grid.RowDefinitions>
@@ -22,17 +25,30 @@
 					<RowDefinition Height="auto"></RowDefinition>
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
-				<Button Name="playBtn" Command="{Binding PlayPlayListCommand}" IsVisible="False">PlayPlaylist</Button>
+				<Button Name="playBtn" Command="{Binding PlayPlayListCommand}" IsVisible="False">
+					PlayPlaylist</Button>
 				<Grid Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
-					<Label   FontSize="20" FontWeight="Bold">THƯ VIỆN</Label>
+					<Label Foreground="#5DA5B9"  FontSize="20" FontWeight="Bold">
+						<Label.Effect>
+							<DropShadowEffect BlurRadius="2" Color="White" OffsetX="0" OffsetY="1"></DropShadowEffect>
+						</Label.Effect>
+						THƯ VIỆN</Label>
 				</Grid>
 				<Grid Background="Transparent" Grid.Row="1" Margin="20,10,20,10">
 					<Button Grid.Column="2" VerticalAlignment="Top"
-					 Padding="10,5,10,5"
-					 CornerRadius="5"
-					 HorizontalAlignment="Left"
-					 Click="AddAlbum_Click"
+							 Padding="10,5,10,5"
+							 CornerRadius="5"
+							 HorizontalAlignment="Left"
+									Background="#5DA5B9"
+									BorderBrush="#60A8BB"
+							BorderThickness="3"
+							Click="AddAlbum_Click"
+									Foreground="White"
 								>
+						<Button.Effect>
+							<DropShadowEffect BlurRadius="5" Color="#5DA5B9" OffsetX="0" OffsetY="1"/>
+						</Button.Effect>
+					
 						<Button.Styles>
 							<Style Selector="Button:pointerover">
 								<Setter Property="Opacity" Value="0.9"/>
@@ -50,7 +66,6 @@
 							</Image>
 							<Label VerticalAlignment="Center"
 							   FontSize="17"
-							   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"
 							   Content="Danh sách phát mới">
 							</Label>
 						</StackPanel>
@@ -65,12 +80,15 @@
 									 DoubleTapped="ListBox_DoubleTapped"
 								>
 								<ListBox.Styles>
+									<Style Selector="ListBoxItem">
+										<Setter Property="Padding" Value="0"></Setter>
+									</Style>
 									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
 										<Setter Property="Background" Value="Transparent"></Setter>
 									</Style>
 									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
 										<Setter Property="Background" Value="Transparent"></Setter>
-										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
+										<Setter Property="Foreground" Value="#5DA5B9"></Setter>
 									</Style>
 								</ListBox.Styles>
 								<ListBox.ItemsPanel>

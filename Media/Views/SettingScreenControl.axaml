@@ -10,10 +10,13 @@
 	<Design.DataContext>
 		<vm:SettingScreenViewModel/>
 	</Design.DataContext>
-	<Border  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
-			 Margin="10" CornerRadius="5" ClipToBounds="True">
+	<Border  Background="White"
+	 Margin="10" CornerRadius="10" ClipToBounds="True">
+		<!--<Border.Effect>
+			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" OffsetX="0" OffsetY="0"></DropShadowEffect>
+		</Border.Effect>-->
 		<Grid>
-			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
+			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" CornerRadius="8" Opacity="0.7">
 			</Border>
 			<Grid>
 				<Grid.RowDefinitions>
@@ -21,7 +24,7 @@
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
 				<Grid Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
-					<Label FontSize="20"  FontWeight="Bold" >CÀI ĐẶT</Label>
+					<Label FontSize="20" Foreground="#5DA5B9" FontWeight="Bold" >CÀI ĐẶT</Label>
 				</Grid>
 				<ScrollViewer Grid.Row="1" Background="Transparent" Padding="20,0,20,0" >
 					<StackPanel Spacing="20">

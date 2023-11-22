@@ -127,7 +127,7 @@ namespace Media.ViewModels
                     TimeSongEnd = PlayMedia.DurationstringSong;
                 }
                 TbValue = PlayMedia.CurrentPositionSong;
-                TimeSongPlay = PlayMedia.CurrentPositionstringSong;
+                //TimeSongPlay = PlayMedia.CurrentPositionstringSong;
             }
             else if (PlayMedia.MediaPlayer.State == VLCState.Ended)
             {

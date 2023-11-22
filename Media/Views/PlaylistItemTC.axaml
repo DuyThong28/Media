@@ -9,7 +9,7 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-		  <Border Name="border" CornerRadius="10" ClipToBounds="True"
+		  <Border Name="border" CornerRadius="10" ClipToBounds="True" Padding="12"
 				  >
 			  <Border.Styles>
 				  <Style Selector="Border">
@@ -24,6 +24,9 @@
 			  </Border.Styles>
 			  <StackPanel Width="225" Background="Transparent">
 				  <Grid>
+					  <Grid.Effect>
+						  <DropShadowEffect BlurRadius="20" Color="#ABD2DD" OffsetX="0" OffsetY="0,10"></DropShadowEffect>
+					  </Grid.Effect>
 					  <Border  CornerRadius="10" ClipToBounds="True" Height="225" Width="225" Background="Transparent">
 						  <Image Source="{TemplateBinding ImageSource}" Stretch="UniformToFill" Classes.hover="{Binding ElementName=border, Path=Tag}">
 							  <Image.Styles>
@@ -69,7 +72,7 @@
 								  </Setter>
 							  </Style>
 						  </Button.Styles>
-						  <PathIcon Height="50" Width="50" Data="{StaticResource play_circle_regular}">
+						  <PathIcon Height="50" Foreground="White" Width="50" Data="{StaticResource play_circle_regular}">
 						  </PathIcon>
 					  </Button>
 				  </Grid>

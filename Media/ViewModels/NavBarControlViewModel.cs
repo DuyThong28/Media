@@ -12,6 +12,11 @@ namespace Media.ViewModels
 {
     public class NavBarControlViewModel:ViewModelBase
     {
+        public NavBarControlViewModel()
+        {
+
+        }
+
         private ListBoxItem selectedNavBarItem;
         public ListBoxItem SelectedNavBarItem
         {

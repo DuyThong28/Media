@@ -17,11 +17,12 @@
 					<Panel>
 						<Border Background="{TemplateBinding Background}"
 								CornerRadius="{TemplateBinding CornerRadius}"
-								Opacity="0.9">
+									>
 						</Border>
 						<Border
 								CornerRadius="{TemplateBinding CornerRadius}"
-								Opacity="0.5">
+								BorderBrush="White"
+								>
 						</Border>
 						<ContentPresenter Name="PART_ContentPresenter"
 						  ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -36,10 +37,13 @@
 			</Setter>
 		</ControlTheme>
 	</UserControl.Resources>
-	<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
-			 Margin="10" CornerRadius="5" ClipToBounds="True">
+	<Border  Background="White"
+		 Margin="10" CornerRadius="10" ClipToBounds="True">
+		<!--<Border.Effect>
+			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" OffsetX="0" OffsetY="0"></DropShadowEffect>
+		</Border.Effect>-->
 		<Grid>
-			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
+			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" CornerRadius="8" Opacity="0.7">
 			</Border>
 			<Grid>
 				<Grid.RowDefinitions>
@@ -48,7 +52,14 @@
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
 				<Grid  Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
-					<TextBox Grid.Row="1" Text="{Binding SearchText}"  Watermark="Bạn muốn nghe gi?" ></TextBox>
+					<Border>
+						<Border.Effect>
+							<DropShadowEffect BlurRadius="5" Color="#5DA5B9" OffsetX="0" OffsetY="1"/>
+						</Border.Effect>
+						<TextBox Grid.Row="1" Text="{Binding SearchText}"  Watermark="Bạn muốn nghe gi?" >
+						</TextBox>
+					</Border>
+				
 				</Grid>
 				<ScrollViewer Background="Transparent" Grid.Row="2"  Padding="20,0,20,0" Margin="0,0,0,10">
 					<ListBox Grid.Row="1" Background="Transparent"
@@ -57,17 +68,30 @@
 								SelectedItem="{Binding SelectedMedia}"
 							 >
 						<ListBox.Styles>
+							<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
+								<Setter Property="Background" Value="Transparent"></Setter>
+							</Style>
 							<Style Selector="ListBoxItem:selected/template/ContentPresenter">
-								<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
+								<Setter Property="Background" Value="Transparent"></Setter>
+								<Setter Property="Foreground" Value="White"></Setter>
 							</Style>
 							<Style Selector="ListBoxItem">
 								<Setter Property="Padding" Value="6,5,5,5"></Setter>
+								<Setter Property="Margin" Value="2,0,2,0"></Setter>
 							</Style>
 							<Style Selector="ListBoxItem:pointerover">
+								<Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
 								<Setter	Property="CornerRadius" Value="5"></Setter>
+								<Setter Property="Effect">
+									<DropShadowEffect BlurRadius="5" Color="#5DA5B9" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
+								</Setter>
 							</Style>
 							<Style Selector="ListBoxItem:selected">
+								<Setter Property="Background" Value="#5DA5B9"></Setter>
 								<Setter	Property="CornerRadius" Value="5"></Setter>
+								<Setter Property="Effect">
+									<DropShadowEffect BlurRadius="5" Color="#494C4D" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
+								</Setter>
 							</Style>
 						</ListBox.Styles>
 						<ListBox.ItemTemplate>

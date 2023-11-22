@@ -7,6 +7,7 @@
 			 xmlns:vm="using:Media.ViewModels"
 			 xmlns:md="using:Media.Models"
 			  x:DataType="vm:PlaylistScreenViewModel"
+			 Foreground="White"
 			 x:Class="Media.Views.PlaylistScreenControl">
 	<Design.DataContext>
 		<vm:PlaylistScreenViewModel/>
@@ -35,11 +36,12 @@
 					<Panel>
 						<Border Background="{TemplateBinding Background}"
 								CornerRadius="{TemplateBinding CornerRadius}"
-								Opacity="0.9">
+									>
 						</Border>
 						<Border
 								CornerRadius="{TemplateBinding CornerRadius}"
-								Opacity="0.5">
+								BorderBrush="White"
+								>
 						</Border>
 						<ContentPresenter Name="PART_ContentPresenter"
 						  ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -54,10 +56,18 @@
 			</Setter>
 		</ControlTheme>
 	</UserControl.Resources>
-	<Border  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
+	<!--<Border  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
 			 Margin="10" CornerRadius="5" ClipToBounds="True">
 		<Grid>
 			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
+			</Border>-->
+	<Border  Background="White"
+			 Margin="10" CornerRadius="15" ClipToBounds="True">
+		<!--<Border.Effect>
+			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" OffsetX="0" OffsetY="0"></DropShadowEffect>
+		</Border.Effect>-->
+		<Grid>
+			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" CornerRadius="10" Opacity="0.7" BorderBrush="White" BorderThickness="5">
 			</Border>
 			<Border>
 				<Panel>
@@ -79,7 +89,7 @@
 									</Rectangle.OpacityMask>
 								</Rectangle>
 							</Panel>
-							<Border Grid.Row="0" Background="Black" Opacity="0.3"></Border>
+							<!--<Border Grid.Row="0" Background="Black" Opacity="0.3"></Border>-->
 							<Grid Grid.Row="0">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="330"></RowDefinition>
@@ -137,8 +147,10 @@
 									</Grid>
 								</Border>
 								<Grid Grid.Row="1">
-									<Border Background="Black" Opacity="0.2"></Border>
-									<Border BorderBrush="#747474" BorderThickness="0,0,0,1" Margin="20,0,20,0">
+									<!--<Border Background="Black" Opacity="0.2"></Border>-->
+									<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" CornerRadius="10" Opacity="0.2">
+									</Border>
+									<Border BorderBrush="#5DA5B9" BorderThickness="0,0,0,1" Margin="20,0,20,0">
 										<Button Background="Transparent" HorizontalAlignment="Left"
 												VerticalAlignment="Center"
 												Command="{Binding PlayMediaCommand}">
@@ -176,26 +188,37 @@
 								</Grid>
 							</Grid>
 
-							<Border Grid.Row="1" Background="Black" Opacity="0.5"></Border>
+							<!--<Border Grid.Row="1" Background="Black" Opacity="0.5"></Border>-->
 							
 							<ListBox Name="listMedia" Grid.Row="1" Background="Transparent"
 												  ItemsSource="{Binding ListMedia}"
 													SelectedItem="{Binding SelectedItem}"
 												Padding="20,30,20,0">
 								<ListBox.Styles>
+									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
+										<Setter Property="Background" Value="Transparent"></Setter>
+									</Style>
 									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
-										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
+										<Setter Property="Background" Value="Transparent"></Setter>
+										<Setter Property="Foreground" Value="White"></Setter>
 									</Style>
 									<Style Selector="ListBoxItem">
 										<Setter Property="Padding" Value="6,5,5,5"></Setter>
+										<Setter Property="Margin" Value="2,0,2,0"></Setter>
 									</Style>
 									<Style Selector="ListBoxItem:pointerover">
-										<Setter Property="Background" Value="#BC757575"></Setter>
+										<Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
+										<Setter Property="Effect">
+											<DropShadowEffect BlurRadius="5" Color="#5DA5B9" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
+										</Setter>
 									</Style>
 									<Style Selector="ListBoxItem:selected">
-										<Setter Property="Background" Value="#BC757575"></Setter>
+										<Setter Property="Background" Value="#5DA5B9"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
+										<Setter Property="Effect">
+											<DropShadowEffect BlurRadius="5" Color="#494C4D" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
+										</Setter>
 									</Style>
 								</ListBox.Styles>
 								<ListBox.ItemTemplate>
@@ -243,7 +266,8 @@
 								<Setter Property="Background" Value="Transparent"></Setter>
 							</Style>
 						</Grid.Styles>
-						<Border  Background="Black" Opacity="0.3" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}"></Border>
+						<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" Opacity="0.3"></Border>
+						<!--<Border  Background="Black" Opacity="0.3" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}"></Border>-->
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="55"></ColumnDefinition>
@@ -309,7 +333,11 @@
 									</Image.Styles>
 								</Image>
 							</Button>
-							<TextBlock Grid.Column="2" HorizontalAlignment="Stretch" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Padding="0,0,0,0"  Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis"></TextBlock>
+							<TextBlock Grid.Column="2" HorizontalAlignment="Stretch" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Padding="0,0,0,0"  Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis">
+								<TextBlock.Effect>
+									<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+								</TextBlock.Effect>
+							</TextBlock>
 						</Grid>
 					</Grid>
 				</Panel>
