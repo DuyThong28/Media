@@ -133,7 +133,7 @@
 													<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
 												</Label.Effect>
 												Danh sách phát</Label>
-											<TextBlock x:Name="playListName"   HorizontalAlignment="Stretch" FontSize="80" FontWeight="Bold" Padding="0,0,0,0" Margin="-10,10,0,20" Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis">
+											<TextBlock x:Name="playListName"  HorizontalAlignment="Stretch" FontSize="80" FontWeight="Bold" Padding="0,0,0,0" Margin="-10,10,0,20" Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis">
 												<TextBlock.Effect>
 													<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
 												</TextBlock.Effect>
@@ -241,10 +241,16 @@
 															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
 														</MenuItem.Icon>
 													</MenuItem>
-													<MenuItem Header="Loại bỏ">
+													<MenuItem Name="mediaItem" Header="Loại bỏ" Click="MenuItem_Click">
 														<MenuItem.Icon>
 															<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
 														</MenuItem.Icon>
+														<MenuItem.CommandParameter>
+															<MultiBinding>
+																<Binding ElementName="playListName" Path="DataContext"/>
+																<Binding ElementName="mediaItem" Path="DataContext"/>
+															</MultiBinding>
+														</MenuItem.CommandParameter>
 													</MenuItem>
 												</ContextMenu>
 											</views:MusicRowTC.ContextMenu>

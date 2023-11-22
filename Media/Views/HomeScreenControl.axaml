@@ -93,7 +93,7 @@
 									<DataTemplate>
 										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}" DurationText="{Binding DurationText}">
 											<views:MediaItemTC.ContextMenu>
-												<ContextMenu>
+												<ContextMenu Name="menu" >
 													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
 														<MenuItem.Icon>
 															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
@@ -107,7 +107,18 @@
 													<MenuItem Header="Thêm vào" ItemsSource="{Binding $parent[ListBox].Tag}">
 														<MenuItem.ItemTemplate>
 															<DataTemplate x:DataType="md:Playlist">
-																<MenuItem Header="{Binding PlayListName}"></MenuItem>
+																<MenuItem Name="playlist" Header="{Binding PlayListName}"
+																	Click="MenuItem_Click_2"	 
+																	>
+																	 <MenuItem.CommandParameter>
+                    <MultiBinding>
+                        <Binding ElementName="menu" Path="DataContext"/>
+                        <Binding ElementName="playlist" Path="DataContext"/>
+                    </MultiBinding>
+                </MenuItem.CommandParameter>
+													
+																
+																</MenuItem>
 															</DataTemplate>
 														</MenuItem.ItemTemplate>
 														<MenuItem.Icon>
@@ -176,7 +187,7 @@
 									<DataTemplate>
 										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}" DurationText="{Binding DurationText}">
 											<views:MediaItemTC.ContextMenu>
-												<ContextMenu>
+												<ContextMenu Name="menu">
 													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
 														<MenuItem.Icon>
 															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
@@ -190,7 +201,18 @@
 													<MenuItem Header="Thêm vào" ItemsSource="{Binding $parent[ListBox].Tag}">
 														<MenuItem.ItemTemplate>
 															<DataTemplate x:DataType="md:Playlist">
-																<MenuItem Header="{Binding PlayListName}"></MenuItem>
+																<MenuItem Name="playlist" Header="{Binding PlayListName}"
+																	Click="MenuItem_Click_2"
+																	>
+																	<MenuItem.CommandParameter>
+																		<MultiBinding>
+																			<Binding ElementName="menu" Path="DataContext"/>
+																			<Binding ElementName="playlist" Path="DataContext"/>
+																		</MultiBinding>
+																	</MenuItem.CommandParameter>
+
+
+																</MenuItem>
 															</DataTemplate>
 														</MenuItem.ItemTemplate>
 														<MenuItem.Icon>
