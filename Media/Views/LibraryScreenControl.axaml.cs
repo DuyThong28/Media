@@ -48,6 +48,19 @@ namespace Media.Views
                 MediaHelper.DeletePlayList(playlistToDelete);
             }
         }
+        private void RenameAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToRename)
+            {
 
+            }
+            if (!isAddAlbumWindowOpen)
+            {
+                AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
+                addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
+                addAlbumWindow.Show();
+                isAddAlbumWindowOpen = true;
+            }
+        }
     }
 }

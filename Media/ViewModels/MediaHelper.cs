@@ -78,6 +78,10 @@ namespace Media.ViewModels
             }
             OnAllPlayListChanged();
         }
+        public static void RenamePlaylist(Playlist playlist)
+        {
+
+        }
         public static void DeleteMediaFromPlaylist(string mediaPath, string playlistID)
         {
             int index = allPlayList.FindIndex(x => x.PlayListID == playlistID);
