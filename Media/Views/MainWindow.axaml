@@ -14,26 +14,28 @@
 		Name="mainWindow"
 		MinHeight="470"
 		MinWidth="840"
-		Tag="#E3F0F8"
+		Background="Black"
 		 TransparencyLevelHint="AcrylicBlur"
-           Background="Transparent"
 		WindowStartupLocation="CenterScreen"
+		WindowState="Maximized"
 		>
 	<Design.DataContext>
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
+	
+	
 		<Grid>
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition></RowDefinition>
 					<RowDefinition Height="90"></RowDefinition>
 				</Grid.RowDefinitions>
-				<Image Source="/Assets/ss_e5459e53de1e3230745804fcf359243ad522488d.1920x1080.jpg" Stretch="UniformToFill">
+				<!--<Image Source="/Assets/ss_e5459e53de1e3230745804fcf359243ad522488d.1920x1080.jpg" Stretch="UniformToFill">
 					<Image.Effect>
 						<BlurEffect Radius="50"></BlurEffect>
 					</Image.Effect>
-				</Image>
-				<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"  Opacity="0.7" ClipToBounds="True"></Border>
+				</Image>-->
+				<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"  Opacity="1" ClipToBounds="True"></Border>-->
 				<ContentControl Name="mainViewScreen" Grid.Row="0"></ContentControl>
 				<!--<Grid Name="mainScreen" Grid.Row="0" IsVisible="True" >
 					<Grid.ColumnDefinitions>

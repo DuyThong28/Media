@@ -15,17 +15,15 @@
 			<ExperimentalAcrylicBorder.Material>
 				<ExperimentalAcrylicMaterial
 					BackgroundSource="Digger"
-					TintColor="#E3F0F8"
+					TintColor="Black"
 					TintOpacity="1"
 					MaterialOpacity="0.5" />
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
-		<Border Background="#E3F0F8" Opacity="0.8" >
-		</Border>
 		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
 			<Button Width="132" Height="132" x:Name="ImageButton"  Click="SelectImage_Click" BorderBrush="#E3F0F8" BorderThickness="2" HorizontalAlignment="Center" CornerRadius="10" ClipToBounds="True" Padding="0">
 				<Button.Effect>
-						<DropShadowEffect BlurRadius="15" Color="#5DA5B9" OffsetX="0" OffsetY="0"></DropShadowEffect>
+						<DropShadowEffect BlurRadius="20" Color="#FF5B5B5B" OffsetX="0" OffsetY="1"></DropShadowEffect>
 				</Button.Effect>
 				<Border  CornerRadius="11" ClipToBounds="True" Height="130" Width="130" Background="Blue" >
 					<Image Name="image"  Source="/Assets/Icons/defaultImage.jpg" Height="130" Width="130" Stretch="UniformToFill">
@@ -35,12 +33,11 @@
 			<TextBox x:Name="AlbumNameTextBox" Width="200" Margin="0,0,0,10"/>
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
 				<Button Width="100"
-						Background="#5DA5B9"
-								BorderBrush="#60A8BB"
+						Background="#1D8943"
 								BorderThickness="3"
 						Click="AddAlbum_Click">
 					<Button.Effect>
-						<DropShadowEffect BlurRadius="15" Color="#5DA5B9" OffsetX="0" OffsetY="0"></DropShadowEffect>
+						<DropShadowEffect BlurRadius="5" Color="#1D8943" OffsetX="0" OffsetY="0"></DropShadowEffect>
 					</Button.Effect>
 					<Button.Content>
 						<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -49,12 +46,10 @@
 					</Button.Content>
 				</Button>
 				<Button Width="100"
-						Background="#5DA5B9"
-								BorderBrush="#60A8BB"
-								BorderThickness="3"
+						Background="#1D8943"
 						Click="Cancel_Click">
 					<Button.Effect>
-						<DropShadowEffect BlurRadius="15" Color="#5DA5B9" OffsetX="0" OffsetY="0"></DropShadowEffect>
+						<DropShadowEffect BlurRadius="5" Color="#1D8943" OffsetX="0" OffsetY="0"></DropShadowEffect>
 					</Button.Effect>
 					<Button.Content>
 						<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

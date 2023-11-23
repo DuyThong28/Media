@@ -9,7 +9,7 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-		  <ToggleButton Height="70" Background="#E9F9FE" Padding="20,10,20,10" CornerRadius="10">
+		  <ToggleButton Height="70" Background="#FF515151" Padding="20,10,20,10" CornerRadius="10">
 			  <ToggleButton.Resources>
 				  <ControlTheme x:Key="{x:Type ToggleButton}" TargetType="ToggleButton">
 					  <Setter Property="Template">
@@ -17,12 +17,12 @@
 							  <Panel>
 								  <Border Background="{TemplateBinding Background}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
-											   BorderBrush="#60A8BB"
+											   BorderBrush="#FF515151"
 											BorderThickness="2"
 										  
 								>
 									  <Border.Effect>
-										  <DropShadowEffect BlurRadius="5" Color="#5DA5B9" OffsetX="0" OffsetY="1"/>
+										  <DropShadowEffect BlurRadius="5" Color="#FF515151" OffsetX="0" OffsetY="1"/>
 									  </Border.Effect>
 									  <Border.Styles>
 										  <Style Selector="Border">
@@ -58,14 +58,12 @@
 						  HorizontalAlignment="Right"
 						  Command="{TemplateBinding Command}"
 						  CommandParameter="{TemplateBinding CommandParameter}"
-						  Background="#5DA5B9"
-							BorderBrush="#60A8BB"
-							BorderThickness="3"
+									Background="#1D8943"
 									Foreground="White"
 						  >
-						  <Button.Effect>
-							  <DropShadowEffect BlurRadius="5" Color="#5DA5B9" OffsetX="0" OffsetY="1"/>
-						  </Button.Effect>
+					  <Button.Effect>
+						  <DropShadowEffect BlurRadius="5" Color="#1D8943" OffsetX="0" OffsetY="1"/>
+					  </Button.Effect>
 					  <Button.Styles>
 						  <Style Selector="Button:pointerover">
 							  <Setter Property="Opacity" Value="0.9"/>

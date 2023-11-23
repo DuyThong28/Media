@@ -50,6 +50,8 @@ namespace Media.Views
             viewModel = new MainWindowViewModel();
             DataContext = viewModel;
             _videoViewer = this.Get<Media.ViewModels.VideoView>("VideoViewer");
+            viewModel.SettingScreenViewModel.OpenSongFolder = ReactiveCommand.Create(() => ChooseSongPath());
+            viewModel.SettingScreenViewModel.OpenVideoFolder = ReactiveCommand.Create(() => ChooseVideoPath());
             libraryScreen = new LibraryScreenControl() { DataContext = viewModel.LibraryScreenViewModel };
             videoScreen = new ListVideoSreenControl() { DataContext = viewModel.ListVideoScreenViewModel };
             homeScreen = new HomeScreenControl() { DataContext = viewModel.HomeScreenViewModel };
@@ -68,12 +70,31 @@ namespace Media.Views
             libraryScreen.SelectPlaylist += LibraryScreen_SelectPlaylist;
             //MediaHelper.UpdatePlayingScreen += MediaHelper_UpdatePlayingScreen;
             MediaHelper.OpenVideoScreen += ListVideoSreenControl_OpenVideoScreen;
-            SettingScreenViewModel.OpenSongFolder = ReactiveCommand.Create(() => ChooseSongPath());
-            SettingScreenViewModel.OpenVideoFolder = ReactiveCommand.Create(() => ChooseVideoPath());
+            MediaHelper.TurnPlayingScreen += MediaHelper_TurnPlayingScreen;
+        
             HomeScreenControl.SeeAllSongs += HomeScreenControl_SeeAllSongs;
             HomeScreenControl.SeeAllVideos += HomeScreenControl_SeeAllVideos;
             PlaylistScreenViewModel.BackEvent += PlaylistScreenViewModel_BackEvent;
             mainViewScreen.Content = mainScreen;
+        }
+
+        private void MediaHelper_TurnPlayingScreen(object? sender, EventArgs e)
+        {
+           
+                if (PlayMedia.IsPlayVideo)
+                {
+                if (mainViewScreen.Content == playingScreen)
+                {
+                    videoDisplay.IsVisible = true;
+                    controlPanel.IsVisible = true;
+                    VideoViewer.IsVisible = true;
+                }
+                } else
+                {
+                    videoDisplay.IsVisible = false;
+                    controlPanel.IsVisible = false;
+                    VideoViewer.IsVisible = false;
+                }
         }
 
         public void DefineMainScreenGrid()
@@ -104,6 +125,8 @@ namespace Media.Views
                 _videoViewer.MediaPlayer.SetHandle(_videoViewer.hndl);
             }
             videoDisplay.IsVisible = false;
+            controlPanel.IsVisible = false;
+            VideoViewer.IsVisible = false;
             //controlPanel.IsVisible = false;
             //videoPlayingScreen.IsVisible = false;
         }
@@ -134,6 +157,7 @@ namespace Media.Views
             screen.Content = videoScreen;
         }
 
+
         private void HomeScreenControl_SeeAllSongs(object? sender, EventArgs e)
         {
             //homeScreen.IsVisible = false;
@@ -155,6 +179,7 @@ namespace Media.Views
             //controlPanel.IsVisible = true;
             videoDisplay.IsVisible = true;
             controlPanel.IsVisible = true;
+            VideoViewer.IsVisible = true;
         }
 
         private void MediaHelper_UpdatePlayingScreen(object? sender, EventArgs e)
@@ -188,6 +213,7 @@ namespace Media.Views
             {
                     playlistScreen = new PlaylistScreenControl() { DataContext = viewModel.PlaylistScreenViewModel };
                 (playlistScreen.DataContext as PlaylistScreenViewModel).Playlist = selectedPlaylist;
+                    MediaHelper.UpdateScreen(sender, e);
             }
             }
             screen.Content = playlistScreen;
@@ -209,6 +235,7 @@ namespace Media.Views
             //if(PlayMedia.IsPlayVideo==true) {
             //controlPanel.IsVisible = !controlPanel.IsVisible;
             //}
+            viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0 : 1;
             if (mainViewScreen.Content == mainScreen)
             {    
                 if(PlayMedia.IsPlayVideo == false)
@@ -216,11 +243,13 @@ namespace Media.Views
                     mainViewScreen.Content = playingScreen;
                     videoDisplay.IsVisible = false;
                     controlPanel.IsVisible = false;
+                    VideoViewer.IsVisible = false;
                 }
                 else
                 {
                     videoDisplay.IsVisible = !videoDisplay.IsVisible;
                     controlPanel.IsVisible = !controlPanel.IsVisible;
+                    VideoViewer.IsVisible = !VideoViewer.IsVisible;
                 }
             } else
             {
@@ -237,6 +266,7 @@ namespace Media.Views
             {
                 case "homeBtn":
                     screen.Content = homeScreen;
+                    viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0:1;
                     //homeScreen.IsVisible = true;
                     //musicScreen.IsVisible = false;
                     //videoScreen.IsVisible = false;
@@ -248,6 +278,7 @@ namespace Media.Views
                     break;
                 case "musicBtn":
                     screen.Content = musicScreen;
+                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     //homeScreen.IsVisible = false;
                     //musicScreen.IsVisible = true;
                     //videoScreen.IsVisible = false;
@@ -259,6 +290,7 @@ namespace Media.Views
                     break;
                 case "videoBtn":
                     screen.Content = videoScreen;
+                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     //homeScreen.IsVisible = false;
                     //musicScreen.IsVisible = false;
                     //videoScreen.IsVisible = true;
@@ -270,6 +302,7 @@ namespace Media.Views
                     break;
                 case "searchBtn":
                     screen.Content = searchScreen;
+                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     //homeScreen.IsVisible = false;
                     //musicScreen.IsVisible = false;
                     //videoScreen.IsVisible = false;
@@ -281,6 +314,7 @@ namespace Media.Views
                     break;
                 case "libraryBtn":
                     screen.Content = libraryScreen;
+                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     //homeScreen.IsVisible = false;
                     //musicScreen.IsVisible = false;
                     //videoScreen.IsVisible = false;
@@ -292,6 +326,7 @@ namespace Media.Views
                     break;
                 case "settingBtn":
                     screen.Content = settingScreen;
+                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     //homeScreen.IsVisible = false;
                     //musicScreen.IsVisible = false;
                     //videoScreen.IsVisible = false;
@@ -303,6 +338,7 @@ namespace Media.Views
                     break;
                 default:
                     screen.Content = homeScreen;
+                    viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0 : 1;
                     //homeScreen.IsVisible = true;
                     //musicScreen.IsVisible = false;
                     //videoScreen.IsVisible = false;
@@ -322,7 +358,7 @@ namespace Media.Views
             var files = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
             {
                 Title = "Select music folder",
-                AllowMultiple = false
+                AllowMultiple = false,
             });
 
             if (files.Count >= 1)

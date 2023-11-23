@@ -18,7 +18,7 @@ namespace Media.ViewModels
         private ObservableCollection<MediaItem> searchResults;
         private MediaItem selectedMedia;
         private string searchText;
-        private List<MediaItem> allMedias = MediaHelper.AllMedias;
+        private List<MediaItem> allMedias;
         public SearchScreenViewModel()
         {
             searchResults = new ObservableCollection<MediaItem>();
@@ -56,7 +56,7 @@ namespace Media.ViewModels
 
         private async void DoSearch(string s)
         {
-            SearchResults.Clear();
+          SearchResults.Clear();
             SearchResults = new ObservableCollection<MediaItem>(ReturnMediaListsSearchedByText(s));
         }
 

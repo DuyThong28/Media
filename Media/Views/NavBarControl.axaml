@@ -2,43 +2,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
+             mc:Ignorable="d" Width="250"
 			 Name="navBar"
 			 xmlns:vm="using:Media.ViewModels"
 			 x:DataType="vm:NavBarControlViewModel"
              x:Class="Media.Views.NavBarControl">
-	<Border  Background="White"
+	<UserControl.Resources>
+		<ControlTheme x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Panel>
+						<Border Background="{TemplateBinding Background}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+									>
+						</Border>
+						
+						<ContentPresenter Name="PART_ContentPresenter"
+						  ContentTemplate="{TemplateBinding ContentTemplate}"
+							Content="{TemplateBinding Content}"
+						  FontWeight="{TemplateBinding FontWeight}"
+						  FontSize="{TemplateBinding FontSize}"
+						  Padding="{TemplateBinding Padding}"
+						  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+						  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+					</Panel>
+				</ControlTemplate>
+			</Setter>
+		</ControlTheme>
+	</UserControl.Resources>
+	<Border  Background="#DB3E3E3E"
 	 Margin="10,10,0,10" CornerRadius="10" ClipToBounds="True">
 		<!--<Border.Effect>
-			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" OffsetX="0" OffsetY="0"></DropShadowEffect>
+			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"></DropShadowEffect>
 		</Border.Effect>-->
 		<Grid>
-			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" CornerRadius="8" Opacity="0.7">
-			</Border>
+			<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" CornerRadius="8" Opacity="0.1">
+			</Border>-->
+
+			<Border Grid.Row="1" Background="Black" Opacity="0.3"></Border>
 			<StackPanel>
-				<StackPanel Margin="2" Height="130" HorizontalAlignment="Center" Orientation="Horizontal">
-					<StackPanel.Effect>
+				<!--<StackPanel Margin="2" Height="130" HorizontalAlignment="Center" Orientation="Horizontal">
+					--><!--<StackPanel.Effect>
 							<DropShadowEffect BlurRadius="2" Color="#8F9597" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
-					</StackPanel.Effect>
+					</StackPanel.Effect>--><!--
 					<Border Height="100" VerticalAlignment="Top">
-						<Border.Effect>
-							<DropShadowEffect BlurRadius="1" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" OffsetX="0" OffsetY="0,1"></DropShadowEffect>
-					</Border.Effect>
+						--><!--<Border.Effect>
+							<DropShadowEffect BlurRadius="1" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0,1"></DropShadowEffect>
+					</Border.Effect>--><!--
 						<Image VerticalAlignment="Center" Source="/Assets/Logo.png" Height="70" Width="" Stretch="UniformToFill"></Image>
 					</Border>
-					<!--<Label Content="Media" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="40" Foreground="#5DA5B9">
+					--><!--<Label Content="Media" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="40" Foreground="#5DA5B9">
 				<Label.Effect>
 							<DropShadowEffect BlurRadius="1" Color="#E3F0F8" OffsetX="0" OffsetY="0,1"></DropShadowEffect>
 					</Label.Effect>	
-				</Label>-->
-				</StackPanel>
-				<ListBox DoubleTapped="ListBox_DoubleTapped" Background="Transparent" SelectedIndex="0"  SelectionChanged="ListBox_SelectionChanged">
+				</Label>--><!--
+				</StackPanel>-->
+				<ListBox DoubleTapped="ListBox_DoubleTapped" Background="Transparent" SelectedIndex="0" Margin="0,10,0,0" SelectionChanged="ListBox_SelectionChanged">
 					<ListBox.Styles>
+				
+						<Style Selector="ListBoxItem">
+							<Setter Property="Background" Value="Transparent"></Setter>
+							<Setter Property="Padding" Value="25,8"></Setter>
+							<Setter	Property="CornerRadius" Value="30"></Setter>
+							<Setter Property="Margin" Value="10,4"></Setter>
+						</Style>
 						<Style Selector="ListBoxItem:pointerover">
-							<Setter	Property="CornerRadius" Value="8"></Setter>
+							<Setter Property="Background" Value="#333333"></Setter>
+							<!--<Setter Property="Effect">
+													<DropShadowEffect BlurRadius="5" Color="#5A5A5A" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
+												</Setter>-->
 						</Style>
 						<Style Selector="ListBoxItem:selected">
-							<Setter	Property="CornerRadius" Value="8"></Setter>
+							<Setter Property="Background" Value="#FF515151"></Setter>
+							<Setter Property="Effect">
+													<DropShadowEffect BlurRadius="5" Color="#494C4D" OffsetX="0" OffsetY="0"></DropShadowEffect>
+												</Setter>
 						</Style>
 					</ListBox.Styles>
 					<ListBoxItem Name="homeBtn">
@@ -47,24 +85,24 @@
 								Classes.checked="{Binding ElementName=homeBtn, Path=IsSelected}"
 								Classes.unChecked="{Binding ElementName=homeBtn, Path=!IsSelected}"
 								>
-								<Image.Effect>
+								<!--<Image.Effect>
 									<DropShadowEffect BlurRadius="1" Color="Black" OffsetX="0" OffsetY="0"></DropShadowEffect>
-								</Image.Effect>
+								</Image.Effect>-->
 								<Image.Styles>
 									<Style Selector="Image.unChecked">
 										<Setter Property="Source" Value="/Assets/Icons/home.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 									<Style Selector="Image.checked">
 										<Setter Property="Source" Value="/Assets/Icons/home-hover.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 								</Image.Styles>
 							</Image>
 
-							<Label Name="home" FontWeight="Bold">Trang chủ</Label>
+							<Label Name="home" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0" FontWeight="Medium">Trang Chủ</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="searchBtn">
@@ -73,23 +111,23 @@
 								Classes.checked="{Binding ElementName=searchBtn, Path=IsSelected}"
 								Classes.unChecked="{Binding ElementName=searchBtn, Path=!IsSelected}"
 								>
-								<Image.Effect>
+								<!--<Image.Effect>
 									<DropShadowEffect BlurRadius="1" Color="Black" OffsetX="0" OffsetY="0"></DropShadowEffect>
-								</Image.Effect>
+								</Image.Effect>-->
 								<Image.Styles>
 									<Style Selector="Image.unChecked">
 										<Setter Property="Source" Value="/Assets/Icons/search.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 									<Style Selector="Image.checked">
 										<Setter Property="Source" Value="/Assets/Icons/search-hover.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label  FontWeight="Bold">Tìm kiếm</Label>
+							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Tìm Kiếm</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="musicBtn">
@@ -98,23 +136,23 @@
 								Classes.checked="{Binding ElementName=musicBtn, Path=IsSelected}"
 								Classes.unChecked="{Binding ElementName=musicBtn, Path=!IsSelected}"
 								>
-								<Image.Effect>
+								<!--<Image.Effect>
 									<DropShadowEffect BlurRadius="1" Color="Black" OffsetX="0" OffsetY="0"></DropShadowEffect>
-								</Image.Effect>
+								</Image.Effect>-->
 								<Image.Styles>
 									<Style Selector="Image.unChecked">
 										<Setter Property="Source" Value="/Assets/Icons/music.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 									<Style Selector="Image.checked">
 										<Setter Property="Source" Value="/Assets/Icons/music-hover.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label  FontWeight="Bold">Âm nhạc</Label>
+							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Âm Nhạc</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="videoBtn" Grid.Row="3">
@@ -123,23 +161,23 @@
 								Classes.checked="{Binding ElementName=videoBtn, Path=IsSelected}"
 								Classes.unChecked="{Binding ElementName=videoBtn, Path=!IsSelected}"
 								>
-								<Image.Effect>
+								<!--<Image.Effect>
 									<DropShadowEffect BlurRadius="1" Color="Black" OffsetX="0" OffsetY="0"></DropShadowEffect>
-								</Image.Effect>
+								</Image.Effect>-->
 								<Image.Styles>
 									<Style Selector="Image.unChecked">
 										<Setter Property="Source" Value="/Assets/Icons/video.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 									<Style Selector="Image.checked">
 										<Setter Property="Source" Value="/Assets/Icons/video-hover.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label FontWeight="Bold">Video</Label>
+							<Label FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Video</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="libraryBtn">
@@ -148,23 +186,23 @@
 						Classes.checked="{Binding ElementName=libraryBtn, Path=IsSelected}"
 						Classes.unChecked="{Binding ElementName=libraryBtn, Path=!IsSelected}"
 								>
-								<Image.Effect>
+								<!--<Image.Effect>
 									<DropShadowEffect BlurRadius="1" Color="Black" OffsetX="0" OffsetY="0"></DropShadowEffect>
-								</Image.Effect>
+								</Image.Effect>-->
 								<Image.Styles>
 									<Style Selector="Image.unChecked">
 										<Setter Property="Source" Value="/Assets/Icons/Library.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 									<Style Selector="Image.checked">
 										<Setter Property="Source" Value="/Assets/Icons/Library-hover.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label  FontWeight="Bold">Danh sách phát</Label>
+							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Thư Viện</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="settingBtn">
@@ -173,23 +211,23 @@
 								Classes.checked="{Binding ElementName=settingBtn, Path=IsSelected}"
 								Classes.unChecked="{Binding ElementName=settingBtn, Path=!IsSelected}"
 								>
-								<Image.Effect>
+								<!--<Image.Effect>
 									<DropShadowEffect BlurRadius="1" Color="Black" OffsetX="0" OffsetY="0"></DropShadowEffect>
-								</Image.Effect>
+								</Image.Effect>-->
 								<Image.Styles>
 									<Style Selector="Image.unChecked">
 										<Setter Property="Source" Value="/Assets/Icons/setting.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 									<Style Selector="Image.checked">
 										<Setter Property="Source" Value="/Assets/Icons/setting-hover.png"></Setter>
-										<Setter Property="Width" Value="20"></Setter>
-										<Setter Property="Height" Value="20"></Setter>
+										<Setter Property="Width" Value="25"></Setter>
+										<Setter Property="Height" Value="25"></Setter>
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label FontWeight="Bold">Cài đặt</Label>
+							<Label FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Cài Đặt</Label>
 						</DockPanel>
 					</ListBoxItem>
 				</ListBox>

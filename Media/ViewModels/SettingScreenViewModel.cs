@@ -18,8 +18,8 @@ namespace Media.ViewModels
         public SettingScreenViewModel()
         {
         }
-        public static ReactiveCommand<Unit, Unit> OpenSongFolder { get; set; }
-        public static ReactiveCommand<Unit, Unit> OpenVideoFolder { get; set; }
+        public  ReactiveCommand<Unit, Unit> OpenSongFolder { get; set; }
+        public  ReactiveCommand<Unit, Unit> OpenVideoFolder { get; set; }
     }
 
 }

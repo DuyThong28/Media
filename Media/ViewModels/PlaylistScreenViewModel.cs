@@ -21,6 +21,7 @@ namespace Media.ViewModels
         private MediaItem selectedItem;
         private string mainColor = "#4E97D1";
         private IImage backGroundImage;
+        private string dateAddted;
 
         public IImage BackGroundImage
         {
@@ -62,12 +63,20 @@ namespace Media.ViewModels
             set=> this.RaiseAndSetIfChanged(ref countMedia, value); 
         }
 
+        public string DateAddted
+        {
+            get => dateAddted;
+            set=> this.RaiseAndSetIfChanged(ref  dateAddted, value);
+        }
+
         public MediaItem SelectedItem { get => selectedItem; set => this.RaiseAndSetIfChanged(ref selectedItem,value); }
 
         private void UpdateMediaControl(object sender, EventArgs e)
         {
             if (playlist != null)
             {
+
+                ListMedia = Playlist.ListMedia;
                 if (MediaHelper.isPlayingPlaylist == true && MediaHelper.playListPlayingId == playlist.PlayListID)
                 {
                     IsPlay = PlayMedia.IsPlay;
@@ -76,15 +85,14 @@ namespace Media.ViewModels
                 {
                     IsPlay = false;
                 }
-                if(selectedItem != MediaHelper.selectPlaylistItem(playlist)) { 
                     SelectedItem = MediaHelper.selectPlaylistItem(playlist);
-                }
             }
         }
         private void UpdateScreen()
         {
-            //ListMedia = Playlist.ListMedia;
-            ListMedia = MediaHelper.listSongs;
+            ListMedia = Playlist.ListMedia;
+            //ListMedia = MediaHelper.listSongs;
+            DateAddted = Playlist.DateCreated;
             PlayListName = Playlist.PlayListName;
             CountMedia = Playlist.ListMedia.Count.ToString();
             BackGroundImage = Playlist.BackGroundImage;

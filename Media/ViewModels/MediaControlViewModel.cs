@@ -135,12 +135,9 @@ namespace Media.ViewModels
                 {
                     PlayMedia.setCurrentPosition(0);
                     PlayMedia.playSong();
-                } else if(PlayMedia.Repeat == RepeatMode.All)
-                {
-                    PlayNext();
                 } else
                 {
-                    PlayMedia.stopSong();
+                    PlayNext();
                 }
             }
 
@@ -192,6 +189,7 @@ namespace Media.ViewModels
                 }
             }
         }
+
 
         private void Repeat()
         {

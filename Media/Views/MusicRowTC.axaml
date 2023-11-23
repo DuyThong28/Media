@@ -9,7 +9,7 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-		  <Border Name="item" CornerRadius="5" ClipToBounds="True" Padding="2">
+		  <Border Name="item"  Padding="3">
 			  <Border.Styles>
 				  <Style Selector="Border">
 					  <Setter Property="Tag" Value="False"></Setter>
@@ -24,19 +24,18 @@
 			  <Grid>
 				  <Grid.ColumnDefinitions>
 					  <ColumnDefinition Width="50"></ColumnDefinition>
-					  <ColumnDefinition></ColumnDefinition>
+					  <ColumnDefinition Width="2*"></ColumnDefinition>
+					  <ColumnDefinition Width="*"></ColumnDefinition>
 					  <ColumnDefinition Width="50"></ColumnDefinition>
 				  </Grid.ColumnDefinitions>
 				  <Grid Grid.Column="0">
-					  <Border CornerRadius="5" ClipToBounds="True" Height="50" Width="50" BorderBrush="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" BorderThickness="1">
+					  <Border CornerRadius="5" ClipToBounds="True" Height="50" Width="50">
 						  <Border.Effect>
-							  <DropShadowEffect BlurRadius="15" Color="#5DA5B9" OffsetX="0" OffsetY="0,5"></DropShadowEffect>
+							  <DropShadowEffect BlurRadius="10" Color="Black" OffsetX="0" OffsetY="1"></DropShadowEffect>
 						  </Border.Effect>
-						  <Border CornerRadius="4" ClipToBounds="True" Height="49" Width="49">
 							  <Image Source="{TemplateBinding ImageSource}" Stretch="UniformToFill"></Image>
-						  </Border>
 					  </Border>
-					  <Border CornerRadius="5" ClipToBounds="True" Height="50" Width="50" IsVisible="{Binding ElementName=item, Path=Tag}" Opacity="0.4" Background="black"></Border>
+					  <Border  CornerRadius="5" ClipToBounds="True" Height="50" Width="50" IsVisible="{Binding ElementName=item, Path=Tag}" Opacity="0.4" Background="black"></Border>
 					  <Button x:Name="btn_Play"
 								Background="Transparent"
 								IsVisible="{Binding ElementName=item, Path=Tag}"
@@ -65,7 +64,7 @@
 						  </PathIcon>
 					  </Button>
 				  </Grid>
-				  <StackPanel Grid.Column="1" Margin="5" Background="Transparent">
+				  <StackPanel Grid.Column="1" Margin="30,5,5,5" Background="Transparent">
 					  <TextBlock x:Name="songName"
 								 HorizontalAlignment="Stretch"
 								 TextTrimming="CharacterEllipsis"
@@ -73,7 +72,7 @@
 							 Text="{TemplateBinding MediaName}">
 						  <TextBlock.Styles>
 							  <Style Selector="TextBlock.checked">
-								  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
+								  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"></Setter>
 							  </Style>
 							  <Style Selector="TextBlock.unChecked">
 								  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"></Setter>
@@ -82,7 +81,8 @@
 					  </TextBlock>
 					  <TextBlock x:Name="nameAuthor" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.5" VerticalAlignment="Top" FontSize="14" Text="{TemplateBinding AuthorName}" HorizontalAlignment="Stretch" TextTrimming="CharacterEllipsis"></TextBlock>
 				  </StackPanel>
-				  <Label Grid.Column="2" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.5" VerticalAlignment="Center" FontSize="14" Content="{TemplateBinding DurationText}"></Label>
+				  <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5" Foreground="White" Content="{TemplateBinding DateAdded}"></Label>
+				  <Label Grid.Column="3" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.5" VerticalAlignment="Center" FontSize="14" Content="{TemplateBinding DurationText}"></Label>
 			  </Grid>
 		  </Border>
       </ControlTemplate>

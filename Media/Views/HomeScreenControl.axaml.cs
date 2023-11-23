@@ -1,10 +1,13 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using Media.Models;
 using Media.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Media.Views
 {
@@ -56,6 +59,22 @@ namespace Media.Views
                 MediaItem mediaItem = list[0] as MediaItem;
                 Playlist playlist = list[1] as Playlist;
                 playlist.AddMedia(mediaItem);              
+            }
+        }
+
+        private void ListBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
+        {
+            ListBox listBox = sender as ListBox;
+            DoSomethingAfterTimeoutAsync(listBox);
+        }
+
+        private async Task DoSomethingAfterTimeoutAsync(ListBox listBox)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(5));
+            Random random = new Random();
+            if (listBox.SelectedIndex != -1)
+            {
+                listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
             }
         }
     }

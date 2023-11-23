@@ -37,14 +37,14 @@
 			</Setter>
 		</ControlTheme>
 	</UserControl.Resources>
-	<Border  Background="White"
+	<Border  Background="#DB3E3E3E"
 		 Margin="10" CornerRadius="10" ClipToBounds="True">
 		<!--<Border.Effect>
-			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" OffsetX="0" OffsetY="0"></DropShadowEffect>
+			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"></DropShadowEffect>
 		</Border.Effect>-->
 		<Grid>
-			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}" CornerRadius="8" Opacity="0.7">
-			</Border>
+
+			<Border Grid.Row="1" Background="Black" Opacity="0.3"></Border>
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="60"></RowDefinition>
@@ -53,9 +53,6 @@
 				</Grid.RowDefinitions>
 				<Grid  Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
 					<Border>
-						<Border.Effect>
-							<DropShadowEffect BlurRadius="5" Color="#5DA5B9" OffsetX="0" OffsetY="1"/>
-						</Border.Effect>
 						<TextBox Grid.Row="1" Text="{Binding SearchText}"  Watermark="Bạn muốn nghe gi?" >
 						</TextBox>
 					</Border>
@@ -73,25 +70,25 @@
 							</Style>
 							<Style Selector="ListBoxItem:selected/template/ContentPresenter">
 								<Setter Property="Background" Value="Transparent"></Setter>
-								<Setter Property="Foreground" Value="White"></Setter>
+								<Setter Property="Foreground" Value="#1ED760"></Setter>
 							</Style>
 							<Style Selector="ListBoxItem">
 								<Setter Property="Padding" Value="6,5,5,5"></Setter>
 								<Setter Property="Margin" Value="2,0,2,0"></Setter>
 							</Style>
 							<Style Selector="ListBoxItem:pointerover">
-								<Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
+								<Setter Property="Background" Value="#2A2A2A"></Setter>
 								<Setter	Property="CornerRadius" Value="5"></Setter>
-								<Setter Property="Effect">
-									<DropShadowEffect BlurRadius="5" Color="#5DA5B9" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
-								</Setter>
+								<!--<Setter Property="Effect">
+													<DropShadowEffect BlurRadius="5" Color="#5A5A5A" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
+												</Setter>-->
 							</Style>
 							<Style Selector="ListBoxItem:selected">
-								<Setter Property="Background" Value="#5DA5B9"></Setter>
+								<Setter Property="Background" Value="#FF515151"></Setter>
 								<Setter	Property="CornerRadius" Value="5"></Setter>
-								<Setter Property="Effect">
-									<DropShadowEffect BlurRadius="5" Color="#494C4D" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
-								</Setter>
+								<!--<Setter Property="Effect">
+													<DropShadowEffect BlurRadius="5" Color="#494C4D" OffsetX="0" OffsetY="0"></DropShadowEffect>
+												</Setter>-->
 							</Style>
 						</ListBox.Styles>
 						<ListBox.ItemTemplate>
@@ -101,6 +98,7 @@
 												   ImageSource="{Binding Image}" 
 												   DurationText="{Binding DurationText}"
 												   Command="{Binding PlaySongCommand}"
+												   DateAdded="{Binding DateAdded}"
 												   />
 							</DataTemplate>
 						</ListBox.ItemTemplate>
