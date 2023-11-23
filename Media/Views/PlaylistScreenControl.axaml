@@ -17,12 +17,16 @@
 			<Setter Property="Template">
 				<ControlTemplate>
 					<Panel>
-						<Border Background="Black"
+						<Border Background="{TemplateBinding Background}"
 								Width="20"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="1"
 								Height="20">
 						</Border>
 						<Label x:Name="PART_ContentPresenter"
 										  Content="{TemplateBinding Content}"
+							   Height="{TemplateBinding Height}"
+							   Width="{TemplateBinding Width}"
 										  />
 					</Panel>
 				</ControlTemplate>
@@ -159,39 +163,57 @@
 									<Border Background="Black" Opacity="0.1">
 									</Border>
 									<Border BorderBrush="#747474" BorderThickness="0,0,0,0.5" Margin="20,0,20,0">
-										<Button Background="Transparent" HorizontalAlignment="Left"
-												VerticalAlignment="Center"
-												Command="{Binding PlayMediaCommand}">
-											<Button.Effect>
-												<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="5"/>
-											</Button.Effect>
-											<Image
-													Classes.checked="{Binding !IsPlay}"
-													Classes.unChecked="{Binding IsPlay}">
-												<Image.Styles>
-													<Style Selector="Image.checked">
-														<Setter Property="Height" Value="60"></Setter>
-														<Setter Property="Width" Value="60"></Setter>
-														<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
-													</Style>
-													<Style Selector="Image.checked:pointerover">
-														<Setter Property="Height" Value="63"></Setter>
-														<Setter Property="Width" Value="63"></Setter>
-														<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
-													</Style>
-													<Style Selector="Image.unChecked">
-														<Setter Property="Height" Value="60"></Setter>
-														<Setter Property="Width" Value="60"></Setter>
-														<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-													</Style>
-													<Style Selector="Image.unChecked:pointerover">
-														<Setter Property="Height" Value="63"></Setter>
-														<Setter Property="Width" Value="63"></Setter>
-														<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-													</Style>
-												</Image.Styles>
-											</Image>
-										</Button>
+										<Grid>
+											<Button Background="Black" HorizontalAlignment="Left"
+													VerticalAlignment="Center"
+													Height="60"
+													Width="60"
+													CornerRadius="60"
+													Padding="5"
+													Command="{Binding PlayMediaCommand}">
+												<Button.Effect>
+													<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="5"/>
+												</Button.Effect>
+												<Image
+														Classes.checked="{Binding !IsPlay}"
+														Classes.unChecked="{Binding IsPlay}">
+													<Image.Styles>
+														<Style Selector="Image.checked">
+															<Setter Property="Height" Value="60"></Setter>
+															<Setter Property="Width" Value="60"></Setter>
+															<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
+														</Style>
+														<Style Selector="Image.checked:pointerover">
+															<Setter Property="Height" Value="63"></Setter>
+															<Setter Property="Width" Value="63"></Setter>
+															<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
+														</Style>
+														<Style Selector="Image.unChecked">
+															<Setter Property="Height" Value="60"></Setter>
+															<Setter Property="Width" Value="60"></Setter>
+															<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
+														</Style>
+														<Style Selector="Image.unChecked:pointerover">
+															<Setter Property="Height" Value="63"></Setter>
+															<Setter Property="Width" Value="63"></Setter>
+															<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
+														</Style>
+													</Image.Styles>
+												</Image>
+											</Button>
+											<Button CornerRadius="5" Padding="10" Height="35" HorizontalAlignment="Right" Background="Transparent">
+												<PathIcon Data="{StaticResource options_regular}" Height="30" Width="60">
+													<PathIcon.Styles>
+														<Style Selector="PathIcon">
+															<Setter Property="Opacity" Value="0.5"></Setter>
+														</Style>
+														<Style Selector="PathIcon:pointerover">
+															<Setter Property="Opacity" Value="0.8"></Setter>
+														</Style>
+													</PathIcon.Styles>
+												</PathIcon>
+											</Button>
+										</Grid>
 									</Border>
 								</Grid>
 							</Grid>
@@ -318,7 +340,7 @@
 								</Button.Styles>
 								<PathIcon Height="15" Width="15" FontWeight="Bold" Margin="0,1,0,0" Data="{StaticResource arrow_left_regular}"></PathIcon>
 							</Button>
-							<Button Name="playBtn" IsVisible="False" Background="Transparent" HorizontalAlignment="Left"
+							<Button Name="playBtn" IsVisible="False" Background="Black" HorizontalAlignment="Left"
 										VerticalAlignment="Center"
 									Grid.Column="1"
 										Command="{Binding PlayMediaCommand}">
@@ -354,6 +376,18 @@
 									<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
 								</TextBlock.Effect>
 							</TextBlock>
+							<Button CornerRadius="5" Grid.Column="2" Padding="10" Height="30" HorizontalAlignment="Right" Margin="0,0,15,0" Background="Transparent" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" >
+								<PathIcon Data="{StaticResource options_regular}" Height="20" Width="30">
+									<PathIcon.Styles>
+										<Style Selector="PathIcon">
+											<Setter Property="Opacity" Value="0.5"></Setter>
+										</Style>
+										<Style Selector="PathIcon:pointerover">
+											<Setter Property="Opacity" Value="0.8"></Setter>
+										</Style>
+									</PathIcon.Styles>
+								</PathIcon>
+							</Button>
 						</Grid>
 					</Grid>
 				</Panel>
