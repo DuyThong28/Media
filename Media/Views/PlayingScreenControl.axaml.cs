@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Media.Models;
 using Media.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace Media.Views
 {
@@ -12,5 +13,11 @@ namespace Media.Views
             InitializeComponent();
             listBoxMedia.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
         }
+
+        private void PlayNext(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MediaHelper.PlayNextInQueue(sender, e);
+        }
+
     }
 }

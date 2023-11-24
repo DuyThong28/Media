@@ -241,6 +241,7 @@ namespace Media.Views
                 if(PlayMedia.IsPlayVideo == false)
                 {
                     mainViewScreen.Content = playingScreen;
+                    MediaHelper.UpdateScreen(sender,e);
                     videoDisplay.IsVisible = false;
                     controlPanel.IsVisible = false;
                     VideoViewer.IsVisible = false;

@@ -77,5 +77,10 @@ namespace Media.Views
                 listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
             }
         }
+
+        private void PlayNext(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MediaHelper.PlayNextInQueue(sender, e);
+        }
     }
 }

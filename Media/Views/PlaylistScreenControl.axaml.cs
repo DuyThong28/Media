@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using Media.Models;
 using Media.ViewModels;
@@ -30,6 +31,14 @@ namespace Media.Views
         private void MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
            MediaHelper.MenuItem_Click(sender, e);
+        }
+        private void AddMediaQueue_Click(object sender, RoutedEventArgs e)
+        {
+            MediaHelper.AddMediaQueue_Click(sender, e);
+        }
+        private void PlayNext(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MediaHelper.PlayNextInQueue(sender, e);
         }
     }
 }

@@ -149,7 +149,7 @@
 																</MenuItem.Icon>
 															</MenuItem>
 															
-															<MenuItem Header="Phát tiếp theo">
+															<MenuItem Header="Phát tiếp theo" Click="PlayNext">
 																<MenuItem.Icon>
 																	<PathIcon Width="20" Height="20" Data="{StaticResource arrow_next_regular}"/>
 																</MenuItem.Icon>
