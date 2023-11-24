@@ -488,6 +488,15 @@ namespace Media.ViewModels
 
             UpdateScreen(sender, e);
         }
+        public static void PlayNextInQueue(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+
+
+
+
 
         public static void MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {

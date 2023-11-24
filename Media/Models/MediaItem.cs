@@ -31,7 +31,7 @@ namespace Media.Models
         private MediaTypes mediaType;
         private TagLib.File others;
         private bool isPlay;
-        //private bool mediaAdded = false;
+        private bool mediaAdded = false;
         public bool IsPlay
         {
             get { return isPlay; }
@@ -152,15 +152,12 @@ namespace Media.Models
             get; set;
         }
         public void PlayMediaCommand()
-        {          
+        {
             //if (!MediaAdded)
             //{
             //    MediaAdded = true;
             //    MediaHelper.PlayQueue.Add(this);
             //}
-
-
-            
 
             if (PlayMedia.Path != this.filePath)
             {
@@ -202,7 +199,7 @@ namespace Media.Models
             }
         }
         public string PlaylistID { get => playlistID; set => playlistID = value; }
-        //public bool MediaAdded { get => mediaAdded; set => mediaAdded = value; }
+        public bool MediaAdded { get => mediaAdded; set => mediaAdded = value; }
 
         public MediaItem(string path)
         {
