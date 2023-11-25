@@ -20,7 +20,7 @@ namespace Media.ViewModels
     public class PlayingScreenViewModel:ViewModelBase
     {
         public MediaItem _media = null;
-        private IImage imageSource;
+        private IImage imageSource = ImageHelper.LoadFromResource(new Uri("avares://Media/Assets/Icons/defaultImage.jpg"));
         private string songName;
         private string nameAuthor;
         private bool isPlay;

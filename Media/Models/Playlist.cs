@@ -53,8 +53,16 @@ namespace Media.Models
 
         public Playlist(string id = null, string name = "Unnamed", string backroundImageFileName = null, List<MediaItem> listMedia = null)
         {
-            string curDir = Environment.CurrentDirectory;
-            if (backroundImageFileName == null) backroundImageFileName = curDir.Remove(curDir.Length-17, 17)+ @"\Assets\Icons\defaultImage.jpg";
+            string curDir = Environment.CurrentDirectory.Trim();
+            if (backroundImageFileName == null) 
+            {
+            #if DEBUG
+                backroundImageFileName = curDir.Remove(curDir.Length - 17, 17) + @"\Assets\Icons\defaultImage.jpg"; 
+
+            #else
+                backroundImageFileName = curDir.Remove(curDir.Length - 18, 18) + @"\Assets\Icons\defaultImage.jpg";
+            #endif
+            }
             if (id == null) playListID = Guid.NewGuid().ToString("N");
             else playListID = id;
             playListName = name;
