@@ -69,6 +69,7 @@
 									<DropShadowEffect BlurRadius="10" Color="Black" OffsetX="0" OffsetY="0"></DropShadowEffect>
 								</Border.Effect>
 								<Border Classes.rotate="{Binding IsPlay}"
+										Classes.noRotate="{Binding !IsPlay}"
 										ClipToBounds="True" Background="Transparent">
 									<Border.Effect>
 										<DropShadowEffect BlurRadius="5" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"/>
@@ -218,14 +219,14 @@
 										<Setter Property="Margin" Value="2,0,2,0"></Setter>
 									</Style>
 									<Style Selector="ListBoxItem:pointerover">
-										<Setter Property="Background" Value="#2A2A2A"></Setter>
+										<Setter Property="Background" Value="#FF515151"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
 										<!--<Setter Property="Effect">
 													<DropShadowEffect BlurRadius="5" Color="#5A5A5A" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
 												</Setter>-->
 									</Style>
 									<Style Selector="ListBoxItem:selected">
-										<Setter Property="Background" Value="#FF515151"></Setter>
+										<Setter Property="Background" Value="#2A2A2A"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
 										<!--<Setter Property="Effect">
 													<DropShadowEffect BlurRadius="5" Color="#494C4D" OffsetX="0" OffsetY="0"></DropShadowEffect>
