@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Media.ViewModels;
 using Media.Views;
+using System;
 
 namespace Media
 {
@@ -10,6 +11,9 @@ namespace Media
     {
         public override void Initialize()
         {
+        #if !DEBUG
+                    Environment.CurrentDirectory = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.Length - 1);
+        #endif
             AvaloniaXamlLoader.Load(this);
         }
 

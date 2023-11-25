@@ -56,12 +56,7 @@ namespace Media.Models
             string curDir = Environment.CurrentDirectory.Trim();
             if (backroundImageFileName == null) 
             {
-            #if DEBUG
                 backroundImageFileName = curDir.Remove(curDir.Length - 17, 17) + @"\Assets\Icons\defaultImage.jpg"; 
-
-            #else
-                backroundImageFileName = curDir.Remove(curDir.Length - 18, 18) + @"\Assets\Icons\defaultImage.jpg";
-            #endif
             }
             if (id == null) playListID = Guid.NewGuid().ToString("N");
             else playListID = id;
