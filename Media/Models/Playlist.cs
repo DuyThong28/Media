@@ -68,7 +68,7 @@ namespace Media.Models
             IEnumerable<IGrouping<char, MediaItem>> res = from song in list
                                                           orderby song.Title ascending
                                                           group song by song.Title[0];
-            return res.Reverse();
+            return res;
         }
 
         public static IEnumerable<IGrouping<string, MediaItem>> SortListDateAdded(List<MediaItem> list)
@@ -76,7 +76,7 @@ namespace Media.Models
             IEnumerable<IGrouping<string, MediaItem>> res = from song in list
                                                             orderby song.DateAdded ascending
                                                             group song by song.DateAdded;
-            return res.Reverse();
+            return res;
         }
 
         public static IEnumerable<IGrouping<string, MediaItem>> SortListAlbum(List<MediaItem> list)
@@ -84,7 +84,7 @@ namespace Media.Models
             IEnumerable<IGrouping<string, MediaItem>> res = from song in list
                                                             orderby song.Album ascending
                                                             group song by song.Album;
-            return res.Reverse();
+            return res;
         }
 
         public static IEnumerable<IGrouping<string, MediaItem>> SortListArtists(List<MediaItem> list)
@@ -92,7 +92,7 @@ namespace Media.Models
             IEnumerable<IGrouping<string, MediaItem>> res = from song in list
                                                             orderby song.ArtistsString ascending
                                                             group song by song.ArtistsString;
-            return res.Reverse();
+            return res;
         }
         public void AddMedia(MediaItem media)
         {

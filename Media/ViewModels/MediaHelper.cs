@@ -31,8 +31,8 @@ namespace Media.ViewModels
         public static bool isPlayingPlaylist = false;
         public static string playListPlayingId = null;
         private static List<Playlist> allPlayList = database.QueryAllPlaylists();
-        public static List<MediaItem> listSongs = new List<MediaItem>();
-        public static List<MediaItem> listVideos = new List<MediaItem>();
+        private static List<MediaItem> listSongs = new List<MediaItem>();
+        private static List<MediaItem> listVideos = new List<MediaItem>();
         public static List<MediaItem> allMedias = new List<MediaItem>();
 
         public static List<MediaItem> AllMedias
@@ -47,6 +47,7 @@ namespace Media.ViewModels
             {
                 return allPlayList;
             }
+            set { allPlayList = value; OnAllPlayListChanged(); }
         }
         public static void UpdatePlaylist(Playlist playlist)
         {
@@ -77,10 +78,6 @@ namespace Media.ViewModels
                 allPlayList.RemoveAt(index);
             }
             OnAllPlayListChanged();
-        }
-        public static void RenamePlaylist(Playlist playlist)
-        {
-
         }
         public static void DeleteMediaFromPlaylist(string mediaPath, string playlistID)
         {
@@ -201,6 +198,9 @@ namespace Media.ViewModels
         }
 
         internal static PlaylistDatabase Database { get => database; set => database = value; }
+        public static List<MediaItem> ListSongs { get => listSongs; set { listSongs = value; OnListSongsChanded(); } }
+
+        public static List<MediaItem> ListVideos { get => listVideos; set { listVideos = value; OnListVideosChanded(); } }
 
         public static void FetchListMedia(MediaTypes mediaTypes)
         {
@@ -213,12 +213,12 @@ namespace Media.ViewModels
                 case MediaTypes.Audio:
                     searchPattern = "*.mp3";
                     path = musicPathFolder;
-                    listMedia = listSongs = new List<MediaItem>();
+                    listMedia = ListSongs = new List<MediaItem>();
                     break;
                 case MediaTypes.Video:
                     searchPattern = "*.mp4";
                     path = videoPathFolder;
-                    listMedia = listVideos = new List<MediaItem>();
+                    listMedia = ListVideos = new List<MediaItem>();
                     break;
                 default:
                     throw new Exception("MediaTypes is invalid");
@@ -243,8 +243,8 @@ namespace Media.ViewModels
                 listMedia.Add(item: new MediaItem(filePath));
             }
             AllMedias.Clear();
-            AllMedias.AddRange(listSongs);
-            AllMedias.AddRange(listVideos);
+            AllMedias.AddRange(ListSongs);
+            AllMedias.AddRange(ListVideos);
         }
 
 
@@ -331,7 +331,7 @@ namespace Media.ViewModels
                 turnPlayingScreen(sender, new EventArgs());
             }
         }
-        
+
         public static void UpdateMainScreen(object sender, EventArgs e)
         {
             if (updateListVideoScreen != null)
@@ -427,6 +427,16 @@ namespace Media.ViewModels
             AllPlayListChanged?.Invoke(null, EventArgs.Empty);
             UpdateMainScreen(null, new EventArgs());
         }
+        public static event EventHandler ListSongsChanged;
+        public static void OnListSongsChanded()
+        {
+            ListSongsChanged?.Invoke(null, EventArgs.Empty);
+        }
+        public static event EventHandler ListVideosChanged;
+        public static void OnListVideosChanded()
+        {
+            ListVideosChanged?.Invoke(null, EventArgs.Empty);
+        }
 
         //
 
@@ -510,6 +520,19 @@ namespace Media.ViewModels
             }
 
         }
-
+        public static IEnumerable<IGrouping<char, Playlist>> SortListAToZ(List<Playlist> list)
+        {
+            IEnumerable<IGrouping<char, Playlist>> res = from playlist in list
+                                                         orderby playlist.PlayListName ascending
+                                                          group playlist by playlist.PlayListName[0];
+            return res;
+        }
+        public static IEnumerable<IGrouping<string, Playlist>> SortListDateAdded(List<Playlist> list)
+        {
+            IEnumerable<IGrouping<string, Playlist>> res = from playlist in list
+                                                            orderby playlist.DateCreated ascending
+                                                            group playlist by playlist.DateCreated;
+            return res;
+        }
     }
 }

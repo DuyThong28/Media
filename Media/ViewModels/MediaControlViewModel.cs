@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Media.Models;
 using Avalonia.Media;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Avalonia.Threading;
 using System.Reactive;
 using NAudio.Wave;

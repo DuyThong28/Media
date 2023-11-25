@@ -6,6 +6,8 @@ using System.Reactive;
 using Avalonia.Interactivity;
 using Media.Models;
 using Media.ViewModels;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Media.Views
 {
@@ -32,7 +34,8 @@ namespace Media.Views
             remove { selectPlaylist -= value; }
         }
         private void AddAlbum_Click(object sender, RoutedEventArgs e)
-        {
+        {         
+            RenameAlbum.Playlist = null;
             if (!isAddAlbumWindowOpen)
             {
                 AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
@@ -52,14 +55,44 @@ namespace Media.Views
         {
             if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToRename)
             {
-
+                if (!isAddAlbumWindowOpen)
+                {
+                    RenameAlbum.Playlist = playlistToRename;
+                    AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
+                    addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
+                    addAlbumWindow.Show();
+                    isAddAlbumWindowOpen = true;
+                }
             }
-            if (!isAddAlbumWindowOpen)
+        }
+
+        private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if (comboBox != null && comboBox.SelectedItem != null)
             {
-                AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
-                addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
-                addAlbumWindow.Show();
-                isAddAlbumWindowOpen = true;
+                ComboBoxItem selectedItem = comboBox.SelectedItem as ComboBoxItem;
+                if (selectedItem != null)
+                {
+                    TextBlock textBlock = selectedItem.Content as TextBlock;
+                    if (textBlock != null)
+                    {
+                        string selectedText = textBlock.Text;
+                        switch (selectedText)
+                        {
+                            case "Sort A-Z":
+                                IEnumerable<IGrouping<char, Playlist>> resAToZ = MediaHelper.SortListAToZ(MediaHelper.AllPlayList);
+                                List<Playlist> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
+                                MediaHelper.AllPlayList = sortedListAToZ;
+                                break;                        
+                            case "Sort by Date":
+                                IEnumerable<IGrouping<string, Playlist>> resDate = MediaHelper.SortListDateAdded(MediaHelper.AllPlayList);
+                                List<Playlist> sortedListDate = resDate.SelectMany(group => group).ToList();
+                                MediaHelper.AllPlayList = sortedListDate;
+                                break;
+                        }
+                    }
+                }
             }
         }
     }

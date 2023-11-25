@@ -35,17 +35,30 @@ namespace Media.ViewModels
             PlayMedia.timer.Tick += MediaHelper.UpdateMediaControl;
             var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);
             LibraryScreenViewModel.ListMedia = ListMedia;
-            HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
-            HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
-            ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;
-            ListVideoScreenViewModel.ListVideos = MediaHelper.listVideos;
+            HomeScreenViewModel.ListSongs = MediaHelper.ListSongs;
+            HomeScreenViewModel.ListVideos = MediaHelper.ListVideos;
+            ListMediaScreenViewModel.ListSongs = MediaHelper.ListSongs;
+            ListVideoScreenViewModel.ListVideos = MediaHelper.ListVideos;
             SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
             PlayMedia._libVlc = _libVlc;
             PlayMedia.MediaPlayer = MediaPlayer;
             //
             MediaHelper.AllPlayListChanged += MediaHelper_AllPlayListChanged;
+            MediaHelper.ListSongsChanged += MediaHelper_ListSongsChanged;
+            MediaHelper.ListVideosChanged += MediaHelper_ListVideosChanged;
             //
         }
+
+        private void MediaHelper_ListVideosChanged(object? sender, EventArgs e)
+        {
+            ListVideoScreenViewModel.ListVideos = MediaHelper.ListVideos;
+        }
+
+        private void MediaHelper_ListSongsChanged(object? sender, EventArgs e)
+        {
+            ListMediaScreenViewModel.ListSongs = MediaHelper.ListSongs;
+        }
+
         //
         private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)
         {
@@ -53,6 +66,7 @@ namespace Media.ViewModels
             LibraryScreenViewModel.ListMedia = ListMedia;
         }
         //
+        //public AddAlbumWindowViewModel AddAlbumWindowViewModel { get; set; } = new AddAlbumWindowViewModel();
         public MediaControlViewModel MediaControlViewModel { get; set; } = new MediaControlViewModel();
         public HomeScreenViewModel HomeScreenViewModel { get; set; } = new HomeScreenViewModel();
         public ListMediaScreenViewModel ListMediaScreenViewModel { get; set; } = new ListMediaScreenViewModel();

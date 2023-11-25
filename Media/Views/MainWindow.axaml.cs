@@ -399,10 +399,10 @@ namespace Media.Views
 
         public void UpdateMedia()
         {
-            (musicScreen.DataContext as ListMediaScreenViewModel).ListSongs = MediaHelper.listSongs;
-            (homeScreen.DataContext as HomeScreenViewModel).ListSongs = MediaHelper.listSongs;
-            (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.listVideos;
-            (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.listVideos;
+            (musicScreen.DataContext as ListMediaScreenViewModel).ListSongs = MediaHelper.ListSongs;
+            (homeScreen.DataContext as HomeScreenViewModel).ListSongs = MediaHelper.ListSongs;
+            (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.ListVideos;
+            (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.ListVideos;
             (searchScreen.DataContext as SearchScreenViewModel).AllMedias = MediaHelper.AllMedias;
 
         }

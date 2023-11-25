@@ -43,11 +43,25 @@ public partial class AddAlbumWindow : Window
         }
     }
     private void AddAlbum_Click(object sender, RoutedEventArgs e)
-    {
-        string albumName = AlbumNameTextBox.Text;
-        string imagePath = this.imagePath;
-        Playlist playlist = new Playlist(null, albumName, imagePath, null);
-        MediaHelper.AddPlayList(playlist);
+    {     
+        if (RenameAlbum.Playlist == null)
+        {
+            string albumName = AlbumNameTextBox.Text;
+            string imagePath = this.imagePath;
+            Playlist playlist = new Playlist(null, albumName, imagePath, null);
+            MediaHelper.AddPlayList(playlist);
+        }
+        else
+        {
+            string albumName = AlbumNameTextBox.Text;
+            string imagePath = this.imagePath;
+            Playlist playlist = new Playlist(null, albumName, imagePath, null);           
+            playlist.ListMedia = RenameAlbum.Playlist.ListMedia;        
+            MediaHelper.AllPlayList.Remove(RenameAlbum.Playlist);
+            MediaHelper.Database.DeletePlaylist(RenameAlbum.Playlist.PlayListID);
+            RenameAlbum.Playlist = playlist;
+            MediaHelper.AddPlayList(playlist);
+        }
         this.Close();
     }
     private void Cancel_Click(object sender, RoutedEventArgs e)

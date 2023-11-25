@@ -70,7 +70,7 @@
 						</StackPanel>
 					</Button>
 
-					<ComboBox HorizontalAlignment="Right" SelectedIndex="0" BorderBrush="#494C4D" Height="40" Width="150" Background="#FF515151">
+					<ComboBox HorizontalAlignment="Right" SelectedIndex="0" BorderBrush="#494C4D" Height="40" Width="150" Background="#FF515151" SelectionChanged="ComboBox_SelectionChanged">
 						<ComboBoxItem>
 							<TextBlock>Sort A-Z</TextBlock>
 						</ComboBoxItem>
@@ -120,7 +120,7 @@
 															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"  />
 														</MenuItem.Icon>
 													</MenuItem>
-													<MenuItem Header="Chỉnh sửa">
+													<MenuItem Header="Chỉnh sửa" Click="RenameAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
 														<MenuItem.Icon>
 															<PathIcon Width="12" Height="12" Data="{StaticResource options_regular}"/>
 														</MenuItem.Icon>
