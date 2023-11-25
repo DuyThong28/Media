@@ -6,7 +6,7 @@
         x:Class="Media.AddAlbumWindow"
 		TransparencyLevelHint="AcrylicBlur"
         Background="Transparent"
-		Icon="/Assets/Logo.ico"
+		Icon="/Assets/Logo5.ico"
 		WindowStartupLocation="CenterScreen"
         Title="Thêm danh sách phát" Width="300" Height="300">
 

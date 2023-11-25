@@ -73,7 +73,6 @@ namespace Media.ViewModels
 
         private void UpdateScreen(object sender, EventArgs e)
         {
-            SelectedItem = MediaHelper.selectPlayingItem(ListMedia);
             if(_media!= PlayMedia.media)
             {
                 _media = PlayMedia.media;
@@ -84,9 +83,10 @@ namespace Media.ViewModels
             IsPlay = PlayMedia.IsPlay;
             if(ListMedia!=MediaHelper.PlayQueue)
             ListMedia = MediaHelper.PlayQueue;
+            SelectedItem = MediaHelper.selectPlayingItem(ListMedia);
         }
-        
-      
+
+
         private MediaItem selectedItem;
         public MediaItem SelectedItem
         {

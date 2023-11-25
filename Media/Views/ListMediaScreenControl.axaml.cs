@@ -68,5 +68,9 @@ namespace Media.Views
                 playlist.AddMedia(mediaItem);
             }
         }
+        private void PlayNext(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MediaHelper.PlayNextInQueue(sender, e);
+        }
     }
 }

@@ -151,6 +151,7 @@ namespace Media.ViewModels
             playListPlayingId = null;
             playQueue.Clear();
             playQueue = new List<MediaItem>(pl);
+            MediaHelper.PlayQueue[0].IsPlay = true;
             PlayMedia.media = MediaHelper.PlayQueue[0];
             PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
             if (PlayMedia.media.MediaTypes != TagLib.MediaTypes.Audio)
@@ -168,6 +169,8 @@ namespace Media.ViewModels
             playListPlayingId = pl.PlayListID;
             playQueue.Clear();
             playQueue = new List<MediaItem>(pl.ListMedia);
+            MediaHelper.PlayQueue[0].IsPlay = true;
+            PlayMedia.media = MediaHelper.PlayQueue[0];
             PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
             if (PlayMedia.media.MediaTypes != TagLib.MediaTypes.Audio)
             {
@@ -501,6 +504,46 @@ namespace Media.ViewModels
             }
 
             UpdateScreen(sender, e);
+        }
+
+        public static void PlayNextInQueue(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem menuItem)
+            {
+                if (menuItem.DataContext is MediaItem mediaItem)
+                {
+                    if (PlayQueue.Count==0)
+                    {
+                        PlayQueue.Add(mediaItem);
+                    }
+                    else if (mediaItem.FilePath == PlayMedia.media.FilePath)
+                        return;
+                    else
+                    {
+                        for (int i = 0; i < PlayQueue.Count; i++)
+                        {
+                            if (mediaItem.FilePath == playQueue[i].FilePath)
+                            {
+                                playQueue.RemoveAt(i);
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < PlayQueue.Count; i++)
+                        {
+                            if (PlayMedia.media.FilePath == playQueue[i].FilePath)
+                            {
+                                PlayQueue.Insert(i + 1, mediaItem);
+                                break;
+                            }
+                        }
+                    }
+                    List<MediaItem> tempQueue = new List<MediaItem>(playQueue);
+                    PlayQueue.Clear();
+                    PlayQueue = new List<MediaItem>();
+                    PlayQueue.AddRange(tempQueue);
+                    UpdateScreen(sender, e);
+                }
+            }
         }
 
         public static void MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

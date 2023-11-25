@@ -7,7 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="1250" d:DesignHeight="850"
         x:Class="Media.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="avares://Media/Assets/Logo.ico"
+        Icon="avares://Media/Assets/Logo5.ico"
 		FontFamily="Open Sans"
 		xmlns:vlc="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
         Title="Media"
