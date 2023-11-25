@@ -7,49 +7,45 @@
         mc:Ignorable="d" d:DesignWidth="1250" d:DesignHeight="850"
         x:Class="Media.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="avares://Media/Assets/Media.ico"
+        Icon="avares://Media/Assets/Logo.ico"
 		FontFamily="Open Sans"
 		xmlns:vlc="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
         Title="Media"
-		Tag="#1ED760"
 		Name="mainWindow"
 		MinHeight="470"
 		MinWidth="840"
-		WindowState="Maximized"
+		Background="Black"
 		 TransparencyLevelHint="AcrylicBlur"
-           Background="Transparent"
 		WindowStartupLocation="CenterScreen"
+		WindowState="Maximized"
 		>
 	<Design.DataContext>
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
-
-	<Panel>
-		<ExperimentalAcrylicBorder IsHitTestVisible="False">
-			<ExperimentalAcrylicBorder.Material>
-				<ExperimentalAcrylicMaterial
-					 BackgroundSource="Digger"
-					 TintColor="Black"
-					 TintOpacity="1"
-					 MaterialOpacity="0.65" />
-			</ExperimentalAcrylicBorder.Material>
-		</ExperimentalAcrylicBorder>
-
+	
+	
 		<Grid>
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition></RowDefinition>
 					<RowDefinition Height="90"></RowDefinition>
 				</Grid.RowDefinitions>
-				<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" Opacity="0.8"></Border>
-				<Grid Name="mainScreen" Grid.Row="0" IsVisible="True">
+				<!--<Image Source="/Assets/ss_e5459e53de1e3230745804fcf359243ad522488d.1920x1080.jpg" Stretch="UniformToFill">
+					<Image.Effect>
+						<BlurEffect Radius="50"></BlurEffect>
+					</Image.Effect>
+				</Image>-->
+				<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"  Opacity="1" ClipToBounds="True"></Border>-->
+				<ContentControl Name="mainViewScreen" Grid.Row="0"></ContentControl>
+				<!--<Grid Name="mainScreen" Grid.Row="0" IsVisible="True" >
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="250"></ColumnDefinition>
 						<ColumnDefinition></ColumnDefinition>
 					</Grid.ColumnDefinitions>
 
-					<views:NavBarControl x:Name="navBarControl" Grid.Column="0" DataContext="{Binding NavBarControlViewModel}"/>
-					<Grid Grid.Column="1">
+					--><!--<views:NavBarControl x:Name="navBarControl" Grid.Column="0" DataContext="{Binding NavBarControlViewModel}"/>
+					<ContentControl Grid.Column="1" Name="screen"></ContentControl>
+					--><!--<Grid Grid.Column="1">
 						<views:ListVideoSreenControl x:Name="videoScreen" DataContext="{Binding ListVideoScreenViewModel}" IsVisible="False"/>
 						<views:ListMediaScreenControl x:Name="musicScreen" DataContext="{Binding ListMediaScreenViewModel}" IsVisible="False"/>
 						<views:LibraryScreenControl x:Name="libraryScreen" DataContext="{Binding LibraryScreenViewModel}" IsVisible="False"/>
@@ -57,20 +53,19 @@
 						<views:PlaylistScreenControl x:Name="playlistScreen" DataContext="{Binding PlaylistScreenViewModel}" IsVisible="False"/>
 						<views:SettingScreenControl x:Name="settingScreen" DataContext="{Binding SettingScreenViewModel}" IsVisible="False"/>
 						<views:SearchScreenControl x:Name="searchScreen" DataContext="{Binding SearchScreenViewModel}" IsVisible="False"/>
-					</Grid>
-				</Grid>
+					</Grid>--><!--
+				</Grid>-->
 
-				<Grid Grid.Row="0" Name="mainPlayingScreen" IsVisible="False">
+				<!--<Grid Grid.Row="0" Name="mainPlayingScreen" IsVisible="False" >
 					<views:PlayingScreenControl x:Name="playingScreen" DataContext="{Binding PlayingScreenViewModel}"/>
-				</Grid>
+				</Grid>-->
 
 				<Grid Grid.Row="1">
-					<views:MediaControl x:Name="mediaControl"  DataContext="{Binding MediaControlViewModel}" />
-
+					<views:MediaControl x:Name="mediaControl"  DataContext="{Binding MediaControlViewModel}" IsEnabled="True"/>
 				</Grid>
 			</Grid>
 
-			<Grid Name="videoPlayingScreen" IsVisible="True">
+			<!--<Grid Name="videoPlayingScreen" IsVisible="True" >-->
 				<Grid Name="videoDisplay" IsVisible="True">
 					<vm:VideoView x:Name="VideoViewer"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 						<Panel
@@ -84,8 +79,7 @@
 				</Grid>
 
 			</Grid>
-		</Grid>
-	</Panel>
+		<!--</Grid>-->
 	
 	
 </Window>

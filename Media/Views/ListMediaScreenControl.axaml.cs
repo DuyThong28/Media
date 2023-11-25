@@ -13,5 +13,10 @@ namespace Media.Views
             InitializeComponent();
             listMusic.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
         }
+
+        private void MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MediaHelper.AddMediaQueue_Click(sender, e);
+        }
     }
 }

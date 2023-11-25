@@ -18,10 +18,10 @@ namespace Media.Models
         private string playListName;
         private List<MediaItem> listMedia = new List<MediaItem>();
         private string backroundImageFileName = null;
-        private DateTime dateCreated;
-        private static readonly string ImageBackgroundFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Media Player\\Play List Image";       
+        private string dateCreated;
+        private static readonly string ImageBackgroundFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Media Player\\Play List Image";
 
-        public string PlayListID => playListID; 
+        public string PlayListID => playListID;
         public string PlayListName
         {
             get => playListName;
@@ -33,9 +33,17 @@ namespace Media.Models
             get => backroundImageFileName;
         }
 
-        public IImage BackGroundImage => ImageHelper.ConvertToAvaloniaBitmap(Image.FromFile(backroundImageFileName));
+        public IImage BackGroundImage
+        {
+            get { if (File.Exists(backroundImageFileName))
+                    return ImageHelper.ConvertToAvaloniaBitmap(Image.FromFile(backroundImageFileName));
+                else
+                    return null;
+            
+            }
+        } 
 
-        public DateTime DateCreated
+        public string DateCreated
         {
             set => dateCreated = value;
             get { return dateCreated; }
@@ -45,12 +53,13 @@ namespace Media.Models
 
         public Playlist(string id = null, string name = "Unnamed", string backroundImageFileName = null, List<MediaItem> listMedia = null)
         {
-            if (backroundImageFileName == null) backroundImageFileName = @"C:\Users\lenovo\source\repos\Media\Media\Assets\Icons\defaultImage.jpg";
+            string curDir = Environment.CurrentDirectory;
+            if (backroundImageFileName == null) backroundImageFileName = curDir.Remove(curDir.Length-17, 17)+ @"\Assets\Icons\defaultImage.jpg";
             if (id == null) playListID = Guid.NewGuid().ToString("N");
             else playListID = id;
             playListName = name;
             this.backroundImageFileName = backroundImageFileName;
-            dateCreated = DateTime.Now;
+            dateCreated = DateTime.Now.ToString("dd/MM/yyy");
             if (listMedia != null)
                 this.ListMedia = listMedia;
         }
@@ -66,7 +75,7 @@ namespace Media.Models
         {
             IEnumerable<IGrouping<string, MediaItem>> res = from song in list
                                                             orderby song.DateAdded ascending
-                                                            group song by song.DateAdded.ToString("dd/MM/yyyy");
+                                                            group song by song.DateAdded;
             return res.Reverse();
         }
 

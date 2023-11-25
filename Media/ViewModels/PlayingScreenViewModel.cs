@@ -26,6 +26,7 @@ namespace Media.ViewModels
         private bool isPlay;
         private List<MediaItem> listMedia;      
         private string backgroundColor;
+        
         public PlayingScreenViewModel()
         {
             if (PlayMedia.timer != null)
@@ -33,6 +34,7 @@ namespace Media.ViewModels
                 MediaHelper.updatePlayingScreen += UpdateScreen;
             }
             PlayMediaCommand = ReactiveCommand.Create(() => { Play(); });
+            //backgroundColor = ImageHelper.GetDominantColor(imageSource).ToString();
         }
 
         public string BackgroundColor

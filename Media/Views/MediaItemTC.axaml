@@ -9,82 +9,88 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-		  <Border Name="border" CornerRadius="10" ClipToBounds="True">
-			  <Border.Styles>
-				  <Style Selector="Border">
-					  <Setter Property="Tag" Value="False"/>
-				  </Style>
-				  <Style Selector="Border.checked">
-					  <Setter Property="Tag" Value="True"/>
-				  </Style>
-				  <Style Selector="Border:pointerover">
-					  <Setter Property="Tag" Value="True"/>
-				  </Style>
-			  </Border.Styles>
-			  <StackPanel Width="225" Background="Transparent">
-				  <Grid>
-					  <Border  CornerRadius="10" ClipToBounds="True" Height="225" Width="225" Background="Transparent">
-						  <Grid>
-							  <Image  Source="{TemplateBinding ImageSource}" Stretch="UniformToFill" Classes.hover="{Binding ElementName=border, Path=Tag}">
-								  <Image.Styles>
-									  <Style Selector="Image">
-										  <Setter Property="Height" Value="225"></Setter>
-										  <Setter Property="Width" Value="225"></Setter>
-									  </Style>
-									  <Style Selector="Image.hover">
-										  <Setter Property="Height" Value="245"></Setter>
-										  <Setter Property="Width" Value="245"></Setter>
-									  </Style>
-								  </Image.Styles>
-								  <Image.Transitions>
-									  <Transitions>
-										  <DoubleTransition Property="Width" Duration="0:0:0.3"></DoubleTransition>
-										  <DoubleTransition Property="Height" Duration="0:0:0.3"></DoubleTransition>
-									  </Transitions>
-								  </Image.Transitions>
-							  </Image>
-							  <Border VerticalAlignment="Bottom" HorizontalAlignment="Right" CornerRadius="3" Margin="4" Padding="2,0,2,0" Background="Black">
-								  <Label Padding="0" Opacity="2" FontSize="12" FontWeight="Medium" Margin="0" Content="{TemplateBinding DurationText}"></Label>
-							  </Border>
-						  </Grid>
-					  </Border>
-					  <Border CornerRadius="10" Width="225" Height="225" ClipToBounds="True" IsVisible="{Binding ElementName=border, Path=Tag}" Opacity="0.3" Background="black"></Border>
-					  <Button x:Name="btn_Play"
-									Background="Transparent"
-									IsVisible="{Binding ElementName=border, Path=Tag}"
-									HorizontalAlignment="Center"
-									VerticalAlignment="Center"
-									Command="{TemplateBinding Command}"
-									CommandParameter="{TemplateBinding CommandParameter}"
+		  <Grid>
+			  <Border CornerRadius="10" ClipToBounds="True" IsVisible="{Binding ElementName=border, Path=Tag}" Opacity="0.1" Background="White"></Border>
+			  <Border Name="border" CornerRadius="10" ClipToBounds="True" Padding="12,12,12,25">
+				  <Border.Styles>
+					  <Style Selector="Border">
+						  <Setter Property="Tag" Value="False"/>
+					  </Style>
+					  <Style Selector="Border.checked">
+						  <Setter Property="Tag" Value="True"/>
+					  </Style>
+					  <Style Selector="Border:pointerover">
+						  <Setter Property="Tag" Value="True"/>
+					  </Style>
+				  </Border.Styles>
+				  <StackPanel Width="150" Background="Transparent">
+
+					  <Grid Margin="0,0,0,10">
+						  <Grid.Effect>
+							  <DropShadowEffect BlurRadius="15" Color="Black" OffsetX="0" OffsetY="1"></DropShadowEffect>
+						  </Grid.Effect>
+						  <Border  CornerRadius="10" ClipToBounds="True" Height="150" Width="150" Background="Transparent">
+							  <Grid>
+								  <Image  Source="{TemplateBinding ImageSource}" Stretch="UniformToFill" Classes.hover="{Binding ElementName=border, Path=Tag}">
+									  <Image.Styles>
+										  <Style Selector="Image">
+											  <Setter Property="Height" Value="150"></Setter>
+											  <Setter Property="Width" Value="150"></Setter>
+										  </Style>
+										  <Style Selector="Image.hover">
+											  <Setter Property="Height" Value="170"></Setter>
+											  <Setter Property="Width" Value="170"></Setter>
+										  </Style>
+									  </Image.Styles>
+									  <Image.Transitions>
+										  <Transitions>
+											  <DoubleTransition Property="Width" Duration="0:0:0.3"></DoubleTransition>
+											  <DoubleTransition Property="Height" Duration="0:0:0.3"></DoubleTransition>
+										  </Transitions>
+									  </Image.Transitions>
+								  </Image>
+								  <Border VerticalAlignment="Bottom" HorizontalAlignment="Right" CornerRadius="3" Margin="4" Padding="2,0,2,0" Background="Black">
+									  <Label Padding="0" Opacity="2" Foreground="White" FontSize="12" FontWeight="Medium" Margin="0" Content="{TemplateBinding DurationText}"></Label>
+								  </Border>
+							  </Grid>
+						  </Border>
+						  <Border CornerRadius="10" Width="150" Height="150" ClipToBounds="True" IsVisible="{Binding ElementName=border, Path=Tag}" Opacity="0.3" Background="black"></Border>
+						  <Button x:Name="btn_Play"
+										Background="Transparent"
+										IsVisible="{Binding ElementName=border, Path=Tag}"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Center"
+										Command="{TemplateBinding Command}"
+										CommandParameter="{TemplateBinding CommandParameter}"
 									>
-						  <Button.Effect>
-							  <DropShadowEffect BlurRadius="8" Color="Black" OffsetX="0" OffsetY="3"/>
-						  </Button.Effect>
-						  <Button.Styles>
-							  <Style Selector="Button">
-								  <Setter Property="Template">
-									  <ControlTemplate>
-										  <Panel>
-											  <Label x:Name="PART_ContentPresenter"
-																Content="{TemplateBinding Content}"
-																Margin="{TemplateBinding Padding}"/>
-										  </Panel>
-									  </ControlTemplate>
-								  </Setter>
-							  </Style>
-						  </Button.Styles>
-						  <PathIcon Height="50" Width="50" Data="{StaticResource play_circle_regular}">
-						  </PathIcon>
-					  </Button>
-				  </Grid>
-					  <TextBlock x:Name="songName" Grid.Row="0"
+							  <Button.Effect>
+								  <DropShadowEffect BlurRadius="8" Color="Black" OffsetX="0" OffsetY="3"/>
+							  </Button.Effect>
+							  <Button.Styles>
+								  <Style Selector="Button">
+									  <Setter Property="Template">
+										  <ControlTemplate>
+											  <Panel>
+												  <Label x:Name="PART_ContentPresenter"
+																	Content="{TemplateBinding Content}"
+																	Margin="{TemplateBinding Padding}"/>
+											  </Panel>
+										  </ControlTemplate>
+									  </Setter>
+								  </Style>
+							  </Button.Styles>
+							  <PathIcon Height="50"  Foreground="White" Width="50" Data="{StaticResource play_circle_regular}">
+							  </PathIcon>
+						  </Button>
+					  </Grid>
+					  <TextBlock x:Name="songName" 
 							 HorizontalAlignment="Stretch"
 							TextTrimming="CharacterEllipsis"
 							 VerticalAlignment="Bottom" FontSize="14" FontWeight="Medium"
 							 Text="{TemplateBinding MediaName}">
 						  <!--<TextBlock.Styles>
 							  <Style Selector="TextBlock.checked">
-								  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
+								  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"></Setter>
 								  <Setter Property="Opacity" Value="0.5"/>
 							  </Style>
 							  <Style Selector="TextBlock.unChecked">
@@ -92,9 +98,12 @@
 							  </Style>
 						  </TextBlock.Styles>-->
 					  </TextBlock>
-				  <TextBlock x:Name="nameAuthor" Grid.Row="1" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="14" Text="{TemplateBinding AuthorName}" TextTrimming="CharacterEllipsis"></TextBlock>
-			  </StackPanel>
-		  </Border>
+					  <TextBlock x:Name="nameAuthor"  Foreground="White" Opacity="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="14" Text="{TemplateBinding AuthorName}" TextTrimming="CharacterEllipsis"></TextBlock>
+					  <TextBlock  Foreground="White" Opacity="0.4" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="12" Text="{TemplateBinding DateAdded}" TextTrimming="CharacterEllipsis"></TextBlock>
+				  </StackPanel>
+			  </Border>
+
+		  </Grid>
       </ControlTemplate>
     </Setter>
   </Style>

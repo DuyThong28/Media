@@ -1,4 +1,5 @@
-﻿using Media.Models;
+﻿using Avalonia.Threading;
+using Media.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -17,17 +19,31 @@ namespace Media.ViewModels
         {
             MediaHelper.updateHomeScreen += MediaHelper_updateHomeScreen;
             AllPlayLists = MediaHelper.AllPlayList;
+            AllMeidas = MediaHelper.AllMedias;
             AddMediaToPlaylistCommand = ReactiveCommand.Create<MediaItem>(AddMediaToPlaylist);
         }
-
         private void MediaHelper_updateHomeScreen(object? sender, EventArgs e)
         {
             AllPlayLists = MediaHelper.AllPlayList;
+            AllMeidas = MediaHelper.AllMedias;
         }
 
+        public DispatcherTimer timer;
         private List<MediaItem> listSongs;
         private List<MediaItem> listVideos;
         private List<Playlist> allPlayLists;
+        private List<MediaItem> allMedias;
+        private int selectedMediaIndex = 0;
+        public int SelectedMediaIndex
+        {
+            get => selectedMediaIndex;
+            set=> this.RaiseAndSetIfChanged(ref selectedMediaIndex, value);
+        }
+        public List<MediaItem> AllMeidas
+        {
+            get => allMedias;
+            set=> this.RaiseAndSetIfChanged(ref allMedias, value);
+        }
 
         public List<Playlist> AllPlayLists
         {
@@ -38,9 +54,9 @@ namespace Media.ViewModels
         {
             get => listSongs; set
             {
-                if (value.Count > 5)
+                if (value.Count > 7)
                 {
-                    value = value.GetRange(0, 5);
+                    value = value.GetRange(0, 7);
                 }
                 this.RaiseAndSetIfChanged(ref listSongs, value);
             }
@@ -49,9 +65,9 @@ namespace Media.ViewModels
         {
             get => listVideos; set
             {
-                if (value.Count > 5)
+                if (value.Count > 7)
                 {
-                    value = value.GetRange(0, 5);
+                    value = value.GetRange(0, 7);
                 }
                 this.RaiseAndSetIfChanged(ref listVideos, value);
             }

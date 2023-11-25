@@ -33,13 +33,13 @@ namespace Media.ViewModels
             MediaHelper.FetchListMedia(MediaTypes.Video);
             PlayMedia.UpdateScreen += MediaHelper.UpdateScreen;
             PlayMedia.timer.Tick += MediaHelper.UpdateMediaControl;
-            SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
             var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);
             LibraryScreenViewModel.ListMedia = ListMedia;
             HomeScreenViewModel.ListSongs = MediaHelper.listSongs;
             HomeScreenViewModel.ListVideos = MediaHelper.listVideos;
             ListMediaScreenViewModel.ListSongs = MediaHelper.listSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.listVideos;
+            SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
             PlayMedia._libVlc = _libVlc;
             PlayMedia.MediaPlayer = MediaPlayer;
             //

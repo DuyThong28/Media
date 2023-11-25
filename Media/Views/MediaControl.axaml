@@ -6,6 +6,7 @@
 			 xmlns:vm="using:Media.ViewModels"
              x:Class="Media.Views.MediaControl"
 			 xmlns:views="using:Media.Views"
+			 Background="White"
 			 x:DataType="vm:MediaControlViewModel"
 			 >
 	<Design.DataContext>
@@ -16,10 +17,10 @@
 			<Setter Property="Template">
 				<ControlTemplate>
 					<Panel>
-						<Border Opacity="0.7" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}}" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}">
+						<Border Opacity="0.2" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}}" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}">
 							<Border.Styles>
 								<Style Selector="Border:pointerover">
-									<Setter Property="Background" Value="#414141"></Setter>
+									<Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"></Setter>
 								</Style>
 							</Border.Styles>
 							
@@ -45,29 +46,48 @@
 						</Border>
 						<Label x:Name="PART_ContentPresenter"
 										  Content="{TemplateBinding Content}"
-										  Margin="{TemplateBinding Padding}"/>
+										  Margin="{TemplateBinding Padding}"></Label>
 					</Panel>
 				</ControlTemplate>
 			</Setter>
 		</Style>
 	</UserControl.Styles>
-	<Grid>
-		<Border Background="Black" Opacity="0.5"></Border>
-		<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" Opacity="0.5"></Border>
+	<Grid Background="Black">
+		<!--<Border Background="Black" Opacity="0.5"></Border>-->
+		<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" Opacity="0.5"></Border>-->
 		<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 			<ColumnDefinition Width="2*"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-			<Button x:Name="miniMediaBtn" Click="Button_Click" Classes.function="True" Padding="0,10,10,10" CornerRadius="10"  ClipToBounds="true" Background="Transparent" HorizontalAlignment="Stretch">
-				<Grid>
+			<Button x:Name="miniMediaBtn" 
+					Click="Button_Click" 
+					Classes.function="True" 
+					Padding="5,5,5,5" 
+					Margin="10,0,10,0"
+					CornerRadius="10"  
+					ClipToBounds="true" 
+					Background="Transparent" 
+					BorderBrush="#60A8BB"
+					BorderThickness="3"
+					HorizontalAlignment="Stretch">
+					<Button.Effect>
+						<DropShadowEffect BlurRadius="5" Color="#121212" OffsetX="0" OffsetY="0,2"/>
+					</Button.Effect>
+				<Grid >
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="90"></ColumnDefinition>
+						<ColumnDefinition Width="80"></ColumnDefinition>
 						<ColumnDefinition></ColumnDefinition>
 					</Grid.ColumnDefinitions>
-					<Border Grid.Column="0" Height="60" Width="60" CornerRadius="5" ClipToBounds="True">
-						<Image x:Name="songImage" Stretch="UniformToFill" Source="{Binding ImageSource}"></Image>
+					<Border Grid.Column="0" HorizontalAlignment="Left" Height="60" Width="60" CornerRadius="5" ClipToBounds="True" BorderThickness="1" BorderBrush="Black" >
+						<Border.Effect>
+							<DropShadowEffect BlurRadius="50" Color="#FF5B5B5B" OffsetX="0" OffsetY="5"></DropShadowEffect>
+						</Border.Effect>
+						<Border CornerRadius="4" ClipToBounds="True">
+							<Image x:Name="songImage" Stretch="UniformToFill" Source="{Binding ImageSource}">
+							</Image>
+						</Border>
 					</Border>
 					<Grid Grid.Column="1">
 						<Grid.RowDefinitions>
@@ -78,7 +98,7 @@
 							   HorizontalAlignment="Stretch" 
 							   VerticalAlignment="Bottom" 
 							   FontSize="14" FontWeight="Medium" 
-							   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"
+							   Foreground="White"
 								   TextTrimming="CharacterEllipsis"
 						   Text="{Binding SongName}"></TextBlock>
 						<TextBlock x:Name="nameAuthor" Grid.Row="1" 
@@ -93,13 +113,16 @@
 		
 		<Grid Grid.Column="1" MaxWidth="600">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="60"></RowDefinition>
+				<RowDefinition Height="30"></RowDefinition>
 			</Grid.RowDefinitions>
 			<Grid Grid.Row="0" >
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,-10">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+						<!--<StackPanel.Effect>
+							<DropShadowEffect BlurRadius="20" Color="White" OffsetX="0" OffsetY="0,3"></DropShadowEffect>
+						</StackPanel.Effect>-->
 					<Button Name="btn_Suffle" Classes.small="true" Click="Button_Click_2" Background="Transparent" VerticalAlignment="Stretch" Command="{Binding SuffCommand}">
-						<Image Name="btn_suff_img" Classes.notSuff="true" Height="22" Width="22">
+						<Image Name="btn_suff_img" Classes.notSuff="true" Height="25" Width="25">
 							<Image.Styles>
 								<Style Selector="Image.notSuff">
 									<Setter Property="Source" Value="/Assets/Icons/suffle.png"></Setter>
@@ -111,7 +134,7 @@
 						</Image>
 					</Button>
 					<Button Name="btn_prev" Classes.small="true" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding PlayPrevCommand}">
-						<Image Height="22" Width="22">
+						<Image Height="25" Width="25">
 							<Image.Styles>
 								<Style Selector="Image">
 									<Setter Property="Source" Value="/Assets/Icons/back.png"></Setter>
@@ -123,9 +146,11 @@
 						</Image>			
 					</Button>
 					<Button x:Name="btn_Play" Classes.small="true"  Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding PlayMediaCommand}"  HotKey="Space">
-							<Image Height="32" Width="32"
-								Classes.checked="{Binding IsPlay}" 
-								Classes.unChecked="{Binding !IsPlay}" 
+						<Border Background="#121212" CornerRadius="40" Width="40" Height="40">
+							
+							<Image Height="40" Width="40"
+									Classes.checked="{Binding IsPlay}"
+									Classes.unChecked="{Binding !IsPlay}"
 								>
 								<Image.Styles>
 									<Style Selector="Image.unChecked">
@@ -142,9 +167,11 @@
 									</Style>
 								</Image.Styles>
 							</Image>
+
+						</Border>	
 					</Button>
 					<Button Name="btn_next" Classes.small="true" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding PlayNextCommand}">
-						<Image Height="22" Width="22">
+						<Image Height="25" Width="25">
 							<Image.Styles>
 								<Style Selector="Image">
 									<Setter Property="Source" Value="/Assets/Icons/next.png"></Setter>
@@ -156,7 +183,7 @@
 						</Image>					
 					</Button>
 					<Button Name="btn_Repeat" Classes.small="true" Click="Button_Click_1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Command="{Binding RepeatCommand}" >
-						<Image Name="btn_repeat_img" Classes.repeat="true" Height="22" Width="22">
+						<Image Name="btn_repeat_img" Classes.repeat="true" Height="25" Width="25">
 							<Image.Styles>
 								<Style Selector="Image.repeat">
 									<Setter Property="Source" Value="/Assets/Icons/repeat.png"></Setter>
@@ -175,21 +202,18 @@
 					</Button>
 				</StackPanel>
 			</Grid>
-			<Grid Grid.Row="1" Margin="0,0,0,10">
+			<Grid Grid.Row="1" Margin="0,-10,0,10">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="50"></ColumnDefinition>
 					<ColumnDefinition></ColumnDefinition>
 					<ColumnDefinition Width="50"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
-				<Label x:Name="timeSongPlay" Foreground="White"  VerticalContentAlignment="Center"  HorizontalAlignment="Right" FontSize="13" Content="{Binding TimeSongPlay}">
-					<Label.Effect>
-						<DropShadowEffect BlurRadius="2" Color="Black" OffsetX="0" OffsetY="2"/>
-					</Label.Effect>
+				<Label x:Name="timeSongPlay" Foreground="Gray"   VerticalContentAlignment="Center"  HorizontalAlignment="Right" FontSize="13" Content="{Binding TimeSongPlay}">
 				</Label>
 				<Slider x:Name="mediaTrackBar" Grid.Column="1"
 						 Maximum="{Binding TbMaxValue}"
 						Value="{Binding TbValue}"
-						Margin="0,-6,0,0"
+						Margin="0,-10,0,0"
 						PointerCaptureLost="Slider_PointerCaptureLost">
 					<Slider.Styles>
 						<Style Selector="Slider Thumb">
@@ -206,10 +230,7 @@
 						</Style>
 					</Slider.Styles>
 				</Slider>
-				<Label x:Name="timeSongEnd" Grid.Column="2" Foreground="White" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" Content="{Binding TimeSongEnd}">
-					<Label.Effect>
-						<DropShadowEffect BlurRadius="2" Color="Black" OffsetX="0" OffsetY="2"/>
-					</Label.Effect>
+				<Label x:Name="timeSongEnd" Grid.Column="2" Foreground="Gray" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" Content="{Binding TimeSongEnd}">
 				</Label>
 			</Grid>
 			<Grid>
@@ -217,23 +238,32 @@
 		</Grid>
 		<Grid Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="35"></ColumnDefinition>
+				<ColumnDefinition Width="45"></ColumnDefinition>
 				<ColumnDefinition Width="35"></ColumnDefinition>
 				<ColumnDefinition Width="100"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 			<Button x:Name="btn_ffullscreen" Background="Transparent"
 					Classes.function="true"
 					Click="Button_Click_4"
+					Classes.small="True"
 					Grid.Column="0" HorizontalAlignment="Right">
+				<!--<Button.Effect>
+					<DropShadowEffect BlurRadius="2" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0,4"></DropShadowEffect>
+				</Button.Effect>-->
 				<PathIcon Height="17" Width="17"
 						  Name="fullScreenIcon"
+						  Margin="10,0,0,0"
 						  Data="{StaticResource arrow_maximize_regular}"
 						  >
 				</PathIcon>
 			</Button>
 			<Button x:Name="btn_Volume" Grid.Column="1" Background="Transparent"
-					Classes.function="true"	
+					Classes.small="true"	
 				 HorizontalAlignment="Right">
+				<!--<Button.Effect>
+					
+					<DropShadowEffect BlurRadius="2" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0,4"></DropShadowEffect>
+				</Button.Effect>-->
 				<Image Name="btn_Volume_img" Height="20" Width="20" Classes.unMute="true">
 					<Image.Styles>
 						<Style Selector="Image.unMute">

@@ -12,211 +12,323 @@
 	<Design.DataContext>
 		<vm:HomeScreenViewModel/>
 	</Design.DataContext>
-	<Border  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
-			 Margin="10" CornerRadius="5" ClipToBounds="True">
-		<Grid>
-			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
-			</Border>
+	<Border  Background="#DB3E3E3E"
+			 Margin="10" CornerRadius="10" ClipToBounds="True">
+		<!--<Border.Effect>
+			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"></DropShadowEffect>
+		</Border.Effect>-->
+		
+		<ScrollViewer Background="Transparent">
+			
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="60"></RowDefinition>
+					<RowDefinition Height="400"></RowDefinition>
+					<RowDefinition></RowDefinition>
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
-				<Grid Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
-					<Label FontSize="20"  FontWeight="Bold" >TRANG CHỦ</Label>
-				</Grid>
-				<ScrollViewer Grid.Row="1" Background="Transparent" Padding="10,0,20,0" >
-					<Grid>
-						<Grid.RowDefinitions>
-							<RowDefinition></RowDefinition>
-							<RowDefinition></RowDefinition>
-						</Grid.RowDefinitions>
-						<Grid Grid.Row="0">
-							<Grid.RowDefinitions>
-								<RowDefinition Height="40"></RowDefinition>
-								<RowDefinition></RowDefinition>
-							</Grid.RowDefinitions>
-							<Grid Grid.Row="0">
-								<Label HorizontalAlignment="Left" FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Bài hát</Label>
-								<Button HorizontalAlignment="Right" Click="Button_Click_1">
-									<Button.Styles>
-										<Style Selector="Button">
-											<Setter Property="Template">
-												<ControlTemplate>
-													<Panel>
-														<Label x:Name="PART_ContentPresenter"
-																		  Content="{TemplateBinding Content}"
-																		  ContentTemplate="{Binding }"
-																		  Margin="{TemplateBinding Padding}"/>
-													</Panel>
-												</ControlTemplate>
-											</Setter>
-										</Style>
-									</Button.Styles>
-									<Label FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Xem tất cả</Label>
-								</Button>
-							</Grid>
-							<ListBox  Grid.Row="1"
-									 Name="listMusic"
-										Background="Transparent"
-										ItemsSource="{Binding ListSongs}"
-										Tag="{Binding AllPlayLists}"
+				<Panel Grid.Row="0" ClipToBounds="True">
+					<Rectangle Name="reg" Fill="#0B177F" Stretch="UniformToFill" >
+						<Rectangle.OpacityMask>
+							<LinearGradientBrush StartPoint="50%,100%" EndPoint="50%,50%">
+								<LinearGradientBrush.GradientStops>
+									<GradientStop Offset="0" Color="Transparent"/>
+									<GradientStop Offset="1" Color="Black"/>
+								</LinearGradientBrush.GradientStops>
+							</LinearGradientBrush>
+						</Rectangle.OpacityMask>
+					</Rectangle>
+				</Panel>
+				<Border Grid.Row="0" Background="Black" Opacity="0.3"></Border>
+				<ListBox Name="lstMedias" Grid.Row="0" IsVisible="False"  ItemsSource="{Binding AllMeidas}" SelectedIndex="{Binding SelectedMediaIndex}" SelectionChanged="ListBox_SelectionChanged">
+				</ListBox>
+				<Border Grid.Row="0" Margin="0,50,0,0">
+					<TransitioningContentControl Content="{Binding ElementName=lstMedias, Path=SelectedItem}">
+						<TransitioningContentControl.PageTransition>
+							<PageSlide Orientation="Horizontal" Duration="0:00:00.400" />
+						</TransitioningContentControl.PageTransition>
+						<TransitioningContentControl.ContentTemplate>
+							<DataTemplate DataType="md:MediaItem">
+								<Grid>
+									<Border Name="bdGradient" Background="Black" MaxWidth="1100" HorizontalAlignment="Stretch" Margin="20,0,20,0" Height="230"  Padding="20" VerticalAlignment="Top">
+										<Border.OpacityMask>
+											<LinearGradientBrush StartPoint="100%,0%" EndPoint="0%,100%">
+												<LinearGradientBrush.GradientStops>
+													<GradientStop Offset="0" Color="Transparent"/>
+													<GradientStop Offset="1" Color="Black"/>
+												</LinearGradientBrush.GradientStops>
+											</LinearGradientBrush>
+										</Border.OpacityMask>
+									</Border>
+									<Border Background="Transparent" MaxWidth="1100" HorizontalAlignment="Stretch" Margin="20,0,20,0" Height="230"  Padding="20" VerticalAlignment="Top">
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="200"></ColumnDefinition>
+												<ColumnDefinition></ColumnDefinition>
+											</Grid.ColumnDefinitions>
+											<Grid Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Left">
+												<Border  CornerRadius="10" ClipToBounds="True" Background="Transparent">
+													<Border.Effect>
+														<DropShadowEffect BlurRadius="20" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+													</Border.Effect>
+													<Grid>
+														<Image Source="{Binding Image}" Stretch="UniformToFill" Height="200" Width="200">
+														</Image>
+														<Button x:Name="btn_Play"
+													   Background="Transparent"
+													   HorizontalAlignment="Center"
+													   VerticalAlignment="Center"
+													   Command="{ Binding PlaySongCommand}"
 									>
-								<ListBox.Styles>
-									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
-										<Setter Property="Background" Value="Transparent"></Setter>
-										<Setter	Property="CornerRadius" Value="15"></Setter>
-										<Setter Property="Tag" Value="True"></Setter>
-									</Style>
-									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
-										<Setter Property="Background" Value="Transparent"></Setter>
-										<Setter	Property="CornerRadius" Value="15"></Setter>
-										<Setter Property="Tag" Value="True"></Setter>
-									</Style>
-								</ListBox.Styles>
-								<ListBox.ItemsPanel>
-									<ItemsPanelTemplate>
-										<WrapPanel/>
-									</ItemsPanelTemplate>
-								</ListBox.ItemsPanel>
-								<ItemsControl.ItemTemplate>
-									<DataTemplate>
-										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}" DurationText="{Binding DurationText}">
-											<views:MediaItemTC.ContextMenu>
-												<ContextMenu Name="menu" >
-													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
-														<MenuItem.Icon>
-															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
-														</MenuItem.Icon>
-													</MenuItem>
-													<MenuItem Header="Phát tiếp theo" Click="AddMediaQueue_Click">
-														<MenuItem.Icon>
-															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
-														</MenuItem.Icon>
-													</MenuItem>
-													<MenuItem Header="Thêm vào" ItemsSource="{Binding $parent[ListBox].Tag}">
-														<MenuItem.ItemTemplate>
-															<DataTemplate x:DataType="md:Playlist">
-																<MenuItem Name="playlist" Header="{Binding PlayListName}"
-																	Click="MenuItem_Click_2"	 
-																	>
-																	 <MenuItem.CommandParameter>
-                    <MultiBinding>
-                        <Binding ElementName="menu" Path="DataContext"/>
-                        <Binding ElementName="playlist" Path="DataContext"/>
-                    </MultiBinding>
-                </MenuItem.CommandParameter>
-													
-																
-																</MenuItem>
-															</DataTemplate>
-														</MenuItem.ItemTemplate>
-														<MenuItem.Icon>
-															<PathIcon Width="20" Height="20" Data="{StaticResource add_regular}" />
-														</MenuItem.Icon>
-													</MenuItem>
-												</ContextMenu>
-											</views:MediaItemTC.ContextMenu>
-										</views:MediaItemTC>
-									</DataTemplate>
-								</ItemsControl.ItemTemplate>
-							</ListBox>
-						</Grid>
-						<Grid Grid.Row="1">
-							<Grid.RowDefinitions>
-								<RowDefinition Height="40"></RowDefinition>
-								<RowDefinition></RowDefinition>
-							</Grid.RowDefinitions>
-							<Grid Grid.Row="0">
-								<Label HorizontalAlignment="Left" FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Video</Label>
-								<Button HorizontalAlignment="Right" Click="Button_Click">
-									<Button.Styles>
-										<Style Selector="Button">
-											<Setter Property="Template">
-												<ControlTemplate>
-													<Panel>
-														<Label x:Name="PART_ContentPresenter"
-																		  Content="{TemplateBinding Content}"
-																		  ContentTemplate="{Binding }"
-																		  Margin="{TemplateBinding Padding}"/>
-													</Panel>
-												</ControlTemplate>
-											</Setter>
-										</Style>
-									</Button.Styles>
-									<Label FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Xem tất cả</Label>
-								</Button>
-							</Grid>
-							<ListBox Grid.Row="1"
-										Name="listBoxVideo"
-										Background="Transparent" 
-                                       Tag="{Binding AllPlayLists}"
-									  ItemsSource="{Binding ListVideos}"
-								   >
-								<ListBox.Styles>
-									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
-										<Setter Property="Background" Value="Transparent"></Setter>
-										<Setter	Property="CornerRadius" Value="15"></Setter>
-										<Setter Property="Tag" Value="True"></Setter>
-									</Style>
-									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
-										<Setter Property="Background" Value="Transparent"></Setter>
-										<Setter	Property="CornerRadius" Value="15"></Setter>
-										<Setter Property="Tag" Value="True"></Setter>
-									</Style>
-								</ListBox.Styles>
-								<ListBox.ItemsPanel>
-									<ItemsPanelTemplate>
-										<WrapPanel/>
-									</ItemsPanelTemplate>
-								</ListBox.ItemsPanel>
-								<ItemsControl.ItemTemplate>
-									<DataTemplate>
-										<views:MediaItemTC AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}" DurationText="{Binding DurationText}">
-											<views:MediaItemTC.ContextMenu>
-												<ContextMenu Name="menu">
-													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
-														<MenuItem.Icon>
-															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
-														</MenuItem.Icon>
-													</MenuItem>
-													<MenuItem Header="Phát tiếp theo">
-														<MenuItem.Icon>
-															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
-														</MenuItem.Icon>
-													</MenuItem>
-													<MenuItem Header="Thêm vào" ItemsSource="{Binding $parent[ListBox].Tag}">
-														<MenuItem.ItemTemplate>
-															<DataTemplate x:DataType="md:Playlist">
-																<MenuItem Name="playlist" Header="{Binding PlayListName}"
-																	Click="MenuItem_Click_2"
-																	>
-																	<MenuItem.CommandParameter>
-																		<MultiBinding>
-																			<Binding ElementName="menu" Path="DataContext"/>
-																			<Binding ElementName="playlist" Path="DataContext"/>
-																		</MultiBinding>
-																	</MenuItem.CommandParameter>
+															<Button.Effect>
+																<DropShadowEffect BlurRadius="8" Color="Black" OffsetX="0" OffsetY="3"/>
+															</Button.Effect>
+															<Button.Styles>
+																<Style Selector="Button">
+																	<Setter Property="Template">
+																		<ControlTemplate>
+																			<Panel>
+																				<Label x:Name="PART_ContentPresenter"
+																								  Content="{TemplateBinding Content}"
+																								  Margin="{TemplateBinding Padding}"/>
+																			</Panel>
+																		</ControlTemplate>
+																	</Setter>
+																</Style>
+															</Button.Styles>
+															<PathIcon Height="50"  Foreground="White" Width="50" Data="{StaticResource play_circle_regular}">
+															</PathIcon>
+														</Button>
+													</Grid>
+												</Border>
+											</Grid>
+											<StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="20,0,0,0">
+												<TextBlock  HorizontalAlignment="Stretch" FontSize="50" FontWeight="Bold" Padding="0,0,0,0" Margin="-10,10,0,10" Text="{Binding Title}" TextTrimming="CharacterEllipsis">
+													<TextBlock.Effect>
+														<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+													</TextBlock.Effect>
+												</TextBlock>
+												<Label    HorizontalContentAlignment="Left" FontSize="15" FontWeight="Bold" Padding="0,0,0,15" Content="{Binding ArtistsString}">
 
+												</Label>
+												<Label  HorizontalContentAlignment="Left" FontSize="15" Opacity="0.6" FontWeight="Bold" Padding="0,0,0,0" Content="{Binding DurationText}">
 
-																</MenuItem>
-															</DataTemplate>
-														</MenuItem.ItemTemplate>
-														<MenuItem.Icon>
-															<PathIcon Width="20" Height="20" Data="{StaticResource add_regular}" />
-														</MenuItem.Icon>
-													</MenuItem>
-												</ContextMenu>
-											</views:MediaItemTC.ContextMenu>
-										</views:MediaItemTC>
-									</DataTemplate>
-								</ItemsControl.ItemTemplate>
-							</ListBox>
-						</Grid>
+												</Label>
+											</StackPanel>
+										</Grid>
+									</Border>
+								</Grid>
+							</DataTemplate>
+						</TransitioningContentControl.ContentTemplate>
+					</TransitioningContentControl>
+				</Border>
+				<Border Grid.Row="0" Background="Black" Opacity="0.4" Height="70" VerticalAlignment="Bottom">
+					<Border.OpacityMask>
+						<LinearGradientBrush StartPoint="50%,100%" EndPoint="50%,50%">
+							<LinearGradientBrush.GradientStops>
+								<GradientStop Offset="0" Color="Transparent"/>
+								<GradientStop Offset="1" Color="Black"/>
+							</LinearGradientBrush.GradientStops>
+						</LinearGradientBrush>
+					</Border.OpacityMask>
+				</Border>
+				<Border Grid.Row="1" Background="Black" Opacity="0.3"></Border>
+				<Border Grid.Row="2" Background="Black" Opacity="0.3"></Border>
+
+				<Grid Grid.Row="1" Margin="10">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="40"></RowDefinition>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+					<Grid Grid.Row="0">
+
+						<Label HorizontalAlignment="Left" FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Bài hát</Label>
+						<Button HorizontalAlignment="Right" Click="Button_Click_1">
+							<Button.Styles>
+								<Style Selector="Button">
+									<Setter Property="Template">
+										<ControlTemplate>
+											<Panel>
+												<Label x:Name="PART_ContentPresenter"
+																  Content="{TemplateBinding Content}"
+																  ContentTemplate="{Binding }"
+																  Margin="{TemplateBinding Padding}"/>
+											</Panel>
+										</ControlTemplate>
+									</Setter>
+								</Style>
+							</Button.Styles>
+							<Label FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Xem tất cả</Label>
+						</Button>
 					</Grid>
-				</ScrollViewer>
-			</Grid>
+					<ListBox  Grid.Row="1"
+							 Name="listMusic"
+								Background="Transparent"
+								ItemsSource="{Binding ListSongs}"
+								Tag="{Binding AllPlayLists}"
+									>
+						<ListBox.Styles>
+							<Style Selector="ListBoxItem">
+								<Setter Property="Padding" Value="0,5,3,5"></Setter>
+							</Style>
+							<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
+								<Setter Property="Background" Value="Transparent"></Setter>
+								<Setter	Property="CornerRadius" Value="15"></Setter>
+								<Setter Property="Tag" Value="True"></Setter>
+							</Style>
+							<Style Selector="ListBoxItem:selected/template/ContentPresenter">
+								<Setter Property="Background" Value="Transparent"></Setter>
+								<Setter	Property="CornerRadius" Value="15"></Setter>
+								<Setter Property="Tag" Value="True"></Setter>
+							</Style>
+						</ListBox.Styles>
+						<ListBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<WrapPanel/>
+							</ItemsPanelTemplate>
+						</ListBox.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<views:MediaItemTC AuthorName="{Binding ArtistsString}" 	  DateAdded="{Binding DateAdded}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}" DurationText="{Binding DurationText}">
+									<views:MediaItemTC.ContextMenu>
+										<ContextMenu Name="menu" >
+											<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
+												<MenuItem.Icon>
+													<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
+												</MenuItem.Icon>
+											</MenuItem>
+											<MenuItem Header="Phát tiếp theo" Click="AddMediaQueue_Click">
+												<MenuItem.Icon>
+													<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
+												</MenuItem.Icon>
+											</MenuItem>
+											<MenuItem Header="Thêm vào" ItemsSource="{Binding $parent[ListBox].Tag}">
+												<MenuItem.ItemTemplate>
+													<DataTemplate x:DataType="md:Playlist">
+														<MenuItem Name="playlist" Header="{Binding PlayListName}"
+															Click="MenuItem_Click_2"
+																	>
+															<MenuItem.CommandParameter>
+																<MultiBinding>
+																	<Binding ElementName="menu" Path="DataContext"/>
+																	<Binding ElementName="playlist" Path="DataContext"/>
+																</MultiBinding>
+															</MenuItem.CommandParameter>
 
-		</Grid>
+
+														</MenuItem>
+													</DataTemplate>
+												</MenuItem.ItemTemplate>
+												<MenuItem.Icon>
+													<PathIcon Width="20" Height="20" Data="{StaticResource add_regular}" />
+												</MenuItem.Icon>
+											</MenuItem>
+										</ContextMenu>
+									</views:MediaItemTC.ContextMenu>
+								</views:MediaItemTC>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ListBox>
+				</Grid>
+				<Grid Grid.Row="2" Margin="10">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="40"></RowDefinition>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+					<Grid Grid.Row="0">
+						<Label HorizontalAlignment="Left" FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Video</Label>
+						<Button HorizontalAlignment="Right" Click="Button_Click">
+							<Button.Styles>
+								<Style Selector="Button">
+									<Setter Property="Template">
+										<ControlTemplate>
+											<Panel>
+												<Label x:Name="PART_ContentPresenter"
+																  Content="{TemplateBinding Content}"
+																  ContentTemplate="{Binding }"
+																  Margin="{TemplateBinding Padding}"/>
+											</Panel>
+										</ControlTemplate>
+									</Setter>
+								</Style>
+							</Button.Styles>
+							<Label FontSize="17" Padding="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">Xem tất cả</Label>
+						</Button>
+					</Grid>
+					<ListBox Grid.Row="1"
+								Name="listBoxVideo"
+								Background="Transparent"
+							   Tag="{Binding AllPlayLists}"
+							  ItemsSource="{Binding ListVideos}"
+								   >
+						<ListBox.Styles>
+							<Style Selector="ListBoxItem">
+								<Setter Property="Padding" Value="0,5,3,5"></Setter>
+							</Style>
+							<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
+								<Setter Property="Background" Value="Transparent"></Setter>
+								<Setter	Property="CornerRadius" Value="15"></Setter>
+								<Setter Property="Tag" Value="True"></Setter>
+							</Style>
+							<Style Selector="ListBoxItem:selected/template/ContentPresenter">
+								<Setter Property="Background" Value="Transparent"></Setter>
+								<Setter	Property="CornerRadius" Value="15"></Setter>
+								<Setter Property="Tag" Value="True"></Setter>
+							</Style>
+						</ListBox.Styles>
+						<ListBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<WrapPanel/>
+							</ItemsPanelTemplate>
+						</ListBox.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate> 
+								<views:MediaItemTC AuthorName="{Binding ArtistsString}" 	  DateAdded="{Binding DateAdded}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}" DurationText="{Binding DurationText}">
+									<views:MediaItemTC.ContextMenu>
+										<ContextMenu Name="menu">
+											<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
+												<MenuItem.Icon>
+													<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
+												</MenuItem.Icon>
+											</MenuItem>
+											<MenuItem Header="Phát tiếp theo" Click="AddMediaQueue_Click">
+												<MenuItem.Icon>
+													<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
+												</MenuItem.Icon>
+											</MenuItem>
+											<MenuItem Header="Thêm vào" ItemsSource="{Binding $parent[ListBox].Tag}">
+												<MenuItem.ItemTemplate>
+													<DataTemplate x:DataType="md:Playlist">
+														<MenuItem Name="playlist" Header="{Binding PlayListName}"
+															Click="MenuItem_Click_2"
+																	>
+															<MenuItem.CommandParameter>
+																<MultiBinding>
+																	<Binding ElementName="menu" Path="DataContext"/>
+																	<Binding ElementName="playlist" Path="DataContext"/>
+																</MultiBinding>
+															</MenuItem.CommandParameter>
+
+
+														</MenuItem>
+													</DataTemplate>
+												</MenuItem.ItemTemplate>
+												<MenuItem.Icon>
+													<PathIcon Width="20" Height="20" Data="{StaticResource add_regular}" />
+												</MenuItem.Icon>
+											</MenuItem>
+										</ContextMenu>
+									</views:MediaItemTC.ContextMenu>
+								</views:MediaItemTC>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ListBox>
+				</Grid>
+			</Grid>
+		</ScrollViewer>
+
+		<!--<Border  Background="Black" Opacity="0.3"></Border>-->
+			<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" CornerRadius="8" Opacity="0.1">
+			</Border>-->
+
 	</Border>
 </UserControl>

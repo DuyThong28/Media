@@ -28,6 +28,17 @@ namespace Media.Views
             set => SetValue(CountMediasProperty, value);
         }
 
+        public static readonly StyledProperty<string> DateAddedProperty =
+            AvaloniaProperty.Register<MusicRowTC, string>(
+                nameof(DateAdded),
+                defaultValue: "");
+
+        public string DateAdded
+        {
+            get { return GetValue(DateAddedProperty); }
+            set => SetValue(DateAddedProperty, value);
+        }
+
         public static readonly StyledProperty<IImage> ImageSourceProperty =
             AvaloniaProperty.Register<PlaylistItemTC, IImage>(
                 nameof(ImageSource));

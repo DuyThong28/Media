@@ -243,8 +243,8 @@ namespace Media.ViewModels
                 listMedia.Add(item: new MediaItem(filePath));
             }
             AllMedias.Clear();
-            AllMedias = new List<MediaItem>(MediaHelper.listSongs);
-            AllMedias.AddRange(MediaHelper.listVideos);
+            AllMedias.AddRange(listSongs);
+            AllMedias.AddRange(listVideos);
         }
 
 
@@ -267,8 +267,8 @@ namespace Media.ViewModels
         {
             add { updatePlayingScreen += value; }
             remove { updatePlayingScreen -= value; }
-        }  
-        
+        }
+
         public static event EventHandler updateLibraryScreen;
         public static event EventHandler UpdateLibraryScreen
         {
@@ -304,6 +304,13 @@ namespace Media.ViewModels
             add { openVideoScreen += value; }
             remove { openVideoScreen -= value; }
         }
+
+        public static event EventHandler turnPlayingScreen;
+        public static event EventHandler TurnPlayingScreen
+        {
+            add => turnPlayingScreen += value;
+            remove { turnPlayingScreen -= value; }
+        }
         public static void UpdateScreen(object sender, EventArgs e)
         {
    
@@ -311,13 +318,17 @@ namespace Media.ViewModels
             {
                 updatePlaylistScreen(sender, new EventArgs());
             }
+            if (updateLibraryScreen != null)
+            {
+                updateLibraryScreen(sender, new EventArgs());
+            }
             if (updatePlayingScreen != null)
             {
                 updatePlayingScreen(sender, new EventArgs());
             }
-            if (updateLibraryScreen != null)
+            if (turnPlayingScreen != null)
             {
-                updateLibraryScreen(sender, new EventArgs());
+                turnPlayingScreen(sender, new EventArgs());
             }
         }
         
@@ -335,19 +346,24 @@ namespace Media.ViewModels
             {
                 updateListMediaScreen(sender, new EventArgs());
             }
+            if (updatePlaylistScreen != null)
+            {
+                updatePlaylistScreen(sender, new EventArgs());
+            }
+
         }
 
-        
+
         public static void UpdateMediaControl(object sender, EventArgs e)
         {
             if (updateMediaScreen != null)
             {
                 updateMediaScreen(sender, new EventArgs());
             }
-            if (updatePlayingScreen != null)
-            {
-                updatePlayingScreen(sender, new EventArgs());
-            }
+            //if (updatePlayingScreen != null)
+            //{
+            //    updatePlayingScreen(sender, new EventArgs());
+            //}
         }
 
 
@@ -474,10 +490,25 @@ namespace Media.ViewModels
                 }
             }
 
-            //if (updatePlayingScreen != null)
-            //{
-            //    updatePlayingScreen(sender, new EventArgs());
-            //}
+            UpdateScreen(sender, e);
+        }
+
+        public static void MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+            IList<object> list = menuItem.CommandParameter as IList<object>;
+            if (list != null)
+            {
+                MediaItem mediaItem = list[1] as MediaItem;
+                if (!mediaItem.IsPlay)
+                {
+                    PlaylistScreenViewModel playlistscreen = list[0] as PlaylistScreenViewModel;
+                    playlistscreen.Playlist.DeleteMedia(mediaItem);
+                    playlistscreen.ListMedia.Remove(mediaItem);
+                    playlistscreen.ListMedia = new List<MediaItem>(playlistscreen.ListMedia);
+                }
+            }
+
         }
 
     }

@@ -7,6 +7,7 @@
 			 xmlns:vm="using:Media.ViewModels"
 			 xmlns:md="using:Media.Models"
 			  x:DataType="vm:PlaylistScreenViewModel"
+			 Foreground="White"
 			 x:Class="Media.Views.PlaylistScreenControl">
 	<Design.DataContext>
 		<vm:PlaylistScreenViewModel/>
@@ -16,12 +17,16 @@
 			<Setter Property="Template">
 				<ControlTemplate>
 					<Panel>
-						<Border Background="Black"
+						<Border Background="{TemplateBinding Background}"
 								Width="20"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="1"
 								Height="20">
 						</Border>
 						<Label x:Name="PART_ContentPresenter"
 										  Content="{TemplateBinding Content}"
+							   Height="{TemplateBinding Height}"
+							   Width="{TemplateBinding Width}"
 										  />
 					</Panel>
 				</ControlTemplate>
@@ -35,11 +40,12 @@
 					<Panel>
 						<Border Background="{TemplateBinding Background}"
 								CornerRadius="{TemplateBinding CornerRadius}"
-								Opacity="0.9">
+									>
 						</Border>
 						<Border
 								CornerRadius="{TemplateBinding CornerRadius}"
-								Opacity="0.5">
+								BorderBrush="White"
+								>
 						</Border>
 						<ContentPresenter Name="PART_ContentPresenter"
 						  ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -54,11 +60,19 @@
 			</Setter>
 		</ControlTheme>
 	</UserControl.Resources>
-	<Border  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
+	<!--<Border  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
 			 Margin="10" CornerRadius="5" ClipToBounds="True">
 		<Grid>
 			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
-			</Border>
+			</Border>-->
+	<Border  Background="#DB3E3E3E"
+			 Margin="10" CornerRadius="10" ClipToBounds="True">
+		<!--<Border.Effect>
+			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"></DropShadowEffect>
+		</Border.Effect>-->
+		<Grid>
+			<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" CornerRadius="10" Opacity="0.7" BorderBrush="White" BorderThickness="5">
+			</Border>-->
 			<Border>
 				<Panel>
 					<ScrollViewer Background="Transparent" ScrollChanged="ScrollViewer_ScrollChanged">
@@ -128,74 +142,114 @@
 													<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
 												</TextBlock.Effect>
 											</TextBlock>
-											<Label x:Name="countMedias"   HorizontalContentAlignment="Left" FontSize="18" FontWeight="Bold" Padding="0,0,0,0" Content="{Binding CountMedia}">
-												<Label.Effect>
-													<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
-												</Label.Effect>
-											</Label>
+											<StackPanel Orientation="Horizontal" Spacing="15">
+												<Label x:Name="dateAdded"   HorizontalContentAlignment="Left" FontSize="18" FontWeight="Bold" Padding="0,0,0,0" Content="{Binding DateAddted}">
+													<Label.Effect>
+														<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+													</Label.Effect>
+												</Label>
+												<Label x:Name="countMedias"   HorizontalContentAlignment="Left" FontSize="18" FontWeight="Bold" Padding="0,0,0,0" Content="{Binding CountMedia}">
+													<Label.Effect>
+														<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+													</Label.Effect>
+												</Label>
+											</StackPanel>
+											
+											
 										</StackPanel>
 									</Grid>
 								</Border>
 								<Grid Grid.Row="1">
-									<Border Background="Black" Opacity="0.2"></Border>
-									<Border BorderBrush="#747474" BorderThickness="0,0,0,1" Margin="20,0,20,0">
-										<Button Background="Transparent" HorizontalAlignment="Left"
-												VerticalAlignment="Center"
-												Command="{Binding PlayMediaCommand}">
-											<Button.Effect>
-												<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="5"/>
-											</Button.Effect>
-											<Image
-													Classes.checked="{Binding !IsPlay}"
-													Classes.unChecked="{Binding IsPlay}">
-												<Image.Styles>
-													<Style Selector="Image.checked">
-														<Setter Property="Height" Value="60"></Setter>
-														<Setter Property="Width" Value="60"></Setter>
-														<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
-													</Style>
-													<Style Selector="Image.checked:pointerover">
-														<Setter Property="Height" Value="63"></Setter>
-														<Setter Property="Width" Value="63"></Setter>
-														<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
-													</Style>
-													<Style Selector="Image.unChecked">
-														<Setter Property="Height" Value="60"></Setter>
-														<Setter Property="Width" Value="60"></Setter>
-														<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-													</Style>
-													<Style Selector="Image.unChecked:pointerover">
-														<Setter Property="Height" Value="63"></Setter>
-														<Setter Property="Width" Value="63"></Setter>
-														<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
-													</Style>
-												</Image.Styles>
-											</Image>
-										</Button>
+									<Border Background="Black" Opacity="0.1">
+									</Border>
+									<Border BorderBrush="#747474" BorderThickness="0,0,0,0.5" Margin="20,0,20,0">
+										<Grid>
+											<Button Background="Black" HorizontalAlignment="Left"
+													VerticalAlignment="Center"
+													Height="60"
+													Width="60"
+													CornerRadius="60"
+													Padding="5"
+													Command="{Binding PlayMediaCommand}">
+												<Button.Effect>
+													<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="5"/>
+												</Button.Effect>
+												<Image
+														Classes.checked="{Binding !IsPlay}"
+														Classes.unChecked="{Binding IsPlay}">
+													<Image.Styles>
+														<Style Selector="Image.checked">
+															<Setter Property="Height" Value="60"></Setter>
+															<Setter Property="Width" Value="60"></Setter>
+															<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
+														</Style>
+														<Style Selector="Image.checked:pointerover">
+															<Setter Property="Height" Value="63"></Setter>
+															<Setter Property="Width" Value="63"></Setter>
+															<Setter Property="Source" Value="/Assets/Icons/play_green.png"></Setter>
+														</Style>
+														<Style Selector="Image.unChecked">
+															<Setter Property="Height" Value="60"></Setter>
+															<Setter Property="Width" Value="60"></Setter>
+															<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
+														</Style>
+														<Style Selector="Image.unChecked:pointerover">
+															<Setter Property="Height" Value="63"></Setter>
+															<Setter Property="Width" Value="63"></Setter>
+															<Setter Property="Source" Value="/Assets/Icons/pause_green.png"></Setter>
+														</Style>
+													</Image.Styles>
+												</Image>
+											</Button>
+											<Button CornerRadius="5" Padding="10" Height="35" HorizontalAlignment="Right" Background="Transparent">
+												<PathIcon Data="{StaticResource options_regular}" Height="30" Width="60">
+													<PathIcon.Styles>
+														<Style Selector="PathIcon">
+															<Setter Property="Opacity" Value="0.5"></Setter>
+														</Style>
+														<Style Selector="PathIcon:pointerover">
+															<Setter Property="Opacity" Value="0.8"></Setter>
+														</Style>
+													</PathIcon.Styles>
+												</PathIcon>
+											</Button>
+										</Grid>
 									</Border>
 								</Grid>
 							</Grid>
 
-							<Border Grid.Row="1" Background="Black" Opacity="0.5"></Border>
+							<Border Grid.Row="1" Background="Black" Opacity="0.3"></Border>
 							
 							<ListBox Name="listMedia" Grid.Row="1" Background="Transparent"
+									 AutoScrollToSelectedItem="True"
 												  ItemsSource="{Binding ListMedia}"
 													SelectedItem="{Binding SelectedItem}"
 												Padding="20,30,20,0">
 								<ListBox.Styles>
+									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
+										<Setter Property="Background" Value="Transparent"></Setter>
+									</Style>
 									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
-										<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
+										<Setter Property="Background" Value="Transparent"></Setter>
+										<Setter Property="Foreground" Value="#1ED760"></Setter>
 									</Style>
 									<Style Selector="ListBoxItem">
 										<Setter Property="Padding" Value="6,5,5,5"></Setter>
+										<Setter Property="Margin" Value="2,0,2,0"></Setter>
 									</Style>
 									<Style Selector="ListBoxItem:pointerover">
-										<Setter Property="Background" Value="#BC757575"></Setter>
+										<Setter Property="Background" Value="#2A2A2A"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
+										<!--<Setter Property="Effect">
+													<DropShadowEffect BlurRadius="5" Color="#5A5A5A" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
+												</Setter>-->
 									</Style>
 									<Style Selector="ListBoxItem:selected">
-										<Setter Property="Background" Value="#BC757575"></Setter>
+										<Setter Property="Background" Value="#FF515151"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
+										<!--<Setter Property="Effect">
+													<DropShadowEffect BlurRadius="5" Color="#494C4D" OffsetX="0" OffsetY="0"></DropShadowEffect>
+												</Setter>-->
 									</Style>
 								</ListBox.Styles>
 								<ListBox.ItemTemplate>
@@ -203,6 +257,7 @@
 										<views:MusicRowTC AuthorName="{Binding ArtistsString}"
 															MediaName="{Binding Title}"
 															ImageSource="{Binding Image}"
+														  DateAdded="{Binding DateAdded}"
 															DurationText="{Binding DurationText}"
 															Command="{Binding PlayMediaCommand}"
 															CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}">
@@ -213,11 +268,11 @@
 															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
 														</MenuItem.Icon>
 													</MenuItem>
-													<MenuItem Header="Phát tiếp theo">
+													<!--<MenuItem Header="Phát tiếp theo">
 														<MenuItem.Icon>
 															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
 														</MenuItem.Icon>
-													</MenuItem>
+													</MenuItem>-->
 													<MenuItem Name="mediaItem" Header="Loại bỏ" Click="MenuItem_Click">
 														<MenuItem.Icon>
 															<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
@@ -249,7 +304,8 @@
 								<Setter Property="Background" Value="Transparent"></Setter>
 							</Style>
 						</Grid.Styles>
-						<Border  Background="Black" Opacity="0.3" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}"></Border>
+						<Border Background="Black" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" Opacity="0.3"></Border>
+						<!--<Border  Background="Black" Opacity="0.3" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}"></Border>-->
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="55"></ColumnDefinition>
@@ -284,7 +340,7 @@
 								</Button.Styles>
 								<PathIcon Height="15" Width="15" FontWeight="Bold" Margin="0,1,0,0" Data="{StaticResource arrow_left_regular}"></PathIcon>
 							</Button>
-							<Button Name="playBtn" IsVisible="False" Background="Transparent" HorizontalAlignment="Left"
+							<Button Name="playBtn" IsVisible="False" Background="Black" HorizontalAlignment="Left"
 										VerticalAlignment="Center"
 									Grid.Column="1"
 										Command="{Binding PlayMediaCommand}">
@@ -315,7 +371,23 @@
 									</Image.Styles>
 								</Image>
 							</Button>
-							<TextBlock Grid.Column="2" HorizontalAlignment="Stretch" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Padding="0,0,0,0"  Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis"></TextBlock>
+							<TextBlock Grid.Column="2" HorizontalAlignment="Stretch" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Padding="0,0,0,0"  Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis">
+								<TextBlock.Effect>
+									<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
+								</TextBlock.Effect>
+							</TextBlock>
+							<Button CornerRadius="5" Grid.Column="2" Padding="10" Height="30" HorizontalAlignment="Right" Margin="0,0,15,0" Background="Transparent" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" >
+								<PathIcon Data="{StaticResource options_regular}" Height="20" Width="30">
+									<PathIcon.Styles>
+										<Style Selector="PathIcon">
+											<Setter Property="Opacity" Value="0.5"></Setter>
+										</Style>
+										<Style Selector="PathIcon:pointerover">
+											<Setter Property="Opacity" Value="0.8"></Setter>
+										</Style>
+									</PathIcon.Styles>
+								</PathIcon>
+							</Button>
 						</Grid>
 					</Grid>
 				</Panel>

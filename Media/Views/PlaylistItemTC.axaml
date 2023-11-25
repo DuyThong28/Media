@@ -9,7 +9,7 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-		  <Border Name="border" CornerRadius="10" ClipToBounds="True"
+		  <Border Name="border" CornerRadius="10" ClipToBounds="True" Padding="12"
 				  >
 			  <Border.Styles>
 				  <Style Selector="Border">
@@ -23,7 +23,10 @@
 				  </Style>
 			  </Border.Styles>
 			  <StackPanel Width="225" Background="Transparent">
-				  <Grid>
+				  <Grid Margin="0,0,0,10">
+					  <Grid.Effect>
+						  <DropShadowEffect BlurRadius="15" Color="Black" OffsetX="0" OffsetY="0,10"></DropShadowEffect>
+					  </Grid.Effect>
 					  <Border  CornerRadius="10" ClipToBounds="True" Height="225" Width="225" Background="Transparent">
 						  <Image Source="{TemplateBinding ImageSource}" Stretch="UniformToFill" Classes.hover="{Binding ElementName=border, Path=Tag}">
 							  <Image.Styles>
@@ -69,33 +72,37 @@
 								  </Setter>
 							  </Style>
 						  </Button.Styles>
-						  <PathIcon Height="50" Width="50" Data="{StaticResource play_circle_regular}">
+						  <PathIcon Height="50" Foreground="White" Width="50" Data="{StaticResource play_circle_regular}">
 						  </PathIcon>
 					  </Button>
 				  </Grid>
-				  <TextBlock x:Name="playlistName" Grid.Row="0"
+				  <TextBlock x:Name="playlistName" 
 						 HorizontalAlignment="Stretch"
 						TextWrapping="WrapWithOverflow"
 						 VerticalAlignment="Bottom" FontSize="14" FontWeight="Medium"
 						 Text="{TemplateBinding PlaylistName}">
 					  <TextBlock.Styles>
 						  <Style Selector="TextBlock.checked">
-							  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Tag}"></Setter>
+							  <Setter Property="Foreground" Value="White"></Setter>
 						  </Style>
 						  <Style Selector="TextBlock.unChecked">
-							  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"></Setter>
+							  <Setter Property="Foreground" Value="White"></Setter>
 						  </Style>
 					  </TextBlock.Styles>
 				  </TextBlock>
-				  <TextBlock x:Name="countMedias"
-							 Grid.Row="1" Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"
-							 Opacity="0.5" 
-							 HorizontalAlignment="Stretch"
-							 VerticalAlignment="Top" FontSize="14"
-								TextWrapping="WrapWithOverflow">
-					  <Run Text="{TemplateBinding CountMedias}"></Run>
-					  <Run Text="mục"></Run>
-				  </TextBlock>
+				  <Grid>
+					  <TextBlock HorizontalAlignment="Left" Foreground="White" Opacity="0.5" FontSize="14" TextWrapping="WrapWithOverflow" Text="{TemplateBinding DateAdded}"></TextBlock>
+
+					  <TextBlock x:Name="countMedias"
+								 Foreground="White"
+								 Opacity="0.5"
+								 HorizontalAlignment="Right"
+								 VerticalAlignment="Top" FontSize="14"
+									TextWrapping="WrapWithOverflow">
+						  <Run Text="{TemplateBinding CountMedias}"></Run>
+						  <Run Text="mục"></Run>
+					  </TextBlock>
+				  </Grid>
 			  </StackPanel>
 		  </Border>
       </ControlTemplate>
