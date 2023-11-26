@@ -7,13 +7,11 @@ using System;
 
 namespace Media
 {
+
     public partial class App : Application
     {
         public override void Initialize()
         {
-        #if !DEBUG
-                    Environment.CurrentDirectory = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.Length - 1);
-        #endif
             AvaloniaXamlLoader.Load(this);
         }
 
@@ -23,6 +21,7 @@ namespace Media
             {
                 desktop.MainWindow = new MainWindow
                 {
+
                     DataContext = new MainWindowViewModel()
                 };
 

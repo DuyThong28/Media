@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using System.Runtime.CompilerServices;
+using Avalonia.Controls.Shapes;
+using Path = System.IO.Path;
 
 namespace Media.Models
 {
@@ -54,9 +56,10 @@ namespace Media.Models
         public Playlist(string id = null, string name = "Unnamed", string backroundImageFileName = null, List<MediaItem> listMedia = null)
         {
             string curDir = Environment.CurrentDirectory.Trim();
-            if (backroundImageFileName == null) 
+            string newPath = Path.GetFullPath(Path.Combine( curDir, @"..\..\..\"));
+            if (backroundImageFileName == null)
             {
-                backroundImageFileName = curDir.Remove(curDir.Length - 17, 17) + @"\Assets\Icons\defaultImage.jpg"; 
+                backroundImageFileName = Path.GetFullPath((newPath+ @"\Assets\Icons\defaultImage.jpg"));
             }
             if (id == null) playListID = Guid.NewGuid().ToString("N");
             else playListID = id;
