@@ -11,6 +11,7 @@ using Avalonia.Media;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls.Shapes;
 using Path = System.IO.Path;
+using LibVLCSharp.Shared;
 
 namespace Media.Models
 {
@@ -55,11 +56,18 @@ namespace Media.Models
 
         public Playlist(string id = null, string name = "Unnamed", string backroundImageFileName = null, List<MediaItem> listMedia = null)
         {
+            string fileName = Path.Combine(Environment.CurrentDirectory, "Default Image", "defaultImage.jpg");
+            Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "Default Image"));
             string curDir = Environment.CurrentDirectory.Trim();
             string newPath = Path.GetFullPath(Path.Combine( curDir, @"..\..\..\"));
+            string imagepath = Path.GetFullPath((newPath + @"\Assets\Icons\defaultImage.jpg"));
+            if (!File.Exists(fileName))
+            {
+                File.Copy(imagepath, fileName);
+            }    
             if (backroundImageFileName == null)
             {
-                backroundImageFileName = Path.GetFullPath((newPath+ @"\Assets\Icons\defaultImage.jpg"));
+                backroundImageFileName = fileName;
             }
             if (id == null) playListID = Guid.NewGuid().ToString("N");
             else playListID = id;
