@@ -236,6 +236,10 @@ namespace Media.Views
             //controlPanel.IsVisible = !controlPanel.IsVisible;
             //}
             viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0 : 1;
+            mediaControl.UpdateRepeatBtn(sender, new Avalonia.Interactivity.RoutedEventArgs());
+            mediaControl.UpdateSuftbtn(sender, new Avalonia.Interactivity.RoutedEventArgs());
+            videoControl.UpdateSuftbtn(sender, new Avalonia.Interactivity.RoutedEventArgs());
+            videoControl.UpdateRepeatBtn(sender, new Avalonia.Interactivity.RoutedEventArgs());
             if (mainViewScreen.Content == mainScreen)
             {    
                 if(PlayMedia.IsPlayVideo == false)
