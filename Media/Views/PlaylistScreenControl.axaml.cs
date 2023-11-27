@@ -40,5 +40,10 @@ namespace Media.Views
         {
             MediaHelper.PlayNextInQueue(sender, e);
         }
+
+        private void Button_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+
+        }
     }
 }

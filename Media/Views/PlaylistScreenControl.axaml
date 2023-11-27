@@ -201,7 +201,7 @@
 													</Image.Styles>
 												</Image>
 											</Button>
-											<Button CornerRadius="5" Padding="10" Height="35" HorizontalAlignment="Right" Background="Transparent">
+											<Button CornerRadius="5" Padding="10" Height="35" HorizontalAlignment="Right" Background="Transparent" Click="Button_Click_1">
 												<PathIcon Data="{StaticResource options_regular}" Height="30" Width="60">
 													<PathIcon.Styles>
 														<Style Selector="PathIcon">

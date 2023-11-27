@@ -9,7 +9,6 @@
 		x:DataType="vm:AddAlbumWindowViewModel"
 		TransparencyLevelHint="AcrylicBlur"
         Background="Transparent"
-		  xmlns:vm="using:Media.ViewModels"
 		Icon="/Assets/Logo5.ico"
 		WindowStartupLocation="CenterScreen"
         Title="Danh sách phát" Width="300" Height="300">
