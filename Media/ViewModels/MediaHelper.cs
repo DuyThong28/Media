@@ -574,6 +574,7 @@ namespace Media.ViewModels
                     PlayingScreenViewModel playingscreen = list[0] as PlayingScreenViewModel;
                     playingscreen.ListMedia.Remove(mediaItem);
                     playingscreen.ListMedia = new List<MediaItem>(playingscreen.ListMedia);
+                    PlayQueue = playingscreen.ListMedia;
                 }
             }
         }
