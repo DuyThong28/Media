@@ -43,7 +43,8 @@ namespace Media.Views
 
         private void Button_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-
+            var playlistDataContext = ((sender as Button).DataContext as PlaylistScreenViewModel);
+            MediaHelper.RenameAlbum_Click(playlistDataContext, e);
         }
     }
 }

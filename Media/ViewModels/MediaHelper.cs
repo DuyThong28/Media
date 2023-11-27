@@ -592,5 +592,30 @@ namespace Media.ViewModels
                                                             group playlist by playlist.DateCreated;
             return res;
         }
+
+        public static void RenameAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = MainWindow.GetInstance();
+            if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToRename)
+            {
+                //if (!isAddAlbumWindowOpen)
+                //{
+                RenameAlbum.Playlist = playlistToRename;
+                AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
+                //addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
+                addAlbumWindow.ShowDialog(mainWindow);
+                //isAddAlbumWindowOpen = true;
+                //}
+            }
+            else if (sender is PlaylistScreenViewModel)
+            {
+                playlistToRename = (sender as PlaylistScreenViewModel).Playlist;
+                RenameAlbum.Playlist = playlistToRename;
+                AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
+                //addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
+                addAlbumWindow.ShowDialog(mainWindow);
+                RenameAlbum.Playlistscreen = sender as PlaylistScreenViewModel;                        
+            }
+        }
     }
 }

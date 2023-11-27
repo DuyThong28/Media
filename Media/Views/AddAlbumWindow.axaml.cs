@@ -69,6 +69,8 @@ public partial class AddAlbumWindow : Window
                 MediaHelper.Database.DeletePlaylist(RenameAlbum.Playlist.PlayListID);
                 RenameAlbum.Playlist = playlist;
                 MediaHelper.AddPlayList(playlist);
+                if (RenameAlbum.Playlistscreen != null)
+                    RenameAlbum.Playlistscreen.Playlist = RenameAlbum.Playlist;
             }
             else
             {

@@ -86,7 +86,7 @@ namespace Media.ViewModels
                     IsPlay = false;
                 }
                     SelectedItem = MediaHelper.selectPlaylistItem(playlist);
-            }
+            }          
         }
         private void UpdateScreen()
         {
