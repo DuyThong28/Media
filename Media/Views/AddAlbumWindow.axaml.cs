@@ -8,7 +8,7 @@ using Media.Models;
 using Media.ViewModels;
 using System.Diagnostics;
 
-namespace Media;
+namespace Media.Views;
 
 public partial class AddAlbumWindow : Window
 {
@@ -16,6 +16,7 @@ public partial class AddAlbumWindow : Window
     {
         InitializeComponent();
         this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        this.DataContext = new AddAlbumWindowViewModel(RenameAlbum.Playlist);
     }
     private string imagePath;
     private async void SelectImage_Click(object sender, RoutedEventArgs e)
@@ -43,24 +44,39 @@ public partial class AddAlbumWindow : Window
         }
     }
     private void AddAlbum_Click(object sender, RoutedEventArgs e)
-    {     
-        if (RenameAlbum.Playlist == null)
+    {
+        if (sender is Button button && button.Tag is AddAlbumWindowViewModel addAlbumWindowViewModel)
         {
-            string albumName = AlbumNameTextBox.Text;
-            string imagePath = this.imagePath;
-            Playlist playlist = new Playlist(null, albumName, imagePath, null);
-            MediaHelper.AddPlayList(playlist);
-        }
-        else
-        {
-            string albumName = AlbumNameTextBox.Text;
-            string imagePath = this.imagePath;
-            Playlist playlist = new Playlist(null, albumName, imagePath, null);           
-            playlist.ListMedia = RenameAlbum.Playlist.ListMedia;        
-            MediaHelper.AllPlayList.Remove(RenameAlbum.Playlist);
-            MediaHelper.Database.DeletePlaylist(RenameAlbum.Playlist.PlayListID);
-            RenameAlbum.Playlist = playlist;
-            MediaHelper.AddPlayList(playlist);
+            /*if (RenameAlbum.Playlist == null)
+            {
+                string albumName = AlbumNameTextBox.Text;
+                string imagePath = this.imagePath;
+                Playlist playlist = new Playlist(null, albumName, imagePath, null);
+                MediaHelper.AddPlayList(playlist);
+            }
+            else*/
+            if (addAlbumWindowViewModel.Playlist != null) 
+            {
+                string albumName = AlbumNameTextBox.Text;
+                string imagePath;
+                if (this.imagePath != null)
+                    imagePath = this.imagePath;
+                else
+                    imagePath = addAlbumWindowViewModel.Playlist.BackroundImageFileName;                   
+                Playlist playlist = new Playlist(null, albumName, imagePath, null);
+                playlist.ListMedia = RenameAlbum.Playlist.ListMedia;
+                MediaHelper.AllPlayList.Remove(RenameAlbum.Playlist);
+                MediaHelper.Database.DeletePlaylist(RenameAlbum.Playlist.PlayListID);
+                RenameAlbum.Playlist = playlist;
+                MediaHelper.AddPlayList(playlist);
+            }
+            else
+            {
+                string albumName = AlbumNameTextBox.Text;
+                string imagePath = this.imagePath;
+                Playlist playlist = new Playlist(null, albumName, imagePath, null);
+                MediaHelper.AddPlayList(playlist);
+            }
         }
         this.Close();
     }

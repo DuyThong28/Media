@@ -6,7 +6,7 @@
 			 xmlns:views="using:Media.Views"
 			 xmlns:vm="using:Media.ViewModels"
 			 xmlns:md="using:Media.Models"
-			  x:DataType="vm:LibraryScreenViewModel"
+			 x:DataType="vm:LibraryScreenViewModel"
              x:Class="Media.Views.LibraryScreenControl">
 	<Design.DataContext>
 		<vm:LibraryScreenViewModel/>
