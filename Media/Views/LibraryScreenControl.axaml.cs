@@ -56,7 +56,7 @@ namespace Media.Views
             if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToRename)
             {
                 if (!isAddAlbumWindowOpen)
-                {
+                {                  
                     RenameAlbum.Playlist = playlistToRename;
                     AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
                     addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;

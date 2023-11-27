@@ -132,6 +132,6 @@ namespace Media.Models
             ListMedia.Remove(media);
             MediaHelper.Database.DeleteMediaInAPlaylist(media.FilePath, this.PlayListID);
             MediaHelper.OnAllPlayListChanged();
-        }
+        }       
     }
 }
