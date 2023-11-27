@@ -13,7 +13,7 @@ namespace Media.Views
 {
     public partial class LibraryScreenControl : UserControl
     {
-        private bool isAddAlbumWindowOpen = false;
+        //private bool isAddAlbumWindowOpen = false;
         public LibraryScreenControl()
         {
             InitializeComponent();
@@ -36,13 +36,15 @@ namespace Media.Views
         private void AddAlbum_Click(object sender, RoutedEventArgs e)
         {         
             RenameAlbum.Playlist = null;
-            if (!isAddAlbumWindowOpen)
-            {
-                AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
-                addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
-                addAlbumWindow.Show();
-                isAddAlbumWindowOpen = true;
-            }
+
+            //if (!isAddAlbumWindowOpen)
+            //{
+         var mainWindow = MainWindow.GetInstance();
+        AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
+                //addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
+                addAlbumWindow.ShowDialog(mainWindow);
+                //isAddAlbumWindowOpen = true;
+            //}
         }
         private void DeleteAlbum_Click(object sender, RoutedEventArgs e)
         {
@@ -53,17 +55,7 @@ namespace Media.Views
         }
         private void RenameAlbum_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToRename)
-            {
-                if (!isAddAlbumWindowOpen)
-                {                  
-                    RenameAlbum.Playlist = playlistToRename;
-                    AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
-                    addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
-                    addAlbumWindow.Show();
-                    isAddAlbumWindowOpen = true;
-                }
-            }
+            MediaHelper.RenameAlbum_Click(sender, e);
         }
 
         private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)

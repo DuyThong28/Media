@@ -40,5 +40,13 @@ namespace Media.Views
         {
             MediaHelper.PlayNextInQueue(sender, e);
         }
+
+        private void Button_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var playlist = ((sender as Button).DataContext as PlaylistScreenViewModel).Playlist;
+            MediaHelper.RenameAlbum_Click(playlist, e);
+        }
+
+     
     }
 }
