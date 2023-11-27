@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Media.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,44 @@ namespace Media.Views
                 btn_repeat_img.Classes.Remove("repeatOne");
                 btn_repeat_img.Classes.Add("repeat");
 
+            }
+        }
+
+        public void UpdateRepeatBtn(object? sender, RoutedEventArgs e)
+        {
+            if (PlayMedia.Repeat == RepeatMode.Off)
+            {
+                btn_repeat_img.Classes.Remove("repeatOn");
+                btn_repeat_img.Classes.Remove("repeatOne");
+                btn_repeat_img.Classes.Add("repeat");
+                
+            }
+            else if (PlayMedia.Repeat == RepeatMode.All)
+            {
+                btn_repeat_img.Classes.Add("repeatOn");
+                btn_repeat_img.Classes.Remove("repeat");
+                btn_repeat_img.Classes.Remove("repeatOne");
+            }
+            else if (PlayMedia.Repeat == RepeatMode.One)
+            {
+                btn_repeat_img.Classes.Remove("repeatOn");
+                btn_repeat_img.Classes.Remove("repeat");
+                btn_repeat_img.Classes.Add("repeatOne");
+
+            }
+        }
+
+        public void UpdateSuftbtn(object ? sender, RoutedEventArgs e)
+        {
+            if (PlayMedia.Suffle)
+            {
+                btn_suff_img.Classes.Remove("notSuff");
+                btn_suff_img.Classes.Add("suff");
+            }
+            else
+            {
+                btn_suff_img.Classes.Add("notSuff");
+                btn_suff_img.Classes.Remove("suff");
             }
         }
 
