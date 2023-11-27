@@ -578,6 +578,33 @@ namespace Media.ViewModels
                 }
             }
         }
+
+        public static void RenameAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToRename)
+            {
+                //if (!isAddAlbumWindowOpen)
+                //{
+                var mainWindow = MainWindow.GetInstance();
+                RenameAlbum.Playlist = playlistToRename;
+                AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
+                //addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
+                addAlbumWindow.ShowDialog(mainWindow);
+                //isAddAlbumWindowOpen = true;
+                //}
+            } else if(sender is Playlist)
+            {
+                 playlistToRename = sender as Playlist;
+                var mainWindow = MainWindow.GetInstance();
+                RenameAlbum.Playlist = playlistToRename;
+                AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
+                //addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
+                addAlbumWindow.ShowDialog(mainWindow);
+            }
+        }
+
+   
+
         public static IEnumerable<IGrouping<char, Playlist>> SortListAToZ(List<Playlist> list)
         {
             IEnumerable<IGrouping<char, Playlist>> res = from playlist in list

@@ -386,7 +386,7 @@
 									<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
 								</TextBlock.Effect>
 							</TextBlock>
-							<Button CornerRadius="5" Grid.Column="2" Padding="10" Height="30" HorizontalAlignment="Right" Margin="0,0,15,0" Background="Transparent" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}">
+							<Button CornerRadius="5" Grid.Column="2" Padding="10" Height="30" HorizontalAlignment="Right" Margin="0,0,15,0" Background="Transparent" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" Click="Button_Click_1" >
 								<PathIcon Data="{StaticResource options_regular}" Height="20" Width="30">
 									<PathIcon.Styles>
 										<Style Selector="PathIcon">
