@@ -561,7 +561,21 @@ namespace Media.ViewModels
                     playlistscreen.ListMedia = new List<MediaItem>(playlistscreen.ListMedia);
                 }
             }
-
+        }
+        public static void MenuItem_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+            IList<object> list = menuItem.CommandParameter as IList<object>;
+            if (list != null)
+            {
+                MediaItem mediaItem = list[1] as MediaItem;
+                if (!mediaItem.IsPlay)
+                {
+                    PlayingScreenViewModel playingscreen = list[0] as PlayingScreenViewModel;
+                    playingscreen.ListMedia.Remove(mediaItem);
+                    playingscreen.ListMedia = new List<MediaItem>(playingscreen.ListMedia);
+                }
+            }
         }
         public static IEnumerable<IGrouping<char, Playlist>> SortListAToZ(List<Playlist> list)
         {

@@ -19,5 +19,9 @@ namespace Media.Views
             MediaHelper.PlayNextInQueue(sender, e);
         }
 
+        private void MenuItem_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MediaHelper.MenuItem_Click_1(sender, e);
+        }
     }
 }

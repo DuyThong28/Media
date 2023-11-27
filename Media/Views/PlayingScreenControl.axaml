@@ -248,10 +248,16 @@
 															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
 														</MenuItem.Icon>
 													</MenuItem>
-													<MenuItem Header="Loại bỏ">
+													<MenuItem Name="mediaItem" Header="Loại bỏ" Click="MenuItem_Click_1">
 														<MenuItem.Icon>
 															<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
 														</MenuItem.Icon>
+														<MenuItem.CommandParameter>
+															<MultiBinding>
+																<Binding ElementName="listBoxMedia" Path="DataContext"/>
+																<Binding ElementName="mediaItem" Path="DataContext"/>
+															</MultiBinding>
+														</MenuItem.CommandParameter>
 													</MenuItem>
 												</ContextMenu>
 											</views:MusicRowTC.ContextMenu>
