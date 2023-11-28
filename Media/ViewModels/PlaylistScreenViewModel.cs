@@ -44,7 +44,7 @@ namespace Media.ViewModels
             });
             MediaHelper.UpdatePlaylistScreen += UpdateMediaControl;
         }
-        public List<MediaItem> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value);} }
+        public List<MediaItem> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
         public string PlayListName
         {
             get => playListName;
@@ -77,6 +77,7 @@ namespace Media.ViewModels
             {
 
                 ListMedia = Playlist.ListMedia;
+                CountMedia = Playlist.ListMedia.Count.ToString();
                 if (MediaHelper.isPlayingPlaylist == true && MediaHelper.playListPlayingId == playlist.PlayListID)
                 {
                     IsPlay = PlayMedia.IsPlay;
