@@ -119,11 +119,18 @@
 																	<PathIcon Width="20" Height="20" Data="{StaticResource reading_list_add_regular}"/>
 																</MenuItem.Icon>
 															</MenuItem>
-															
-															<MenuItem Header="Thêm vào" ItemsSource="{Binding $parent[ListBox].Tag}">
+															<MenuItem x:Name="menu" Header="Thêm vào" ItemsSource="{Binding $parent[ListBox].Tag}">
 																<MenuItem.ItemTemplate>
-																	<DataTemplate x:DataType="md:Playlist">
-																		<MenuItem Header="{Binding PlayListName}"></MenuItem>
+																	<DataTemplate
+																		x:DataType="md:Playlist">
+																		<MenuItem Name="playlist" Header="{Binding PlayListName}" Click="MenuItem_Click_1">
+																			<MenuItem.CommandParameter>
+																				<MultiBinding>
+																					<Binding ElementName="menu" Path="DataContext"/>
+																					<Binding ElementName="playlist" Path="DataContext"/>
+																				</MultiBinding>
+																			</MenuItem.CommandParameter>
+																		</MenuItem>
 																	</DataTemplate>
 																</MenuItem.ItemTemplate>
 																<MenuItem.Icon>
