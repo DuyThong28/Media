@@ -180,20 +180,20 @@
 					</Grid>
 				</Border>
 				<Border Grid.Column="1" Background="Transparent" Margin="20,20,0,20" CornerRadius="5">
-					<ScrollViewer Padding="0,0,20,0">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="60"></RowDefinition>
-								<RowDefinition></RowDefinition>
-							</Grid.RowDefinitions>
-							<Grid Grid.Row="0" VerticalAlignment="Center" >
-								<Label  FontSize="20" FontWeight="Bold">
-									<Label.Effect>
-										<DropShadowEffect BlurRadius="1" Color="White" OffsetX="0" OffsetY="1"></DropShadowEffect>
-									</Label.Effect>
-									DANH SÁCH PHÁT
-								</Label>
-							</Grid>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="60"></RowDefinition>
+							<RowDefinition></RowDefinition>
+						</Grid.RowDefinitions>
+						<Grid Grid.Row="0" VerticalAlignment="Center" >
+							<Label  FontSize="20" FontWeight="Bold">
+								<Label.Effect>
+									<DropShadowEffect BlurRadius="1" Color="White" OffsetX="0" OffsetY="1"></DropShadowEffect>
+								</Label.Effect>
+								DANH SÁCH PHÁT
+							</Label>
+						</Grid>
+						<ScrollViewer Padding="0,0,20,0" Grid.Row="1">
 							<ListBox Grid.Row="1" Background="Transparent"
 									 AutoScrollToSelectedItem="True"
 									 Name="listBoxMedia"
@@ -253,8 +253,9 @@
 									</DataTemplate>
 								</ListBox.ItemTemplate>
 							</ListBox>
-						</Grid>
-					</ScrollViewer>
+						</ScrollViewer>
+					</Grid>
+					
 				</Border>
 			</Grid>
 		</Panel>
