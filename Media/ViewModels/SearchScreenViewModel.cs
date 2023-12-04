@@ -1,15 +1,9 @@
-﻿using DynamicData;
-using Media.Models;
-using Media.Views;
+﻿using Media.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TagLib.Riff;
 
 namespace Media.ViewModels
 {
@@ -72,8 +66,6 @@ namespace Media.ViewModels
 
                 foreach (var media in AllMedias)
                 {
-                    // If there's no diacritics in searchText -> Proceed to search diacritics insensitively
-                    // Else search diacritics sensitively
                     string title =
                         isNotHaveDiacritics == true ?
                         Diacritics.RemoveDiacritics(media.Title) :

@@ -2,11 +2,7 @@
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Media.ViewModels
 {
@@ -14,15 +10,11 @@ namespace Media.ViewModels
     {
         public LibraryScreenViewModel()
         {
-            //
             ListMedia = new List<Playlist>();
             PlayPlayListCommand = ReactiveCommand.Create<Playlist>(PlayPlaylist);
             MediaHelper.UpdateLibraryScreen += MediaHelper_UpdateLibraryScreen; 
-            //
         }
-        //
         private List<Playlist> listMedia;
-        //
 
         private Playlist selectedPlaylist;
         public List<Playlist> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }

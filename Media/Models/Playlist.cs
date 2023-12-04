@@ -4,14 +4,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using Avalonia.Media;
-using System.Runtime.CompilerServices;
-using Avalonia.Controls.Shapes;
 using Path = System.IO.Path;
-using LibVLCSharp.Shared;
 
 namespace Media.Models
 {
@@ -42,7 +36,6 @@ namespace Media.Models
                     return ImageHelper.ConvertToAvaloniaBitmap(Image.FromFile(backroundImageFileName));
                 else
                     return null;
-            
             }
         } 
 

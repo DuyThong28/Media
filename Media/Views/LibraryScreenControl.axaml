@@ -13,27 +13,21 @@
 	</Design.DataContext>
 	<Border  Background="#DB3E3E3E"
 			 Margin="10" CornerRadius="10" ClipToBounds="True">
-		<!--<Border.Effect>
-			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"></DropShadowEffect>
-		</Border.Effect>-->
 		<Grid>
-
 			<Border Grid.Row="1" Background="Black" Opacity="0.3"></Border>
-			<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" CornerRadius="8" Opacity="0.1"></Border>-->
-				<Grid>
+			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="60"></RowDefinition>
 					<RowDefinition Height="auto"></RowDefinition>
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
 				<Button Name="playBtn" Command="{Binding PlayPlayListCommand}" IsVisible="False">
-					PlayPlaylist</Button>
+					PlayPlaylist
+				</Button>
 				<Grid Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
 					<Label   FontSize="20" FontWeight="Bold">
-						<!--<Label.Effect>
-							<DropShadowEffect BlurRadius="2" Color="White" OffsetX="0" OffsetY="1"></DropShadowEffect>
-						</Label.Effect>-->
-						THƯ VIỆN</Label>
+						THƯ VIỆN
+					</Label>
 				</Grid>
 				<Grid Background="Transparent" Grid.Row="1" Margin="20,10,20,10">
 					<Button  VerticalAlignment="Top"
@@ -47,7 +41,7 @@
 						<Button.Effect>
 							<DropShadowEffect BlurRadius="5" Color="#1D8943" OffsetX="0" OffsetY="1"/>
 						</Button.Effect>
-					
+
 						<Button.Styles>
 							<Style Selector="Button:pointerover">
 								<Setter Property="Opacity" Value="0.9"/>
@@ -80,62 +74,62 @@
 					</ComboBox>
 				</Grid>
 				<ScrollViewer Grid.Row="2" Background="Transparent" Padding="10,0,20,0" Margin="0,10,0,10">
-							<ListBox Name="lb" Grid.Row="1"
-									Background="Transparent"
-									ItemsSource="{Binding ListMedia}"
-									 Tag="{Binding ListMedia}"
-									 SelectedItem="{Binding SelectedPlaylist}"
-									 DoubleTapped="ListBox_DoubleTapped"
+					<ListBox Name="lb" Grid.Row="1"
+							Background="Transparent"
+							ItemsSource="{Binding ListMedia}"
+							 Tag="{Binding ListMedia}"
+							 SelectedItem="{Binding SelectedPlaylist}"
+							 DoubleTapped="ListBox_DoubleTapped"
 								>
-								<ListBox.Styles>
-									<Style Selector="ListBoxItem">
-										<Setter Property="Padding" Value="0"></Setter>
-									</Style>
-									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
-										<Setter Property="Background" Value="Transparent"></Setter>
-									</Style>
-									<Style Selector="ListBoxItem:selected/template/ContentPresenter">
-										<Setter Property="Background" Value="Transparent"></Setter>
-										<Setter Property="Foreground" Value="#1ED760"></Setter>
-									</Style>
-								</ListBox.Styles>
-								<ListBox.ItemsPanel>
-									<ItemsPanelTemplate>
-										<WrapPanel/>
-									</ItemsPanelTemplate>
-								</ListBox.ItemsPanel>
-								<ListBox.ItemTemplate>
-									<DataTemplate>
-										<views:PlaylistItemTC PlaylistName="{Binding PlayListName}" 
-															  CountMedias="{Binding ListMedia.Count}"
-															  	  DateAdded="{Binding DateCreated}"
-											ImageSource="{Binding BackGroundImage}" 
-											Command="{Binding ElementName=playBtn, Path=Command}" 
-											CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
-											<views:PlaylistItemTC.ContextMenu>
-												<ContextMenu>
-													<MenuItem Header="Phát" 
-															  Command="{Binding ElementName=playBtn, Path=Command}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}">
-														<MenuItem.Icon>
-															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"  />
-														</MenuItem.Icon>
-													</MenuItem>
-													<MenuItem Header="Chỉnh sửa" Click="RenameAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
-														<MenuItem.Icon>
-															<PathIcon Width="12" Height="12" Data="{StaticResource options_regular}"/>
-														</MenuItem.Icon>
-													</MenuItem>
-													<MenuItem Header="Loại bỏ" Click="DeleteAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
-														<MenuItem.Icon>
-															<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
-														</MenuItem.Icon>
-													</MenuItem>
-												</ContextMenu>
-											</views:PlaylistItemTC.ContextMenu>
-										</views:PlaylistItemTC>
-									</DataTemplate>
-								</ListBox.ItemTemplate>
-							</ListBox>
+						<ListBox.Styles>
+							<Style Selector="ListBoxItem">
+								<Setter Property="Padding" Value="0"></Setter>
+							</Style>
+							<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
+								<Setter Property="Background" Value="Transparent"></Setter>
+							</Style>
+							<Style Selector="ListBoxItem:selected/template/ContentPresenter">
+								<Setter Property="Background" Value="Transparent"></Setter>
+								<Setter Property="Foreground" Value="#1ED760"></Setter>
+							</Style>
+						</ListBox.Styles>
+						<ListBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<WrapPanel/>
+							</ItemsPanelTemplate>
+						</ListBox.ItemsPanel>
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<views:PlaylistItemTC PlaylistName="{Binding PlayListName}"
+													  CountMedias="{Binding ListMedia.Count}"
+														  DateAdded="{Binding DateCreated}"
+									ImageSource="{Binding BackGroundImage}"
+									Command="{Binding ElementName=playBtn, Path=Command}"
+									CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+									<views:PlaylistItemTC.ContextMenu>
+										<ContextMenu>
+											<MenuItem Header="Phát"
+													  Command="{Binding ElementName=playBtn, Path=Command}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}">
+												<MenuItem.Icon>
+													<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"  />
+												</MenuItem.Icon>
+											</MenuItem>
+											<MenuItem Header="Chỉnh sửa" Click="RenameAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
+												<MenuItem.Icon>
+													<PathIcon Width="12" Height="12" Data="{StaticResource options_regular}"/>
+												</MenuItem.Icon>
+											</MenuItem>
+											<MenuItem Header="Loại bỏ" Click="DeleteAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
+												<MenuItem.Icon>
+													<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
+												</MenuItem.Icon>
+											</MenuItem>
+										</ContextMenu>
+									</views:PlaylistItemTC.ContextMenu>
+								</views:PlaylistItemTC>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
 				</ScrollViewer>
 			</Grid>
 		</Grid>

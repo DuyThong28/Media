@@ -13,7 +13,6 @@ namespace Media.Views
 {
     public partial class LibraryScreenControl : UserControl
     {
-        //private bool isAddAlbumWindowOpen = false;
         public LibraryScreenControl()
         {
             InitializeComponent();
@@ -37,13 +36,8 @@ namespace Media.Views
         {         
             RenameAlbum.Playlist = null;
             var mainWindow = MainWindow.GetInstance();
-            //if (!isAddAlbumWindowOpen)
-            //{
             AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
-            //addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
             addAlbumWindow.ShowDialog(mainWindow);
-            //isAddAlbumWindowOpen = true;
-            //}
         }
         private void DeleteAlbum_Click(object sender, RoutedEventArgs e)
         {

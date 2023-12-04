@@ -1,17 +1,11 @@
 ﻿using Avalonia.Platform;
 using System;
 using System.Collections.Generic;
-using Avalonia.Media.Imaging;
-using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing.Imaging;
 using Bitmap = Avalonia.Media.Imaging.Bitmap;
 using System.Drawing;
 using Color = Avalonia.Media.Color;
-using System.Runtime.InteropServices;
 using SkiaSharp;
 
 namespace Media.ViewModels

@@ -14,10 +14,6 @@
 	</Design.DataContext>
 	<Border  Background="#DB3E3E3E"
 			 Margin="10" CornerRadius="10" ClipToBounds="True">
-		<!--<Border.Effect>
-			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"></DropShadowEffect>
-		</Border.Effect>-->
-		
 		<ScrollViewer Background="Transparent">
 			
 			<Grid>
@@ -77,8 +73,7 @@
 													   Background="Transparent"
 													   HorizontalAlignment="Center"
 													   VerticalAlignment="Center"
-													   Command="{ Binding PlaySongCommand}"
-									>
+													   Command="{ Binding PlaySongCommand}">
 															<Button.Effect>
 																<DropShadowEffect BlurRadius="8" Color="Black" OffsetX="0" OffsetY="3"/>
 															</Button.Effect>
@@ -319,8 +314,6 @@
 																	<Binding ElementName="playlist" Path="DataContext"/>
 																</MultiBinding>
 															</MenuItem.CommandParameter>
-
-
 														</MenuItem>
 													</DataTemplate>
 												</MenuItem.ItemTemplate>
@@ -337,10 +330,5 @@
 				</Grid>
 			</Grid>
 		</ScrollViewer>
-
-		<!--<Border  Background="Black" Opacity="0.3"></Border>-->
-			<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" CornerRadius="8" Opacity="0.1">
-			</Border>-->
-
 	</Border>
 </UserControl>

@@ -1,22 +1,10 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using Media.ViewModels;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Text;
 using TagLib;
-using System.Diagnostics;
-using NAudio.Wave;
 using Media.Models;
-using Avalonia.Markup.Xaml;
-using LibVLCSharp.Shared;
-using LibVLCSharp.Avalonia;
 
 namespace Media.Views
 {
@@ -32,7 +20,6 @@ namespace Media.Views
         public PlaylistScreenControl playlistScreen;
         public MainWindowViewModel viewModel;
         public ContentControl screen;
-        //public MediaControl mediaControl;
         public PlayingScreenControl playingScreen;
         public Grid mainScreen;
         public NavBarControl navBarControl { get; set; }
@@ -68,7 +55,6 @@ namespace Media.Views
             mediaControl.ButtonClicked += MediaControl_ButtonClicked;
             videoControl.ButtonClicked += MediaControl_ButtonClicked;
             libraryScreen.SelectPlaylist += LibraryScreen_SelectPlaylist;
-            //MediaHelper.UpdatePlayingScreen += MediaHelper_UpdatePlayingScreen;
             MediaHelper.OpenVideoScreen += ListVideoSreenControl_OpenVideoScreen;
             MediaHelper.TurnPlayingScreen += MediaHelper_TurnPlayingScreen;
         
@@ -100,16 +86,13 @@ namespace Media.Views
         public void DefineMainScreenGrid()
         {
             Grid grid = new Grid();
-            // Define the column definitions
             ColumnDefinition column1 = new ColumnDefinition() { Width = new GridLength(250, GridUnitType.Pixel) };
             ColumnDefinition column2 = new ColumnDefinition();
             grid.ColumnDefinitions.Add(column1);
             grid.ColumnDefinitions.Add(column2);
 
-            // Add child controls to the grid
             Grid.SetColumn(navBarControl, 0);
             grid.Children.Add(navBarControl);
-            //mainScreen
             Grid.SetColumn(screen, 1);
             grid.Children.Add(screen);
             mainScreen = grid;
@@ -127,56 +110,26 @@ namespace Media.Views
             videoDisplay.IsVisible = false;
             controlPanel.IsVisible = false;
             VideoViewer.IsVisible = false;
-            //controlPanel.IsVisible = false;
-            //videoPlayingScreen.IsVisible = false;
         }
 
         private void PlaylistScreenViewModel_BackEvent(object? sender, EventArgs e)
         {
-            //homeScreen.IsVisible = false;
-            //musicScreen.IsVisible = false;
-            //videoScreen.IsVisible = false;
-            ////playingScreen.IsVisible = false;
-            //libraryScreen.IsVisible = true;
-            //playlistScreen.IsVisible = false;
-            //settingScreen.IsVisible = false;
-            //searchScreen.IsVisible = false;
             screen.Content = libraryScreen;
         }
 
         private void HomeScreenControl_SeeAllVideos(object? sender, EventArgs e)
         {
-            //homeScreen.IsVisible = false;
-            //musicScreen.IsVisible = false;
-            //videoScreen.IsVisible = true;
-            ////playingScreen.IsVisible = false;
-            //libraryScreen.IsVisible = false;
-            //playlistScreen.IsVisible = false;
-            //settingScreen.IsVisible = false;
-            //searchScreen.IsVisible = false;
             screen.Content = videoScreen;
         }
 
 
         private void HomeScreenControl_SeeAllSongs(object? sender, EventArgs e)
         {
-            //homeScreen.IsVisible = false;
-            //musicScreen.IsVisible = true;
-            //videoScreen.IsVisible = false;
-            ////playingScreen.IsVisible = false;
-            //libraryScreen.IsVisible = false;
-            //playlistScreen.IsVisible = false;
-            //settingScreen.IsVisible = false;
-            //searchScreen.IsVisible = false;
             screen.Content = musicScreen;
         }
 
         private void ListVideoSreenControl_OpenVideoScreen(object? sender, EventArgs e)
         {
-            //mainScreen.IsVisible = false;
-            //mainPlayingScreen.IsVisible = true;
-            //videoPlayingScreen.IsVisible = true;
-            //controlPanel.IsVisible = true;
             videoDisplay.IsVisible = true;
             controlPanel.IsVisible = true;
             VideoViewer.IsVisible = true;
@@ -184,21 +137,6 @@ namespace Media.Views
 
         private void MediaHelper_UpdatePlayingScreen(object? sender, EventArgs e)
         {
-            //if (PlayMedia.IsPlayVideo == true)
-            //{
-            //    videoDisplay.IsVisible = true;
-            //    playingScreen.IsVisible = false;
-            //}
-            //else if (PlayMedia.IsPlayVideo == false)
-            //{
-            //    videoDisplay.IsVisible = false;
-            //    controlPanel.IsVisible = false;
-            //    playingScreen.IsVisible = true;
-            //}
-            //if (PlayMedia.IsFirst == true)
-            //{
-            //    mediaControl.IsEnabled = true;
-            //}
         }
 
         private void LibraryScreen_SelectPlaylist(object? sender, EventArgs e)
@@ -217,24 +155,10 @@ namespace Media.Views
             }
             }
             screen.Content = playlistScreen;
-            //homeScreen.IsVisible = false;
-            //musicScreen.IsVisible = false;
-            //videoScreen.IsVisible = false;
-            ////playingScreen.IsVisible = false;
-            //libraryScreen.IsVisible = false;
-            //playlistScreen.IsVisible = true;
-            //settingScreen.IsVisible = false;
-            //searchScreen.IsVisible = false;
         }
 
         private void MediaControl_ButtonClicked(object? sender, EventArgs e)
         {
-            //mainScreen.IsVisible = !mainScreen.IsVisible;
-            //mainPlayingScreen.IsVisible = !mainPlayingScreen.IsVisible;
-            //videoPlayingScreen.IsVisible = !videoPlayingScreen.IsVisible;
-            //if(PlayMedia.IsPlayVideo==true) {
-            //controlPanel.IsVisible = !controlPanel.IsVisible;
-            //}
             viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0 : 1;
             mediaControl.UpdateRepeatBtn(sender, new Avalonia.Interactivity.RoutedEventArgs());
             mediaControl.UpdateSuftbtn(sender, new Avalonia.Interactivity.RoutedEventArgs());
@@ -272,86 +196,30 @@ namespace Media.Views
                 case "homeBtn":
                     screen.Content = homeScreen;
                     viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0:1;
-                    //homeScreen.IsVisible = true;
-                    //musicScreen.IsVisible = false;
-                    //videoScreen.IsVisible = false;
-                    ////playingScreen.IsVisible = false;
-                    //libraryScreen.IsVisible = false;
-                    //playlistScreen.IsVisible = false;
-                    //settingScreen.IsVisible = false;
-                    //searchScreen.IsVisible = false;
                     break;
                 case "musicBtn":
                     screen.Content = musicScreen;
                     viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
-                    //homeScreen.IsVisible = false;
-                    //musicScreen.IsVisible = true;
-                    //videoScreen.IsVisible = false;
-                    ////playingScreen.IsVisible = false;
-                    //libraryScreen.IsVisible = false;
-                    //playlistScreen.IsVisible = false;
-                    //settingScreen.IsVisible = false;
-                    //searchScreen.IsVisible = false;
                     break;
                 case "videoBtn":
                     screen.Content = videoScreen;
                     viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
-                    //homeScreen.IsVisible = false;
-                    //musicScreen.IsVisible = false;
-                    //videoScreen.IsVisible = true;
-                    ////playingScreen.IsVisible = false;
-                    //libraryScreen.IsVisible = false;
-                    //playlistScreen.IsVisible = false;
-                    //settingScreen.IsVisible = false;
-                    //searchScreen.IsVisible = false;
                     break;
                 case "searchBtn":
                     screen.Content = searchScreen;
                     viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
-                    //homeScreen.IsVisible = false;
-                    //musicScreen.IsVisible = false;
-                    //videoScreen.IsVisible = false;
-                    ////playingScreen.IsVisible = false;
-                    //libraryScreen.IsVisible = false;
-                    //playlistScreen.IsVisible = false;
-                    //settingScreen.IsVisible = false;
-                    //searchScreen.IsVisible = true;
                     break;
                 case "libraryBtn":
                     screen.Content = libraryScreen;
                     viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
-                    //homeScreen.IsVisible = false;
-                    //musicScreen.IsVisible = false;
-                    //videoScreen.IsVisible = false;
-                    ////playingScreen.IsVisible = false;
-                    //libraryScreen.IsVisible = true;
-                    //playlistScreen.IsVisible = false;
-                    //settingScreen.IsVisible = false;
-                    //searchScreen.IsVisible = false;
                     break;
                 case "settingBtn":
                     screen.Content = settingScreen;
                     viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
-                    //homeScreen.IsVisible = false;
-                    //musicScreen.IsVisible = false;
-                    //videoScreen.IsVisible = false;
-                    ////playingScreen.IsVisible = false;
-                    //libraryScreen.IsVisible = false;
-                    //playlistScreen.IsVisible = false;
-                    //settingScreen.IsVisible = true;
-                    //searchScreen.IsVisible = false;
                     break;
                 default:
                     screen.Content = homeScreen;
                     viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0 : 1;
-                    //homeScreen.IsVisible = true;
-                    //musicScreen.IsVisible = false;
-                    //videoScreen.IsVisible = false;
-                    ////playingScreen.IsVisible = false;
-                    //libraryScreen.IsVisible = false;
-                    //playlistScreen.IsVisible = false;
-                    //settingScreen.IsVisible = false;
-                    //searchScreen.IsVisible = false;
                     break;
             }
         }
@@ -404,12 +272,11 @@ namespace Media.Views
 
         public void UpdateMedia()
         {
+            (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.ListVideos;
             (musicScreen.DataContext as ListMediaScreenViewModel).ListSongs = MediaHelper.ListSongs;
             (homeScreen.DataContext as HomeScreenViewModel).ListSongs = MediaHelper.ListSongs;
             (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.ListVideos;
-            (videoScreen.DataContext as ListVideoScreenViewModel).ListVideos = MediaHelper.ListVideos;
             (searchScreen.DataContext as SearchScreenViewModel).AllMedias = MediaHelper.AllMedias;
-
         }
     }
 }

@@ -47,14 +47,6 @@ public partial class AddAlbumWindow : Window
     {
         if (sender is Button button && button.Tag is AddAlbumWindowViewModel addAlbumWindowViewModel)
         {
-            /*if (RenameAlbum.Playlist == null)
-            {
-                string albumName = AlbumNameTextBox.Text;
-                string imagePath = this.imagePath;
-                Playlist playlist = new Playlist(null, albumName, imagePath, null);
-                MediaHelper.AddPlayList(playlist);
-            }
-            else*/
             if (addAlbumWindowViewModel.Playlist != null) 
             {
                 string albumName = AlbumNameTextBox.Text;

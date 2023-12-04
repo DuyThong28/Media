@@ -1,10 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media;
-using Media.Models;
 using Media.ViewModels;
-using System.Collections.Generic;
-using System.Numerics;
 
 namespace Media.Views
 {

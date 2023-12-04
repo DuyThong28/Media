@@ -1,17 +1,7 @@
-﻿using Avalonia.Controls;
-using Avalonia.Interactivity;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform.Storage;
-using LibVLCSharp.Shared;
+﻿using LibVLCSharp.Shared;
 using Media.Models;
-using Media.Views;
-using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reactive;
-using System.Windows.Input;
 using TagLib;
 
 
@@ -42,11 +32,9 @@ namespace Media.ViewModels
             SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
             PlayMedia._libVlc = _libVlc;
             PlayMedia.MediaPlayer = MediaPlayer;
-            //
             MediaHelper.AllPlayListChanged += MediaHelper_AllPlayListChanged;
             MediaHelper.ListSongsChanged += MediaHelper_ListSongsChanged;
             MediaHelper.ListVideosChanged += MediaHelper_ListVideosChanged;
-            //
         }
 
         private void MediaHelper_ListVideosChanged(object? sender, EventArgs e)
@@ -59,14 +47,11 @@ namespace Media.ViewModels
             ListMediaScreenViewModel.ListSongs = MediaHelper.ListSongs;
         }
 
-        //
         private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)
         {
             var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);
             LibraryScreenViewModel.ListMedia = ListMedia;
         }
-        //
-        //public AddAlbumWindowViewModel AddAlbumWindowViewModel { get; set; } = new AddAlbumWindowViewModel();
         public MediaControlViewModel MediaControlViewModel { get; set; } = new MediaControlViewModel();
         public HomeScreenViewModel HomeScreenViewModel { get; set; } = new HomeScreenViewModel();
         public ListMediaScreenViewModel ListMediaScreenViewModel { get; set; } = new ListMediaScreenViewModel();

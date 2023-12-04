@@ -1,21 +1,14 @@
 ﻿using Media.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TagLib;
-using Avalonia.Controls;
 using Avalonia.Media;
-using System.Resources;
 using System.Drawing;
 using ReactiveUI;
 using System.Reactive;
-using NAudio.Wave;
 using LibVLCSharp.Shared;
-using Media.Views;
 
 namespace Media.Models
 {
@@ -31,13 +24,12 @@ namespace Media.Models
         private MediaTypes mediaType;
         private TagLib.File others;
         private bool isPlay;
-        private bool mediaAdded = false;
         public bool IsPlay
         {
             get { return isPlay; }
             set { isPlay = value; }
         }
-        private string playlistID = null; //Tên playlist
+        private string playlistID = null;
         public MediaTypes MediaTypes { get { return mediaType; } }
         public string Title
         {
@@ -153,22 +145,15 @@ namespace Media.Models
         }
         public void PlayMediaCommand()
         {
-            //if (!MediaAdded)
-            //{
-            //    MediaAdded = true;
-            //    MediaHelper.PlayQueue.Add(this);
-            //}
-
             if (PlayMedia.Path != this.filePath)
             {
                 IsPlay=true;
-                //PlayMedia.media = this;
                 for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
                 {
                     if (MediaHelper.PlayQueue[i].FilePath == this.FilePath)
                     {
-                        MediaHelper.PlayQueue.Remove(MediaHelper.PlayQueue[i]);
-                        break;
+                        PlayMedia.URL = this.filePath;
+                        return;
                     }
                 }
                 MediaHelper.PlayQueue.Add(this);
@@ -195,11 +180,14 @@ namespace Media.Models
                 {
                     IsPlay = true;
                     PlayMedia.continueSong();
+                } else if(PlayMedia.MediaPlayer.State == VLCState.Ended)
+                {
+                    IsPlay = true;
+                    PlayMedia.continueSong();
                 }
             }
         }
         public string PlaylistID { get => playlistID; set => playlistID = value; }
-        public bool MediaAdded { get => mediaAdded; set => mediaAdded = value; }
 
         public MediaItem(string path)
         {
