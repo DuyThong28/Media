@@ -53,8 +53,6 @@
 		</Style>
 	</UserControl.Styles>
 	<Grid Background="Black">
-		<!--<Border Background="Black" Opacity="0.5"></Border>-->
-		<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" Opacity="0.5"></Border>-->
 		<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"></ColumnDefinition>
@@ -118,9 +116,6 @@
 			</Grid.RowDefinitions>
 			<Grid Grid.Row="0" >
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-						<!--<StackPanel.Effect>
-							<DropShadowEffect BlurRadius="20" Color="White" OffsetX="0" OffsetY="0,3"></DropShadowEffect>
-						</StackPanel.Effect>-->
 					<Button Name="btn_Suffle" Classes.small="true" Click="Button_Click_2" Background="Transparent" VerticalAlignment="Stretch" Command="{Binding SuffCommand}">
 						<Image Name="btn_suff_img" Classes.notSuff="true" Height="25" Width="25">
 							<Image.Styles>
@@ -247,9 +242,6 @@
 					Click="Button_Click_4"
 					Classes.small="True"
 					Grid.Column="0" HorizontalAlignment="Right">
-				<!--<Button.Effect>
-					<DropShadowEffect BlurRadius="2" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0,4"></DropShadowEffect>
-				</Button.Effect>-->
 				<PathIcon Height="17" Width="17"
 						  Name="fullScreenIcon"
 						  Margin="10,0,0,0"
@@ -260,10 +252,6 @@
 			<Button x:Name="btn_Volume" Grid.Column="1" Background="Transparent"
 					Classes.small="true"	
 				 HorizontalAlignment="Right">
-				<!--<Button.Effect>
-					
-					<DropShadowEffect BlurRadius="2" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0,4"></DropShadowEffect>
-				</Button.Effect>-->
 				<Image Name="btn_Volume_img" Height="20" Width="20" Classes.unMute="true">
 					<Image.Styles>
 						<Style Selector="Image.unMute">
@@ -302,7 +290,6 @@
 					</Style>
 				</Slider.Styles>
 			</Slider>
-			<!--<Label Content="{TemplateBinding MediaName}"></Label>-->
 		</Grid>
 	</Grid>
 	</Grid>

@@ -39,14 +39,8 @@
 		<vm:PlayingScreenViewModel/>
 	</Design.DataContext>
 	<Border Background="Transparent"   Margin="10,10,10,10"  CornerRadius="10" ClipToBounds="True">
-		<!--<Border.Effect>
-			<DropShadowEffect BlurRadius="200" Color="#8E7D7D7D" OffsetX="0" OffsetY="0,20"></DropShadowEffect>
-		</Border.Effect>-->
 		<Panel>
 			<Image Name="bgImage" Source="{Binding ImageSource}" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" >
-				<!--<Image.Effect>
-					<BlurEffect Radius="50"></BlurEffect>
-				</Image.Effect>-->
 			</Image>
 			<Border Background="Black" CornerRadius="10" Opacity="0.6" ClipToBounds="True">
 			</Border>
@@ -186,20 +180,20 @@
 					</Grid>
 				</Border>
 				<Border Grid.Column="1" Background="Transparent" Margin="20,20,0,20" CornerRadius="5">
-					<ScrollViewer Padding="0,0,20,0">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="60"></RowDefinition>
-								<RowDefinition></RowDefinition>
-							</Grid.RowDefinitions>
-							<Grid Grid.Row="0" VerticalAlignment="Center" >
-								<Label  FontSize="20" FontWeight="Bold">
-									<Label.Effect>
-										<DropShadowEffect BlurRadius="1" Color="White" OffsetX="0" OffsetY="1"></DropShadowEffect>
-									</Label.Effect>
-									DANH SÁCH PHÁT
-								</Label>
-							</Grid>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="60"></RowDefinition>
+							<RowDefinition></RowDefinition>
+						</Grid.RowDefinitions>
+						<Grid Grid.Row="0" VerticalAlignment="Center" >
+							<Label  FontSize="20" FontWeight="Bold">
+								<Label.Effect>
+									<DropShadowEffect BlurRadius="1" Color="White" OffsetX="0" OffsetY="1"></DropShadowEffect>
+								</Label.Effect>
+								DANH SÁCH PHÁT
+							</Label>
+						</Grid>
+						<ScrollViewer Padding="0,0,20,0" Grid.Row="1">
 							<ListBox Grid.Row="1" Background="Transparent"
 									 AutoScrollToSelectedItem="True"
 									 Name="listBoxMedia"
@@ -221,16 +215,10 @@
 									<Style Selector="ListBoxItem:pointerover">
 										<Setter Property="Background" Value="#FF515151"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
-										<!--<Setter Property="Effect">
-													<DropShadowEffect BlurRadius="5" Color="#5A5A5A" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
-												</Setter>-->
 									</Style>
 									<Style Selector="ListBoxItem:selected">
-										<Setter Property="Background" Value="#2A2A2A"></Setter>
+										<Setter Property="Background" Value="Black"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
-										<!--<Setter Property="Effect">
-													<DropShadowEffect BlurRadius="5" Color="#494C4D" OffsetX="0" OffsetY="0"></DropShadowEffect>
-												</Setter>-->
 									</Style>
 								</ListBox.Styles>
 								<ListBox.ItemTemplate>
@@ -265,13 +253,11 @@
 									</DataTemplate>
 								</ListBox.ItemTemplate>
 							</ListBox>
-						</Grid>
-					</ScrollViewer>
+						</ScrollViewer>
+					</Grid>
+					
 				</Border>
 			</Grid>
-
-			<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" CornerRadius="5" ClipToBounds="True" Opacity="0.4">
-			</Border>-->
 		</Panel>
 	</Border>
 </UserControl>

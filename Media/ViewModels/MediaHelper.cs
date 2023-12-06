@@ -1,23 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Reactive;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using DynamicData;
-using LibVLCSharp.Shared;
 using Media.Models;
 using Media.Views;
 using ReactiveUI;
 using TagLib;
-using static OpenTK.Graphics.OpenGL.GL;
 
 namespace Media.ViewModels
 {
@@ -363,10 +354,6 @@ namespace Media.ViewModels
             {
                 updateMediaScreen(sender, new EventArgs());
             }
-            //if (updatePlayingScreen != null)
-            //{
-            //    updatePlayingScreen(sender, new EventArgs());
-            //}
         }
 
 
@@ -422,7 +409,7 @@ namespace Media.ViewModels
                 }
                 return selectedItem;
         } 
-        //
+        
         public static event EventHandler AllPlayListChanged;
 
         public static void OnAllPlayListChanged()
@@ -441,8 +428,6 @@ namespace Media.ViewModels
             ListVideosChanged?.Invoke(null, EventArgs.Empty);
         }
 
-        //
-
         public static void AddMediaQueue_Click(object sender, RoutedEventArgs e)
         {
             bool isplay = false;
@@ -450,43 +435,6 @@ namespace Media.ViewModels
             {
                 if (menuItem.DataContext is MediaItem mediaItem)
                 {
-                    //if (!mediaItem.MediaAdded)
-                    //{
-                    //    mediaItem.MediaAdded = true;
-                    //    for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
-                    //    {
-                    //        if (MediaHelper.PlayQueue[i].IsPlay)
-                    //        {
-                    //            MediaHelper.PlayQueue.Insert(i + 1, mediaItem);
-                    //            break;
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
-                    //    {
-                    //        if (mediaItem.FilePath == MediaHelper.PlayQueue[i].FilePath)
-                    //        {
-                    //            isplay = MediaHelper.PlayQueue[i].IsPlay;
-                    //            if (!isplay)
-                    //                MediaHelper.PlayQueue.Remove(MediaHelper.PlayQueue[i]);
-                    //            break;
-                    //        }
-                    //    }
-                    //    if (!isplay)
-                    //    {
-                    //        for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
-                    //        {
-                    //            if (MediaHelper.PlayQueue[i].IsPlay)
-                    //            {
-                    //                MediaHelper.PlayQueue.Insert(i + 1, mediaItem);
-                    //                break;
-                    //            }
-                    //        }
-                    //    }
-                    //}
-
                     for (int i = 0; i < PlayQueue.Count; i++)
                     {
                         if (PlayQueue[i].FilePath == mediaItem.FilePath)
@@ -598,21 +546,15 @@ namespace Media.ViewModels
             var mainWindow = MainWindow.GetInstance();
             if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToRename)
             {
-                //if (!isAddAlbumWindowOpen)
-                //{
                 RenameAlbum.Playlist = playlistToRename;
                 AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
-                //addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
                 addAlbumWindow.ShowDialog(mainWindow);
-                //isAddAlbumWindowOpen = true;
-                //}
             }
             else if (sender is PlaylistScreenViewModel)
             {
                 playlistToRename = (sender as PlaylistScreenViewModel).Playlist;
                 RenameAlbum.Playlist = playlistToRename;
                 AddAlbumWindow addAlbumWindow = new AddAlbumWindow();
-                //addAlbumWindow.Closed += (s, args) => isAddAlbumWindowOpen = false;
                 addAlbumWindow.ShowDialog(mainWindow);
                 RenameAlbum.Playlistscreen = sender as PlaylistScreenViewModel;                        
             }

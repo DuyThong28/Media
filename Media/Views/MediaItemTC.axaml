@@ -88,15 +88,6 @@
 							TextTrimming="CharacterEllipsis"
 							 VerticalAlignment="Bottom" FontSize="14" FontWeight="Medium"
 							 Text="{TemplateBinding MediaName}">
-						  <!--<TextBlock.Styles>
-							  <Style Selector="TextBlock.checked">
-								  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"></Setter>
-								  <Setter Property="Opacity" Value="0.5"/>
-							  </Style>
-							  <Style Selector="TextBlock.unChecked">
-								  <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}"></Setter>
-							  </Style>
-						  </TextBlock.Styles>-->
 					  </TextBlock>
 					  <TextBlock x:Name="nameAuthor"  Foreground="White" Opacity="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="14" Text="{TemplateBinding AuthorName}" TextTrimming="CharacterEllipsis"></TextBlock>
 					  <TextBlock  Foreground="White" Opacity="0.4" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="12" Text="{TemplateBinding DateAdded}" TextTrimming="CharacterEllipsis"></TextBlock>

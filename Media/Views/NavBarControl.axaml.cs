@@ -1,6 +1,4 @@
 using Avalonia.Controls;
-using Media.ViewModels;
-using ReactiveUI;
 using System;
 
 namespace Media.Views

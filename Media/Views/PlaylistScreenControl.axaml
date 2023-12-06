@@ -60,19 +60,9 @@
 			</Setter>
 		</ControlTheme>
 	</UserControl.Resources>
-	<!--<Border  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}"
-			 Margin="10" CornerRadius="5" ClipToBounds="True">
-		<Grid>
-			<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}" Opacity="0.1">
-			</Border>-->
 	<Border  Background="#DB3E3E3E"
 			 Margin="10" CornerRadius="10" ClipToBounds="True">
-		<!--<Border.Effect>
-			<DropShadowEffect BlurRadius="10" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"></DropShadowEffect>
-		</Border.Effect>-->
 		<Grid>
-			<!--<Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" CornerRadius="10" Opacity="0.7" BorderBrush="White" BorderThickness="5">
-			</Border>-->
 			<Border>
 				<Panel>
 					<ScrollViewer Background="Transparent" ScrollChanged="ScrollViewer_ScrollChanged">
@@ -240,16 +230,10 @@
 									<Style Selector="ListBoxItem:pointerover">
 										<Setter Property="Background" Value="#2A2A2A"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
-										<!--<Setter Property="Effect">
-													<DropShadowEffect BlurRadius="5" Color="#5A5A5A" OffsetX="0" OffsetY="0,2"></DropShadowEffect>
-												</Setter>-->
 									</Style>
 									<Style Selector="ListBoxItem:selected">
 										<Setter Property="Background" Value="#FF515151"></Setter>
 										<Setter	Property="CornerRadius" Value="5"></Setter>
-										<!--<Setter Property="Effect">
-													<DropShadowEffect BlurRadius="5" Color="#494C4D" OffsetX="0" OffsetY="0"></DropShadowEffect>
-												</Setter>-->
 									</Style>
 								</ListBox.Styles>
 								<ListBox.ItemTemplate>
@@ -268,11 +252,6 @@
 															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
 														</MenuItem.Icon>
 													</MenuItem>
-													<!--<MenuItem Header="Phát tiếp theo">
-														<MenuItem.Icon>
-															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
-														</MenuItem.Icon>
-													</MenuItem>-->
 													<MenuItem Header="Phát tiếp theo" Click="PlayNext">
 														<MenuItem.Icon>
 															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
@@ -315,7 +294,6 @@
 							</Style>
 						</Grid.Styles>
 						<Border Background="Black" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}" Opacity="0.3"></Border>
-						<!--<Border  Background="Black" Opacity="0.3" IsVisible="{Binding ElementName=playBtn, Path=IsVisible}"></Border>-->
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="55"></ColumnDefinition>

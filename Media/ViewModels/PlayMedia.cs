@@ -4,7 +4,6 @@ using Media.Models;
 using LibVLCSharp.Shared;
 using MyMedia = LibVLCSharp.Shared.Media;
 using TagLib;
-using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace Media.ViewModels
 {
@@ -116,7 +115,6 @@ namespace Media.ViewModels
                 }
                 if (path != null)
                 {
-                    //MediaPlayer.Pause();
                     media = new MediaItem(path);
                     _media = new MyMedia(_libVlc, new Uri(path));
                     IsPlay = true;
@@ -137,7 +135,6 @@ namespace Media.ViewModels
                     timer.Start();
                     timer.Interval = new TimeSpan(0, 0, 1);
                     currentTimePlay =0;
-                    _media.Dispose();
                 }
             }
         }
@@ -147,15 +144,18 @@ namespace Media.ViewModels
         }
         public static void continueSong()
         {
-            if (MediaPlayer.State == VLCState.Paused)
+           
+            if (MediaPlayer.State == VLCState.Ended)
             {
-                MediaPlayer.Time = currentTimePlay;
-                IsPlay = true;
-                MediaPlayer.Play();
-                if(updateScreen != null)
-                    {
-                    updateScreen(null, new EventArgs());
-                }
+                _media = new MyMedia(_libVlc, new Uri(path));
+                MediaPlayer.Play(_media);
+            }
+            MediaPlayer.Play();
+            MediaPlayer.Time = currentTimePlay;
+            IsPlay = true;
+            if (updateScreen != null)
+            {
+                updateScreen(null, new EventArgs());
             }
         }
         public static void playSong()
@@ -186,15 +186,6 @@ namespace Media.ViewModels
             }
         }
 
-        public static void stopSong()
-        {
-            IsPlay = false;
-            MediaPlayer.Stop();
-            if (updateScreen != null)
-            {
-                updateScreen(null, new EventArgs());
-            }
-        } 
         public static void muteVolume()
         {
             MediaPlayer.Volume = 0;

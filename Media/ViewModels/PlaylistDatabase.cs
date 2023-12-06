@@ -1,9 +1,6 @@
 ﻿using Media.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 
 namespace Media.ViewModels
@@ -30,7 +27,6 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Error Creating Playlist Table");
             }
 
             string createPlaylistMediasTable = "CREATE TABLE IF NOT EXISTS PlaylistMedias(" +
@@ -45,7 +41,6 @@ namespace Media.ViewModels
             }
             catch
             {
-                //MessageBox.Show("Error Creating PlaylistMedias Table");
             }
             DeleteNotExistMedias();
         }
@@ -69,7 +64,6 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
             }
         }
 
@@ -146,7 +140,6 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
             }
 
             playlistDatabaseConnection.Close();
@@ -174,7 +167,6 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
             }
             playlistDatabaseConnection.Close();
             return playlistsInDatabase;

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
 using Avalonia.Media;
 using Media.Models;
 using ReactiveUI;
@@ -92,7 +88,6 @@ namespace Media.ViewModels
         private void UpdateScreen()
         {
             ListMedia = Playlist.ListMedia;
-            //ListMedia = MediaHelper.listSongs;
             DateAddted = Playlist.DateCreated;
             PlayListName = Playlist.PlayListName;
             CountMedia = Playlist.ListMedia.Count.ToString();

@@ -1,18 +1,9 @@
-﻿using Avalonia.Media.Imaging;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using Media.Models;
 using Avalonia.Media;
-//using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Avalonia.Threading;
 using System.Reactive;
-using NAudio.Wave;
-using System.Runtime.InteropServices;
 using LibVLCSharp.Shared;
 
 namespace Media.ViewModels
@@ -127,14 +118,12 @@ namespace Media.ViewModels
                     TimeSongEnd = PlayMedia.DurationstringSong;
                 }
                 TbValue = PlayMedia.CurrentPositionSong;
-                //TimeSongPlay = PlayMedia.CurrentPositionstringSong;
             }
             else if (PlayMedia.MediaPlayer.State == VLCState.Ended)
             {
                 if (PlayMedia.Repeat == RepeatMode.One)
                 {
-                    PlayMedia.setCurrentPosition(0);
-                    PlayMedia.playSong();
+                    PlayMedia.URL = PlayMedia.Path;
                 } else
                 {
                     PlayNext();
@@ -168,6 +157,9 @@ namespace Media.ViewModels
                     {
                         PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
                         PlayMedia.media = MediaHelper.PlayQueue[0];
+                    } else
+                    {
+                        PlayMedia.pauseSong();
                     }
                     return;
                 }

@@ -1,9 +1,6 @@
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Interactivity;
 using Avalonia.Media;
-using System;
 using System.Windows.Input;
 
 namespace Media.Views

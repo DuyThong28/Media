@@ -1,9 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Platform.Storage;
-using Media.ViewModels;
-using ReactiveUI;
-using System.Reactive;
-using TagLib;
 
 namespace Media.Views
 {

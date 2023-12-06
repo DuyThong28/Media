@@ -15,18 +15,11 @@ using LibVLCSharp.Shared;
 using Avalonia.Layout;
 using System.Linq;
 using Avalonia.LogicalTree;
-using Avalonia.Markup.Xaml;
 using Avalonia.Input;
 using System.Diagnostics;
-using Avalonia.Media.Immutable;
-using Avalonia.Animation;
-using DynamicData;
 
- namespace Media.ViewModels
+namespace Media.ViewModels
 {
-    /// <summary>
-    ///     Avalonia VideoView for Windows, Linux and Mac.
-    /// </summary>
     public class VideoView : NativeControlHost
     {
 
@@ -116,7 +109,6 @@ using DynamicData;
 
                     ShowInTaskbar = false,
 
-                    //Topmost=true,
                     ZIndex = Int32.MaxValue,
 
                     Opacity = 1,
@@ -158,7 +150,6 @@ using DynamicData;
         }
 
 
-        /// <inheritdoc />
         protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent)
         {
             var handle = base.CreateNativeControlCore(parent);
@@ -167,7 +158,6 @@ using DynamicData;
             return handle;
         }
 
-        /// <inheritdoc />
         protected override void DestroyNativeControlCore(IPlatformHandle control)
         {
             attacher.Dispose();
@@ -262,12 +252,6 @@ using DynamicData;
             _isAttached = true;
 
             InitializeNativeOverlay();
-
-            //_isEffectivelyVisible = this.GetVisualAncestors().OfType<IControl>()
-            //        .Select(v => v.GetObservable(IsVisibleProperty))
-            //        .CombineLatest(v => !v.Any(o => !o))
-            //        .DistinctUntilChanged()
-            //        .Subscribe(v => IsVisible = v);
         }
 
         protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -311,9 +295,5 @@ using DynamicData;
                 player.XWindow = (uint)handle.Handle;
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) player.NsObject = handle.Handle;
         }
-
-
-
-
     }
 }

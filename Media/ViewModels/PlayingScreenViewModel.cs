@@ -1,18 +1,9 @@
-﻿using Avalonia.Controls;
-using Avalonia.Media;
-using LibVLCSharp.Shared;
+﻿using Avalonia.Media;
 using Media.Models;
-using NAudio.CoreAudioApi;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
-using MyMedia = LibVLCSharp.Shared.Media;
-using Color = Avalonia.Media.Color;
 
 
 namespace Media.ViewModels
@@ -34,7 +25,6 @@ namespace Media.ViewModels
                 MediaHelper.updatePlayingScreen += UpdateScreen;
             }
             PlayMediaCommand = ReactiveCommand.Create(() => { Play(); });
-            //backgroundColor = ImageHelper.GetDominantColor(imageSource).ToString();
         }
 
         public string BackgroundColor
