@@ -9,6 +9,8 @@ using Media.Models;
 using Media.Views;
 using ReactiveUI;
 using TagLib;
+using MsBox.Avalonia;
+using System.Threading.Tasks;
 
 namespace Media.ViewModels
 {
@@ -56,7 +58,7 @@ namespace Media.ViewModels
                 throw new Exception("Playlist trùng ID");
             }
             allPlayList.Add(playlist);
-            database.InsertPlaylist(playlist);
+            database.InsertPlaylist(playlist);           
             OnAllPlayListChanged();
         }
 
@@ -68,6 +70,7 @@ namespace Media.ViewModels
                 database.DeletePlaylist(allPlayList[index].PlayListID);
                 allPlayList.RemoveAt(index);
             }
+
             OnAllPlayListChanged();
         }
         public static void DeleteMediaFromPlaylist(string mediaPath, string playlistID)
@@ -126,9 +129,7 @@ namespace Media.ViewModels
                 {
                     n--;
                     int k = random.Next(n + 1);
-                    int value = listRanIndex[k];
-                    listRanIndex[k] = listRanIndex[n];
-                    listRanIndex[n] = value;
+                    (listRanIndex[n], listRanIndex[k]) = (listRanIndex[k], listRanIndex[n]);
                 }
                 listRanIndex.Insert(0, CurrentIndex);
                 return listRanIndex;
@@ -196,7 +197,7 @@ namespace Media.ViewModels
 
         public static List<MediaItem> ListVideos { get => listVideos; set { listVideos = value; OnListVideosChanded(); } }
 
-        public static void FetchListMedia(MediaTypes mediaTypes)
+        public static async Task FetchListMedia(MediaTypes mediaTypes)
         {
             string searchPattern;
             List<MediaItem> listMedia = new List<MediaItem>();
@@ -229,7 +230,7 @@ namespace Media.ViewModels
             }
             catch
             {
-
+                await MessageBoxManager.GetMessageBoxStandard("Lỗi", "Lỗi đường dẫn " + path + " không tồn tại").ShowWindowDialogAsync(MainWindow.GetInstance());
             }
 
             foreach (string filePath in filePaths)
@@ -358,7 +359,7 @@ namespace Media.ViewModels
 
 
         public static void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
-        {
+        {            
             MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
             if (media != null)
             {
@@ -376,7 +377,6 @@ namespace Media.ViewModels
 
         public static MediaItem selectPlayingItem(List<MediaItem> listMedia)
         {
-
             MediaItem selectedItem = null;
             if (listMedia != null)
             {
@@ -430,7 +430,7 @@ namespace Media.ViewModels
 
         public static void AddMediaQueue_Click(object sender, RoutedEventArgs e)
         {
-            bool isplay = false;
+            //bool isplay = false;
             if (sender is MenuItem menuItem)
             {
                 if (menuItem.DataContext is MediaItem mediaItem)

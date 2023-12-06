@@ -2,6 +2,10 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
+using MsBox.Avalonia;
+using Media.Views;
+using System.Threading.Tasks;
+using Avalonia.Controls;
 
 namespace Media.ViewModels
 {
@@ -13,7 +17,7 @@ namespace Media.ViewModels
         {
             InitializeTables();
         }
-        public void InitializeTables()
+        public async Task InitializeTables()
         {
             string createPlaylistTable = "CREATE TABLE IF NOT EXISTS Playlist(" +
                 "PlaylistID VARCHAR(4000) PRIMARY KEY NOT NULL," +
@@ -27,6 +31,7 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
+                await MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message).ShowWindowDialogAsync(MainWindow.GetInstance());
             }
 
             string createPlaylistMediasTable = "CREATE TABLE IF NOT EXISTS PlaylistMedias(" +
@@ -39,12 +44,13 @@ namespace Media.ViewModels
             {
                 CreateTable(createPlaylistMediasTable);
             }
-            catch
+            catch (Exception ex)
             {
+                await MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message).ShowWindowDialogAsync (MainWindow.GetInstance());
             }
             DeleteNotExistMedias();
         }
-
+        
 
         public void CreateTable(string tableCreationString)
         {
@@ -56,7 +62,7 @@ namespace Media.ViewModels
             playlistDatabaseConnection.Close();
         }
 
-        private void RunSqlCommand(SqliteCommand sqlCommand)
+        private async Task RunSqlCommand(SqliteCommand sqlCommand)
         {
             try
             {
@@ -64,6 +70,7 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
+                await MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message).ShowWindowDialogAsync(MainWindow.GetInstance());
             }
         }
 
@@ -119,7 +126,7 @@ namespace Media.ViewModels
             playlistDatabaseConnection.Close();
         }
 
-        public Playlist QueryPlaylistGivenPlaylistID(string playlistID)
+        public async Task<Playlist> QueryPlaylistGivenPlaylistID(string playlistID)
         {
             Playlist result = new Playlist();
             playlistDatabaseConnection.Open();
@@ -140,6 +147,7 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
+                await MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message).ShowWindowDialogAsync(MainWindow.GetInstance());
             }
 
             playlistDatabaseConnection.Close();
@@ -167,6 +175,7 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
+                MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message);
             }
             playlistDatabaseConnection.Close();
             return playlistsInDatabase;
