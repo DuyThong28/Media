@@ -74,7 +74,7 @@
 					</ComboBox>
 				</Grid>
 				<ScrollViewer Grid.Row="2" Background="Transparent" Padding="10,0,20,0" Margin="0,10,0,10">
-					<ListBox Name="lb" Grid.Row="1"
+					<ListBox Name="lbLibrary" Grid.Row="1"
 							Background="Transparent"
 							ItemsSource="{Binding ListMedia}"
 							 Tag="{Binding ListMedia}"

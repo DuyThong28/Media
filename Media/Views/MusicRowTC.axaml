@@ -36,18 +36,17 @@
 							  <Image Source="{TemplateBinding ImageSource}" Stretch="UniformToFill"></Image>
 					  </Border>
 					  <Border  CornerRadius="5" ClipToBounds="True" Height="50" Width="50" IsVisible="{Binding ElementName=item, Path=Tag}" Opacity="0.4" Background="black"></Border>
-					  <Button x:Name="btn_Play"
+					  <Border x:Name="btn_Play"
 								Background="Transparent"
 								IsVisible="{Binding ElementName=item, Path=Tag}"
 								HorizontalAlignment="Center"
 								VerticalAlignment="Center"
-								Command="{TemplateBinding Command}"
-								CommandParameter="{TemplateBinding CommandParameter}"
+							
 									>
-						  <Button.Effect>
+						  <Border.Effect>
 							  <DropShadowEffect BlurRadius="4" Color="Black" OffsetX="0" OffsetY="2"/>
-						  </Button.Effect>
-						  <Button.Styles>
+						  </Border.Effect>
+						  <!--<Border.Styles>
 							  <Style Selector="Button">
 								  <Setter Property="Template">
 									  <ControlTemplate>
@@ -59,10 +58,10 @@
 									  </ControlTemplate>
 								  </Setter>
 							  </Style>
-						  </Button.Styles>
+						  </Border.Styles>-->
 						  <PathIcon Foreground="White" Height="20" Width="20" Data="{StaticResource play_regular}">
 						  </PathIcon>
-					  </Button>
+					  </Border>
 				  </Grid>
 				  <StackPanel Grid.Column="1" Margin="30,5,5,5" Background="Transparent">
 					  <TextBlock x:Name="songName"

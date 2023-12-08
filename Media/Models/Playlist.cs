@@ -1,7 +1,6 @@
 ﻿using Media.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using Avalonia.Media;
@@ -33,7 +32,7 @@ namespace Media.Models
         public IImage BackGroundImage
         {
             get { if (File.Exists(backroundImageFileName))
-                    return ImageHelper.ConvertToAvaloniaBitmap(Image.FromFile(backroundImageFileName));
+                    return new Avalonia.Media.Imaging.Bitmap(backroundImageFileName);
                 else
                     return null;
             }

@@ -9,7 +9,7 @@ namespace Media.Views
         public PlaylistScreenControl()
         {
             InitializeComponent();
-            listMedia.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
+            listMedia.Tapped += MediaHelper.ListBox_DoubleTapped;
         }
 
         private void ScrollViewer_ScrollChanged(object? sender, Avalonia.Controls.ScrollChangedEventArgs e)

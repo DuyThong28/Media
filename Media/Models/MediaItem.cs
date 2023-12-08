@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using TagLib;
 using Avalonia.Media;
-using System.Drawing;
 using ReactiveUI;
 using System.Reactive;
 using LibVLCSharp.Shared;
+using Avalonia.Media.Imaging;
 
 namespace Media.Models
 {
@@ -217,8 +217,9 @@ namespace Media.Models
                 if (taglib.Tag.Pictures.Length > 0)
                 {
                     byte[] bin = (byte[])(taglib.Tag.Pictures[0].Data.Data);
-                    var image = System.Drawing.Image.FromStream(new MemoryStream(bin));
-                    this.image = ImageHelper.ConvertToAvaloniaBitmap(image);
+                    string base64String = Convert.ToBase64String(bin);
+                    byte[] imageBytes = Convert.FromBase64String(base64String);
+                    this.image = new Bitmap(new MemoryStream(imageBytes));
                 }
                 else
                 {
@@ -231,7 +232,7 @@ namespace Media.Models
                         {
                             ffMpeg.GetVideoThumbnail(path, fileName, 1);
                         }
-                        this.Image = ImageHelper.ConvertToAvaloniaBitmap(new Bitmap(fileName));
+                        this.Image = new Bitmap(fileName);
                     }
                     catch
                     {

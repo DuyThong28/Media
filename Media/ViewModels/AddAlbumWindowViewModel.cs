@@ -3,8 +3,6 @@ using Media.Models;
 using ReactiveUI;
 using System;
 using System.IO;
-using System.Drawing;
-using SkiaSharp;
 
 namespace Media.ViewModels
 {
@@ -19,7 +17,8 @@ namespace Media.ViewModels
                 {
                     string fileName = Path.Combine(Environment.CurrentDirectory, "Default Image", "defaultImage.jpg");
                     if (File.Exists(fileName))
-                        return ImageHelper.ConvertToAvaloniaBitmap(Image.FromFile(fileName));
+                        
+                        return new Avalonia.Media.Imaging.Bitmap(fileName);
                     else
                         return null;
                 }

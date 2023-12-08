@@ -33,20 +33,7 @@ namespace Media.ViewModels
             PlayMedia._libVlc = _libVlc;
             PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.AllPlayListChanged += MediaHelper_AllPlayListChanged;
-            MediaHelper.ListSongsChanged += MediaHelper_ListSongsChanged;
-            MediaHelper.ListVideosChanged += MediaHelper_ListVideosChanged;
         }
-
-        private void MediaHelper_ListVideosChanged(object? sender, EventArgs e)
-        {
-            ListVideoScreenViewModel.ListVideos = MediaHelper.ListVideos;
-        }
-
-        private void MediaHelper_ListSongsChanged(object? sender, EventArgs e)
-        {
-            ListMediaScreenViewModel.ListSongs = MediaHelper.ListSongs;
-        }
-
         private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)
         {
             var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);

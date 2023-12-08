@@ -159,7 +159,6 @@ namespace Media.Views
 
         private void MediaControl_ButtonClicked(object? sender, EventArgs e)
         {
-            viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0 : 1;
             mediaControl.UpdateRepeatBtn(sender, new Avalonia.Interactivity.RoutedEventArgs());
             mediaControl.UpdateSuftbtn(sender, new Avalonia.Interactivity.RoutedEventArgs());
             videoControl.UpdateSuftbtn(sender, new Avalonia.Interactivity.RoutedEventArgs());
@@ -184,43 +183,45 @@ namespace Media.Views
             {
                 mainViewScreen.Content = mainScreen;
             }
+
+            if (viewModel.HomeScreenViewModel.SelectedMediaIndex != -1)
+            {
+                viewModel.HomeScreenViewModel.SelectedMediaIndex = 1;
+            }
         }
         private void NavBarControl_RadioButtonChecked(object? sender, EventArgs e)
         {
 
             ListBox listBox = sender as ListBox;
             ListBoxItem listBoxItem = (ListBoxItem)listBox.SelectedItem;
-
             switch (listBoxItem.Name)
             {
                 case "homeBtn":
                     screen.Content = homeScreen;
-                    viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0:1;
                     break;
                 case "musicBtn":
                     screen.Content = musicScreen;
-                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     break;
                 case "videoBtn":
                     screen.Content = videoScreen;
-                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     break;
                 case "searchBtn":
                     screen.Content = searchScreen;
-                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     break;
                 case "libraryBtn":
                     screen.Content = libraryScreen;
-                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     break;
                 case "settingBtn":
                     screen.Content = settingScreen;
-                    viewModel.HomeScreenViewModel.SelectedMediaIndex = -1;
                     break;
                 default:
                     screen.Content = homeScreen;
-                    viewModel.HomeScreenViewModel.SelectedMediaIndex = viewModel.HomeScreenViewModel.SelectedMediaIndex == 1 ? 0 : 1;
                     break;
+            }
+
+            if (viewModel.HomeScreenViewModel.SelectedMediaIndex != -1)
+            {
+                viewModel.HomeScreenViewModel.SelectedMediaIndex = 1;
             }
         }
 

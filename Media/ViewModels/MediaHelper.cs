@@ -192,9 +192,9 @@ namespace Media.ViewModels
         }
 
         internal static PlaylistDatabase Database { get => database; set => database = value; }
-        public static List<MediaItem> ListSongs { get => listSongs; set { listSongs = value; OnListSongsChanded(); } }
+        public static List<MediaItem> ListSongs { get => listSongs; set { listSongs = value;  } }
 
-        public static List<MediaItem> ListVideos { get => listVideos; set { listVideos = value; OnListVideosChanded(); } }
+        public static List<MediaItem> ListVideos { get => listVideos; set { listVideos = value;  } }
 
         public static void FetchListMedia(MediaTypes mediaTypes)
         {
@@ -360,16 +360,16 @@ namespace Media.ViewModels
         public static void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
         {
             MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
+            media.PlayMediaCommand();
             if (media != null)
             {
                 if (media.MediaTypes != TagLib.MediaTypes.Audio)
                 {
-                    if (openVideoScreen != null)
+                    if(openVideoScreen!= null && PlayMedia.CurrentTimePlay<=2)
                     {
                         openVideoScreen(sender, new EventArgs());
                     }
                 }
-                media.PlayMediaCommand();
 
             }
         }
@@ -416,16 +416,6 @@ namespace Media.ViewModels
         {
             AllPlayListChanged?.Invoke(null, EventArgs.Empty);
             UpdateMainScreen(null, new EventArgs());
-        }
-        public static event EventHandler ListSongsChanged;
-        public static void OnListSongsChanded()
-        {
-            ListSongsChanged?.Invoke(null, EventArgs.Empty);
-        }
-        public static event EventHandler ListVideosChanged;
-        public static void OnListVideosChanded()
-        {
-            ListVideosChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static void AddMediaQueue_Click(object sender, RoutedEventArgs e)
