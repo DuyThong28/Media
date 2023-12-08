@@ -16,6 +16,8 @@ public partial class AddAlbumWindow : Window
         this.DataContext = new AddAlbumWindowViewModel(RenameAlbum.Playlist);
     }
     private string imagePath;
+
+    [System.Obsolete]
     private async void SelectImage_Click(object sender, RoutedEventArgs e)
     {
         OpenFileDialog dialog = new OpenFileDialog();
