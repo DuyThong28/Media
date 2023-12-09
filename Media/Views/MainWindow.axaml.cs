@@ -218,11 +218,6 @@ namespace Media.Views
                     screen.Content = homeScreen;
                     break;
             }
-
-            if (viewModel.HomeScreenViewModel.SelectedMediaIndex != -1)
-            {
-                viewModel.HomeScreenViewModel.SelectedMediaIndex = 1;
-            }
         }
 
         public async void ChooseSongPath()

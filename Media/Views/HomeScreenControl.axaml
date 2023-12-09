@@ -35,7 +35,7 @@
 					</Rectangle>
 				</Panel>
 				<Border Grid.Row="0" Background="Black" Opacity="0.3"></Border>
-				<ListBox Name="lstMedias" Grid.Row="0" IsVisible="False"  ItemsSource="{Binding AllMeidas}" SelectedIndex="{Binding SelectedMediaIndex}" SelectionChanged="ListBox_SelectionChanged">
+				<ListBox Name="lstMedias" Grid.Row="0" IsVisible="False"  ItemsSource="{Binding AllMeidas}" SelectedIndex="{Binding SelectedMediaIndex}" SelectionChanged="ListBox_SelectionChanged" Tag="ListBoxVideo_Tapped1">
 				</ListBox>
 				<Border Grid.Row="0" Margin="0,50,0,0">
 					<TransitioningContentControl Content="{Binding ElementName=lstMedias, Path=SelectedItem}">

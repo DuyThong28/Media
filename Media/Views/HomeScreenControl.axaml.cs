@@ -27,11 +27,6 @@ namespace Media.Views
             listMusic.SelectedIndex = -1;
         }
 
-        private void ListBoxVideo_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private static event EventHandler seeAllSongs;
         public static event EventHandler SeeAllSongs
 
@@ -82,10 +77,17 @@ namespace Media.Views
 
         private async Task DoSomethingAfterTimeoutAsync(ListBox listBox)
         {
-            await Task.Delay(TimeSpan.FromSeconds(4));
+            
             Random random = new Random();
+            int currentIndex = listBox.SelectedIndex;
             if (listBox.SelectedIndex != -1)
             {
+                await Task.Delay(TimeSpan.FromSeconds(4));
+                listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
+            }
+
+            if(listBox.SelectedIndex == currentIndex) {
+                await Task.Delay(TimeSpan.FromSeconds(4));
                 listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
             }
         }
