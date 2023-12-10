@@ -1,9 +1,7 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Media.ViewModels;
 using System;
-using System.Collections.Generic;
 
 namespace Media.Views
 {

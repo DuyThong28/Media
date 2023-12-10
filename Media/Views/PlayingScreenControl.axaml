@@ -62,14 +62,60 @@
 								<Border.Effect>
 									<DropShadowEffect BlurRadius="10" Color="Black" OffsetX="0" OffsetY="0"></DropShadowEffect>
 								</Border.Effect>
-								<Border Classes.rotate="{Binding IsPlay}"
+								<Border
 										Classes.noRotate="{Binding !IsPlay}"
+										Classes.rotate="{Binding IsPlay}"
+										IsVisible="{Binding !IsPlay}"
 										ClipToBounds="True" Background="Transparent">
 									<Border.Effect>
-										<DropShadowEffect BlurRadius="5" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"/>
+										<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="0"/>
 									</Border.Effect>
 									<Border.Styles>
-										<Style Selector="Border">
+										<Style Selector="Border.noRotate">
+											<Setter Property="CornerRadius" Value="10"></Setter>
+										</Style>
+										<Style Selector="Border.rotate">
+											<Setter Property="CornerRadius" Value="150"></Setter>
+										</Style>
+									</Border.Styles>
+									<Border.Transitions>
+										<Transitions>
+											<CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.5"></CornerRadiusTransition>
+										</Transitions>
+									</Border.Transitions>
+									<Image  Name="imageSong" Source="{Binding ImageSource}" Stretch="UniformToFill">
+										<Image.Transitions>
+											<Transitions>
+												<DoubleTransition Property="Width" Duration="0:0:0.1"></DoubleTransition>
+												<DoubleTransition Property="Height" Duration="0:0:0.1"></DoubleTransition>
+											</Transitions>
+										</Image.Transitions>
+										<Image.Styles>
+											<Style Selector="Image">
+												<Setter Property="Width" Value="300"/>
+												<Setter Property="Height" Value="300"/>
+											</Style>
+											<Style Selector="Image:pointerover">
+												<Setter Property="Width" Value="320"/>
+												<Setter Property="Height" Value="320"/>
+											</Style>
+										</Image.Styles>
+									</Image>
+								</Border>
+							</Border>	
+							<Border>
+								<Border.Effect>
+									<DropShadowEffect BlurRadius="10" Color="Black" OffsetX="0" OffsetY="0"></DropShadowEffect>
+								</Border.Effect>
+								<Border Classes.rotate="{Binding IsPlay}"
+										Classes.noRotate="{Binding !IsPlay}"
+										IsVisible="{Binding IsPlay}"
+										ClipToBounds="True" Background="Transparent">
+									<Border.Effect>
+										<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="0"/>
+									</Border.Effect>
+									<Border.Styles>
+										<Style Selector="Border.noRotate">
 											<Setter Property="CornerRadius" Value="10"></Setter>
 										</Style>
 										<Style Selector="Border.rotate">
@@ -91,7 +137,7 @@
 											<CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.5"></CornerRadiusTransition>
 										</Transitions>
 									</Border.Transitions>
-									<Image  Name="imageSong" Source="{Binding ImageSource}" Stretch="UniformToFill">
+									<Image  Source="{Binding ImageSource}" Stretch="UniformToFill">
 										<Image.Transitions>
 											<Transitions>
 												<DoubleTransition Property="Width" Duration="0:0:0.1"></DoubleTransition>
@@ -145,7 +191,7 @@
 									<DropShadowEffect BlurRadius="5" Color="#1D8943" OffsetX="0" OffsetY="1"/>
 								</Button.Effect>
 								<StackPanel Orientation="Horizontal">
-									<Image
+									<Image 
 										Width="25"
 										Height="25"
 										Classes.checked="{Binding !IsPlay}"
@@ -223,7 +269,7 @@
 								</ListBox.Styles>
 								<ListBox.ItemTemplate>
 									<DataTemplate>
-										<views:MusicRowTC AuthorName="{Binding ArtistsString}" DateAdded="{Binding DateAdded}" MediaName="{Binding Title}" ImageSource="{Binding Image}" Command="{Binding PlayMediaCommand}" DurationText="{Binding DurationText}">
+										<views:MusicRowTC AuthorName="{Binding ArtistsString}" DateAdded="{Binding DateAdded}" MediaName="{Binding Title}" ImageSource="{Binding Image}"  DurationText="{Binding DurationText}">
 											<views:MusicRowTC.ContextMenu>
 												<ContextMenu>
 													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">

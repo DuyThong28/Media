@@ -16,8 +16,15 @@ namespace Media.Views
         public HomeScreenControl()
         {
             InitializeComponent();
-            listBoxVideo.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
-            listMusic.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
+            listBoxVideo.Tapped += ListBoxVideo_Tapped1;
+            listMusic.Tapped += ListBoxVideo_Tapped1;
+        }
+
+        private void ListBoxVideo_Tapped1(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            MediaHelper.ListBox_DoubleTapped(sender, e);
+            listBoxVideo.SelectedIndex = -1;
+            listMusic.SelectedIndex = -1;
         }
 
         private static event EventHandler seeAllSongs;
@@ -70,10 +77,17 @@ namespace Media.Views
 
         private async Task DoSomethingAfterTimeoutAsync(ListBox listBox)
         {
-            await Task.Delay(TimeSpan.FromSeconds(5));
+            
             Random random = new Random();
+            int currentIndex = listBox.SelectedIndex;
             if (listBox.SelectedIndex != -1)
             {
+                await Task.Delay(TimeSpan.FromSeconds(4));
+                listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
+            }
+
+            if(listBox.SelectedIndex == currentIndex) {
+                await Task.Delay(TimeSpan.FromSeconds(4));
                 listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
             }
         }

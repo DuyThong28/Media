@@ -1,12 +1,11 @@
 ﻿using Avalonia.Platform;
 using System;
+using Bitmap = Avalonia.Media.Imaging.Bitmap;
+using Color = Avalonia.Media.Color;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using System.Collections.Generic;
 using System.Linq;
-using System.Drawing.Imaging;
-using Bitmap = Avalonia.Media.Imaging.Bitmap;
-using System.Drawing;
-using Color = Avalonia.Media.Color;
-using SkiaSharp;
 
 namespace Media.ViewModels
 {
@@ -16,60 +15,35 @@ namespace Media.ViewModels
         {
             return new Bitmap(AssetLoader.Open(resourceUri));
         }
-        public static Bitmap ConvertToAvaloniaBitmap(this System.Drawing.Image bitmap)
-        {
-            if (bitmap == null)
-                return null;
-            System.Drawing.Bitmap bitmapTmp = new System.Drawing.Bitmap(bitmap);
-            var bitmapdata = bitmapTmp.LockBits(new Rectangle(0, 0, bitmapTmp.Width, bitmapTmp.Height), ImageLockMode.ReadWrite, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            Bitmap bitmap1 = new Bitmap(Avalonia.Platform.PixelFormat.Bgra8888, Avalonia.Platform.AlphaFormat.Premul,
-                bitmapdata.Scan0,
-                new Avalonia.PixelSize(bitmapdata.Width, bitmapdata.Height),
-                new Avalonia.Vector(96, 96),
-                bitmapdata.Stride);
-            bitmapTmp.UnlockBits(bitmapdata);
-            bitmapTmp.Dispose();
-            return bitmap1;
-        }
 
         public static Color GetDominantColor(string imagePath)
         {
-            using (var stream = System.IO.File.OpenRead(imagePath))
-            using (var bitmap = SKBitmap.Decode(stream))
+            using (var image = Image.Load<Rgba32>(imagePath))
             {
-                // Get the dimensions of the image
-                int width = bitmap.Width;
-                int height = bitmap.Height;
-
-                // Dictionary to store color frequencies
+                int width = image.Width;
+                int height = image.Height;
                 var colorFrequencies = new Dictionary<Color, int>();
 
-                // Loop through each pixel in the image
-                for (int y = 0; y < height; y++)
+                for (int x = 0; x < height; x++)
                 {
-                    for (int x = 0; x < width; x++)
+                    for (int y = 0; y < width; y++)
                     {
-                        // Get the color of the current pixel
-                        SKColor pixelColor = bitmap.GetPixel(x, y);
-
-                        // Convert SKColor to WPF Color
-                        Color wpfColor = Color.FromArgb(pixelColor.Alpha, pixelColor.Red, pixelColor.Green, pixelColor.Blue);
-
-                        // Count the frequency of each color
+                        var pixel = image[x, y];
+                        Color wpfColor = Color.FromArgb(pixel.A, pixel.R, pixel.G, pixel.B);
                         if (colorFrequencies.ContainsKey(wpfColor))
                         {
                             colorFrequencies[wpfColor]++;
                         }
                         else
                         {
-                            colorFrequencies[wpfColor]=1;
+                            colorFrequencies[wpfColor] = 1;
                         }
                     }
                 }
 
-                // Find the color with the highest frequency
                 Color dominantColor = colorFrequencies.OrderByDescending(c => c.Value).First().Key;
                 return dominantColor;
+              
             }
         }
 

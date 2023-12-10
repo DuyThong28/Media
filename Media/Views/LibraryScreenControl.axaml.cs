@@ -16,6 +16,13 @@ namespace Media.Views
         public LibraryScreenControl()
         {
             InitializeComponent();
+            lbLibrary.Tapped += LbLibrary_Tapped;
+        }
+
+
+        private void LbLibrary_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            (sender as ListBox).SelectedItem = MediaHelper.selectPlaylist((sender as ListBox).ItemsSource as List<Playlist>);
         }
 
         private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)

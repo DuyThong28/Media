@@ -83,6 +83,7 @@
 												<Setter Property="Background" Value="Transparent"></Setter>
 												<Setter	Property="CornerRadius" Value="15"></Setter>
 												<Setter Property="Tag" Value="True"></Setter>
+												<Setter Property="Foreground" Value="#1ED760"></Setter>
 											</Style>
 										</ListBox.Styles>
 										<ListBox.ItemsPanel>
@@ -92,7 +93,7 @@
 										</ListBox.ItemsPanel>
 										<ListBox.ItemTemplate>
 											<DataTemplate>
-												<views:MediaItemTC 	  DateAdded="{Binding DateAdded}" AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" DurationText="{Binding DurationText}" ImageSource="{Binding Image}" Command="{Binding PlaySongCommand}">
+												<views:MediaItemTC 	  DateAdded="{Binding DateAdded}" AuthorName="{Binding ArtistsString}" MediaName="{Binding Title}" DurationText="{Binding DurationText}" ImageSource="{Binding Image}" >
 													<views:MediaItemTC.ContextMenu>
 														<ContextMenu>
 															<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">

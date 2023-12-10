@@ -3,7 +3,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Media.ViewModels;
 using Media.Views;
-using System;
 
 namespace Media
 {
@@ -14,6 +13,7 @@ namespace Media
         {
             AvaloniaXamlLoader.Load(this);
         }
+
 
         public override void OnFrameworkInitializationCompleted()
         {

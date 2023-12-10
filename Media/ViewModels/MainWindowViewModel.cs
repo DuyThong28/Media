@@ -11,14 +11,14 @@ namespace Media.ViewModels
     {
         public static MainWindowViewModel Instance { get; set; }
 
-        public readonly LibVLC _libVlc = new LibVLC(enableDebugLogs: true);
-        public MediaPlayer MediaPlayer { get; set; } = new MediaPlayer(new LibVLC());
+        //public readonly LibVLC _libVlc = new LibVLC(enableDebugLogs: true);
+        //public MediaPlayer MediaPlayer { get; set; } = new MediaPlayer(new LibVLC());
         public LibVLCSharp.Shared.Media media;
 
         public MainWindowViewModel()
         {
-            PlayMedia._libVlc = _libVlc;
-            PlayMedia.MediaPlayer = MediaPlayer;
+            PlayMedia._libVlc = new LibVLC(enableDebugLogs: true);
+            PlayMedia.MediaPlayer = new MediaPlayer(PlayMedia._libVlc); ;
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
             PlayMedia.UpdateScreen += MediaHelper.UpdateScreen;
@@ -30,23 +30,10 @@ namespace Media.ViewModels
             ListMediaScreenViewModel.ListSongs = MediaHelper.ListSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.ListVideos;
             SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
-            PlayMedia._libVlc = _libVlc;
-            PlayMedia.MediaPlayer = MediaPlayer;
+            //PlayMedia._libVlc = _libVlc;
+            //PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.AllPlayListChanged += MediaHelper_AllPlayListChanged;
-            MediaHelper.ListSongsChanged += MediaHelper_ListSongsChanged;
-            MediaHelper.ListVideosChanged += MediaHelper_ListVideosChanged;
         }
-
-        private void MediaHelper_ListVideosChanged(object? sender, EventArgs e)
-        {
-            ListVideoScreenViewModel.ListVideos = MediaHelper.ListVideos;
-        }
-
-        private void MediaHelper_ListSongsChanged(object? sender, EventArgs e)
-        {
-            ListMediaScreenViewModel.ListSongs = MediaHelper.ListSongs;
-        }
-
         private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)
         {
             var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);

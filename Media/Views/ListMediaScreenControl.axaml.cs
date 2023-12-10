@@ -13,7 +13,13 @@ namespace Media.Views
         {
 
             InitializeComponent();
-            listMusic.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
+            listMusic.Tapped += ListMusic_Tapped;
+        }
+
+        private void ListMusic_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            MediaHelper.ListBox_DoubleTapped(sender, e);
+            listMusic.SelectedIndex = -1;
         }
 
         private void MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -24,7 +30,7 @@ namespace Media.Views
         private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-            if (comboBox != null && comboBox.SelectedItem != null)
+            if (comboBox != null && comboBox.SelectedItem != null&& listMusic !=null)
             {
                 ComboBoxItem selectedItem = comboBox.SelectedItem as ComboBoxItem;
                 if (selectedItem != null)
@@ -38,17 +44,17 @@ namespace Media.Views
                             case "Sort A-Z":
                                 IEnumerable<IGrouping<char, MediaItem>> resAToZ = Playlist.SortListAToZ(MediaHelper.ListSongs);
                                 List<MediaItem> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
-                                MediaHelper.ListSongs = sortedListAToZ;                              
+                                listMusic.ItemsSource = sortedListAToZ;                              
                                 break;
                             case "Sort by Author":
                                 IEnumerable<IGrouping<string, MediaItem>> resArtists = Playlist.SortListArtists(MediaHelper.ListSongs);
                                 List<MediaItem> sortedListArtists = resArtists.SelectMany(group => group).ToList();
-                                MediaHelper.ListSongs = sortedListArtists;
+                                listMusic.ItemsSource = sortedListArtists;
                                 break;
                             case "Sort by Date":
                                 IEnumerable<IGrouping<string, MediaItem>> resDate = Playlist.SortListDateAdded(MediaHelper.ListSongs);
                                 List<MediaItem> sortedListDate = resDate.SelectMany(group => group).ToList();
-                                MediaHelper.ListSongs = sortedListDate;
+                                listMusic.ItemsSource = sortedListDate;
                                 break;
                         }
                     }

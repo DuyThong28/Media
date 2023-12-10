@@ -8,7 +8,7 @@ namespace Media.Views
         public PlayingScreenControl()
         {
             InitializeComponent();
-            listBoxMedia.DoubleTapped += MediaHelper.ListBox_DoubleTapped;
+            listBoxMedia.Tapped += MediaHelper.ListBox_DoubleTapped;
         }
 
         private void PlayNext(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

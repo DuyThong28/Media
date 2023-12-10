@@ -124,7 +124,6 @@
 															  MediaName="{Binding Title}"
 															  ImageSource="{Binding Image}"
 															  DurationText="{Binding DurationText}"
-																Command="{Binding PlaySongCommand}"
 												  DateAdded="{Binding DateAdded}"
 																	>
 													<views:MusicRowTC.ContextMenu>

@@ -1,12 +1,9 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.IO;
-using System.Drawing;
 using Media.Models;
 using Media.ViewModels;
-using System.Diagnostics;
+using Avalonia.Media.Imaging;
 
 namespace Media.Views;
 
@@ -36,7 +33,7 @@ public partial class AddAlbumWindow : Window
                 Avalonia.Media.Imaging.Bitmap bmp = null;
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    bitmap.Save(ms);
                     ms.Position = 0;
                     bmp = new Avalonia.Media.Imaging.Bitmap(ms);
                 }
