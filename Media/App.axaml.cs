@@ -3,12 +3,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Media.ViewModels;
 using Media.Views;
-using Ao.Lang.AvaloniaUI;
-using System.Globalization;
-using Ao.Lang.Runtime;
-using Ao.Lang;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
 
 namespace Media
 {

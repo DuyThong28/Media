@@ -7,6 +7,7 @@
              x:Class="Media.Views.SearchScreenControl"
 			  xmlns:vm="using:Media.ViewModels"
 			 x:DataType="vm:SearchScreenViewModel"
+			 Background=""
 			 xmlns:views="using:Media.Views">
 	<Design.DataContext>
 		<vm:SearchScreenViewModel/>

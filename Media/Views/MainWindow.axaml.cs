@@ -102,7 +102,7 @@ namespace Media.Views
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            if (_videoViewer != null && viewModel.MediaPlayer != null)
+            if (_videoViewer != null && PlayMedia.MediaPlayer != null)
             {
                 _videoViewer.MediaPlayer = PlayMedia.MediaPlayer;
                 _videoViewer.MediaPlayer.SetHandle(_videoViewer.hndl);

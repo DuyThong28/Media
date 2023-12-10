@@ -68,7 +68,7 @@
 										IsVisible="{Binding !IsPlay}"
 										ClipToBounds="True" Background="Transparent">
 									<Border.Effect>
-										<DropShadowEffect BlurRadius="5" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"/>
+										<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="0"/>
 									</Border.Effect>
 									<Border.Styles>
 										<Style Selector="Border.noRotate">
@@ -112,7 +112,7 @@
 										IsVisible="{Binding IsPlay}"
 										ClipToBounds="True" Background="Transparent">
 									<Border.Effect>
-										<DropShadowEffect BlurRadius="5" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Background}" OffsetX="0" OffsetY="0"/>
+										<DropShadowEffect BlurRadius="5" Color="Black" OffsetX="0" OffsetY="0"/>
 									</Border.Effect>
 									<Border.Styles>
 										<Style Selector="Border.noRotate">

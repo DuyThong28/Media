@@ -11,14 +11,14 @@ namespace Media.ViewModels
     {
         public static MainWindowViewModel Instance { get; set; }
 
-        public readonly LibVLC _libVlc = new LibVLC(enableDebugLogs: true);
-        public MediaPlayer MediaPlayer { get; set; } = new MediaPlayer(new LibVLC());
+        //public readonly LibVLC _libVlc = new LibVLC(enableDebugLogs: true);
+        //public MediaPlayer MediaPlayer { get; set; } = new MediaPlayer(new LibVLC());
         public LibVLCSharp.Shared.Media media;
 
         public MainWindowViewModel()
         {
-            PlayMedia._libVlc = _libVlc;
-            PlayMedia.MediaPlayer = MediaPlayer;
+            PlayMedia._libVlc = new LibVLC(enableDebugLogs: true);
+            PlayMedia.MediaPlayer = new MediaPlayer(PlayMedia._libVlc); ;
             MediaHelper.FetchListMedia(MediaTypes.Audio);
             MediaHelper.FetchListMedia(MediaTypes.Video);
             PlayMedia.UpdateScreen += MediaHelper.UpdateScreen;
@@ -30,8 +30,8 @@ namespace Media.ViewModels
             ListMediaScreenViewModel.ListSongs = MediaHelper.ListSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.ListVideos;
             SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
-            PlayMedia._libVlc = _libVlc;
-            PlayMedia.MediaPlayer = MediaPlayer;
+            //PlayMedia._libVlc = _libVlc;
+            //PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.AllPlayListChanged += MediaHelper_AllPlayListChanged;
         }
         private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)
