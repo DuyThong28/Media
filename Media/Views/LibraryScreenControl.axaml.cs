@@ -73,9 +73,9 @@ namespace Media.Views
                         switch (selectedText)
                         {
                             case "Sort A-Z":
-                                IEnumerable<IGrouping<char, Playlist>> resAToZ = MediaHelper.SortListAToZ(MediaHelper.AllPlayList);
-                                List<Playlist> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
-                                MediaHelper.AllPlayList = sortedListAToZ;
+                                //IEnumerable<IGrouping<char, Playlist>> resAToZ = MediaHelper.SortListAToZ(MediaHelper.AllPlayList);
+                                //List<Playlist> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
+                                //MediaHelper.AllPlayList = sortedListAToZ;
                                 break;                        
                             case "Sort by Date":
                                 IEnumerable<IGrouping<string, Playlist>> resDate = MediaHelper.SortListDateAdded(MediaHelper.AllPlayList);

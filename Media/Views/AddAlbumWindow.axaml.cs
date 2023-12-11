@@ -49,6 +49,8 @@ public partial class AddAlbumWindow : Window
             if (addAlbumWindowViewModel.Playlist != null) 
             {
                 string albumName = AlbumNameTextBox.Text;
+                if (albumName == null || string.IsNullOrWhiteSpace(albumName))  
+                    albumName = "Unnamed";
                 string imagePath;
                 if (this.imagePath != null)
                     imagePath = this.imagePath;
@@ -66,6 +68,8 @@ public partial class AddAlbumWindow : Window
             else
             {
                 string albumName = AlbumNameTextBox.Text;
+                if (albumName == null || string.IsNullOrWhiteSpace(albumName))
+                    albumName = "Unnamed";
                 string imagePath = this.imagePath;
                 Playlist playlist = new Playlist(null, albumName, imagePath, null);
                 MediaHelper.AddPlayList(playlist);
