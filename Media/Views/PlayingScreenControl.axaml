@@ -190,37 +190,40 @@
 								<Button.Effect>
 									<DropShadowEffect BlurRadius="5" Color="#1D8943" OffsetX="0" OffsetY="1"/>
 								</Button.Effect>
-								<StackPanel Orientation="Horizontal">
-									<Image 
-										Width="25"
-										Height="25"
-										Classes.checked="{Binding !IsPlay}"
-										Classes.unChecked="{Binding IsPlay}"
+								<Border Padding="20,0,20,0">
+									<StackPanel Orientation="Horizontal" >
+										<Image
+											Width="25"
+											Height="25"
+											Classes.checked="{Binding !IsPlay}"
+											Classes.unChecked="{Binding IsPlay}"
 									>
-										<Image.Styles>
-											<Style Selector="Image.unChecked">
-												<Setter Property="Source" Value="/Assets/Icons/pause_nobackrgound.png"></Setter>
-											</Style>
-											<Style Selector="Image.checked">
-												<Setter Property="Source" Value="/Assets/Icons/play_nobackground.png"></Setter>
-											</Style>
-										</Image.Styles>
-									</Image>
-									<Label
-										Classes.checked="{Binding !IsPlay}"
-										Classes.unChecked="{Binding IsPlay}"
-										Foreground="White"
-										FontSize="17" FontWeight="Medium" VerticalAlignment="Center">
-										<Label.Styles>
-											<Style Selector="Label.unChecked">
-												<Setter Property="Content" Value="TẠM DỪNG"></Setter>
-											</Style>
-											<Style Selector="Label.checked">
-												<Setter Property="Content" Value="TIẾP TỤC PHÁT"></Setter>
-											</Style>
-										</Label.Styles>
-									</Label>
-								</StackPanel>
+											<Image.Styles>
+												<Style Selector="Image.unChecked">
+													<Setter Property="Source" Value="/Assets/Icons/pause_nobackrgound.png"></Setter>
+												</Style>
+												<Style Selector="Image.checked">
+													<Setter Property="Source" Value="/Assets/Icons/play_nobackground.png"></Setter>
+												</Style>
+											</Image.Styles>
+										</Image>
+										<Label
+											Classes.checked="{Binding !IsPlay}"
+											Classes.unChecked="{Binding IsPlay}"
+											Foreground="White"
+											FontSize="17" FontWeight="Medium" VerticalAlignment="Center">
+											<Label.Styles>
+												<Style Selector="Label.unChecked">
+													<Setter Property="Content" Value="PAUSE"></Setter>
+												</Style>
+												<Style Selector="Label.checked">
+													<Setter Property="Content" Value="PLAY"></Setter>
+												</Style>
+											</Label.Styles>
+										</Label>
+									</StackPanel>
+
+								</Border>
 							</Button>
 						</StackPanel>
 					</Grid>
@@ -229,24 +232,27 @@
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="60"></RowDefinition>
-							<RowDefinition></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
 						</Grid.RowDefinitions>
 						<Grid Grid.Row="0" VerticalAlignment="Center" >
 							<Label  FontSize="20" FontWeight="Bold">
 								<Label.Effect>
 									<DropShadowEffect BlurRadius="1" Color="White" OffsetX="0" OffsetY="1"></DropShadowEffect>
 								</Label.Effect>
-								DANH SÁCH PHÁT
+								PLAYING QUEUE
 							</Label>
 						</Grid>
 						<ScrollViewer Padding="0,0,20,0" Grid.Row="1">
-							<ListBox Grid.Row="1" Background="Transparent"
+							<ListBox Grid.Row="1" 
 									 AutoScrollToSelectedItem="True"
 									 Name="listBoxMedia"
 											  ItemsSource="{Binding ListMedia}"
 												SelectedItem="{Binding SelectedItem}"
 											>
 								<ListBox.Styles>
+									<Style Selector="ListBox">
+										<Setter Property="Background" Value="Transparent"></Setter>
+									</Style>
 									<Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
 										<Setter Property="Background" Value="Transparent"></Setter>
 									</Style>
@@ -272,17 +278,17 @@
 										<views:MusicRowTC AuthorName="{Binding ArtistsString}" DateAdded="{Binding DateAdded}" MediaName="{Binding Title}" ImageSource="{Binding Image}"  DurationText="{Binding DurationText}">
 											<views:MusicRowTC.ContextMenu>
 												<ContextMenu>
-													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
+													<MenuItem Header="Play" Command="{Binding PlaySongCommand}">
 														<MenuItem.Icon>
 															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
 														</MenuItem.Icon>
 													</MenuItem>
-													<MenuItem Header="Phát tiếp theo" Click="PlayNext">
+													<MenuItem Header="Play next" Click="PlayNext">
 														<MenuItem.Icon>
 															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
 														</MenuItem.Icon>
 													</MenuItem>
-													<MenuItem Name="mediaItem" Header="Loại bỏ" Click="MenuItem_Click_1">
+													<MenuItem Name="mediaItem" Header="Remove" Click="MenuItem_Click_1">
 														<MenuItem.Icon>
 															<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
 														</MenuItem.Icon>

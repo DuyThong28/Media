@@ -126,7 +126,7 @@
 												<Label.Effect>
 													<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
 												</Label.Effect>
-												Danh sách phát</Label>
+												Playlist</Label>
 											<TextBlock x:Name="playListName"  HorizontalAlignment="Stretch" FontSize="80" FontWeight="Bold" Padding="0,0,0,0" Margin="-10,10,0,20" Text="{Binding PlayListName}" TextTrimming="CharacterEllipsis">
 												<TextBlock.Effect>
 													<DropShadowEffect BlurRadius="5" Color="#9C131313" OffsetX="0" OffsetY="0"/>
@@ -247,22 +247,22 @@
 															CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Foreground}">
 											<views:MusicRowTC.ContextMenu>
 												<ContextMenu>
-													<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
+													<MenuItem Header="Play" Command="{Binding PlaySongCommand}">
 														<MenuItem.Icon>
 															<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
 														</MenuItem.Icon>
 													</MenuItem>
-													<MenuItem Header="Phát tiếp theo" Click="PlayNext">
+													<MenuItem Header="Play next" Click="PlayNext">
 														<MenuItem.Icon>
 															<PathIcon Width="20" Height="20" Data="{StaticResource add_circle_regular}"/>
 														</MenuItem.Icon>
 													</MenuItem>
-													<MenuItem Header="Thêm vào queue" Click="AddMediaQueue_Click">
+													<MenuItem Header="Add to queue" Click="AddMediaQueue_Click">
 														<MenuItem.Icon>
 															<PathIcon Width="20" Height="20" Data="{StaticResource reading_list_add_regular}"/>
 														</MenuItem.Icon>
 													</MenuItem>
-													<MenuItem Name="mediaItem" Header="Loại bỏ" Click="MenuItem_Click">
+													<MenuItem Name="mediaItem" Header="Remove" Click="MenuItem_Click">
 														<MenuItem.Icon>
 															<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
 														</MenuItem.Icon>

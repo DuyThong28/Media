@@ -126,15 +126,14 @@ namespace Media.ViewModels
                     {
                        IsPlayVideo = true;
                     }
-                    MediaPlayer.Play(_media);
 
                     if (updateScreen != null)
                     {
                         updateScreen(null, new EventArgs());
                     }
-                    timer.Start();
-                    timer.Interval = new TimeSpan(0, 0, 1);
+                  
                     currentTimePlay =0;
+                    MediaPlayer.Play(_media);
                 }
             }
         }

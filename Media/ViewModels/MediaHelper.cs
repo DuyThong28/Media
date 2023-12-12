@@ -325,6 +325,10 @@ namespace Media.ViewModels
             {
                 turnPlayingScreen(sender, new EventArgs());
             }
+            if (updateMediaScreen != null)
+            {
+                updateMediaScreen(sender, new EventArgs());
+            }
         }
 
         public static void UpdateMainScreen(object sender, EventArgs e)
@@ -361,9 +365,9 @@ namespace Media.ViewModels
         public static void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
         {            
             MediaItem media = (sender as ListBox).SelectedItem as MediaItem;
-            media.PlayMediaCommand();
             if (media != null)
             {
+                media.PlayMediaCommand();
                 if (media.MediaTypes != TagLib.MediaTypes.Audio)
                 {
                     if(openVideoScreen!= null && PlayMedia.CurrentTimePlay<=2)

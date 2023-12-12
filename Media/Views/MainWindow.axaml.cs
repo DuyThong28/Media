@@ -258,7 +258,6 @@ namespace Media.Views
                 MediaHelper.FetchListMedia(MediaTypes.Video);
                 UpdateMedia();
             }
-
         }
 
         public static MainWindow GetInstance()
@@ -272,7 +271,13 @@ namespace Media.Views
             (musicScreen.DataContext as ListMediaScreenViewModel).ListSongs = MediaHelper.ListSongs;
             (homeScreen.DataContext as HomeScreenViewModel).ListSongs = MediaHelper.ListSongs;
             (homeScreen.DataContext as HomeScreenViewModel).ListVideos = MediaHelper.ListVideos;
+            (homeScreen.DataContext as HomeScreenViewModel).AllMeidas = MediaHelper.AllMedias;
             (searchScreen.DataContext as SearchScreenViewModel).AllMedias = MediaHelper.AllMedias;
+            if (viewModel.HomeScreenViewModel.SelectedMediaIndex == -1)
+            { 
+                viewModel.HomeScreenViewModel.SelectedMediaIndex = 1;
+                viewModel.HomeScreenViewModel.SelectedMediaIndex = 0;
+            }
         }
     }
 }

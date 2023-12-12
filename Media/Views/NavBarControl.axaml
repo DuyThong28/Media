@@ -74,7 +74,7 @@
 								</Image.Styles>
 							</Image>
 
-							<Label Name="home" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0" FontWeight="Medium">Trang Chủ</Label>
+							<Label Name="home" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="25,0,0,0" FontWeight="Medium">Home</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="searchBtn">
@@ -96,7 +96,7 @@
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Tìm Kiếm</Label>
+							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="25,0,0,0">Searching</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="musicBtn">
@@ -118,7 +118,7 @@
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Âm Nhạc</Label>
+							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="25,0,0,0">My Music</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="videoBtn" Grid.Row="3">
@@ -140,7 +140,7 @@
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Video</Label>
+							<Label FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="25,0,0,0">My Video</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="libraryBtn">
@@ -162,7 +162,7 @@
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Thư Viện</Label>
+							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="25,0,0,0">My Library</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="settingBtn" >
@@ -184,7 +184,7 @@
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="15,0,0,0">Cài Đặt</Label>
+							<Label FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="25,0,0,0">Setting</Label>
 						</DockPanel>
 					</ListBoxItem>
 				</ListBox>

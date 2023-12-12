@@ -26,7 +26,7 @@
 				</Button>
 				<Grid Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
 					<Label   FontSize="20" FontWeight="Bold">
-						THƯ VIỆN
+						LIBRARY
 					</Label>
 				</Grid>
 				<Grid Background="Transparent" Grid.Row="1" Margin="20,10,20,10">
@@ -59,7 +59,7 @@
 							</Image>
 							<Label VerticalAlignment="Center"
 							   FontSize="17"
-							   Content="Danh sách phát mới">
+							   Content="New playlist">
 							</Label>
 						</StackPanel>
 					</Button>
@@ -108,18 +108,18 @@
 									CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 									<views:PlaylistItemTC.ContextMenu>
 										<ContextMenu>
-											<MenuItem Header="Phát"
+											<MenuItem Header="Play"
 													  Command="{Binding ElementName=playBtn, Path=Command}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}">
 												<MenuItem.Icon>
 													<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"  />
 												</MenuItem.Icon>
 											</MenuItem>
-											<MenuItem Header="Chỉnh sửa" Click="RenameAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
+											<MenuItem Header="Edit" Click="RenameAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
 												<MenuItem.Icon>
 													<PathIcon Width="12" Height="12" Data="{StaticResource options_regular}"/>
 												</MenuItem.Icon>
 											</MenuItem>
-											<MenuItem Header="Loại bỏ" Click="DeleteAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
+											<MenuItem Header="Remove" Click="DeleteAlbum_Click" Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
 												<MenuItem.Icon>
 													<PathIcon Height="20" Width="20" Data="{StaticResource delete_regular}" />
 												</MenuItem.Icon>

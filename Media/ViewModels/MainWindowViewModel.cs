@@ -23,6 +23,8 @@ namespace Media.ViewModels
             MediaHelper.FetchListMedia(MediaTypes.Video);
             PlayMedia.UpdateScreen += MediaHelper.UpdateScreen;
             PlayMedia.timer.Tick += MediaHelper.UpdateMediaControl;
+            PlayMedia.timer.Interval = new TimeSpan(0, 0, 1);
+            PlayMedia.timer.Start();
             var ListMedia = new List<Playlist>(MediaHelper.AllPlayList);
             LibraryScreenViewModel.ListMedia = ListMedia;
             HomeScreenViewModel.ListSongs = MediaHelper.ListSongs;

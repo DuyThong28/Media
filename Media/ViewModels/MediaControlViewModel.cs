@@ -17,8 +17,8 @@ namespace Media.ViewModels
         private string timeSongEnd = "00:00";
         private string timeSongPlay = "00:00";
         private IImage imageSource = ImageHelper.LoadFromResource(new Uri("avares://Media/Assets/Icons/defaultImage.jpg"));
-        private string songName = "Tên bài hát";
-        private string nameAuthor = "Tên ca sĩ";
+        private string songName = "Song name";
+        private string nameAuthor = "Author name";
         private List<int> listIndexPlay;
 
         public MediaControlViewModel()
@@ -124,9 +124,31 @@ namespace Media.ViewModels
                 if (PlayMedia.Repeat == RepeatMode.One)
                 {
                     PlayMedia.URL = PlayMedia.Path;
+                    return;
                 } else
                 {
-                    PlayNext();
+                    if (PlayMedia.IsFirst == false) return;
+                    for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
+                    {
+                        if (MediaHelper.PlayQueue[listIndexPlay[i]].FilePath == PlayMedia.Path)
+                        {
+                            if (i != MediaHelper.PlayQueue.Count - 1)
+                            {
+                                PlayMedia.media = MediaHelper.PlayQueue[i + 1];
+                                PlayMedia.URL = MediaHelper.PlayQueue[i + 1].FilePath;
+                            }
+                            else if (i == MediaHelper.PlayQueue.Count - 1 && PlayMedia.Repeat == RepeatMode.All)
+                            {
+                                PlayMedia.media = MediaHelper.PlayQueue[0];
+                                PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
+                            }
+                            else
+                            {
+                                PlayMedia.pauseSong();
+                            }
+                            return;
+                        }
+                    }
                 }
             }
 
@@ -150,16 +172,13 @@ namespace Media.ViewModels
                 {
                     if (i != MediaHelper.PlayQueue.Count - 1)
                     {
-                        PlayMedia.URL = MediaHelper.PlayQueue[i+1].FilePath;
                         PlayMedia.media = MediaHelper.PlayQueue[i + 1];
+                        PlayMedia.URL = MediaHelper.PlayQueue[i + 1].FilePath;
                     }
                     else if (i == MediaHelper.PlayQueue.Count - 1 && PlayMedia.Repeat == RepeatMode.All)
                     {
-                        PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
                         PlayMedia.media = MediaHelper.PlayQueue[0];
-                    } else
-                    {
-                        PlayMedia.pauseSong();
+                        PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
                     }
                     return;
                 }
@@ -168,14 +187,20 @@ namespace Media.ViewModels
         private void PlayPrev()
         {
             if (PlayMedia.IsFirst == false) return;
-            for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
+            int count = MediaHelper.PlayQueue.Count;
+            for (int i = 0; i < count; i++)
             {
                 if (MediaHelper.PlayQueue[listIndexPlay[i]].FilePath == PlayMedia.Path)
                 {
                     if (i != 0)
                     {
-                        PlayMedia.URL = MediaHelper.PlayQueue[i - 1].FilePath;
                         PlayMedia.media = MediaHelper.PlayQueue[i - 1];
+                        PlayMedia.URL = MediaHelper.PlayQueue[i - 1].FilePath;
+                    }
+                    else if (i ==0 && PlayMedia.Repeat == RepeatMode.All)
+                    {
+                        PlayMedia.media = MediaHelper.PlayQueue[count - 1];
+                        PlayMedia.URL = MediaHelper.PlayQueue[count-1].FilePath;
                     }
                     return;
                 }

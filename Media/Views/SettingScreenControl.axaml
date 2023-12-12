@@ -20,7 +20,7 @@
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
 				<Grid Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
-					<Label FontSize="20"  FontWeight="Bold" >CÀI ĐẶT</Label>
+					<Label FontSize="20"  FontWeight="Bold" >SETTING</Label>
 				</Grid>
 				<ScrollViewer Grid.Row="1" Background="Transparent" Padding="20,0,20,0" >
 					<StackPanel Spacing="20">
@@ -29,16 +29,16 @@
 								<RowDefinition Height="40"></RowDefinition>
 								<RowDefinition></RowDefinition>
 							</Grid.RowDefinitions>
-							<Label Grid.Row="0" Name="lib"  FontSize="17" VerticalAlignment="Center" FontWeight="Bold">Thư viện</Label>
+							
 							<StackPanel Grid.Row="1" Spacing="10">
 								<views:SettingItemTC ImageSource="/Assets/Icons/folder-128.png"
-													 SettingContent="Vị trí thư viện nhạc"
-													 ButtonContent="Thêm thư mục"
+													 SettingContent="Music library location"
+													 ButtonContent="Add folder"
 													 Command="{Binding OpenSongFolder}"
 												 />
 								<views:SettingItemTC ImageSource="/Assets/Icons/folder-128.png"
-													 SettingContent="Vị trí thư viện video"
-													 ButtonContent="Thêm thư mục"
+													 SettingContent="Video library location"
+													 ButtonContent="Add folder"
 													 Command="{Binding OpenVideoFolder}"/>
 							</StackPanel>
 						</Grid>

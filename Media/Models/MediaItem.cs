@@ -230,7 +230,7 @@ namespace Media.Models
                         Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "Video Thumbnail"));
                         if (!System.IO.File.Exists(fileName))
                         {
-                            ffMpeg.GetVideoThumbnail(path, fileName, 1);
+                            ffMpeg.GetVideoThumbnail(path, fileName, 5);
                         }
                         this.Image = new Bitmap(fileName);
                     }

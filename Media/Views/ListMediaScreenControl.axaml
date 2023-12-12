@@ -51,7 +51,7 @@
 						</Grid.RowDefinitions>
 						<Grid  Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
 							<Label   FontSize="20" FontWeight="Bold">
-								ÂM NHẠC
+								MUSIC
 							</Label>
 						</Grid>
 						<Grid Background="Transparent" Grid.Row="1" Margin="20,10,20,10">
@@ -75,7 +75,7 @@
 									</Image>
 									<Label VerticalAlignment="Center"
 									   FontSize="17"
-									   Content="Phát tất cả">
+									   Content="Play all">
 									</Label>
 								</StackPanel>
 							</Button>
@@ -128,23 +128,23 @@
 																	>
 													<views:MusicRowTC.ContextMenu>
 														<ContextMenu Name="menu">
-															<MenuItem Header="Phát" Command="{Binding PlaySongCommand}">
+															<MenuItem Header="Play" Command="{Binding PlaySongCommand}">
 																<MenuItem.Icon>
 																	<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
 																</MenuItem.Icon>
 															</MenuItem>
 															
-															<MenuItem Header="Phát tiếp theo" Click="PlayNext">
+															<MenuItem Header="Play next" Click="PlayNext">
 																<MenuItem.Icon>
 																	<PathIcon Width="20" Height="20" Data="{StaticResource arrow_next_regular}"/>
 																</MenuItem.Icon>
 															</MenuItem>
-															<MenuItem Header="Thêm vào queue" Click="MenuItem_Click">
+															<MenuItem Header="Add to queue" Click="MenuItem_Click">
 																<MenuItem.Icon>
 																	<PathIcon Width="20" Height="20" Data="{StaticResource reading_list_add_regular}"/>
 																</MenuItem.Icon>
 															</MenuItem>
-															<MenuItem Header="Thêm vào" ItemsSource="{Binding $parent[ListBox].Tag}">
+															<MenuItem Header="Add to" ItemsSource="{Binding $parent[ListBox].Tag}">
 																<MenuItem.ItemTemplate>
 																	<DataTemplate 
 																		x:DataType="md:Playlist">

@@ -53,7 +53,7 @@
 				<Grid  Grid.Row="0" VerticalAlignment="Center" Margin="20,10,20,10">
 					<Border>
 						<TextBox Name="inputTextbox"
-								 Grid.Row="1"  Text="{Binding SearchText}"  Watermark="Bạn muốn nghe gi?" >
+								 Grid.Row="1"  Text="{Binding SearchText}"  Watermark="What do you want to listen to?" >
 						</TextBox>
 					</Border>
 				

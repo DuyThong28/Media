@@ -21,9 +21,9 @@ public partial class AddAlbumWindow : Window
     private async void SelectImage_Click(object sender, RoutedEventArgs e)
     {
         OpenFileDialog dialog = new OpenFileDialog();
-        dialog.Title = "Chọn Ảnh Bìa";
+        dialog.Title = "Choose image";
         dialog.Filters.Add(new FileDialogFilter() { Name = "Ảnh", Extensions = { "png", "jpg", "jpeg", "gif", "bmp" } });
-
+        
         string[] result = await dialog.ShowAsync(this);
         if (result != null && result.Length > 0)
         {
