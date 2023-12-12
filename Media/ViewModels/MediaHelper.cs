@@ -56,7 +56,7 @@ namespace Media.ViewModels
             if (allPlayList.Exists(x => x.PlayListID == playlist.PlayListID))
             {
                 throw new Exception("Playlist trùng ID");
-            }
+            }         
             allPlayList.Add(playlist);
             database.InsertPlaylist(playlist);           
             OnAllPlayListChanged();
