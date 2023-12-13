@@ -96,7 +96,7 @@
 									</Style>
 								</Image.Styles>
 							</Image>
-							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="25,0,0,0">Searching</Label>
+							<Label  FontWeight="Medium" FontSize="16" VerticalAlignment="Center" Opacity="0.8" Margin="25,0,0,0">Search</Label>
 						</DockPanel>
 					</ListBoxItem>
 					<ListBoxItem Name="musicBtn">

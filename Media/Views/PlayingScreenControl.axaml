@@ -275,7 +275,7 @@
 								</ListBox.Styles>
 								<ListBox.ItemTemplate>
 									<DataTemplate>
-										<views:MusicRowTC AuthorName="{Binding ArtistsString}" DateAdded="{Binding DateAdded}" MediaName="{Binding Title}" ImageSource="{Binding Image}"  DurationText="{Binding DurationText}">
+										<views:MusicRowTC AuthorName="{Binding ArtistsString}" DateAdded="{Binding DateAdded}" MediaName="{Binding Title}" ImageSource="{Binding Image}"  DurationText="{Binding DurationText}" >
 											<views:MusicRowTC.ContextMenu>
 												<ContextMenu>
 													<MenuItem Header="Play" Command="{Binding PlaySongCommand}">

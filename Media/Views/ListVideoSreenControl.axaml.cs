@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Input;
 using Media.Models;
 using Media.ViewModels;
 using System;
@@ -13,6 +14,12 @@ namespace Media.Views
         {
             InitializeComponent();
             listBoxVideo.Tapped += ListBoxVideo_Tapped;
+            listBoxVideo.PointerExited += ListBoxVideo_PointerExited;
+        }
+
+        private void ListBoxVideo_PointerExited(object? sender, PointerEventArgs e)
+        {
+            (sender as ListBox).SelectedIndex = -1;
         }
 
         private void ListBoxVideo_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)

@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Input;
 using Media.Models;
 using Media.ViewModels;
 using ReactiveUI;
@@ -14,6 +15,12 @@ namespace Media.Views
 
             InitializeComponent();
             listMusic.Tapped += ListMusic_Tapped;
+            listMusic.PointerExited += ListMusic_PointerExited;
+        }
+
+        private void ListMusic_PointerExited(object? sender, PointerEventArgs e)
+        {
+            (sender as ListBox).SelectedIndex = -1;
         }
 
         private void ListMusic_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)

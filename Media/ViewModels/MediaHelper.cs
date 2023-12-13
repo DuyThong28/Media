@@ -305,7 +305,16 @@ namespace Media.ViewModels
         {
             add => turnPlayingScreen += value;
             remove { turnPlayingScreen -= value; }
+        }   
+        
+        public static event EventHandler updateMediaControlData;
+        public static event EventHandler UpdateMediaControlData
+        {
+            add => updateMediaControlData += value;
+            remove { updateMediaControlData -= value; }
         }
+
+
         public static void UpdateScreen(object sender, EventArgs e)
         {
    
@@ -325,10 +334,11 @@ namespace Media.ViewModels
             {
                 turnPlayingScreen(sender, new EventArgs());
             }
-            if (updateMediaScreen != null)
+            if(updateMediaControlData != null)
             {
-                updateMediaScreen(sender, new EventArgs());
+                updateMediaControlData(sender, new EventArgs());
             }
+        
         }
 
         public static void UpdateMainScreen(object sender, EventArgs e)
@@ -379,6 +389,22 @@ namespace Media.ViewModels
             }
         }
 
+        public static void Item_Tapped1(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            MediaItem media = (sender as Button).DataContext as MediaItem;
+            if (media != null)
+            {
+                media.PlayMediaCommand();
+                if (media.MediaTypes != TagLib.MediaTypes.Audio)
+                {
+                    if (openVideoScreen != null && PlayMedia.CurrentTimePlay <= 2)
+                    {
+                        openVideoScreen(sender, new EventArgs());
+                    }
+                }
+
+            }
+        }
         public static MediaItem selectPlayingItem(List<MediaItem> listMedia)
         {
             MediaItem selectedItem = null;
@@ -553,5 +579,6 @@ namespace Media.ViewModels
                 RenameAlbum.Playlistscreen = sender as PlaylistScreenViewModel;                        
             }
         }
+
     }
 }

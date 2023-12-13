@@ -1,7 +1,9 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
+using LibVLCSharp.Shared;
 using Media.Models;
 using Media.ViewModels;
 using System;
@@ -18,6 +20,13 @@ namespace Media.Views
             InitializeComponent();
             listBoxVideo.Tapped += ListBoxVideo_Tapped1;
             listMusic.Tapped += ListBoxVideo_Tapped1;
+            listBoxVideo.PointerExited += ListBoxVideo_PointerExited;
+            listMusic.PointerExited += ListBoxVideo_PointerExited;
+        }
+
+        private void ListBoxVideo_PointerExited(object? sender, PointerEventArgs e)
+        {
+            (sender as ListBox).SelectedIndex = -1;
         }
 
         private void ListBoxVideo_Tapped1(object? sender, Avalonia.Input.TappedEventArgs e)
@@ -25,6 +34,11 @@ namespace Media.Views
             MediaHelper.ListBox_DoubleTapped(sender, e);
             listBoxVideo.SelectedIndex = -1;
             listMusic.SelectedIndex = -1;
+        } 
+        
+        private void Item_Tapped1(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            MediaHelper.Item_Tapped1(sender, e);
         }
 
         private static event EventHandler seeAllSongs;

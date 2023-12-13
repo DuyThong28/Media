@@ -31,8 +31,28 @@ namespace Media.ViewModels
             if (PlayMedia.timer != null)
             {
                 MediaHelper.updateMediaScreen += UpdateMediaControl;
+                MediaHelper.updateMediaControlData += MediaHelper_updateMediaControlData;
             }
         }
+
+        private void MediaHelper_updateMediaControlData(object? sender, EventArgs e)
+        {
+            IsPlay = PlayMedia.IsPlay;
+            if (PlayMedia.MediaPlayer.State == VLCState.Playing)
+            {
+                if (_media != PlayMedia.media)
+                {
+                    _media = PlayMedia.media;
+                    SongName = PlayMedia.media.Title;
+                    NameAuthor = PlayMedia.media.ArtistsString;
+                    ImageSource = PlayMedia.media.Image;
+                    TbMaxValue = PlayMedia.DurationSong;
+                    TimeSongEnd = PlayMedia.DurationstringSong;
+                }
+                TbValue = PlayMedia.CurrentPositionSong;
+            }
+        }
+
         public long TbMaxValue
         {
             get { return tbMaxValue; }

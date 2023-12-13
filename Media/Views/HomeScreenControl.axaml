@@ -33,6 +33,7 @@
 							</LinearGradientBrush>
 						</Rectangle.OpacityMask>
 					</Rectangle>
+					<!--<Image Source="\Assets\background.png"  Stretch="UniformToFill"></Image>-->
 				</Panel>
 				<Border Grid.Row="0" Background="Black" Opacity="0.3"></Border>
 				<ListBox Name="lstMedias" Grid.Row="0" IsVisible="False"  ItemsSource="{Binding AllMeidas}" SelectedIndex="{Binding SelectedMediaIndex}" SelectionChanged="ListBox_SelectionChanged" Tag="ListBoxVideo_Tapped1">
@@ -73,7 +74,7 @@
 													   Background="Transparent"
 													   HorizontalAlignment="Center"
 													   VerticalAlignment="Center"
-													   Command="{ Binding PlaySongCommand}">
+													   Tapped="Item_Tapped1">
 															<Button.Effect>
 																<DropShadowEffect BlurRadius="8" Color="Black" OffsetX="0" OffsetY="3"/>
 															</Button.Effect>
