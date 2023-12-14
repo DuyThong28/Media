@@ -74,6 +74,8 @@ public partial class AddAlbumWindow : Window
                 Playlist playlist = new Playlist(null, albumName, imagePath, null);
                 MediaHelper.AddPlayList(playlist);
             }
+
+           
         }
         this.Close();
     }

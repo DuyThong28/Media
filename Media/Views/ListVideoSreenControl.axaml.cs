@@ -50,17 +50,17 @@ namespace Media.Views
                             case "Sort A-Z":
                                 IEnumerable<IGrouping<char, MediaItem>> resAToZ = Playlist.SortListAToZ(MediaHelper.ListVideos);
                                 List<MediaItem> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
-                                    listBoxVideo.ItemsSource = sortedListAToZ;
+                                    (this.DataContext as ListVideoScreenViewModel).ListVideos = sortedListAToZ;
                                 break;
                             case "Sort by Author":
                                 IEnumerable<IGrouping<string, MediaItem>> resArtists = Playlist.SortListArtists(MediaHelper.ListVideos);
                                 List<MediaItem> sortedListArtists = resArtists.SelectMany(group => group).ToList();
-                                listBoxVideo.ItemsSource = sortedListArtists;
+                                (this.DataContext as ListVideoScreenViewModel).ListVideos = sortedListArtists;
                                 break;
                             case "Sort by Date":
                                 IEnumerable<IGrouping<string, MediaItem>> resDate = Playlist.SortListDateAdded(MediaHelper.ListVideos);
                                 List<MediaItem> sortedListDate = resDate.SelectMany(group => group).ToList();
-                                listBoxVideo.ItemsSource = sortedListDate;
+                                (this.DataContext as ListVideoScreenViewModel).ListVideos = sortedListDate;
                                 break;
                         }
                     }

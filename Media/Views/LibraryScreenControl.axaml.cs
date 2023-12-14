@@ -17,6 +17,7 @@ namespace Media.Views
         {
             InitializeComponent();
             lbLibrary.Tapped += LbLibrary_Tapped;
+            cbBox.SelectedIndex = 1;
         }
 
 
@@ -51,11 +52,13 @@ namespace Media.Views
             if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToDelete)
             {
                 MediaHelper.DeletePlayList(playlistToDelete);
+                
             }
         }
         private void RenameAlbum_Click(object sender, RoutedEventArgs e)
         {
             MediaHelper.RenameAlbum_Click(sender, e);
+           
         }
 
         private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
@@ -73,9 +76,9 @@ namespace Media.Views
                         switch (selectedText)
                         {
                             case "Sort A-Z":
-                                //IEnumerable<IGrouping<char, Playlist>> resAToZ = MediaHelper.SortListAToZ(MediaHelper.AllPlayList);
-                                //List<Playlist> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
-                                //MediaHelper.AllPlayList = sortedListAToZ;
+                                IEnumerable<IGrouping<char, Playlist>> resAToZ = MediaHelper.SortListAToZ(MediaHelper.AllPlayList);
+                                List<Playlist> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
+                                MediaHelper.AllPlayList = sortedListAToZ;
                                 break;                        
                             case "Sort by Date":
                                 IEnumerable<IGrouping<string, Playlist>> resDate = MediaHelper.SortListDateAdded(MediaHelper.AllPlayList);

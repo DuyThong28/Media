@@ -12,7 +12,6 @@ namespace Media.Views
     {
         public ListMediaScreenControl()
         {
-
             InitializeComponent();
             listMusic.Tapped += ListMusic_Tapped;
             listMusic.PointerExited += ListMusic_PointerExited;
@@ -51,17 +50,17 @@ namespace Media.Views
                             case "Sort A-Z":
                                 IEnumerable<IGrouping<char, MediaItem>> resAToZ = Playlist.SortListAToZ(MediaHelper.ListSongs);
                                 List<MediaItem> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
-                                listMusic.ItemsSource = sortedListAToZ;                              
+                                (this.DataContext as ListMediaScreenViewModel).ListSongs = sortedListAToZ;                              
                                 break;
                             case "Sort by Author":
                                 IEnumerable<IGrouping<string, MediaItem>> resArtists = Playlist.SortListArtists(MediaHelper.ListSongs);
                                 List<MediaItem> sortedListArtists = resArtists.SelectMany(group => group).ToList();
-                                listMusic.ItemsSource = sortedListArtists;
+                                (this.DataContext as ListMediaScreenViewModel).ListSongs  = sortedListArtists;
                                 break;
                             case "Sort by Date":
                                 IEnumerable<IGrouping<string, MediaItem>> resDate = Playlist.SortListDateAdded(MediaHelper.ListSongs);
                                 List<MediaItem> sortedListDate = resDate.SelectMany(group => group).ToList();
-                                listMusic.ItemsSource = sortedListDate;
+                                (this.DataContext as ListMediaScreenViewModel).ListSongs  = sortedListDate;
                                 break;
                         }
                     }

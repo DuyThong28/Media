@@ -17,10 +17,20 @@ namespace Media.ViewModels
         private List<Playlist> listMedia;
 
         private Playlist selectedPlaylist;
-        public List<Playlist> ListMedia { get => listMedia; set { this.RaiseAndSetIfChanged(ref listMedia, value); } }
+        public List<Playlist> ListMedia { get => listMedia; set {
+                this.RaiseAndSetIfChanged(ref listMedia, value);
+            
+            } }
         private void MediaHelper_UpdateLibraryScreen(object? sender, EventArgs e)
         {
             SelectedPlaylist = MediaHelper.selectPlaylist(ListMedia);
+        }
+
+        private int selectedIndex = 1;
+        public int SelectedIndex
+        {
+            get => selectedIndex;
+            set=> this.RaiseAndSetIfChanged(ref selectedIndex, value);
         }
 
         public Playlist SelectedPlaylist { get => selectedPlaylist; set => this.RaiseAndSetIfChanged(ref selectedPlaylist, value); }

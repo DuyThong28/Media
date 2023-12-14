@@ -9,7 +9,7 @@ namespace Media.ViewModels
     public class ListMediaScreenViewModel:ViewModelBase
     {
         public ListMediaScreenViewModel() {
-            PlayMediaCommand = ReactiveCommand.Create(() => { MediaHelper.PlayThePlaylist(listSongs); });
+            PlayMediaCommand = ReactiveCommand.Create(() => { MediaHelper.PlayThePlaylist(ListSongs); });
             MediaHelper.updateListMediaScreen += MediaHelper_updateListMediaScreen;
             AllPlayLists = MediaHelper.AllPlayList;
         }

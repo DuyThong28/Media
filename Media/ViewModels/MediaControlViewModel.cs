@@ -5,6 +5,8 @@ using Media.Models;
 using Avalonia.Media;
 using System.Reactive;
 using LibVLCSharp.Shared;
+using Avalonia.Controls;
+using System.Threading.Tasks;
 
 namespace Media.ViewModels
 {
@@ -40,15 +42,11 @@ namespace Media.ViewModels
             IsPlay = PlayMedia.IsPlay;
             if (PlayMedia.MediaPlayer.State == VLCState.Playing)
             {
-                if (_media != PlayMedia.media)
-                {
-                    _media = PlayMedia.media;
                     SongName = PlayMedia.media.Title;
                     NameAuthor = PlayMedia.media.ArtistsString;
                     ImageSource = PlayMedia.media.Image;
                     TbMaxValue = PlayMedia.DurationSong;
                     TimeSongEnd = PlayMedia.DurationstringSong;
-                }
                 TbValue = PlayMedia.CurrentPositionSong;
             }
         }
@@ -126,6 +124,7 @@ namespace Media.ViewModels
         {
             listIndexPlay = new List<int>(MediaHelper.ListIndexPlayQueue);
             IsPlay = PlayMedia.IsPlay;
+
             if (PlayMedia.MediaPlayer.State == VLCState.Playing)
             {
                 if (_media != PlayMedia.media)
@@ -141,6 +140,7 @@ namespace Media.ViewModels
             }
             else if (PlayMedia.MediaPlayer.State == VLCState.Ended)
             {
+                int count = MediaHelper.PlayQueue.Count;
                 if (PlayMedia.Repeat == RepeatMode.One)
                 {
                     PlayMedia.URL = PlayMedia.Path;
@@ -148,16 +148,25 @@ namespace Media.ViewModels
                 } else
                 {
                     if (PlayMedia.IsFirst == false) return;
-                    for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
+                    for (int i = 0; i < count; i++)
                     {
                         if (MediaHelper.PlayQueue[listIndexPlay[i]].FilePath == PlayMedia.Path)
                         {
-                            if (i != MediaHelper.PlayQueue.Count - 1)
+                            if (i != count - 1)
                             {
-                                PlayMedia.media = MediaHelper.PlayQueue[i + 1];
-                                PlayMedia.URL = MediaHelper.PlayQueue[i + 1].FilePath;
+                                if (PlayMedia.Suffle == true)
+                                {
+                                    Random random = new Random();
+                                    int SelectedIndex = random.Next(i+1, count);
+                                    PlayMedia.media = MediaHelper.PlayQueue[SelectedIndex];
+                                    PlayMedia.URL = MediaHelper.PlayQueue[SelectedIndex].FilePath;
+                                } else
+                                {
+                                    PlayMedia.media = MediaHelper.PlayQueue[i + 1];
+                                    PlayMedia.URL = MediaHelper.PlayQueue[i + 1].FilePath;
+                                }
                             }
-                            else if (i == MediaHelper.PlayQueue.Count - 1 && PlayMedia.Repeat == RepeatMode.All)
+                            else if (i == count - 1 && PlayMedia.Repeat == RepeatMode.All)
                             {
                                 PlayMedia.media = MediaHelper.PlayQueue[0];
                                 PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;

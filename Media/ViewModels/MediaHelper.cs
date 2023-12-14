@@ -237,9 +237,18 @@ namespace Media.ViewModels
             {
                 listMedia.Add(item: new MediaItem(filePath));
             }
+            ListSongs = SortMediaAtoZ(ListSongs);
+            ListVideos = SortMediaAtoZ(ListVideos);
             AllMedias.Clear();
             AllMedias.AddRange(ListSongs);
             AllMedias.AddRange(ListVideos);
+        }
+
+        public static List<MediaItem> SortMediaAtoZ(List<MediaItem> list)
+        {
+            IEnumerable<IGrouping<char, MediaItem>> resAToZ = Playlist.SortListAToZ(list);
+            List<MediaItem> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
+            return sortedListAToZ;
         }
 
 
@@ -359,7 +368,6 @@ namespace Media.ViewModels
             {
                 updatePlaylistScreen(sender, new EventArgs());
             }
-
         }
 
 
@@ -529,6 +537,10 @@ namespace Media.ViewModels
                     playlistscreen.ListMedia = new List<MediaItem>(playlistscreen.ListMedia);
                 }
             }
+            if (updatePlaylistScreen != null)
+            {
+                updatePlaylistScreen(sender, new EventArgs());
+            }
         }
         public static void MenuItem_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
@@ -544,6 +556,10 @@ namespace Media.ViewModels
                     playingscreen.ListMedia = new List<MediaItem>(playingscreen.ListMedia);
                     PlayQueue = playingscreen.ListMedia;
                 }
+            }
+            if (updatePlayingScreen != null)
+            {
+                updatePlayingScreen(sender, new EventArgs());
             }
         }
         public static IEnumerable<IGrouping<char, Playlist>> SortListAToZ(List<Playlist> list)

@@ -34,8 +34,6 @@ namespace Media.ViewModels
             ListMediaScreenViewModel.ListSongs = MediaHelper.ListSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.ListVideos;
             SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
-            //PlayMedia._libVlc = _libVlc;
-            //PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.AllPlayListChanged += MediaHelper_AllPlayListChanged;
         }
         private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)

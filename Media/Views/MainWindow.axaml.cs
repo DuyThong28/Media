@@ -5,6 +5,7 @@ using ReactiveUI;
 using System;
 using TagLib;
 using Media.Models;
+using System.Collections.Generic;
 
 namespace Media.Views
 {
@@ -206,6 +207,7 @@ namespace Media.Views
                     screen.Content = videoScreen;
                     break;
                 case "searchBtn":
+                    (searchScreen.DataContext as SearchScreenViewModel).SearchText = "";
                     screen.Content = searchScreen;
                     break;
                 case "libraryBtn":

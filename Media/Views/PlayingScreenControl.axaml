@@ -232,7 +232,7 @@
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="60"></RowDefinition>
-							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition ></RowDefinition>
 						</Grid.RowDefinitions>
 						<Grid Grid.Row="0" VerticalAlignment="Center" >
 							<Label  FontSize="20" FontWeight="Bold">
@@ -242,8 +242,8 @@
 								PLAYING QUEUE
 							</Label>
 						</Grid>
-						<ScrollViewer Padding="0,0,20,0" Grid.Row="1">
-							<ListBox Grid.Row="1" 
+						<ScrollViewer Padding="0,0,20,0" Grid.Row="1" Background="Transparent">
+							<ListBox 
 									 AutoScrollToSelectedItem="True"
 									 Name="listBoxMedia"
 											  ItemsSource="{Binding ListMedia}"
