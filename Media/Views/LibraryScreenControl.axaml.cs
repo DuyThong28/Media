@@ -17,6 +17,7 @@ namespace Media.Views
         {
             InitializeComponent();
             lbLibrary.Tapped += LbLibrary_Tapped;
+            cbBox.SelectedIndex = 1;
         }
 
 
@@ -51,11 +52,13 @@ namespace Media.Views
             if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToDelete)
             {
                 MediaHelper.DeletePlayList(playlistToDelete);
+                
             }
         }
         private void RenameAlbum_Click(object sender, RoutedEventArgs e)
         {
             MediaHelper.RenameAlbum_Click(sender, e);
+           
         }
 
         private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)

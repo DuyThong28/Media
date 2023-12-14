@@ -1,5 +1,6 @@
 ﻿using LibVLCSharp.Shared;
 using Media.Models;
+using Media.Views;
 using System;
 using System.Collections.Generic;
 using TagLib;
@@ -17,6 +18,7 @@ namespace Media.ViewModels
 
         public MainWindowViewModel()
         {
+            
             PlayMedia._libVlc = new LibVLC(enableDebugLogs: true);
             PlayMedia.MediaPlayer = new MediaPlayer(PlayMedia._libVlc); ;
             MediaHelper.FetchListMedia(MediaTypes.Audio);
@@ -32,8 +34,6 @@ namespace Media.ViewModels
             ListMediaScreenViewModel.ListSongs = MediaHelper.ListSongs;
             ListVideoScreenViewModel.ListVideos = MediaHelper.ListVideos;
             SearchScreenViewModel.AllMedias = MediaHelper.AllMedias;
-            //PlayMedia._libVlc = _libVlc;
-            //PlayMedia.MediaPlayer = MediaPlayer;
             MediaHelper.AllPlayListChanged += MediaHelper_AllPlayListChanged;
         }
         private void MediaHelper_AllPlayListChanged(object sender, EventArgs e)

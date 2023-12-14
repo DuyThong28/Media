@@ -232,7 +232,7 @@
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="60"></RowDefinition>
-							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition ></RowDefinition>
 						</Grid.RowDefinitions>
 						<Grid Grid.Row="0" VerticalAlignment="Center" >
 							<Label  FontSize="20" FontWeight="Bold">
@@ -242,8 +242,8 @@
 								PLAYING QUEUE
 							</Label>
 						</Grid>
-						<ScrollViewer Padding="0,0,20,0" Grid.Row="1">
-							<ListBox Grid.Row="1" 
+						<ScrollViewer Padding="0,0,20,0" Grid.Row="1" Background="Transparent">
+							<ListBox 
 									 AutoScrollToSelectedItem="True"
 									 Name="listBoxMedia"
 											  ItemsSource="{Binding ListMedia}"
@@ -275,7 +275,7 @@
 								</ListBox.Styles>
 								<ListBox.ItemTemplate>
 									<DataTemplate>
-										<views:MusicRowTC AuthorName="{Binding ArtistsString}" DateAdded="{Binding DateAdded}" MediaName="{Binding Title}" ImageSource="{Binding Image}"  DurationText="{Binding DurationText}">
+										<views:MusicRowTC AuthorName="{Binding ArtistsString}" DateAdded="{Binding DateAdded}" MediaName="{Binding Title}" ImageSource="{Binding Image}"  DurationText="{Binding DurationText}" >
 											<views:MusicRowTC.ContextMenu>
 												<ContextMenu>
 													<MenuItem Header="Play" Command="{Binding PlaySongCommand}">

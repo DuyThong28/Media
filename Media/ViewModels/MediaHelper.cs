@@ -237,9 +237,18 @@ namespace Media.ViewModels
             {
                 listMedia.Add(item: new MediaItem(filePath));
             }
+            ListSongs = SortMediaAtoZ(ListSongs);
+            ListVideos = SortMediaAtoZ(ListVideos);
             AllMedias.Clear();
             AllMedias.AddRange(ListSongs);
             AllMedias.AddRange(ListVideos);
+        }
+
+        public static List<MediaItem> SortMediaAtoZ(List<MediaItem> list)
+        {
+            IEnumerable<IGrouping<char, MediaItem>> resAToZ = Playlist.SortListAToZ(list);
+            List<MediaItem> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
+            return sortedListAToZ;
         }
 
 
@@ -305,7 +314,16 @@ namespace Media.ViewModels
         {
             add => turnPlayingScreen += value;
             remove { turnPlayingScreen -= value; }
+        }   
+        
+        public static event EventHandler updateMediaControlData;
+        public static event EventHandler UpdateMediaControlData
+        {
+            add => updateMediaControlData += value;
+            remove { updateMediaControlData -= value; }
         }
+
+
         public static void UpdateScreen(object sender, EventArgs e)
         {
    
@@ -325,10 +343,11 @@ namespace Media.ViewModels
             {
                 turnPlayingScreen(sender, new EventArgs());
             }
-            if (updateMediaScreen != null)
+            if(updateMediaControlData != null)
             {
-                updateMediaScreen(sender, new EventArgs());
+                updateMediaControlData(sender, new EventArgs());
             }
+        
         }
 
         public static void UpdateMainScreen(object sender, EventArgs e)
@@ -349,7 +368,6 @@ namespace Media.ViewModels
             {
                 updatePlaylistScreen(sender, new EventArgs());
             }
-
         }
 
 
@@ -379,6 +397,22 @@ namespace Media.ViewModels
             }
         }
 
+        public static void Item_Tapped1(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            MediaItem media = (sender as Button).DataContext as MediaItem;
+            if (media != null)
+            {
+                media.PlayMediaCommand();
+                if (media.MediaTypes != TagLib.MediaTypes.Audio)
+                {
+                    if (openVideoScreen != null && PlayMedia.CurrentTimePlay <= 2)
+                    {
+                        openVideoScreen(sender, new EventArgs());
+                    }
+                }
+
+            }
+        }
         public static MediaItem selectPlayingItem(List<MediaItem> listMedia)
         {
             MediaItem selectedItem = null;
@@ -503,6 +537,10 @@ namespace Media.ViewModels
                     playlistscreen.ListMedia = new List<MediaItem>(playlistscreen.ListMedia);
                 }
             }
+            if (updatePlaylistScreen != null)
+            {
+                updatePlaylistScreen(sender, new EventArgs());
+            }
         }
         public static void MenuItem_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
@@ -518,6 +556,10 @@ namespace Media.ViewModels
                     playingscreen.ListMedia = new List<MediaItem>(playingscreen.ListMedia);
                     PlayQueue = playingscreen.ListMedia;
                 }
+            }
+            if (updatePlayingScreen != null)
+            {
+                updatePlayingScreen(sender, new EventArgs());
             }
         }
         public static IEnumerable<IGrouping<char, Playlist>> SortListAToZ(List<Playlist> list)
@@ -553,5 +595,6 @@ namespace Media.ViewModels
                 RenameAlbum.Playlistscreen = sender as PlaylistScreenViewModel;                        
             }
         }
+
     }
 }

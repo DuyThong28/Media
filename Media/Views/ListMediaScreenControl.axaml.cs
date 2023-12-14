@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Input;
 using Media.Models;
 using Media.ViewModels;
 using ReactiveUI;
@@ -11,9 +12,14 @@ namespace Media.Views
     {
         public ListMediaScreenControl()
         {
-
             InitializeComponent();
             listMusic.Tapped += ListMusic_Tapped;
+            listMusic.PointerExited += ListMusic_PointerExited;
+        }
+
+        private void ListMusic_PointerExited(object? sender, PointerEventArgs e)
+        {
+            (sender as ListBox).SelectedIndex = -1;
         }
 
         private void ListMusic_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
@@ -44,17 +50,17 @@ namespace Media.Views
                             case "Sort A-Z":
                                 IEnumerable<IGrouping<char, MediaItem>> resAToZ = Playlist.SortListAToZ(MediaHelper.ListSongs);
                                 List<MediaItem> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
-                                listMusic.ItemsSource = sortedListAToZ;                              
+                                (this.DataContext as ListMediaScreenViewModel).ListSongs = sortedListAToZ;                              
                                 break;
                             case "Sort by Author":
                                 IEnumerable<IGrouping<string, MediaItem>> resArtists = Playlist.SortListArtists(MediaHelper.ListSongs);
                                 List<MediaItem> sortedListArtists = resArtists.SelectMany(group => group).ToList();
-                                listMusic.ItemsSource = sortedListArtists;
+                                (this.DataContext as ListMediaScreenViewModel).ListSongs  = sortedListArtists;
                                 break;
                             case "Sort by Date":
                                 IEnumerable<IGrouping<string, MediaItem>> resDate = Playlist.SortListDateAdded(MediaHelper.ListSongs);
                                 List<MediaItem> sortedListDate = resDate.SelectMany(group => group).ToList();
-                                listMusic.ItemsSource = sortedListDate;
+                                (this.DataContext as ListMediaScreenViewModel).ListSongs  = sortedListDate;
                                 break;
                         }
                     }
