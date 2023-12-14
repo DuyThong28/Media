@@ -35,7 +35,7 @@
 		<Grid>
 			<Border Grid.Row="1" Background="Black" Opacity="0.3"></Border>
 			<StackPanel>
-				<ListBox DoubleTapped="ListBox_DoubleTapped" Background="Transparent" SelectedIndex="0" Margin="0,10,0,0" SelectionChanged="ListBox_SelectionChanged">
+				<ListBox Name="lbControl" DoubleTapped="ListBox_DoubleTapped" Background="Transparent" SelectedIndex="0" Margin="0,10,0,0" SelectionChanged="ListBox_SelectionChanged">
 					<ListBox.Styles>
 				
 						<Style Selector="ListBoxItem">

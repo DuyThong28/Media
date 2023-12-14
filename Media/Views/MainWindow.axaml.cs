@@ -121,12 +121,14 @@ namespace Media.Views
         private void HomeScreenControl_SeeAllVideos(object? sender, EventArgs e)
         {
             screen.Content = videoScreen;
+            navBarControl.lbControl.SelectedIndex = 3;
         }
 
 
         private void HomeScreenControl_SeeAllSongs(object? sender, EventArgs e)
         {
             screen.Content = musicScreen;
+            navBarControl.lbControl.SelectedIndex = 2;
         }
 
         private void ListVideoSreenControl_OpenVideoScreen(object? sender, EventArgs e)
