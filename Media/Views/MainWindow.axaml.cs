@@ -307,7 +307,7 @@ namespace Media.Views
             {
                 var result = await MessageBoxManager.GetMessageBoxStandard("Update", "New update available! Do you want to install it?", ButtonEnum.YesNo).ShowAsync();
 
-                if (result == ButtonResult.Yes)
+                if (result == ButtonResult.Yes   )
                 {
                     try
                     {
