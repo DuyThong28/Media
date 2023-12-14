@@ -7,6 +7,11 @@ using TagLib;
 using Media.Models;
 using System.Collections.Generic;
 using System.IO;
+using MsBox.Avalonia.Enums;
+using MsBox.Avalonia;
+using System.Diagnostics;
+using System.IO.Compression;
+using System.Net;
 
 namespace Media.Views
 {
@@ -29,6 +34,7 @@ namespace Media.Views
         public MainWindow()
         {
             InitializeComponent();
+            Opened += OnOpened;
             Init();
 
             
@@ -238,7 +244,11 @@ namespace Media.Views
             if (files.Count >= 1)
             {
                 string folderPath = files[0].Path.ToString();
-                string folderPathFormat = folderPath.Remove(0, 8);
+                string folderPathFormat = folderPath.Remove(0, 7);
+                if (!Directory.Exists(folderPathFormat))
+                {
+                    folderPathFormat = folderPath.Remove(0, 8);
+                }
                 MediaHelper.MusicPathFolder = folderPathFormat;
                 MediaHelper.FetchListMedia(MediaTypes.Audio);
                 UpdateMedia();
@@ -286,6 +296,42 @@ namespace Media.Views
             { 
                 viewModel.HomeScreenViewModel.SelectedMediaIndex = 1;
                 viewModel.HomeScreenViewModel.SelectedMediaIndex = 0;
+            }
+        }
+
+        private async void OnOpened(object? sender, EventArgs e)
+        {
+            WebClient webClient = new WebClient();
+            var client = new WebClient();
+            if (!webClient.DownloadString("https://www.dropbox.com/scl/fi/a5tsavuttkfqb64qukigo/Update.txt?rlkey=lg6dqscl6g2ryi9lrdghmyxnm&dl=1").Contains("1.0.9"))
+            {
+                var result = await MessageBoxManager.GetMessageBoxStandard("Update", "New update available! Do you want to install it?", ButtonEnum.YesNo).ShowAsync();
+
+                if (result == ButtonResult.Yes)
+                {
+                    try
+                    {
+                        if (System.IO.File.Exists(@".\Media Setup.exe"))
+                        {
+                            System.IO.File.Delete(@".\Media Setup.exe");
+                        }
+                        client.DownloadFile("https://www.dropbox.com/scl/fi/4eg6ubpzl7ig5e9r6acbz/Media-SetUp.zip?rlkey=g70jjl2modwa3flci7dnm8626&dl=1", @"Media Setup.zip");
+                        string zipPath = @".\Media Setup.zip";
+                        string extractPath = @".\";
+                        ZipFile.ExtractToDirectory(zipPath, extractPath);
+                        string[] setupFiles = System.IO.Directory.GetFiles(extractPath, "Media Setup.exe", System.IO.SearchOption.AllDirectories);
+                        if (setupFiles.Length > 0)
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.FileName = setupFiles[0];
+                            Process.Start(startInfo);
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }
             }
         }
     }
