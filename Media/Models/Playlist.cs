@@ -46,7 +46,7 @@ namespace Media.Models
 
         public List<MediaItem> ListMedia { get => listMedia; set => listMedia = value; }
 
-        public Playlist(string id = null, string name = "Unnamed", string backroundImageFileName = null, List<MediaItem> listMedia = null)
+        public Playlist(string id = null, string name = "Unnamed", string backroundImageFileName = null, List<MediaItem> listMedia = null, string dateCreated = null)
         {
             string fileName = Path.Combine(Environment.CurrentDirectory, "Default Image", "defaultImage.jpg");
             Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "Default Image"));
@@ -65,7 +65,10 @@ namespace Media.Models
             else playListID = id;
             playListName = name;
             this.backroundImageFileName = backroundImageFileName;
-            dateCreated = DateTime.Now.ToString("dd/MM/yyy");
+            if (dateCreated == null)
+                this.dateCreated = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            else
+                this.dateCreated = dateCreated;
             if (listMedia != null)
                 this.ListMedia = listMedia;
         }

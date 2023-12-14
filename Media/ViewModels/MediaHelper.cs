@@ -230,7 +230,7 @@ namespace Media.ViewModels
             }
             catch
             {
-                await MessageBoxManager.GetMessageBoxStandard("Lỗi", "Lỗi đường dẫn " + path + " không tồn tại").ShowWindowDialogAsync(MainWindow.GetInstance());
+                await MessageBoxManager.GetMessageBoxStandard("Error", "Path: " + path + " does not exist").ShowWindowDialogAsync(MainWindow.GetInstance());
             }
 
             foreach (string filePath in filePaths)
