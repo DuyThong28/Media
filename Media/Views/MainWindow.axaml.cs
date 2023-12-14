@@ -6,6 +6,7 @@ using System;
 using TagLib;
 using Media.Models;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Media.Views
 {
@@ -257,7 +258,11 @@ namespace Media.Views
             if (files.Count >= 1)
             {
                 string folderPath = files[0].Path.ToString();
-                string folderPathFormat = folderPath.Remove(0, 8);
+                string folderPathFormat = folderPath.Remove(0, 7);
+                if (!Directory.Exists(folderPathFormat))
+                {
+                    folderPathFormat = folderPath.Remove(0, 8);
+                }
                 MediaHelper.VideoPathFolder = folderPathFormat;
                 MediaHelper.FetchListMedia(MediaTypes.Video);
                 UpdateMedia();
