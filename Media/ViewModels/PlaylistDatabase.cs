@@ -31,7 +31,7 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
-                await MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message).ShowWindowDialogAsync(MainWindow.GetInstance());
+                await MessageBoxManager.GetMessageBoxStandard("Error", ex.Message).ShowWindowDialogAsync(MainWindow.GetInstance());
             }
 
             string createPlaylistMediasTable = "CREATE TABLE IF NOT EXISTS PlaylistMedias(" +
@@ -46,7 +46,7 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
-                await MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message).ShowWindowDialogAsync (MainWindow.GetInstance());
+                await MessageBoxManager.GetMessageBoxStandard("Error", ex.Message).ShowWindowDialogAsync (MainWindow.GetInstance());
             }
             DeleteNotExistMedias();
         }
@@ -70,7 +70,7 @@ namespace Media.ViewModels
             }
             catch (Exception ex)
             {
-                await MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message).ShowWindowDialogAsync(MainWindow.GetInstance());
+                await MessageBoxManager.GetMessageBoxStandard("Error", ex.Message).ShowWindowDialogAsync(MainWindow.GetInstance());
             }
         }
 
@@ -141,13 +141,13 @@ namespace Media.ViewModels
                 {
                     List<MediaItem> mediaInPlaylist = QueryAllMediaInGivenPlaylist(playlistID);
                     result = new Playlist(dataReader["PlaylistID"].ToString(), dataReader["PlaylistName"].ToString(),
-                        dataReader["PlaylistThumbnailPath"].ToString(), mediaInPlaylist);
+                    dataReader["PlaylistThumbnailPath"].ToString(), mediaInPlaylist, dataReader["PlaylistDateOfCreation"].ToString());
                     break;
                 }
             }
             catch (Exception ex)
             {
-                await MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message).ShowWindowDialogAsync(MainWindow.GetInstance());
+                await MessageBoxManager.GetMessageBoxStandard("Error", ex.Message).ShowWindowDialogAsync(MainWindow.GetInstance());
             }
 
             playlistDatabaseConnection.Close();
@@ -169,13 +169,13 @@ namespace Media.ViewModels
                     Playlist playlist;
                     mediaInPlaylist = QueryAllMediaInGivenPlaylist(dataReader["PlaylistID"].ToString());
                     playlist = new Playlist(dataReader["PlaylistID"].ToString(), dataReader["PlaylistName"].ToString(),
-                    dataReader["PlaylistThumbnailPath"].ToString(), mediaInPlaylist);
+                    dataReader["PlaylistThumbnailPath"].ToString(), mediaInPlaylist, dataReader["PlaylistDateOfCreation"].ToString());
                     playlistsInDatabase.Add(playlist);
                 }
             }
             catch (Exception ex)
             {
-                MessageBoxManager.GetMessageBoxStandard("Lỗi", ex.Message);
+                MessageBoxManager.GetMessageBoxStandard("Error", ex.Message);
             }
             playlistDatabaseConnection.Close();
             return playlistsInDatabase;

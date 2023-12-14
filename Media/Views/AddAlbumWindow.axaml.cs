@@ -55,8 +55,8 @@ public partial class AddAlbumWindow : Window
                 if (this.imagePath != null)
                     imagePath = this.imagePath;
                 else
-                    imagePath = addAlbumWindowViewModel.Playlist.BackroundImageFileName;                   
-                Playlist playlist = new Playlist(null, albumName, imagePath, null);
+                    imagePath = addAlbumWindowViewModel.Playlist.BackroundImageFileName;
+                Playlist playlist = new Playlist(null, albumName, imagePath, null, null);
                 playlist.ListMedia = RenameAlbum.Playlist.ListMedia;
                 MediaHelper.AllPlayList.Remove(RenameAlbum.Playlist);
                 MediaHelper.Database.DeletePlaylist(RenameAlbum.Playlist.PlayListID);
@@ -71,7 +71,7 @@ public partial class AddAlbumWindow : Window
                 if (albumName == null || string.IsNullOrWhiteSpace(albumName))
                     albumName = "Unnamed";
                 string imagePath = this.imagePath;
-                Playlist playlist = new Playlist(null, albumName, imagePath, null);
+                Playlist playlist = new Playlist(null, albumName, imagePath, null, null);
                 MediaHelper.AddPlayList(playlist);
             }
 
