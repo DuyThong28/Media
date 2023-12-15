@@ -207,7 +207,7 @@ namespace Media.Models
                 this.title = taglib.Tag.Title ?? Path.GetFileNameWithoutExtension(path);
                 this.artists = taglib.Tag.Artists.Length != 0 ? taglib.Tag.Artists[0].Split(',').ToList() : null;
                 this.duration = taglib.Properties.Duration != null ? taglib.Properties.Duration : new TimeSpan(0, 0, 0);
-                this.dateAdded = (System.IO.File.GetCreationTime(path) ).ToString("dd/MM/yyyy HH:mm:ss");
+                this.dateAdded = (System.IO.File.GetCreationTime(path) ).ToString("dd/MM/yyyy");
                 this.filePath = path;
                 this.mediaType = taglib.Properties.MediaTypes;
                 this.album = taglib.Tag.Album;
