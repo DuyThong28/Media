@@ -74,7 +74,7 @@
 							<Panel Grid.Row="0" ClipToBounds="True">
 								<Rectangle Name="reg" Fill="{Binding MainColor}" Stretch="UniformToFill" >
 									<Rectangle.OpacityMask>
-										<LinearGradientBrush StartPoint="50%,100%" EndPoint="50%,50%">
+										<LinearGradientBrush StartPoint="50%,100%" EndPoint="50%,75%">
 											<LinearGradientBrush.GradientStops>
 												<GradientStop Offset="0" Color="Transparent"/>
 												<GradientStop Offset="1" Color="Black"/>
@@ -83,7 +83,7 @@
 									</Rectangle.OpacityMask>
 								</Rectangle>
 							</Panel>
-							<Border Grid.Row="0" Background="Black" Opacity="0.3"></Border>
+							<Border Grid.Row="0" Background="Black" Opacity="0.1"></Border>
 							<Grid Grid.Row="0">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="330"></RowDefinition>
