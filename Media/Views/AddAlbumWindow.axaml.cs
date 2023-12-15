@@ -4,6 +4,8 @@ using System.IO;
 using Media.Models;
 using Media.ViewModels;
 using Avalonia.Media.Imaging;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Media.Views;
 
@@ -74,8 +76,20 @@ public partial class AddAlbumWindow : Window
                 Playlist playlist = new Playlist(null, albumName, imagePath, null, null);
                 MediaHelper.AddPlayList(playlist);
             }
+            switch (MediaHelper.Sortby)
+            {
+                case "Sort A-Z":
+                    IEnumerable<IGrouping<char, Playlist>> resAToZ = MediaHelper.SortListAToZ(MediaHelper.AllPlayList);
+                    List<Playlist> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
+                    MediaHelper.AllPlayList = sortedListAToZ;
+                    break;
+                case "Sort by Date":
+                    IEnumerable<IGrouping<string, Playlist>> resDate = MediaHelper.SortListDateAdded(MediaHelper.AllPlayList);
+                    List<Playlist> sortedListDate = resDate.SelectMany(group => group).ToList();
+                    MediaHelper.AllPlayList = sortedListDate;
+                    break;
+            }
 
-           
         }
         this.Close();
     }

@@ -79,11 +79,13 @@ namespace Media.Views
                                 IEnumerable<IGrouping<char, Playlist>> resAToZ = MediaHelper.SortListAToZ(MediaHelper.AllPlayList);
                                 List<Playlist> sortedListAToZ = resAToZ.SelectMany(group => group).ToList();
                                 MediaHelper.AllPlayList = sortedListAToZ;
+                                MediaHelper.Sortby = "Sort A-Z";
                                 break;                        
                             case "Sort by Date":
                                 IEnumerable<IGrouping<string, Playlist>> resDate = MediaHelper.SortListDateAdded(MediaHelper.AllPlayList);
                                 List<Playlist> sortedListDate = resDate.SelectMany(group => group).ToList();
                                 MediaHelper.AllPlayList = sortedListDate;
+                                MediaHelper.Sortby = "Sort by Date";
                                 break;
                         }
                     }
