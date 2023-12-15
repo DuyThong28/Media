@@ -303,9 +303,10 @@ namespace Media.Views
         {
             WebClient webClient = new WebClient();
             var client = new WebClient();
-            if (!webClient.DownloadString("https://www.dropbox.com/scl/fi/a5tsavuttkfqb64qukigo/Update.txt?rlkey=lg6dqscl6g2ryi9lrdghmyxnm&dl=1").Contains("1.0.9"))
+            string currentVersion = webClient.DownloadString("https://www.dropbox.com/scl/fi/a5tsavuttkfqb64qukigo/Update.txt?rlkey=lg6dqscl6g2ryi9lrdghmyxnm&dl=1");
+            if (!currentVersion.Contains(MediaHelper.CurrentVersion))
             {
-                var result = await MessageBoxManager.GetMessageBoxStandard("Update", "New update available! Do you want to install it?", ButtonEnum.YesNo).ShowAsync();
+                var result = await MessageBoxManager.GetMessageBoxStandard("Update", "New update available! Do you want to install it?", ButtonEnum.YesNo).ShowWindowDialogAsync(this);
 
                 if (result == ButtonResult.Yes)
                 {
@@ -326,6 +327,7 @@ namespace Media.Views
                             startInfo.FileName = setupFiles[0];
                             Process.Start(startInfo);
                         }
+                        MediaHelper.CurrentVersion = currentVersion;
                     }
                     catch
                     {
