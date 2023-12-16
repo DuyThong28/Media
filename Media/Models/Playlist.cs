@@ -40,7 +40,7 @@ namespace Media.Models
         public string DateCreated
         {
             set => dateCreated = value;
-            get { return dateCreated; }
+            get { return dateCreated.Substring(0,10); }
         }
 
         public List<MediaItem> ListMedia { get => listMedia; set => listMedia = value; }

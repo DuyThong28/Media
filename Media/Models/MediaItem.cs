@@ -21,13 +21,7 @@ namespace Media.Models
         private TimeSpan duration;
         private string dateAdded;
         private MediaTypes mediaType;
-        //private TagLib.File others;
-        private bool isPlay;
-        public bool IsPlay
-        {
-            get { return isPlay; }
-            set { isPlay = value; }
-        }
+ 
         private string playlistID = null;
         public MediaTypes MediaTypes { get { return mediaType; } }
         public string Title
@@ -128,7 +122,6 @@ namespace Media.Models
                 return durationText;
             }
         }
-        //public TagLib.File Others => others;
         public ReactiveCommand<Unit, Unit> PlaySongCommand
         {
             get; set;
@@ -137,7 +130,6 @@ namespace Media.Models
         {
             if (PlayMedia.Path != this.filePath)
             {
-                IsPlay=true;
                 for (int i = 0; i < MediaHelper.PlayQueue.Count; i++)
                 {
                     if (MediaHelper.PlayQueue[i].FilePath == this.FilePath)
@@ -168,22 +160,18 @@ namespace Media.Models
             {
                 if (PlayMedia.MediaPlayer.State == VLCState.Stopped)
                 {
-                    IsPlay = true;
                     PlayMedia.playSong();
 
                 }
                 else if (PlayMedia.MediaPlayer.State == VLCState.Playing)
                 {
-                    IsPlay = false;
                     PlayMedia.pauseSong();
                 }
                 else if (PlayMedia.MediaPlayer.State == VLCState.Paused)
                 {
-                    IsPlay = true;
                     PlayMedia.continueSong();
                 } else if(PlayMedia.MediaPlayer.State == VLCState.Ended)
                 {
-                    IsPlay = true;
                     PlayMedia.continueSong();
                 }
             }
@@ -200,8 +188,6 @@ namespace Media.Models
                 this.dateAdded = (System.IO.File.GetCreationTime(path) ).ToString("dd/MM/yyyy");
                 this.filePath = path;
                 this.mediaType = taglib.Properties.MediaTypes;
-                //this.others = taglib;
-                this.isPlay = false;
 
                 if (taglib.Tag.Pictures.Length > 0)
                 {
