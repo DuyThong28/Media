@@ -95,17 +95,13 @@ namespace Media.Views
         {
             
             Random random = new Random();
-            int currentIndex = listBox.SelectedIndex;
             if (listBox.SelectedIndex != -1)
             {
                 await Task.Delay(TimeSpan.FromSeconds(4));
                 listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
             }
 
-            if(listBox.SelectedIndex == currentIndex) {
-                await Task.Delay(TimeSpan.FromSeconds(4));
-                listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
-            }
+         
         }
 
         private void PlayNext(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
