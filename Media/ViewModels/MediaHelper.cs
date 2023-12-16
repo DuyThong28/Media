@@ -371,6 +371,10 @@ namespace Media.ViewModels
             {
                 updatePlaylistScreen(sender, new EventArgs());
             }
+            if (updateLibraryScreen != null)
+            {
+                updateLibraryScreen(sender, new EventArgs());
+            }
         }
 
 

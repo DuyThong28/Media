@@ -52,7 +52,6 @@ namespace Media.Views
             if (sender is MenuItem menuItem && menuItem.Tag is Playlist playlistToDelete)
             {
                 MediaHelper.DeletePlayList(playlistToDelete);
-                
             }
         }
         private void RenameAlbum_Click(object sender, RoutedEventArgs e)
