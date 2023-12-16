@@ -8,6 +8,7 @@ using Media.Models;
 using Media.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ namespace Media.Views
             listMusic.Tapped += ListBoxVideo_Tapped1;
             listBoxVideo.PointerExited += ListBoxVideo_PointerExited;
             listMusic.PointerExited += ListBoxVideo_PointerExited;
+            string x = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private void ListBoxVideo_PointerExited(object? sender, PointerEventArgs e)

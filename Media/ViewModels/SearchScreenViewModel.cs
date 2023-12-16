@@ -70,18 +70,15 @@ namespace Media.ViewModels
                         isNotHaveDiacritics == true ?
                         Diacritics.RemoveDiacritics(media.Title) :
                         media.Title;
-                    string album = isNotHaveDiacritics == true ?
-                        Diacritics.RemoveDiacritics(media.Album) :
-                        media.Album;
+               
                     List<string> artists = isNotHaveDiacritics == true ?
                         Diacritics.RemoveDiacriticsForAList(media.Artists) :
                         media.Artists;
 
                     bool isFoundTitle = title.IndexOf(text, StringComparison.InvariantCultureIgnoreCase) >= 0;
-                    bool isFoundAlbum = album.IndexOf(text, StringComparison.InvariantCultureIgnoreCase) >= 0;
                     bool isFoundArtists = CheckArtistExistsInList(artists, text);
 
-                    if (isFoundTitle == true || isFoundArtists == true || isFoundAlbum == true)
+                    if (isFoundTitle == true || isFoundArtists == true )
                     {
                         result.Add(media);
                     }

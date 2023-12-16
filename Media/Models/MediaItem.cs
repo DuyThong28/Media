@@ -16,13 +16,12 @@ namespace Media.Models
     {
         private string title;
         private List<string> artists;
-        private string album;
         private string filePath;
         private IImage image;
         private TimeSpan duration;
         private string dateAdded;
         private MediaTypes mediaType;
-        private TagLib.File others;
+        //private TagLib.File others;
         private bool isPlay;
         public bool IsPlay
         {
@@ -78,15 +77,6 @@ namespace Media.Models
             }
         }
 
-        public string Album
-        {
-            set => album = value;
-            get
-            {
-                if (album == null) return "Unknown";
-                return album;
-            }
-        }
 
         public IImage Image
         {
@@ -138,7 +128,7 @@ namespace Media.Models
                 return durationText;
             }
         }
-        public TagLib.File Others => others;
+        //public TagLib.File Others => others;
         public ReactiveCommand<Unit, Unit> PlaySongCommand
         {
             get; set;
@@ -210,8 +200,7 @@ namespace Media.Models
                 this.dateAdded = (System.IO.File.GetCreationTime(path) ).ToString("dd/MM/yyyy");
                 this.filePath = path;
                 this.mediaType = taglib.Properties.MediaTypes;
-                this.album = taglib.Tag.Album;
-                this.others = taglib;
+                //this.others = taglib;
                 this.isPlay = false;
 
                 if (taglib.Tag.Pictures.Length > 0)
