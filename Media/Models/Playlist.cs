@@ -15,7 +15,6 @@ namespace Media.Models
         private List<MediaItem> listMedia = new List<MediaItem>();
         private string backroundImageFileName = null;
         private string dateCreated;
-        private static readonly string ImageBackgroundFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Media Player\\Play List Image";
 
         public string PlayListID => playListID;
         public string PlayListName
@@ -41,7 +40,7 @@ namespace Media.Models
         public string DateCreated
         {
             set => dateCreated = value;
-            get { return dateCreated; }
+            get { return dateCreated.Substring(0,10); }
         }
 
         public List<MediaItem> ListMedia { get => listMedia; set => listMedia = value; }
@@ -88,13 +87,6 @@ namespace Media.Models
             return res;
         }
 
-        public static IEnumerable<IGrouping<string, MediaItem>> SortListAlbum(List<MediaItem> list)
-        {
-            IEnumerable<IGrouping<string, MediaItem>> res = from song in list
-                                                            orderby song.Album ascending
-                                                            group song by song.Album;
-            return res;
-        }
 
         public static IEnumerable<IGrouping<string, MediaItem>> SortListArtists(List<MediaItem> list)
         {

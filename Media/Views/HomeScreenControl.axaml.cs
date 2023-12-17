@@ -8,6 +8,7 @@ using Media.Models;
 using Media.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ namespace Media.Views
             listMusic.Tapped += ListBoxVideo_Tapped1;
             listBoxVideo.PointerExited += ListBoxVideo_PointerExited;
             listMusic.PointerExited += ListBoxVideo_PointerExited;
+            string x = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private void ListBoxVideo_PointerExited(object? sender, PointerEventArgs e)
@@ -94,15 +96,15 @@ namespace Media.Views
             
             Random random = new Random();
             int currentIndex = listBox.SelectedIndex;
+            int randomNumber = random.Next(0, listBox.Items.Count);
+            do
+            {
+                randomNumber = random.Next(0, listBox.Items.Count);
+            } while (randomNumber == currentIndex);
             if (listBox.SelectedIndex != -1)
             {
                 await Task.Delay(TimeSpan.FromSeconds(4));
-                listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
-            }
-
-            if(listBox.SelectedIndex == currentIndex) {
-                await Task.Delay(TimeSpan.FromSeconds(4));
-                listBox.SelectedIndex = random.Next(0, listBox.Items.Count);
+                listBox.SelectedIndex = randomNumber;
             }
         }
 

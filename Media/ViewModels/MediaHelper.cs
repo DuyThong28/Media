@@ -145,7 +145,6 @@ namespace Media.ViewModels
             playListPlayingId = null;
             playQueue.Clear();
             playQueue = new List<MediaItem>(pl);
-            MediaHelper.PlayQueue[0].IsPlay = true;
             PlayMedia.media = MediaHelper.PlayQueue[0];
             PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
             if (PlayMedia.media.MediaTypes != TagLib.MediaTypes.Audio)
@@ -163,7 +162,6 @@ namespace Media.ViewModels
             playListPlayingId = pl.PlayListID;
             playQueue.Clear();
             playQueue = new List<MediaItem>(pl.ListMedia);
-            MediaHelper.PlayQueue[0].IsPlay = true;
             PlayMedia.media = MediaHelper.PlayQueue[0];
             PlayMedia.URL = MediaHelper.PlayQueue[0].FilePath;
             if (PlayMedia.media.MediaTypes != TagLib.MediaTypes.Audio)
@@ -373,6 +371,10 @@ namespace Media.ViewModels
             {
                 updatePlaylistScreen(sender, new EventArgs());
             }
+            if (updateLibraryScreen != null)
+            {
+                updateLibraryScreen(sender, new EventArgs());
+            }
         }
 
 
@@ -534,7 +536,7 @@ namespace Media.ViewModels
             if (list != null)
             {
                 MediaItem mediaItem = list[1] as MediaItem;
-                if (!mediaItem.IsPlay)
+                if (mediaItem.FilePath != PlayMedia.Path)
                 {
                     PlaylistScreenViewModel playlistscreen = list[0] as PlaylistScreenViewModel;
                     playlistscreen.Playlist.DeleteMedia(mediaItem);
@@ -554,7 +556,7 @@ namespace Media.ViewModels
             if (list != null)
             {
                 MediaItem mediaItem = list[1] as MediaItem;
-                if (!mediaItem.IsPlay)
+                if (mediaItem.FilePath!= PlayMedia.Path)
                 {
                     PlayingScreenViewModel playingscreen = list[0] as PlayingScreenViewModel;
                     playingscreen.ListMedia.Remove(mediaItem);
