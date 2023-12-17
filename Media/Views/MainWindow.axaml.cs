@@ -34,10 +34,10 @@ namespace Media.Views
         public MainWindow()
         {
             InitializeComponent();
-            Opened += OnOpened;
             Init();
+            Opened += OnOpened;
 
-            
+
         }
 
         public void Init()
