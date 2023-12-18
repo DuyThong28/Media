@@ -126,6 +126,7 @@ namespace Media.Models
         {
             get; set;
         }
+
         public void PlayMediaCommand()
         {
             if (PlayMedia.Path != this.filePath)
@@ -138,23 +139,6 @@ namespace Media.Models
                         return;
                     }
                 }
-                if (MediaHelper.isPlayingPlaylist==false)
-                {
-                   
-                    MediaHelper.PlayQueue.Add(this);
-                    List<MediaItem> tempQueue = new List<MediaItem>(MediaHelper.PlayQueue);
-                    MediaHelper.PlayQueue.Clear();
-                    MediaHelper.PlayQueue = new List<MediaItem>();
-                    MediaHelper.PlayQueue.AddRange(tempQueue);
-                    PlayMedia.URL = this.filePath;
-                } else
-                {
-                    MediaHelper.PlayQueue.Clear();
-                    List<MediaItem> newQueue = new List<MediaItem>();
-                    newQueue.Add(this);
-                    MediaHelper.PlayThePlaylist(newQueue);
-                }
-             
             }
             else
             {
@@ -216,6 +200,7 @@ namespace Media.Models
                 }
             }
            this.PlaySongCommand = ReactiveCommand.Create(() => { PlayMediaCommand();});
+           
         }
 
         public MediaItem()

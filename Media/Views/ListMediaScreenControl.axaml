@@ -128,7 +128,7 @@
 																	>
 													<views:MusicRowTC.ContextMenu>
 														<ContextMenu Name="menu">
-															<MenuItem Header="Play" Command="{Binding PlaySongCommand}">
+															<MenuItem Header="Play" Click="Play_Menu_Click">
 																<MenuItem.Icon>
 																	<PathIcon Width="12" Height="12" Data="{StaticResource play_regular}"/>
 																</MenuItem.Icon>

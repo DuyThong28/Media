@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Media.Models;
 using Media.ViewModels;
 using System;
@@ -24,7 +25,13 @@ namespace Media.Views
 
         private void ListBoxVideo_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
         {
-            MediaHelper.ListBox_DoubleTapped(sender, e);
+            MediaHelper.Play_New_Queue(sender, e);
+            listBoxVideo.SelectedIndex = -1;
+        }
+
+        private void Play_Menu_Click(object? sender, RoutedEventArgs e)
+        {
+            MediaHelper.Play_New_Queue(sender, null);
             listBoxVideo.SelectedIndex = -1;
         }
 

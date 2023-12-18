@@ -22,7 +22,7 @@ namespace Media.Views
 
         private void ListBoxMedia_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
         {
-            MediaHelper.ListBox_DoubleTapped(sender, e);
+            MediaHelper.Play_New_Queue(sender, e);
             listBoxMedia.SelectedIndex = -1;
         }
     }

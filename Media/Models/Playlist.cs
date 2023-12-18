@@ -5,6 +5,14 @@ using System.IO;
 using System.Linq;
 using Avalonia.Media;
 using Path = System.IO.Path;
+using Avalonia.Controls.Shapes;
+using Media.Views;
+using MsBox.Avalonia;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.Platform;
+using Avalonia;
+using ReactiveUI;
 
 namespace Media.Models
 {
@@ -95,7 +103,7 @@ namespace Media.Models
                                                             group song by song.ArtistsString;
             return res;
         }
-        public void AddMedia(MediaItem media)
+        public async void AddMedia(MediaItem media)
         {
             if (ListMedia.Exists(x => x.FilePath == media.FilePath))
             {

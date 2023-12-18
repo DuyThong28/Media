@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.Net;
 using System.Reflection;
+using Avalonia;
 
 namespace Media.Views
 {
@@ -37,6 +38,7 @@ namespace Media.Views
             InitializeComponent();
             Init();
             Opened += OnOpened;
+           
         }
 
         public void Init()
@@ -297,40 +299,40 @@ namespace Media.Views
 
         private async void OnOpened(object? sender, EventArgs e)
         {
-            //WebClient webClient = new WebClient();
-            //var client = new WebClient();
-            //string currentVersion = webClient.DownloadString("https://www.dropbox.com/scl/fi/a5tsavuttkfqb64qukigo/Update.txt?rlkey=lg6dqscl6g2ryi9lrdghmyxnm&dl=1");
-            //if (!currentVersion.Contains(MediaHelper.CurrentVersion))
-            //{
-            //    var result = await MessageBoxManager.GetMessageBoxStandard("Update", "New update available! Do you want to install it?", ButtonEnum.YesNo).ShowWindowDialogAsync(this);
+            WebClient webClient = new WebClient();
+            var client = new WebClient();
+            string currentVersion = webClient.DownloadString("https://www.dropbox.com/scl/fi/a5tsavuttkfqb64qukigo/Update.txt?rlkey=lg6dqscl6g2ryi9lrdghmyxnm&dl=1");
+            if (!currentVersion.Contains(MediaHelper.CurrentVersion))
+            {
+                var result = await MessageBoxManager.GetMessageBoxStandard("Update", "New update available! Do you want to install it?", ButtonEnum.YesNo).ShowWindowDialogAsync(this);
 
-            //    if (result == ButtonResult.Yes   )
-            //    {
-            //        try
-            //        {
-            //            if (System.IO.File.Exists(@".\Media Setup.exe"))
-            //            {
-            //                System.IO.File.Delete(@".\Media Setup.exe");
-            //            }
-            //            client.DownloadFile("https://www.dropbox.com/scl/fi/4eg6ubpzl7ig5e9r6acbz/Media-SetUp.zip?rlkey=g70jjl2modwa3flci7dnm8626&dl=1", @"Media Setup.zip");
-            //            string zipPath = @".\Media Setup.zip";
-            //            string extractPath = @".\";
-            //            ZipFile.ExtractToDirectory(zipPath, extractPath);
-            //            string[] setupFiles = System.IO.Directory.GetFiles(extractPath, "Media Setup.exe", System.IO.SearchOption.AllDirectories);
-            //            if (setupFiles.Length > 0)
-            //            {
-            //                ProcessStartInfo startInfo = new ProcessStartInfo();
-            //                startInfo.FileName = setupFiles[0];
-            //                Process.Start(startInfo);
-            //            }
-            //            MediaHelper.CurrentVersion = currentVersion;
-            //        }
-            //        catch
-            //        {
+                if (result == ButtonResult.Yes)
+                {
+                    try
+                    {
+                        if (System.IO.File.Exists(@".\Media Setup.exe"))
+                        {
+                            System.IO.File.Delete(@".\Media Setup.exe");
+                        }
+                        client.DownloadFile("https://www.dropbox.com/scl/fi/4eg6ubpzl7ig5e9r6acbz/Media-SetUp.zip?rlkey=g70jjl2modwa3flci7dnm8626&dl=1", @"Media Setup.zip");
+                        string zipPath = @".\Media Setup.zip";
+                        string extractPath = @".\";
+                        ZipFile.ExtractToDirectory(zipPath, extractPath);
+                        string[] setupFiles = System.IO.Directory.GetFiles(extractPath, "Media Setup.exe", System.IO.SearchOption.AllDirectories);
+                        if (setupFiles.Length > 0)
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.FileName = setupFiles[0];
+                            Process.Start(startInfo);
+                        }
+                        MediaHelper.CurrentVersion = currentVersion;
+                    }
+                    catch
+                    {
 
-            //        }
-            //    }
-            //}
+                    }
+                }
+            }
         }
     }
 }
