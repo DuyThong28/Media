@@ -27,7 +27,6 @@ namespace Media.ViewModels
         private static List<MediaItem> listSongs = new List<MediaItem>();
         private static List<MediaItem> listVideos = new List<MediaItem>();
         public static List<MediaItem> allMedias = new List<MediaItem>();
-        private static string currentVersion = "1.0.0";
         private static string sortby = "Sort by Date";
 
         public static List<MediaItem> AllMedias
@@ -197,7 +196,6 @@ namespace Media.ViewModels
 
         public static List<MediaItem> ListVideos { get => listVideos; set { listVideos = value;  } }
 
-        public static string CurrentVersion { get => currentVersion; set => currentVersion = value; }
         public static string Sortby { get => sortby; set => sortby = value; }
 
         public static async Task FetchListMedia(MediaTypes mediaTypes)
