@@ -1,21 +1,22 @@
 # Media
 <p>Media là ứng dụng đa nền tảng kết hợp trình phát nhạc và video tạo ra một nền tảng tích hợp mang đến cho người dùng trải nghiệm đa phương tiện toàn diện và đẳng cấp.</p>
-
-![image](https://github.com/DuyThong28/Media/assets/116278919/c1b39200-6788-41ba-a604-0342a0ab2dd7)
-![image](https://github.com/DuyThong28/Media/assets/116278919/beaa9a45-2def-476d-bfe3-a8f36bf77b67)
-![image](https://github.com/DuyThong28/Media/assets/116278919/cd16dda0-7e97-4fda-92e4-38d0e4479cf2)
-
 <p>
-  <b>
+ <ul>
+  <li>
+      <b>
     Video demo: 
   </b><a href="https://www.youtube.com/watch?v=2Kxuc6KANqs" target="_blank">Media App</a>
-</p>
-<p>
-  <b>
+  </li>
+  <li>
+    <b>
     Website:
   </b>
- <a href="https://657882764b129202526f464b--earnest-tapioca-3dfc30.netlify.app/" target="_blank">Media.com</a><br>
+ <a href="https://657882764b129202526f464b--earnest-tapioca-3dfc30.netlify.app/" target="_blank">Media.com</a>
+  </li>
+</ul> 
 </p>
+
+![image](https://github.com/DuyThong28/Media/assets/116278919/c1b39200-6788-41ba-a604-0342a0ab2dd7)
 <h1>Các chức năng chính</h1>
   <p>
     <ul>
@@ -49,7 +50,7 @@
 </b> Truy cập vào website <a href="https://657882764b129202526f464b--earnest-tapioca-3dfc30.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt phù hợp với hệ điều hành.</p>
 <p><b>Bước 2:</b> Mở file cài đặt <a href="https://1drv.ms/u/s!AigGS8UUUr15lTMO1agxvhCZN7lX" target="_blank">MediaSetUp.exe</a>.</p>
 <p><b>Bước 3:</b> Chọn đường dẫn để lưu phần mềm bằng cách nhấn “Browse” sau đó nhấn “Next”.</p>
-<p><b>⚠️ Lưu ý:</b> Không lưu ở ổ đĩa C:.</p>
+<p><b> Lưu ý: </b>Không lưu ở ổ đĩa C: </p>
 <p><b>Bước 4:</b> Tích vào “Create a desktop shortcut” (nếu muốn tạo một shortcut ở màn hình desktop) sau đó nhấn “Next”.</p>
 <p><b>Bước 5:</b> Nhấn “Install”</p>
 <p><b>Bước 6:</b> Bỏ chọn “Launch Media” (nếu không muốn mở ứng dụng sau khi nhấn “Finish”). Nhấn Finish để hoàn thành quá trình cài đặt.</p>
