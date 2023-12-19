@@ -1,12 +1,18 @@
 # Media
-<p>Media là ứng dụng kết hợp trình phát nhạc và video, tạo ra một nền tảng tích hợp cho người dùng trải nghiệm đa phương tiện toàn diện.</p>
+<p>Media là ứng dụng đa nền tảng kết hợp trình phát nhạc và video tạo ra một nền tảng tích hợp mang đến cho người dùng trải nghiệm đa phương tiện toàn diện và đẳng cấp.</p>
+
+![image](https://github.com/DuyThong28/Media/assets/116278919/c1b39200-6788-41ba-a604-0342a0ab2dd7)
 <p>
-  Video demo: <a href="https://www.youtube.com/watch?v=2Kxuc6KANqs" target="_blank">Media App</a>
+  <b>
+    Video demo: 
+  </b><a href="https://www.youtube.com/watch?v=2Kxuc6KANqs" target="_blank">Media App</a>
 </p>
 <p>
-Website: <a href="https://657882764b129202526f464b--earnest-tapioca-3dfc30.netlify.app/" target="_blank">Media.com</a><br>
+  <b>
+    Website:
+  </b>
+ <a href="https://657882764b129202526f464b--earnest-tapioca-3dfc30.netlify.app/" target="_blank">Media.com</a><br>
 </p>
-![image](https://github.com/DuyThong28/Media/assets/116278919/9cd3fbbe-a467-4d0a-b580-103cf72db141)
 <h1>Các chức năng chính</h1>
   <p>
     <ul>
