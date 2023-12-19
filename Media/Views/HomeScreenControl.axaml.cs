@@ -47,7 +47,7 @@ namespace Media.Views
         
         private void Item_Tapped1(object? sender, Avalonia.Input.TappedEventArgs e)
         {
-            MediaHelper.Item_Tapped1(sender, e);
+            MediaHelper.Play_New_Queue(sender, null);
         }
 
         private static event EventHandler seeAllSongs;

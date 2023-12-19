@@ -416,6 +416,10 @@ namespace Media.ViewModels
             {
                 media = (sender as MenuItem).DataContext as MediaItem;
             }
+            if(sender is Button)
+            {
+                media = (sender as Button).DataContext as MediaItem;
+            }
             if (media != null)
             {
                 isPlayingPlaylist = false;
