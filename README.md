@@ -51,12 +51,12 @@
 </b> Truy cập vào website <a href="https://657882764b129202526f464b--earnest-tapioca-3dfc30.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt phù hợp với hệ điều hành.</p>
 <p><b>Bước 2:</b> Mở file cài đặt <a href="https://1drv.ms/u/s!AigGS8UUUr15lTMO1agxvhCZN7lX" target="_blank">MediaSetUp.exe</a>.</p>
 <p><b>Bước 3:</b> Chọn đường dẫn để lưu phần mềm bằng cách nhấn “Browse” sau đó nhấn “Next”.</p>
-<p><b> Lưu ý: </b>Không lưu ở ổ đĩa C: </p>
+<p><b> Lưu ý: </b>Không lưu ở ổ đĩa C:/. </p>
 <p><b>Bước 4:</b> Tích vào “Create a desktop shortcut” (nếu muốn tạo một shortcut ở màn hình desktop) sau đó nhấn “Next”.</p>
-<p><b>Bước 5:</b> Nhấn “Install”</p>
+<p><b>Bước 5:</b> Nhấn “Install”.</p>
 <p><b>Bước 6:</b> Bỏ chọn “Launch Media” (nếu không muốn mở ứng dụng sau khi nhấn “Finish”). Nhấn Finish để hoàn thành quá trình cài đặt.</p>
 <h1>Hướng dẫn cập nhật phiên bản mới</h1>
-<p><b>Bước 1:</b> Khi có thông báo hiển thị “New update available! Do you want to install it?” nhấn chọn “Yes” (nếu bạn muốn cập nhật phiên bản mới), chọn “No” hoặc nhấn vào biểu tượng “Cancel” (nếu bạn không muốn cập nhật phiên bản mới) 
+<p><b>Bước 1:</b> Khi có thông báo hiển thị “New update available! Do you want to install it?” nhấn chọn “Yes” (nếu bạn muốn cập nhật phiên bản mới), chọn “No” hoặc nhấn vào biểu tượng “Cancel” (nếu bạn không muốn cập nhật phiên bản mới).
 </p>
 <p><b>Bước 2:</b> Nếu chọn “Yes” vui lòng đợi quá trình xử lí sau đó tiến hành các bước như hướng dẫn cài đặt.
 </p>
