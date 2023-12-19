@@ -33,14 +33,21 @@ namespace Media.Views
 
         private void ListBoxVideo_Tapped1(object? sender, Avalonia.Input.TappedEventArgs e)
         {
-            MediaHelper.ListBox_DoubleTapped(sender, e);
+            MediaHelper.Play_New_Queue(sender, e);
             listBoxVideo.SelectedIndex = -1;
             listMusic.SelectedIndex = -1;
         } 
+
+        private void Play_Menu_Click(object? sender, RoutedEventArgs e)
+        {
+            MediaHelper.Play_New_Queue(sender,  null);
+            listBoxVideo.SelectedIndex = -1;
+            listMusic.SelectedIndex = -1;
+        }
         
         private void Item_Tapped1(object? sender, Avalonia.Input.TappedEventArgs e)
         {
-            MediaHelper.Item_Tapped1(sender, e);
+            MediaHelper.Play_New_Queue(sender, null);
         }
 
         private static event EventHandler seeAllSongs;

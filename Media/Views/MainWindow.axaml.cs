@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.Net;
 using System.Reflection;
+using Avalonia;
 
 namespace Media.Views
 {
@@ -37,6 +38,7 @@ namespace Media.Views
             InitializeComponent();
             Init();
             Opened += OnOpened;
+           
         }
 
         public void Init()

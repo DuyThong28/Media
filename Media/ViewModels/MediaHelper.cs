@@ -11,6 +11,7 @@ using ReactiveUI;
 using TagLib;
 using MsBox.Avalonia;
 using System.Threading.Tasks;
+using Avalonia.Input;
 
 namespace Media.ViewModels
 {
@@ -402,6 +403,42 @@ namespace Media.ViewModels
             }
         }
 
+        public static void Play_New_Queue(object? sender, TappedEventArgs e)
+        {
+            MediaItem media = null;
+            if (sender is ListBox)
+            {
+                 media = (sender as ListBox).SelectedItem as MediaItem;
+            }
+            if (sender is MenuItem)
+            {
+                media = (sender as MenuItem).DataContext as MediaItem;
+            }
+            if(sender is Button)
+            {
+                media = (sender as Button).DataContext as MediaItem;
+            }
+            if (media != null)
+            {
+                isPlayingPlaylist = false;
+                PlayQueue.Clear();
+                List<MediaItem> newQueue = new List<MediaItem>();
+                newQueue.Add(media);
+                PlayQueue = new List<MediaItem>();
+                PlayQueue.AddRange(newQueue);
+                PlayMedia.URL = media.FilePath;
+                if (media.MediaTypes != TagLib.MediaTypes.Audio)
+                {
+                    if (openVideoScreen != null && PlayMedia.CurrentTimePlay <= 2)
+                    {
+                        openVideoScreen(sender, new EventArgs());
+                    }
+                }
+
+            }
+           
+        }
+
         public static void Item_Tapped1(object? sender, Avalonia.Input.TappedEventArgs e)
         {
             MediaItem media = (sender as Button).DataContext as MediaItem;
@@ -463,7 +500,6 @@ namespace Media.ViewModels
 
         public static void AddMediaQueue_Click(object sender, RoutedEventArgs e)
         {
-            //bool isplay = false;
             if (sender is MenuItem menuItem)
             {
                 if (menuItem.DataContext is MediaItem mediaItem)
