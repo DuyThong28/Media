@@ -1,4 +1,7 @@
 # Media
+
+
+![image](https://github.com/DuyThong28/Media/assets/116278919/c1b39200-6788-41ba-a604-0342a0ab2dd7)
 <p>Media là ứng dụng đa nền tảng kết hợp trình phát nhạc và video tạo ra một nền tảng tích hợp mang đến cho người dùng trải nghiệm đa phương tiện toàn diện và đẳng cấp.</p>
 <p>
  <ul>
@@ -15,8 +18,6 @@
   </li>
 </ul> 
 </p>
-
-![image](https://github.com/DuyThong28/Media/assets/116278919/c1b39200-6788-41ba-a604-0342a0ab2dd7)
 <h1>Các chức năng chính</h1>
   <p>
     <ul>
