@@ -312,29 +312,23 @@ namespace Media.Views
 
                     if (result == ButtonResult.Yes)
                     {
-                        try
+                        if (System.IO.File.Exists(@".\Media Setup.exe"))
                         {
-                            if (System.IO.File.Exists(@".\Media Setup.exe"))
-                            {
-                                System.IO.File.Delete(@".\Media Setup.exe");
-                            }
-                            client.DownloadFile("https://www.dropbox.com/scl/fi/4eg6ubpzl7ig5e9r6acbz/Media-SetUp.zip?rlkey=g70jjl2modwa3flci7dnm8626&dl=1", @"Media Setup.zip");
-                            string zipPath = @".\Media Setup.zip";
-                            string extractPath = @".\";
-                            ZipFile.ExtractToDirectory(zipPath, extractPath);
-                            string[] setupFiles = System.IO.Directory.GetFiles(extractPath, "Media Setup.exe", System.IO.SearchOption.AllDirectories);
-                            if (setupFiles.Length > 0)
-                            {
-                                ProcessStartInfo startInfo = new ProcessStartInfo();
-                                startInfo.FileName = setupFiles[0];
-                                Process.Start(startInfo);
-                            }
-                            Assembly.GetExecutingAssembly().GetName().Version = Version.Parse(nextVersion);
+                            System.IO.File.Delete(@".\Media Setup.exe");
                         }
-                        catch
+                        client.DownloadFile("https://www.dropbox.com/scl/fi/4eg6ubpzl7ig5e9r6acbz/Media-SetUp.zip?rlkey=g70jjl2modwa3flci7dnm8626&dl=1", @"Media Setup.zip");
+                        string zipPath = @".\Media Setup.zip";
+                        string extractPath = @".\";
+                        ZipFile.ExtractToDirectory(zipPath, extractPath);
+                        string[] setupFiles = System.IO.Directory.GetFiles(extractPath, "Media Setup.exe", System.IO.SearchOption.AllDirectories);
+                        if (setupFiles.Length > 0)
                         {
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.FileName = setupFiles[0];
+                            Process.Start(startInfo);
+                        }
+                        Assembly.GetExecutingAssembly().GetName().Version = Version.Parse(nextVersion);
 
-                        }
                     }
                 }
             }
