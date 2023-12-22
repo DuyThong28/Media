@@ -1,4 +1,4 @@
-# Media
+# Media Application
 
 ![image](https://github.com/DuyThong28/Media/assets/116278919/4771413d-46c7-410e-9bbe-6c317be851a8)
 
@@ -8,7 +8,7 @@
   <li>
       <b>
     Video demo: 
-  </b><a href="https://www.youtube.com/watch?v=2Kxuc6KANqs" target="_blank">Media App</a>
+  </b><a href="https://www.youtube.com/watch?v=l0DxiA__Z7I" target="_blank">Media Application</a>
   </li>
   <li>
     <b>
