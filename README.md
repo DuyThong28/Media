@@ -1,6 +1,7 @@
 # Media Application
 
-![image](https://github.com/DuyThong28/Media/assets/116278919/4771413d-46c7-410e-9bbe-6c317be851a8)
+![image](https://github.com/DuyThong28/Media/assets/116278919/ba7eef68-a1de-42ae-b0b1-b9c918e20aaf)
+
 
 <p>Media là ứng dụng đa nền tảng kết hợp trình phát nhạc và video tạo ra một nền tảng tích hợp mang đến cho người dùng trải nghiệm đa phương tiện toàn diện và đẳng cấp.</p>
 <p>
@@ -8,7 +9,7 @@
   <li>
       <b>
     Video demo: 
-  </b><a href="https://www.youtube.com/watch?v=l0DxiA__Z7I" target="_blank">Media Application</a>
+  </b><a href="https://658516ac0888fb830206a9a6--starlit-tanuki-5ce830.netlify.app/" target="_blank">Media Application</a>
   </li>
   <li>
     <b>
@@ -48,7 +49,7 @@
 <h1>Hướng dẫn cài đặt</h1>
 <p><b>
   Bước 1: 
-</b> Truy cập vào website <a href="https://658514521eb607875ac8b2e0--enchanting-treacle-c650e5.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt phù hợp với hệ điều hành.</p>
+</b> Truy cập vào website <a href="https://658516ac0888fb830206a9a6--starlit-tanuki-5ce830.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt phù hợp với hệ điều hành.</p>
 <p><b>Bước 2:</b> Mở file cài đặt <a href="https://1drv.ms/u/s!AigGS8UUUr15lTMO1agxvhCZN7lX" target="_blank">MediaSetUp.exe</a>.</p>
 <p><b>Bước 3:</b> Chọn đường dẫn để lưu phần mềm bằng cách nhấn “Browse” sau đó nhấn “Next”.</p>
 <p><b> Lưu ý: </b>Không lưu ở ổ đĩa C:/. </p>
