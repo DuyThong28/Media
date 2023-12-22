@@ -14,7 +14,7 @@
     <b>
     Website:
   </b>
- <a href="https://6584f6a3727b002aed888b88--aesthetic-duckanoo-356d9d.netlify.app/" target="_blank">Media.com</a>
+ <a href="https://658514521eb607875ac8b2e0--enchanting-treacle-c650e5.netlify.app/" target="_blank">Media.com</a>
   </li>
 </ul> 
 </p>
@@ -48,7 +48,7 @@
 <h1>Hướng dẫn cài đặt</h1>
 <p><b>
   Bước 1: 
-</b> Truy cập vào website <a href="https://6584f6a3727b002aed888b88--aesthetic-duckanoo-356d9d.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt phù hợp với hệ điều hành.</p>
+</b> Truy cập vào website <a href="https://658514521eb607875ac8b2e0--enchanting-treacle-c650e5.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt phù hợp với hệ điều hành.</p>
 <p><b>Bước 2:</b> Mở file cài đặt <a href="https://1drv.ms/u/s!AigGS8UUUr15lTMO1agxvhCZN7lX" target="_blank">MediaSetUp.exe</a>.</p>
 <p><b>Bước 3:</b> Chọn đường dẫn để lưu phần mềm bằng cách nhấn “Browse” sau đó nhấn “Next”.</p>
 <p><b> Lưu ý: </b>Không lưu ở ổ đĩa C:/. </p>
