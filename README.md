@@ -1,7 +1,7 @@
 # Media
 
+![image](https://github.com/DuyThong28/Media/assets/116278919/4771413d-46c7-410e-9bbe-6c317be851a8)
 
-![image](https://github.com/DuyThong28/Media/assets/116278919/c1b39200-6788-41ba-a604-0342a0ab2dd7)
 <p>Media là ứng dụng đa nền tảng kết hợp trình phát nhạc và video tạo ra một nền tảng tích hợp mang đến cho người dùng trải nghiệm đa phương tiện toàn diện và đẳng cấp.</p>
 <p>
  <ul>
@@ -14,7 +14,7 @@
     <b>
     Website:
   </b>
- <a href="https://65849899caaaa736e7ca8f6a--heartfelt-quokka-ea9e07.netlify.app/" target="_blank">Media.com</a>
+ <a href="https://6584f6a3727b002aed888b88--aesthetic-duckanoo-356d9d.netlify.app/" target="_blank">Media.com</a>
   </li>
 </ul> 
 </p>
