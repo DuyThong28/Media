@@ -9,13 +9,13 @@
   <li>
       <b>
     Video demo: 
-  </b><a href="https://658516ac0888fb830206a9a6--starlit-tanuki-5ce830.netlify.app/" target="_blank">Media Application</a>
+  </b><a href="https://www.youtube.com/watch?v=l0DxiA__Z7I&t=1s" target="_blank">Media Application</a>
   </li>
   <li>
     <b>
     Website:
   </b>
- <a href="https://658514521eb607875ac8b2e0--enchanting-treacle-c650e5.netlify.app/" target="_blank">Media.com</a>
+ <a href="https://658516ac0888fb830206a9a6--starlit-tanuki-5ce830.netlify.app/" target="_blank">Media.com</a>
   </li>
 </ul> 
 </p>
