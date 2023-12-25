@@ -301,11 +301,10 @@ namespace Media.Views
         {
             WebClient webClient = new WebClient();
             var client = new WebClient();
-            string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0,5);
+            string currentVersion = MediaHelper.Version;
             try
             {
                 string nextVersion = webClient.DownloadString("https://www.dropbox.com/scl/fi/a5tsavuttkfqb64qukigo/Update.txt?rlkey=lg6dqscl6g2ryi9lrdghmyxnm&dl=1");
-
                 if (!nextVersion.Contains(currentVersion))
                 {
                     var result = await MessageBoxManager.GetMessageBoxStandard("Update", "New update available! Do you want to install it?", ButtonEnum.YesNo).ShowWindowDialogAsync(this);
@@ -327,8 +326,7 @@ namespace Media.Views
                             startInfo.FileName = setupFiles[0];
                             Process.Start(startInfo);
                         }
-                        Assembly.GetExecutingAssembly().GetName().Version = Version.Parse(nextVersion);
-
+                        MediaHelper.Version = nextVersion;
                     }
                 }
             }
