@@ -8,8 +8,8 @@
  <ul>
   <li>
       <b>
-    Video demo: 
-  </b><a href="https://www.youtube.com/watch?v=l0DxiA__Z7I&t=1s" target="_blank">Media Application</a>
+    Demo: 
+  </b><a href="https://www.youtube.com/watch?v=l0DxiA__Z7I&t=1s" target="_blank">Media Application Demo</a>
   </li>
   <li>
     <b>
@@ -57,6 +57,7 @@
 <p><b>Bước 5:</b> Nhấn “Install”.</p>
 <p><b>Bước 6:</b> Bỏ chọn “Launch Media” (nếu không muốn mở ứng dụng sau khi nhấn “Finish”). Nhấn Finish để hoàn thành quá trình cài đặt.</p>
 <h1>Hướng dẫn cập nhật phiên bản mới</h1>
+<p><b>Tutorial:</b> <a href="https://www.youtube.com/watch?v=JDoZTx4U9bI">Media Application Update Latest Version Tutorial</a></p>
 <p><b>Bước 1:</b> Khi có thông báo hiển thị “New update available! Do you want to install it?” nhấn chọn “Yes” (nếu bạn muốn cập nhật phiên bản mới), chọn “No” hoặc nhấn vào biểu tượng “Cancel” (nếu bạn không muốn cập nhật phiên bản mới).
 </p>
 <p><b>Bước 2:</b> Nếu chọn “Yes” vui lòng đợi quá trình xử lí sau đó tiến hành các bước như hướng dẫn cài đặt.
