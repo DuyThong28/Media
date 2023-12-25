@@ -9,7 +9,7 @@
   <li>
       <b>
     Demo: 
-  </b><a href="https://www.youtube.com/watch?v=l0DxiA__Z7I&t=1s" target="_blank">Media Application Demo [Version 1.0.1]</a>
+  </b><a href="https://www.youtube.com/watch?v=l0DxiA__Z7I&t=1s" target="_blank">Media Application Demo</a>
   </li>
   <li>
     <b>
