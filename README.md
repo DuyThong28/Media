@@ -47,6 +47,7 @@
   <li><b>Hỗ trợ các định dạng:</b> .mp3, .mp4, .wav.</li>
 </ul>
 <h1>Hướng dẫn cài đặt cho Windows</h1>
+<p><b>Tutorial: </b><a href="https://youtu.be/m10WAM2u1dY" target="_blank">Download Media Application For Windows Tutorial</a></p>
 <p><b>
   Bước 1: 
 </b> Truy cập vào website <a href="https://master--thunderous-malasada-a5ba2f.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt cho Windows.</p>
