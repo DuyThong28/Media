@@ -15,7 +15,7 @@
     <b>
     Website:
   </b>
- <a href="https://master--wondrous-tartufo-0a09c2.netlify.app/" target="_blank">Media.com</a>
+ <a href="https://master--thunderous-malasada-a5ba2f.netlify.app/" target="_blank">Media.com</a>
   </li>
 </ul> 
 </p>
@@ -46,10 +46,10 @@
   <li>Các file lưu trên ổ đĩa.</li>
   <li><b>Hỗ trợ các định dạng:</b> .mp3, .mp4, .wav.</li>
 </ul>
-<h1>Hướng dẫn cài đặt cho Window</h1>
+<h1>Hướng dẫn cài đặt cho Windows</h1>
 <p><b>
   Bước 1: 
-</b> Truy cập vào website <a href="https://658516ac0888fb830206a9a6--starlit-tanuki-5ce830.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt phù hợp với hệ điều hành.</p>
+</b> Truy cập vào website <a href="https://master--thunderous-malasada-a5ba2f.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt cho Windows.</p>
 <p><b>Bước 2:</b> Giải nén rồi mở file cài đặt MediaSetup.exe</p>
 <p><b>Bước 3:</b> Chọn đường dẫn để lưu phần mềm bằng cách nhấn “Browse” sau đó nhấn “Next”.</p>
 <p><b> Lưu ý: </b>Không lưu ở ổ đĩa C:/. </p>
