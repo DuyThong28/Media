@@ -29,7 +29,7 @@ namespace Media.ViewModels
         private static List<MediaItem> listVideos = new List<MediaItem>();
         public static List<MediaItem> allMedias = new List<MediaItem>();
         private static string sortby = "Sort by Date";
-        private static string version = "1.0.1";
+        private static string version = "1.0.0";
         public static List<MediaItem> AllMedias
         {
             get => allMedias;
