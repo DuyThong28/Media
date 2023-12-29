@@ -8,14 +8,14 @@
  <ul>
   <li>
       <b>
-    Video demo: 
-  </b><a href="https://www.youtube.com/watch?v=l0DxiA__Z7I&t=1s" target="_blank">Media Application</a>
+    Demo: 
+  </b><a href="https://www.youtube.com/watch?v=l0DxiA__Z7I&t=1s" target="_blank">Media Application Demo</a>
   </li>
   <li>
     <b>
     Website:
   </b>
- <a href="https://658516ac0888fb830206a9a6--starlit-tanuki-5ce830.netlify.app/" target="_blank">Media.com</a>
+ <a href="https://master--wondrous-tartufo-0a09c2.netlify.app/" target="_blank">Media.com</a>
   </li>
 </ul> 
 </p>
@@ -46,17 +46,18 @@
   <li>Các file lưu trên ổ đĩa.</li>
   <li><b>Hỗ trợ các định dạng:</b> .mp3, .mp4, .wav.</li>
 </ul>
-<h1>Hướng dẫn cài đặt</h1>
+<h1>Hướng dẫn cài đặt cho Window</h1>
 <p><b>
   Bước 1: 
 </b> Truy cập vào website <a href="https://658516ac0888fb830206a9a6--starlit-tanuki-5ce830.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt phù hợp với hệ điều hành.</p>
-<p><b>Bước 2:</b> Mở file cài đặt <a href="https://1drv.ms/u/s!AigGS8UUUr15lTMO1agxvhCZN7lX" target="_blank">MediaSetUp.exe</a>.</p>
+<p><b>Bước 2:</b> Giải nén rồi mở file cài đặt MediaSetup.exe</p>
 <p><b>Bước 3:</b> Chọn đường dẫn để lưu phần mềm bằng cách nhấn “Browse” sau đó nhấn “Next”.</p>
 <p><b> Lưu ý: </b>Không lưu ở ổ đĩa C:/. </p>
 <p><b>Bước 4:</b> Tích vào “Create a desktop shortcut” (nếu muốn tạo một shortcut ở màn hình desktop) sau đó nhấn “Next”.</p>
 <p><b>Bước 5:</b> Nhấn “Install”.</p>
 <p><b>Bước 6:</b> Bỏ chọn “Launch Media” (nếu không muốn mở ứng dụng sau khi nhấn “Finish”). Nhấn Finish để hoàn thành quá trình cài đặt.</p>
 <h1>Hướng dẫn cập nhật phiên bản mới</h1>
+<p><b>Tutorial:</b> <a href="https://www.youtube.com/watch?v=JDoZTx4U9bI">Media Application Update Latest Version Tutorial</a></p>
 <p><b>Bước 1:</b> Khi có thông báo hiển thị “New update available! Do you want to install it?” nhấn chọn “Yes” (nếu bạn muốn cập nhật phiên bản mới), chọn “No” hoặc nhấn vào biểu tượng “Cancel” (nếu bạn không muốn cập nhật phiên bản mới).
 </p>
 <p><b>Bước 2:</b> Nếu chọn “Yes” vui lòng đợi quá trình xử lí sau đó tiến hành các bước như hướng dẫn cài đặt.
