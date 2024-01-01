@@ -15,7 +15,7 @@
     <b>
     Website:
   </b>
- <a href="https://master--thunderous-malasada-a5ba2f.netlify.app/" target="_blank">Media.com</a>
+ <a href="https://master--stupendous-figolla-43e41f.netlify.app/" target="_blank">Media.com</a>
   </li>
 </ul> 
 </p>
@@ -50,7 +50,7 @@
 <p><b>Tutorial: </b><a href="https://youtu.be/m10WAM2u1dY" target="_blank">Download Media Application For Windows Tutorial</a></p>
 <p><b>
   Bước 1: 
-</b> Truy cập vào website <a href="https://master--thunderous-malasada-a5ba2f.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt cho Windows.</p>
+</b> Truy cập vào website <a href="https://master--stupendous-figolla-43e41f.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt cho Windows.</p>
 <p><b>Bước 2:</b> Giải nén rồi mở file cài đặt MediaSetup.exe</p>
 <p><b>Bước 3:</b> Chọn đường dẫn để lưu phần mềm bằng cách nhấn “Browse” sau đó nhấn “Next”.</p>
 <p><b> Lưu ý: </b>Không lưu ở ổ đĩa C:/. </p>
@@ -58,7 +58,7 @@
 <p><b>Bước 5:</b> Nhấn “Install”.</p>
 <p><b>Bước 6:</b> Bỏ chọn “Launch Media” (nếu không muốn mở ứng dụng sau khi nhấn “Finish”). Nhấn Finish để hoàn thành quá trình cài đặt.</p>
 <h1>Hướng dẫn cài đặt cho Linux</h1>
-<p><b>Bước 1:</b> Truy cập vào web “link” tải về file cài đặt cho Linux.</p>
+<p><b>Bước 1:</b> Truy cập vào website <a href="https://master--stupendous-figolla-43e41f.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt cho Linux.</p>
 <p><b>Bước 2:</b> Giải nén file vừa download về sau đó mở terminal lên.</p>
 <p><b>Bước 3:</b> Di chuyển đến vị trí chứa file MediaSetup.deb gõ lệnh sudo dpkg -i MediaSetup.deb.</p>
 <p><b>Bước 4:</b> Di chuyển đến vị trí chứa file thực thi Media sau đó cấp quyền chmod +x path</p>
