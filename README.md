@@ -58,6 +58,7 @@
 <p><b>Bước 5:</b> Nhấn “Install”.</p>
 <p><b>Bước 6:</b> Bỏ chọn “Launch Media” (nếu không muốn mở ứng dụng sau khi nhấn “Finish”). Nhấn Finish để hoàn thành quá trình cài đặt.</p>
 <h1>Hướng dẫn cài đặt cho Linux</h1>
+<p><b>Tutorial: </b><a href="https://www.youtube.com/watch?v=oQr2Geo6d10&list=PLQUwlYFgIusWXVRGy-MdIT8LSg9HlDT3N&index=3" target="_blank">Download Media Application For Linux Tutorial</a></p>
 <p><b>Bước 1:</b> Truy cập vào website <a href="https://master--stupendous-figolla-43e41f.netlify.app/" target="_blank">Media.com</a> tải về file cài đặt cho Linux.</p>
 <p><b>Bước 2:</b> Giải nén file vừa download về sau đó mở terminal lên.</p>
 <p><b>Bước 3:</b> Di chuyển đến vị trí chứa file MediaSetup.deb gõ lệnh sudo dpkg -i MediaSetup.deb.</p>
