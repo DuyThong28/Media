@@ -57,6 +57,12 @@
 <p><b>Bước 4:</b> Tích vào “Create a desktop shortcut” (nếu muốn tạo một shortcut ở màn hình desktop) sau đó nhấn “Next”.</p>
 <p><b>Bước 5:</b> Nhấn “Install”.</p>
 <p><b>Bước 6:</b> Bỏ chọn “Launch Media” (nếu không muốn mở ứng dụng sau khi nhấn “Finish”). Nhấn Finish để hoàn thành quá trình cài đặt.</p>
+<h1>Hướng dẫn cài đặt cho Linux</h1>
+<p><b>Bước 1:</b> Truy cập vào web “link” tải về file cài đặt cho Linux.</p>
+<p><b>Bước 2:</b> Giải nén file vừa download về sau đó mở terminal lên.</p>
+<p><b>Bước 3:</b> Di chuyển đến vị trí chứa file MediaSetup.deb gõ lệnh sudo dpkg -i MediaSetup.deb.</p>
+<p><b>Bước 4:</b> Di chuyển đến vị trí chứa file thực thi Media sau đó cấp quyền chmod +x path</p>
+<p><b>Bước 5:</b> Chạy lệnh ./Media</p>
 <h1>Hướng dẫn cập nhật phiên bản mới</h1>
 <p><b>Tutorial:</b> <a href="https://www.youtube.com/watch?v=JDoZTx4U9bI">Media Application Update Latest Version Tutorial</a></p>
 <p><b>Bước 1:</b> Khi có thông báo hiển thị “New update available! Do you want to install it?” nhấn chọn “Yes” (nếu bạn muốn cập nhật phiên bản mới), chọn “No” hoặc nhấn vào biểu tượng “Cancel” (nếu bạn không muốn cập nhật phiên bản mới).
