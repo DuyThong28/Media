@@ -33,7 +33,7 @@
 <h1>Công nghệ sử dụng</h1>
 <ul>
   <li>C#</li>
-  <li>SQL Lite</li>
+  <li>Sqlite</li>
   <li>Avalonia UI</li>
 </ul>
 <h1>Môi trường triển khai</h1>
