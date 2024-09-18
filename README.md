@@ -6,10 +6,7 @@
 <p>Media là ứng dụng đa nền tảng kết hợp trình phát nhạc và video tạo ra một nền tảng tích hợp mang đến cho người dùng trải nghiệm đa phương tiện toàn diện và đẳng cấp.</p>
 <p>
  <ul>
-  <li>
-      <b>
-    Demo: 
-  </li>
+ 
   <li>
     <b>
     Website:
